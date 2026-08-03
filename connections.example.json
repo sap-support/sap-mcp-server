@@ -1,0 +1,13 @@
+{
+  "defaultConnection": "primary",
+  "connections": {
+    "primary": {
+      "defaultDestination": "<SID>",
+      "relayUrl":     "https://your-backend.example.com",
+      "relayBasePath": "/api/tableread/mcp",
+      "clientId":     "REPLACE_WITH_CLIENT_ID",
+      "clientSecret": "REPLACE_WITH_CLIENT_SECRET",
+      "tokenUrl":     "https://your-idp.example.com/oauth/token"
+    }
+  }
+}

@@ -1,0 +1,17 @@
+sap-mcp-server
+Copyright 2026 HUGO Consulting
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+This product is an independent open-source project.
+"SAP", "ABAP", "SAP BTP", and other SAP product names are trademarks or
+registered trademarks of SAP SE (or an SAP affiliate company) in Germany and
+other countries. This project is not affiliated with, endorsed by, or
+sponsored by SAP SE.
+
+Third-party dependencies bundled in the distributed binary retain their own
+licenses; see the generated SBOM / third-party notices attached to each release.

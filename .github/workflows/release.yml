@@ -1,0 +1,99 @@
+name: release
+
+# Builds the Linux binary from a tag of the upstream development repository and publishes it here
+# as a signed release asset. This repository holds no source; the upstream tag is the input.
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Upstream tag to build and publish (e.g. v0.14.2)"
+        required: true
+        type: string
+
+permissions:
+  contents: write # create the release and upload assets
+  id-token: write # OIDC token for sigstore keyless signing and provenance
+  attestations: write # artifact attestation
+
+env:
+  UPSTREAM_REPO: hugoconsulting/sap-mcp-server
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Validate input
+        env:
+          VERSION: ${{ inputs.version }}
+        run: |
+          # Keep the input out of the command line: expand it only as a shell variable.
+          case "$VERSION" in
+            v[0-9]*) ;;
+            *) echo "version must be a tag like 'v0.14.2' (got '$VERSION')" >&2; exit 1 ;;
+          esac
+
+      - name: Check out this repository
+        uses: actions/checkout@v7
+
+      - name: Check out upstream source at the requested tag
+        uses: actions/checkout@v7
+        with:
+          repository: ${{ env.UPSTREAM_REPO }}
+          ref: ${{ inputs.version }}
+          path: upstream
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+
+      - name: Build Linux binary
+        working-directory: upstream
+        run: |
+          npm ci
+          npm run build:bin:linux
+
+      - name: Checksum
+        working-directory: upstream/build
+        run: sha256sum sap-mcp-server-linux > sap-mcp-server-linux.sha256
+
+      - name: Install cosign
+        # cosign-installer publishes no moving tags (v4 etc.), so pin the exact version by SHA.
+        uses: sigstore/cosign-installer@6f9f17788090df1f26f669e9d70d6ae9567deba6 # v4.1.2
+
+      - name: Sign binary (sigstore keyless)
+        # No key is held: signing uses the GitHub Actions OIDC token. The bundle carries the
+        # certificate and the Rekor transparency log entry, so verification needs that one file.
+        run: |
+          cosign sign-blob --yes upstream/build/sap-mcp-server-linux \
+            --bundle upstream/build/sap-mcp-server-linux.cosign.bundle
+
+      - name: Attest provenance
+        uses: actions/attest-build-provenance@v4
+        with:
+          subject-path: upstream/build/sap-mcp-server-linux
+
+      - name: Create release if absent
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VERSION: ${{ inputs.version }}
+        run: |
+          if gh release view "$VERSION" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            echo "Release $VERSION already exists — its assets will be replaced."
+          else
+            gh release create "$VERSION" --repo "$GITHUB_REPOSITORY" --title "$VERSION" --target main --notes \
+              "Linux binary built from [\`${UPSTREAM_REPO}@${VERSION}\`](https://github.com/${UPSTREAM_REPO}/releases/tag/${VERSION}).
+
+          Signed with sigstore (keyless) and shipped with a build provenance attestation — see [Verifying a download](https://github.com/${GITHUB_REPOSITORY}#verifying-a-download)."
+          fi
+
+      - name: Upload assets
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VERSION: ${{ inputs.version }}
+        run: |
+          gh release upload "$VERSION" --repo "$GITHUB_REPOSITORY" --clobber \
+            upstream/build/sap-mcp-server-linux \
+            upstream/build/sap-mcp-server-linux.sha256 \
+            upstream/build/sap-mcp-server-linux.cosign.bundle \
+            connections.example.json \
+            scripts/install-sap-mcp.sh
