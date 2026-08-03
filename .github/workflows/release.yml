@@ -16,7 +16,8 @@ permissions:
   attestations: write # artifact attestation
 
 env:
-  UPSTREAM_REPO: hugoconsulting/sap-mcp-server
+  # Repository variable holding "<owner>/<repo>" of the source to build from.
+  UPSTREAM_REPO: ${{ vars.UPSTREAM_REPO }}
 
 jobs:
   release:
@@ -31,6 +32,10 @@ jobs:
             v[0-9]*) ;;
             *) echo "version must be a tag like 'v0.14.2' (got '$VERSION')" >&2; exit 1 ;;
           esac
+          if [ -z "$UPSTREAM_REPO" ]; then
+            echo "the UPSTREAM_REPO repository variable is not set (Settings → Actions → Variables)" >&2
+            exit 1
+          fi
 
       - name: Check out this repository
         uses: actions/checkout@v7
