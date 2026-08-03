@@ -9,10 +9,9 @@ Connect to SAP **ABAP** and **BTP services** from general MCP-compatible AI clie
 > This tool is **not standalone**: it requires a backend service deployed on **SAP BTP, Cloud Foundry**.
 > Through strong, multi-layered security it accesses **on-premise / RISE** SAP environments.
 
-> **This repository is the official binary distribution point.** Source code and development live in
-> the upstream repository [hugoconsulting/sap-mcp-server](https://github.com/hugoconsulting/sap-mcp-server).
-> Every binary published here is built from a tagged commit of that repository by the release workflow
-> in this repository.
+> **This repository is the official binary distribution point.** Every binary published here is built
+> from a tagged source revision by the release workflow in this repository, then signed and attested
+> before it is attached to a release.
 
 ---
 
@@ -60,10 +59,8 @@ Operational controls (defense in depth): (1) MCP key issuance, (2) scope `mcp` /
 
 ## Capabilities
 
-**35 tools.** The authoritative list — per-tool descriptions, official API references and per-scope
-permissions — is
-[`src/toolCatalog.json`](https://github.com/hugoconsulting/sap-mcp-server/blob/main/src/toolCatalog.json)
-in the upstream repository.
+**35 tools.** Per-tool descriptions, official API references and per-scope permissions are carried in
+the tool catalog embedded in the binary, which your MCP client shows once the server is connected.
 
 - **Connection**
   - List destinations, switch the active destination, show the current one
@@ -231,26 +228,12 @@ Restart Claude Desktop after editing.
 Restart the Gemini CLI session after editing. (The binary still reads `connections.json` from the lookup
 order above — the client config only points at the binary.)
 
-## Build (developers)
-
-The source lives in the upstream repository. Clone it and build the same binary locally:
-
-```bash
-git clone https://github.com/hugoconsulting/sap-mcp-server.git
-cd sap-mcp-server
-npm ci
-npm run build:bundle    # esbuild → CJS bundle
-npm run build:bin:linux # Node SEA blob + postject → single binary
-```
-
 ## Backend
 
 Actual SAP communication and the security controls above are performed by a **backend** that this
 server connects to over a secure channel. A **compatible backend is required** (Bring Your Own Backend).
 
-- The REST contract a backend must satisfy is defined in
-  [docs/BACKEND-CONTRACT.md](https://github.com/hugoconsulting/sap-mcp-server/blob/main/docs/BACKEND-CONTRACT.md)
-  in the upstream repository.
+- The REST contract a backend must satisfy is documented separately and is available on request.
 - A reference backend is **not** included. A production-ready backend
   (setup, connection configuration, and operation) is **provided separately under a consulting engagement**.
   Contact: contact@hugoconsulting.com
