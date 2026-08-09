@@ -6,15 +6,17 @@
 <title>sap-mcp-server — ツール一覧</title>
 <style>
 :root {
-  --bg: #ffffff; --fg: #10233f; --muted: #4a5f7a; --line: #b9c7da;
-  --head: #10336b; --head-fg: #ffffff; --accent: #10336b; --accent-soft: #eef3fb;
-  --overlay: rgba(9, 24, 46, .55);
+  --bg: #f4f6fb; --surface: #ffffff; --fg: #10233f; --muted: #4a5f7a; --line: #e3e8f0;
+  --head: hsl(230 60% 50%); --head-fg: #ffffff;
+  --accent: hsl(230 60% 42%); --accent-soft: hsl(230 60% 50% / .12);
+  --shadow: 0 6px 16px rgba(0, 0, 0, .07); --overlay: rgba(9, 24, 46, .55);
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg: #0a1526; --fg: #dfe8f5; --muted: #93a6c0; --line: #274063;
-    --head: #16345f; --head-fg: #ffffff; --accent: #7fb0f0; --accent-soft: #12253f;
-    --overlay: rgba(2, 8, 18, .8);
+    --bg: #0a1526; --surface: #0f1e33; --fg: #dfe8f5; --muted: #93a6c0; --line: #21365a;
+    --head: hsl(230 45% 38%); --head-fg: #ffffff;
+    --accent: hsl(230 70% 74%); --accent-soft: hsl(230 60% 60% / .16);
+    --shadow: 0 6px 16px rgba(0, 0, 0, .45); --overlay: rgba(2, 8, 18, .8);
   }
 }
 * { box-sizing: border-box; }
@@ -24,25 +26,29 @@ body {
 }
 main { max-width: 1100px; margin: 0 auto; }
 h1 { font-size: 1.6rem; margin: 0 0 1.5rem; color: var(--accent); }
-.wrap { overflow-x: auto; }
-table { border-collapse: collapse; width: 100%; font-size: .875rem; border: 1px solid var(--line); }
-th, td { text-align: left; padding: .55rem .7rem; border: 1px solid var(--line); vertical-align: top; }
-thead th {
-  background: var(--head); color: var(--head-fg); font-weight: 600; white-space: nowrap;
-  position: sticky; top: 0; border-color: var(--head);
+.wrap {
+  overflow-x: auto; background: var(--surface);
+  border-radius: 10px; box-shadow: var(--shadow);
 }
+table { border-collapse: collapse; width: 100%; font-size: .875rem; background: var(--surface); }
+th, td { text-align: left; padding: 9px 13px; vertical-align: top; }
+thead th { background: var(--head); color: var(--head-fg); font-weight: 600; white-space: nowrap; }
+tbody td { border-top: 1px solid var(--line); transition: background .15s; }
+tbody tr:hover td { background: var(--accent-soft); }
 td.num { color: var(--muted); text-align: right; width: 3ch; }
-td.what { min-width: 20ch; }
+td.what { min-width: 18ch; }
+td.sys { white-space: nowrap; }
 td.act { width: 1%; white-space: nowrap; }
 code { font-size: .9em; }
 button.detail {
-  padding: .15rem .6rem; font: inherit; font-size: .8rem;
+  padding: .15rem .7rem; font: inherit; font-size: .8rem;
   color: var(--accent); background: var(--accent-soft);
-  border: 1px solid var(--line); border-radius: 4px; cursor: pointer;
+  border: 1px solid transparent; border-radius: 999px; cursor: pointer;
 }
 button.detail:hover { border-color: var(--accent); }
 dialog {
-  border: 1px solid var(--line); border-radius: 8px; background: var(--bg); color: var(--fg);
+  border: 1px solid var(--line); border-radius: 10px; background: var(--surface); color: var(--fg);
+  box-shadow: var(--shadow);
   padding: 0; max-width: 44rem; width: calc(100% - 2rem);
 }
 dialog::backdrop { background: var(--overlay); }
@@ -57,9 +63,14 @@ dialog::backdrop { background: var(--overlay); }
 .db li span { color: var(--muted); }
 a { color: var(--accent); }
 footer { margin-top: 2rem; color: var(--muted); font-size: .8rem; }
-.top { display: flex; align-items: baseline; gap: 1rem; margin: 0 0 1.5rem; }
+.top { display: flex; align-items: center; gap: 1rem; margin: 0 0 1.5rem; }
 .top h1 { margin: 0; }
-.top a { margin-left: auto; font-size: .85rem; }
+.top a {
+  margin-left: auto; font-size: .85rem; text-decoration: none; white-space: nowrap;
+  padding: .3rem .8rem; border-radius: 999px;
+  color: var(--head-fg); background: var(--head);
+}
+.top a:hover { filter: brightness(1.1); }
 </style>
 </head>
 <body>
@@ -73,7 +84,7 @@ footer { margin-top: 2rem; color: var(--muted); font-size: .8rem; }
     <table>
       <thead>
         <tr>
-          <th>No</th><th>ツール</th><th>機能</th><th>フル</th><th>参照専用</th><th>開発専用</th><th></th>
+          <th>No</th><th>ツール</th><th>機能</th><th>対象システム</th><th>フル</th><th>参照専用</th><th>開発専用</th><th></th>
         </tr>
       </thead>
       <tbody>
@@ -81,6 +92,7 @@ footer { margin-top: 2rem; color: var(--muted); font-size: .8rem; }
           <td class="num">1</td>
           <td><code>sap_list_destinations</code></td>
           <td class="what">接続(Destination)一覧</td>
+          <td class="sys">BTP 接続設定</td>
           <td>全環境の一覧を参照</td>
           <td>全環境の一覧を参照</td>
           <td>開発・品証のみ参照</td>
@@ -90,6 +102,7 @@ footer { margin-top: 2rem; color: var(--muted); font-size: .8rem; }
           <td class="num">2</td>
           <td><code>sap_use_destination</code></td>
           <td class="what">セッション既定の接続を切替</td>
+          <td class="sys">BTP 接続設定</td>
           <td>全環境で利用可</td>
           <td>全環境で利用可</td>
           <td>全環境で利用可</td>
@@ -99,6 +112,7 @@ footer { margin-top: 2rem; color: var(--muted); font-size: .8rem; }
           <td class="num">3</td>
           <td><code>sap_current_destination</code></td>
           <td class="what">現在の既定接続を表示</td>
+          <td class="sys">BTP 接続設定</td>
           <td>全環境で利用可</td>
           <td>全環境で利用可</td>
           <td>全環境で利用可</td>
@@ -108,6 +122,7 @@ footer { margin-top: 2rem; color: var(--muted); font-size: .8rem; }
           <td class="num">4</td>
           <td><code>sap_call_fm</code></td>
           <td class="what">ABAP Function Module 呼出</td>
+          <td class="sys">ABAP システム</td>
           <td>全環境で参照・更新</td>
           <td>開発・品証で参照・更新<br>本番は不可</td>
           <td>開発・品証で参照・更新</td>
@@ -117,6 +132,7 @@ footer { margin-top: 2rem; color: var(--muted); font-size: .8rem; }
           <td class="num">5</td>
           <td><code>sap_select_table</code></td>
           <td class="what">SAP テーブル動的 SELECT</td>
+          <td class="sys">ABAP システム</td>
           <td>全環境で参照</td>
           <td>全環境で参照</td>
           <td>開発・品証で参照</td>
@@ -126,6 +142,7 @@ footer { margin-top: 2rem; color: var(--muted); font-size: .8rem; }
           <td class="num">6</td>
           <td><code>sap_adt_freestyle</code></td>
           <td class="what">ADT で自由形式 SQL 実行</td>
+          <td class="sys">ABAP システム</td>
           <td>全環境で参照</td>
           <td>全環境で参照</td>
           <td>開発・品証で参照</td>
@@ -135,6 +152,7 @@ footer { margin-top: 2rem; color: var(--muted); font-size: .8rem; }
           <td class="num">7</td>
           <td><code>sap_adt_osql</code></td>
           <td class="what">ADT で Open SQL 実行</td>
+          <td class="sys">ABAP システム</td>
           <td>全環境で参照</td>
           <td>全環境で参照</td>
           <td>開発・品証で参照</td>
@@ -144,6 +162,7 @@ footer { margin-top: 2rem; color: var(--muted); font-size: .8rem; }
           <td class="num">8</td>
           <td><code>sap_adt_ddic</code></td>
           <td class="what">DDIC オブジェクト(テーブル/CDS)を SELECT *</td>
+          <td class="sys">ABAP システム</td>
           <td>全環境で参照</td>
           <td>全環境で参照</td>
           <td>開発・品証で参照</td>
@@ -153,6 +172,7 @@ footer { margin-top: 2rem; color: var(--muted); font-size: .8rem; }
           <td class="num">9</td>
           <td><code>sap_abap_read_source</code></td>
           <td class="what">ABAP ソース読取</td>
+          <td class="sys">ABAP システム</td>
           <td>全環境で参照</td>
           <td>全環境で参照</td>
           <td>開発・品証で参照</td>
@@ -162,6 +182,7 @@ footer { margin-top: 2rem; color: var(--muted); font-size: .8rem; }
           <td class="num">10</td>
           <td><code>sap_abap_write_source</code></td>
           <td class="what">ABAP レポート/プログラム作成・更新＋活性化</td>
+          <td class="sys">ABAP システム</td>
           <td>開発環境で作成・更新</td>
           <td>開発環境で作成・更新</td>
           <td>開発環境で作成・更新</td>
@@ -171,6 +192,7 @@ footer { margin-top: 2rem; color: var(--muted); font-size: .8rem; }
           <td class="num">11</td>
           <td><code>sap_abap_delete_source</code></td>
           <td class="what">ABAP プログラム/CDS DDL 削除</td>
+          <td class="sys">ABAP システム</td>
           <td>開発環境で作成・更新</td>
           <td>開発環境で作成・更新</td>
           <td>開発環境で作成・更新</td>
@@ -180,6 +202,7 @@ footer { margin-top: 2rem; color: var(--muted); font-size: .8rem; }
           <td class="num">12</td>
           <td><code>sap_abap_write_fm</code></td>
           <td class="what">ABAP Function Module(SE37)作成・更新＋活性化</td>
+          <td class="sys">ABAP システム</td>
           <td>開発環境で作成・更新</td>
           <td>開発環境で作成・更新</td>
           <td>開発環境で作成・更新</td>
@@ -189,6 +212,7 @@ footer { margin-top: 2rem; color: var(--muted); font-size: .8rem; }
           <td class="num">13</td>
           <td><code>sap_create_transport</code></td>
           <td class="what">移送リクエスト作成</td>
+          <td class="sys">ABAP システム</td>
           <td>開発環境で作成・更新</td>
           <td>開発環境で作成・更新</td>
           <td>開発環境で作成・更新</td>
@@ -198,6 +222,7 @@ footer { margin-top: 2rem; color: var(--muted); font-size: .8rem; }
           <td class="num">14</td>
           <td><code>sap_release_transport</code></td>
           <td class="what">移送リクエスト解放</td>
+          <td class="sys">ABAP システム</td>
           <td>開発環境で作成・更新</td>
           <td>開発環境で作成・更新</td>
           <td>開発環境で作成・更新</td>
@@ -207,6 +232,7 @@ footer { margin-top: 2rem; color: var(--muted); font-size: .8rem; }
           <td class="num">15</td>
           <td><code>sap_abap_activate</code></td>
           <td class="what">ABAP オブジェクト活性化＋構文チェック</td>
+          <td class="sys">ABAP システム</td>
           <td>開発環境で作成・更新</td>
           <td>開発環境で作成・更新</td>
           <td>開発環境で作成・更新</td>
@@ -216,6 +242,7 @@ footer { margin-top: 2rem; color: var(--muted); font-size: .8rem; }
           <td class="num">16</td>
           <td><code>sap_call_ias_admin</code></td>
           <td class="what">IAS(Cloud Identity)Admin API。個人情報を扱う</td>
+          <td class="sys">Cloud Identity Services (IAS)</td>
           <td>全環境で参照・更新</td>
           <td>利用不可</td>
           <td>利用不可</td>
@@ -225,6 +252,7 @@ footer { margin-top: 2rem; color: var(--muted); font-size: .8rem; }
           <td class="num">17</td>
           <td><code>sap_call_ips_job</code></td>
           <td class="what">IPS(Identity Provisioning)Jobs/JobLogs API。個人情報を扱う</td>
+          <td class="sys">Cloud Identity Services (IPS)</td>
           <td>全環境で参照・更新</td>
           <td>利用不可</td>
           <td>利用不可</td>
@@ -234,6 +262,7 @@ footer { margin-top: 2rem; color: var(--muted); font-size: .8rem; }
           <td class="num">18</td>
           <td><code>sap_call_cf_api</code></td>
           <td class="what">Cloud Foundry API v3</td>
+          <td class="sys">Cloud Foundry</td>
           <td>全環境で参照・更新</td>
           <td>開発・品証で参照・更新<br>本番は参照のみ</td>
           <td>開発・品証で参照のみ</td>
@@ -243,6 +272,7 @@ footer { margin-top: 2rem; color: var(--muted); font-size: .8rem; }
           <td class="num">19</td>
           <td><code>sap_call_bwz_content</code></td>
           <td class="what">Build Work Zone Standard Content API</td>
+          <td class="sys">SAP Build Work Zone</td>
           <td>全環境で参照・更新</td>
           <td>開発・品証で参照・更新<br>本番は参照のみ</td>
           <td>開発・品証で参照のみ</td>
@@ -252,6 +282,7 @@ footer { margin-top: 2rem; color: var(--muted); font-size: .8rem; }
           <td class="num">20</td>
           <td><code>sap_call_ctms_api</code></td>
           <td class="what">Cloud Transport Management v2 API</td>
+          <td class="sys">Cloud Transport Management</td>
           <td>全環境で参照・更新</td>
           <td>開発・品証で参照・更新<br>本番は参照のみ</td>
           <td>開発・品証で参照のみ</td>
@@ -261,6 +292,7 @@ footer { margin-top: 2rem; color: var(--muted); font-size: .8rem; }
           <td class="num">21</td>
           <td><code>sap_call_forms_api</code></td>
           <td class="what">Forms Service by Adobe REST API</td>
+          <td class="sys">SAP Forms Service by Adobe</td>
           <td>全環境で参照・更新</td>
           <td>開発・品証で参照・更新<br>本番は参照のみ</td>
           <td>開発・品証で参照のみ</td>
@@ -270,6 +302,7 @@ footer { margin-top: 2rem; color: var(--muted); font-size: .8rem; }
           <td class="num">22</td>
           <td><code>sap_call_cis_api</code></td>
           <td class="what">Cloud Information Service(CIS Central)</td>
+          <td class="sys">BTP アカウント</td>
           <td>全環境で参照・更新</td>
           <td>開発・品証で参照・更新<br>本番は参照のみ</td>
           <td>開発・品証で参照のみ</td>
@@ -279,6 +312,7 @@ footer { margin-top: 2rem; color: var(--muted); font-size: .8rem; }
           <td class="num">23</td>
           <td><code>sap_call_cpi_api</code></td>
           <td class="what">Integration Suite(CPI)Audit/Monitoring API</td>
+          <td class="sys">SAP Integration Suite</td>
           <td>全環境で参照・更新</td>
           <td>開発・品証で参照・更新<br>本番は参照のみ</td>
           <td>開発・品証で参照のみ</td>
@@ -288,6 +322,7 @@ footer { margin-top: 2rem; color: var(--muted); font-size: .8rem; }
           <td class="num">24</td>
           <td><code>sap_call_ans_api</code></td>
           <td class="what">Alert Notification Service REST API</td>
+          <td class="sys">Alert Notification Service</td>
           <td>全環境で参照・更新</td>
           <td>開発・品証で参照・更新<br>本番は参照のみ</td>
           <td>開発・品証で参照のみ</td>
@@ -297,6 +332,7 @@ footer { margin-top: 2rem; color: var(--muted); font-size: .8rem; }
           <td class="num">25</td>
           <td><code>sap_call_sbpa_api</code></td>
           <td class="what">Build Process Automation REST API</td>
+          <td class="sys">SAP Build Process Automation</td>
           <td>全環境で参照・更新</td>
           <td>開発・品証で参照・更新<br>本番は参照のみ</td>
           <td>開発・品証で参照のみ</td>
@@ -306,6 +342,7 @@ footer { margin-top: 2rem; color: var(--muted); font-size: .8rem; }
           <td class="num">26</td>
           <td><code>sap_call_datasphere_api</code></td>
           <td class="what">Datasphere 公開 REST/OData API</td>
+          <td class="sys">SAP Datasphere</td>
           <td>全環境で参照・更新</td>
           <td>開発・品証で参照・更新<br>本番は参照のみ</td>
           <td>開発・品証で参照のみ</td>
@@ -315,6 +352,7 @@ footer { margin-top: 2rem; color: var(--muted); font-size: .8rem; }
           <td class="num">27</td>
           <td><code>sap_call_calm_api</code></td>
           <td class="what">Cloud ALM REST API</td>
+          <td class="sys">SAP Cloud ALM</td>
           <td>全環境で参照・更新</td>
           <td>開発・品証で参照・更新<br>本番は参照のみ</td>
           <td>開発・品証で参照のみ</td>
@@ -324,6 +362,7 @@ footer { margin-top: 2rem; color: var(--muted); font-size: .8rem; }
           <td class="num">28</td>
           <td><code>sap_call_btp_cli</code></td>
           <td class="what">btp CLI 実行（SAP BTP CLI v2.106.1）</td>
+          <td class="sys">BTP アカウント</td>
           <td>全環境で実行</td>
           <td>利用不可</td>
           <td>利用不可</td>
@@ -333,6 +372,7 @@ footer { margin-top: 2rem; color: var(--muted); font-size: .8rem; }
           <td class="num">29</td>
           <td><code>sap_call_cf_cli</code></td>
           <td class="what">cf CLI 実行（Cloud Foundry CLI v8.18.3）</td>
+          <td class="sys">Cloud Foundry</td>
           <td>全環境で実行</td>
           <td>利用不可</td>
           <td>利用不可</td>
@@ -342,6 +382,7 @@ footer { margin-top: 2rem; color: var(--muted); font-size: .8rem; }
           <td class="num">30</td>
           <td><code>sap_call_datasphere_cli</code></td>
           <td class="what">datasphere CLI 実行（SAP Datasphere CLI v2026.13.0）</td>
+          <td class="sys">SAP Datasphere</td>
           <td>全環境で実行</td>
           <td>利用不可</td>
           <td>利用不可</td>
@@ -351,6 +392,7 @@ footer { margin-top: 2rem; color: var(--muted); font-size: .8rem; }
           <td class="num">31</td>
           <td><code>app_call_jira_api</code></td>
           <td class="what">JIRA REST API（外部アプリ / Apps &amp; Services）</td>
+          <td class="sys">Jira（外部アプリ）</td>
           <td>全環境で全操作（起票/遷移/コメント/照会）</td>
           <td>開発・品証で全操作<br>本番は参照のみ</td>
           <td>開発・品証で全操作可<br>本番は不可</td>
@@ -360,6 +402,7 @@ footer { margin-top: 2rem; color: var(--muted); font-size: .8rem; }
           <td class="num">32</td>
           <td><code>app_call_smartdb_api</code></td>
           <td class="what">SmartDB REST API v3（外部アプリ / Apps &amp; Services）</td>
+          <td class="sys">SmartDB（外部アプリ）</td>
           <td>全環境で全操作（文書 CRUD/プロセス実行）</td>
           <td>開発・品証で全操作<br>本番は参照のみ</td>
           <td>開発・品証で全操作可<br>本番は不可</td>
@@ -369,6 +412,7 @@ footer { margin-top: 2rem; color: var(--muted); font-size: .8rem; }
           <td class="num">33</td>
           <td><code>sap_call_ibp_api</code></td>
           <td class="what">Integrated Business Planning(IBP)OData API</td>
+          <td class="sys">SAP IBP</td>
           <td>全環境で参照・更新</td>
           <td>開発・品証で参照・更新<br>本番は参照のみ</td>
           <td>開発・品証で参照・更新</td>
@@ -378,6 +422,7 @@ footer { margin-top: 2rem; color: var(--muted); font-size: .8rem; }
           <td class="num">34</td>
           <td><code>sap_call_s4_api</code></td>
           <td class="what">S/4HANA OData/REST API</td>
+          <td class="sys">SAP S/4HANA</td>
           <td>全環境で参照・更新</td>
           <td>開発・品証で参照・更新<br>本番は参照のみ</td>
           <td>開発・品証で参照のみ</td>
@@ -387,6 +432,7 @@ footer { margin-top: 2rem; color: var(--muted); font-size: .8rem; }
           <td class="num">35</td>
           <td><code>sap_call_soap</code></td>
           <td class="what">S/4HANA SOAP API</td>
+          <td class="sys">SAP S/4HANA</td>
           <td>全環境で参照・更新</td>
           <td>開発・品証で参照・更新<br>本番は参照のみ</td>
           <td>開発・品証で参照のみ</td>
