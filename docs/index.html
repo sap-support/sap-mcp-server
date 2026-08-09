@@ -6,13 +6,15 @@
 <title>sap-mcp-server — tool reference</title>
 <style>
 :root {
-  --bg: #ffffff; --fg: #1f2328; --muted: #59636e; --line: #d1d9e0;
-  --head: #f6f8fa; --code: #eff1f3; --accent: #0969da; --overlay: rgba(31, 35, 40, .5);
+  --bg: #ffffff; --fg: #10233f; --muted: #4a5f7a; --line: #b9c7da;
+  --head: #10336b; --head-fg: #ffffff; --accent: #10336b; --accent-soft: #eef3fb;
+  --overlay: rgba(9, 24, 46, .55);
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg: #0d1117; --fg: #e6edf3; --muted: #9198a1; --line: #3d444d;
-    --head: #161b22; --code: #21262d; --accent: #4493f8; --overlay: rgba(1, 4, 9, .8);
+    --bg: #0a1526; --fg: #dfe8f5; --muted: #93a6c0; --line: #274063;
+    --head: #16345f; --head-fg: #ffffff; --accent: #7fb0f0; --accent-soft: #12253f;
+    --overlay: rgba(2, 8, 18, .8);
   }
 }
 * { box-sizing: border-box; }
@@ -21,19 +23,22 @@ body {
   font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
 }
 main { max-width: 1100px; margin: 0 auto; }
-h1 { font-size: 1.6rem; margin: 0 0 .25rem; }
-.sub { color: var(--muted); margin: 0 0 2rem; font-size: .9rem; }
-.wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 6px; }
-table { border-collapse: collapse; width: 100%; font-size: .875rem; }
-th, td { text-align: left; padding: .55rem .7rem; border-bottom: 1px solid var(--line); vertical-align: top; }
-thead th { background: var(--head); font-weight: 600; white-space: nowrap; position: sticky; top: 0; }
-tbody tr:last-child td { border-bottom: 0; }
+h1 { font-size: 1.6rem; margin: 0 0 1.5rem; color: var(--accent); }
+.wrap { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: .875rem; border: 1px solid var(--line); }
+th, td { text-align: left; padding: .55rem .7rem; border: 1px solid var(--line); vertical-align: top; }
+thead th {
+  background: var(--head); color: var(--head-fg); font-weight: 600; white-space: nowrap;
+  position: sticky; top: 0; border-color: var(--head);
+}
 td.num { color: var(--muted); text-align: right; width: 3ch; }
 td.what { min-width: 20ch; }
-code { background: var(--code); padding: .1rem .35rem; border-radius: 4px; font-size: .9em; }
+td.act { width: 1%; white-space: nowrap; }
+code { font-size: .9em; }
 button.detail {
-  margin-left: .5rem; padding: .1rem .5rem; font: inherit; font-size: .8rem;
-  color: var(--accent); background: none; border: 1px solid var(--line); border-radius: 4px; cursor: pointer;
+  padding: .15rem .6rem; font: inherit; font-size: .8rem;
+  color: var(--accent); background: var(--accent-soft);
+  border: 1px solid var(--line); border-radius: 4px; cursor: pointer;
 }
 button.detail:hover { border-color: var(--accent); }
 dialog {
@@ -57,365 +62,329 @@ footer { margin-top: 2rem; color: var(--muted); font-size: .8rem; }
 <body>
 <main>
   <h1>sap-mcp-server — tool reference</h1>
-  <p class="sub">What each tool does and which role may call it. Generated from the tool catalog (version 1.3.3, 35 tools, server 0.14.3) — do not edit by hand.</p>
 
   <div class="wrap">
     <table>
       <thead>
         <tr>
-          <th>No</th><th>Tool</th><th>What it does</th><th>Full</th><th>Read-only</th><th>Developer</th>
+          <th>No</th><th>Tool</th><th>What it does</th><th>Full</th><th>Read-only</th><th>Developer</th><th></th>
         </tr>
       </thead>
       <tbody>
         <tr data-id="sap_list_destinations">
           <td class="num">1</td>
           <td><code>sap_list_destinations</code></td>
-          <td class="what">List Destinations
-            <button type="button" class="detail" data-no="1">Details</button>
-          </td>
+          <td class="what">List Destinations</td>
           <td>List all</td>
           <td>List all</td>
           <td>DEV/QAS only</td>
+          <td class="act"><button type="button" class="detail" data-no="1">Details</button></td>
         </tr>
         <tr data-id="sap_use_destination">
           <td class="num">2</td>
           <td><code>sap_use_destination</code></td>
-          <td class="what">Switch default Destination
-            <button type="button" class="detail" data-no="2">Details</button>
-          </td>
+          <td class="what">Switch default Destination</td>
           <td>All envs: available</td>
           <td>All envs: available</td>
           <td>All envs: available</td>
+          <td class="act"><button type="button" class="detail" data-no="2">Details</button></td>
         </tr>
         <tr data-id="sap_current_destination">
           <td class="num">3</td>
           <td><code>sap_current_destination</code></td>
-          <td class="what">Show current Destination
-            <button type="button" class="detail" data-no="3">Details</button>
-          </td>
+          <td class="what">Show current Destination</td>
           <td>All envs: available</td>
           <td>All envs: available</td>
           <td>All envs: available</td>
+          <td class="act"><button type="button" class="detail" data-no="3">Details</button></td>
         </tr>
         <tr data-id="sap_call_fm">
           <td class="num">4</td>
           <td><code>sap_call_fm</code></td>
-          <td class="what">Call ABAP Function Module
-            <button type="button" class="detail" data-no="4">Details</button>
-          </td>
+          <td class="what">Call ABAP Function Module</td>
           <td>All envs: read &amp; update</td>
           <td>DEV/QAS: read &amp; update<br>PRD blocked</td>
           <td>DEV/QAS: read &amp; update</td>
+          <td class="act"><button type="button" class="detail" data-no="4">Details</button></td>
         </tr>
         <tr data-id="sap_select_table">
           <td class="num">5</td>
           <td><code>sap_select_table</code></td>
-          <td class="what">Dynamic table SELECT
-            <button type="button" class="detail" data-no="5">Details</button>
-          </td>
+          <td class="what">Dynamic table SELECT</td>
           <td>All envs: read</td>
           <td>All envs: read</td>
           <td>DEV/QAS: read</td>
+          <td class="act"><button type="button" class="detail" data-no="5">Details</button></td>
         </tr>
         <tr data-id="sap_adt_freestyle">
           <td class="num">6</td>
           <td><code>sap_adt_freestyle</code></td>
-          <td class="what">Free-form SQL via ADT
-            <button type="button" class="detail" data-no="6">Details</button>
-          </td>
+          <td class="what">Free-form SQL via ADT</td>
           <td>All envs: read</td>
           <td>All envs: read</td>
           <td>DEV/QAS: read</td>
+          <td class="act"><button type="button" class="detail" data-no="6">Details</button></td>
         </tr>
         <tr data-id="sap_adt_osql">
           <td class="num">7</td>
           <td><code>sap_adt_osql</code></td>
-          <td class="what">Open SQL via ADT
-            <button type="button" class="detail" data-no="7">Details</button>
-          </td>
+          <td class="what">Open SQL via ADT</td>
           <td>All envs: read</td>
           <td>All envs: read</td>
           <td>DEV/QAS: read</td>
+          <td class="act"><button type="button" class="detail" data-no="7">Details</button></td>
         </tr>
         <tr data-id="sap_adt_ddic">
           <td class="num">8</td>
           <td><code>sap_adt_ddic</code></td>
-          <td class="what">SELECT * a DDIC object
-            <button type="button" class="detail" data-no="8">Details</button>
-          </td>
+          <td class="what">SELECT * a DDIC object</td>
           <td>All envs: read</td>
           <td>All envs: read</td>
           <td>DEV/QAS: read</td>
+          <td class="act"><button type="button" class="detail" data-no="8">Details</button></td>
         </tr>
         <tr data-id="sap_abap_read_source">
           <td class="num">9</td>
           <td><code>sap_abap_read_source</code></td>
-          <td class="what">Read ABAP source
-            <button type="button" class="detail" data-no="9">Details</button>
-          </td>
+          <td class="what">Read ABAP source</td>
           <td>All envs: read</td>
           <td>All envs: read</td>
           <td>DEV/QAS: read</td>
+          <td class="act"><button type="button" class="detail" data-no="9">Details</button></td>
         </tr>
         <tr data-id="sap_abap_write_source">
           <td class="num">10</td>
           <td><code>sap_abap_write_source</code></td>
-          <td class="what">Create/update ABAP program + activate
-            <button type="button" class="detail" data-no="10">Details</button>
-          </td>
+          <td class="what">Create/update ABAP program + activate</td>
           <td>DEV only: create &amp; update</td>
           <td>DEV only: create &amp; update</td>
           <td>DEV only: create &amp; update</td>
+          <td class="act"><button type="button" class="detail" data-no="10">Details</button></td>
         </tr>
         <tr data-id="sap_abap_delete_source">
           <td class="num">11</td>
           <td><code>sap_abap_delete_source</code></td>
-          <td class="what">Delete ABAP program / CDS DDL
-            <button type="button" class="detail" data-no="11">Details</button>
-          </td>
+          <td class="what">Delete ABAP program / CDS DDL</td>
           <td>DEV only: create &amp; update</td>
           <td>DEV only: create &amp; update</td>
           <td>DEV only: create &amp; update</td>
+          <td class="act"><button type="button" class="detail" data-no="11">Details</button></td>
         </tr>
         <tr data-id="sap_abap_write_fm">
           <td class="num">12</td>
           <td><code>sap_abap_write_fm</code></td>
-          <td class="what">Create/update ABAP FM + activate
-            <button type="button" class="detail" data-no="12">Details</button>
-          </td>
+          <td class="what">Create/update ABAP FM + activate</td>
           <td>DEV only: create &amp; update</td>
           <td>DEV only: create &amp; update</td>
           <td>DEV only: create &amp; update</td>
+          <td class="act"><button type="button" class="detail" data-no="12">Details</button></td>
         </tr>
         <tr data-id="sap_create_transport">
           <td class="num">13</td>
           <td><code>sap_create_transport</code></td>
-          <td class="what">Create transport request
-            <button type="button" class="detail" data-no="13">Details</button>
-          </td>
+          <td class="what">Create transport request</td>
           <td>DEV only: create &amp; update</td>
           <td>DEV only: create &amp; update</td>
           <td>DEV only: create &amp; update</td>
+          <td class="act"><button type="button" class="detail" data-no="13">Details</button></td>
         </tr>
         <tr data-id="sap_release_transport">
           <td class="num">14</td>
           <td><code>sap_release_transport</code></td>
-          <td class="what">Release transport request
-            <button type="button" class="detail" data-no="14">Details</button>
-          </td>
+          <td class="what">Release transport request</td>
           <td>DEV only: create &amp; update</td>
           <td>DEV only: create &amp; update</td>
           <td>DEV only: create &amp; update</td>
+          <td class="act"><button type="button" class="detail" data-no="14">Details</button></td>
         </tr>
         <tr data-id="sap_abap_activate">
           <td class="num">15</td>
           <td><code>sap_abap_activate</code></td>
-          <td class="what">Activate ABAP object
-            <button type="button" class="detail" data-no="15">Details</button>
-          </td>
+          <td class="what">Activate ABAP object</td>
           <td>DEV only: create &amp; update</td>
           <td>DEV only: create &amp; update</td>
           <td>DEV only: create &amp; update</td>
+          <td class="act"><button type="button" class="detail" data-no="15">Details</button></td>
         </tr>
         <tr data-id="sap_call_ias_admin">
           <td class="num">16</td>
           <td><code>sap_call_ias_admin</code></td>
-          <td class="what">IAS Admin API (personal data)
-            <button type="button" class="detail" data-no="16">Details</button>
-          </td>
+          <td class="what">IAS Admin API (personal data)</td>
           <td>All envs: read &amp; update</td>
           <td>Not available</td>
           <td>Not available</td>
+          <td class="act"><button type="button" class="detail" data-no="16">Details</button></td>
         </tr>
         <tr data-id="sap_call_ips_job">
           <td class="num">17</td>
           <td><code>sap_call_ips_job</code></td>
-          <td class="what">IPS Jobs/JobLogs API (personal data)
-            <button type="button" class="detail" data-no="17">Details</button>
-          </td>
+          <td class="what">IPS Jobs/JobLogs API (personal data)</td>
           <td>All envs: read &amp; update</td>
           <td>Not available</td>
           <td>Not available</td>
+          <td class="act"><button type="button" class="detail" data-no="17">Details</button></td>
         </tr>
         <tr data-id="sap_call_cf_api">
           <td class="num">18</td>
           <td><code>sap_call_cf_api</code></td>
-          <td class="what">Cloud Foundry API v3
-            <button type="button" class="detail" data-no="18">Details</button>
-          </td>
+          <td class="what">Cloud Foundry API v3</td>
           <td>All envs: read &amp; update</td>
           <td>DEV/QAS: read &amp; update<br>PRD read-only</td>
           <td>DEV/QAS: read only</td>
+          <td class="act"><button type="button" class="detail" data-no="18">Details</button></td>
         </tr>
         <tr data-id="sap_call_bwz_content">
           <td class="num">19</td>
           <td><code>sap_call_bwz_content</code></td>
-          <td class="what">Build Work Zone Content API
-            <button type="button" class="detail" data-no="19">Details</button>
-          </td>
+          <td class="what">Build Work Zone Content API</td>
           <td>All envs: read &amp; update</td>
           <td>DEV/QAS: read &amp; update<br>PRD read-only</td>
           <td>DEV/QAS: read only</td>
+          <td class="act"><button type="button" class="detail" data-no="19">Details</button></td>
         </tr>
         <tr data-id="sap_call_ctms_api">
           <td class="num">20</td>
           <td><code>sap_call_ctms_api</code></td>
-          <td class="what">Cloud Transport Management v2 API
-            <button type="button" class="detail" data-no="20">Details</button>
-          </td>
+          <td class="what">Cloud Transport Management v2 API</td>
           <td>All envs: read &amp; update</td>
           <td>DEV/QAS: read &amp; update<br>PRD read-only</td>
           <td>DEV/QAS: read only</td>
+          <td class="act"><button type="button" class="detail" data-no="20">Details</button></td>
         </tr>
         <tr data-id="sap_call_forms_api">
           <td class="num">21</td>
           <td><code>sap_call_forms_api</code></td>
-          <td class="what">Forms Service by Adobe REST API
-            <button type="button" class="detail" data-no="21">Details</button>
-          </td>
+          <td class="what">Forms Service by Adobe REST API</td>
           <td>All envs: read &amp; update</td>
           <td>DEV/QAS: read &amp; update<br>PRD read-only</td>
           <td>DEV/QAS: read only</td>
+          <td class="act"><button type="button" class="detail" data-no="21">Details</button></td>
         </tr>
         <tr data-id="sap_call_cis_api">
           <td class="num">22</td>
           <td><code>sap_call_cis_api</code></td>
-          <td class="what">CIS Central API
-            <button type="button" class="detail" data-no="22">Details</button>
-          </td>
+          <td class="what">CIS Central API</td>
           <td>All envs: read &amp; update</td>
           <td>DEV/QAS: read &amp; update<br>PRD read-only</td>
           <td>DEV/QAS: read only</td>
+          <td class="act"><button type="button" class="detail" data-no="22">Details</button></td>
         </tr>
         <tr data-id="sap_call_cpi_api">
           <td class="num">23</td>
           <td><code>sap_call_cpi_api</code></td>
-          <td class="what">CPI Audit/Monitoring API
-            <button type="button" class="detail" data-no="23">Details</button>
-          </td>
+          <td class="what">CPI Audit/Monitoring API</td>
           <td>All envs: read &amp; update</td>
           <td>DEV/QAS: read &amp; update<br>PRD read-only</td>
           <td>DEV/QAS: read only</td>
+          <td class="act"><button type="button" class="detail" data-no="23">Details</button></td>
         </tr>
         <tr data-id="sap_call_ans_api">
           <td class="num">24</td>
           <td><code>sap_call_ans_api</code></td>
-          <td class="what">Alert Notification Service REST API
-            <button type="button" class="detail" data-no="24">Details</button>
-          </td>
+          <td class="what">Alert Notification Service REST API</td>
           <td>All envs: read &amp; update</td>
           <td>DEV/QAS: read &amp; update<br>PRD read-only</td>
           <td>DEV/QAS: read only</td>
+          <td class="act"><button type="button" class="detail" data-no="24">Details</button></td>
         </tr>
         <tr data-id="sap_call_sbpa_api">
           <td class="num">25</td>
           <td><code>sap_call_sbpa_api</code></td>
-          <td class="what">Build Process Automation REST API
-            <button type="button" class="detail" data-no="25">Details</button>
-          </td>
+          <td class="what">Build Process Automation REST API</td>
           <td>All envs: read &amp; update</td>
           <td>DEV/QAS: read &amp; update<br>PRD read-only</td>
           <td>DEV/QAS: read only</td>
+          <td class="act"><button type="button" class="detail" data-no="25">Details</button></td>
         </tr>
         <tr data-id="sap_call_datasphere_api">
           <td class="num">26</td>
           <td><code>sap_call_datasphere_api</code></td>
-          <td class="what">Datasphere public REST/OData API
-            <button type="button" class="detail" data-no="26">Details</button>
-          </td>
+          <td class="what">Datasphere public REST/OData API</td>
           <td>All envs: read &amp; update</td>
           <td>DEV/QAS: read &amp; update<br>PRD read-only</td>
           <td>DEV/QAS: read only</td>
+          <td class="act"><button type="button" class="detail" data-no="26">Details</button></td>
         </tr>
         <tr data-id="sap_call_calm_api">
           <td class="num">27</td>
           <td><code>sap_call_calm_api</code></td>
-          <td class="what">Cloud ALM REST API
-            <button type="button" class="detail" data-no="27">Details</button>
-          </td>
+          <td class="what">Cloud ALM REST API</td>
           <td>All envs: read &amp; update</td>
           <td>DEV/QAS: read &amp; update<br>PRD read-only</td>
           <td>DEV/QAS: read only</td>
+          <td class="act"><button type="button" class="detail" data-no="27">Details</button></td>
         </tr>
         <tr data-id="sap_call_btp_cli">
           <td class="num">28</td>
           <td><code>sap_call_btp_cli</code></td>
-          <td class="what">Run btp CLI (SAP BTP CLI v2.106.1)
-            <button type="button" class="detail" data-no="28">Details</button>
-          </td>
+          <td class="what">Run btp CLI (SAP BTP CLI v2.106.1)</td>
           <td>All envs: run</td>
           <td>Not available</td>
           <td>Not available</td>
+          <td class="act"><button type="button" class="detail" data-no="28">Details</button></td>
         </tr>
         <tr data-id="sap_call_cf_cli">
           <td class="num">29</td>
           <td><code>sap_call_cf_cli</code></td>
-          <td class="what">Run cf CLI (Cloud Foundry CLI v8.18.3)
-            <button type="button" class="detail" data-no="29">Details</button>
-          </td>
+          <td class="what">Run cf CLI (Cloud Foundry CLI v8.18.3)</td>
           <td>All envs: run</td>
           <td>Not available</td>
           <td>Not available</td>
+          <td class="act"><button type="button" class="detail" data-no="29">Details</button></td>
         </tr>
         <tr data-id="sap_call_datasphere_cli">
           <td class="num">30</td>
           <td><code>sap_call_datasphere_cli</code></td>
-          <td class="what">Run datasphere CLI (SAP Datasphere CLI v2026.13.0)
-            <button type="button" class="detail" data-no="30">Details</button>
-          </td>
+          <td class="what">Run datasphere CLI (SAP Datasphere CLI v2026.13.0)</td>
           <td>All envs: run</td>
           <td>Not available</td>
           <td>Not available</td>
+          <td class="act"><button type="button" class="detail" data-no="30">Details</button></td>
         </tr>
         <tr data-id="app_call_jira_api">
           <td class="num">31</td>
           <td><code>app_call_jira_api</code></td>
-          <td class="what">JIRA REST API (external app / Apps &amp; Services)
-            <button type="button" class="detail" data-no="31">Details</button>
-          </td>
+          <td class="what">JIRA REST API (external app / Apps &amp; Services)</td>
           <td>All envs: all operations</td>
           <td>DEV/QAS: all operations<br>PRD read-only</td>
           <td>DEV/QAS: all operations<br>PRD blocked</td>
+          <td class="act"><button type="button" class="detail" data-no="31">Details</button></td>
         </tr>
         <tr data-id="app_call_smartdb_api">
           <td class="num">32</td>
           <td><code>app_call_smartdb_api</code></td>
-          <td class="what">SmartDB REST API v3 (external app / Apps &amp; Services)
-            <button type="button" class="detail" data-no="32">Details</button>
-          </td>
+          <td class="what">SmartDB REST API v3 (external app / Apps &amp; Services)</td>
           <td>All envs: all operations</td>
           <td>DEV/QAS: all operations<br>PRD read-only</td>
           <td>DEV/QAS: all operations<br>PRD blocked</td>
+          <td class="act"><button type="button" class="detail" data-no="32">Details</button></td>
         </tr>
         <tr data-id="sap_call_ibp_api">
           <td class="num">33</td>
           <td><code>sap_call_ibp_api</code></td>
-          <td class="what">IBP OData API
-            <button type="button" class="detail" data-no="33">Details</button>
-          </td>
+          <td class="what">IBP OData API</td>
           <td>All envs: read &amp; update</td>
           <td>DEV/QAS: read &amp; update<br>PRD read-only</td>
           <td>DEV/QAS: read &amp; update</td>
+          <td class="act"><button type="button" class="detail" data-no="33">Details</button></td>
         </tr>
         <tr data-id="sap_call_s4_api">
           <td class="num">34</td>
           <td><code>sap_call_s4_api</code></td>
-          <td class="what">S/4HANA OData/REST API
-            <button type="button" class="detail" data-no="34">Details</button>
-          </td>
+          <td class="what">S/4HANA OData/REST API</td>
           <td>All envs: read &amp; update</td>
           <td>DEV/QAS: read &amp; update<br>PRD read-only</td>
           <td>DEV/QAS: read only</td>
+          <td class="act"><button type="button" class="detail" data-no="34">Details</button></td>
         </tr>
         <tr data-id="sap_call_soap">
           <td class="num">35</td>
           <td><code>sap_call_soap</code></td>
-          <td class="what">S/4HANA SOAP API
-            <button type="button" class="detail" data-no="35">Details</button>
-          </td>
+          <td class="what">S/4HANA SOAP API</td>
           <td>All envs: read &amp; update</td>
           <td>DEV/QAS: read &amp; update<br>PRD read-only</td>
           <td>DEV/QAS: read only</td>
+          <td class="act"><button type="button" class="detail" data-no="35">Details</button></td>
         </tr>
       </tbody>
     </table>
