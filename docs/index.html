@@ -47,11 +47,13 @@ thead th.desc::after { content: ' ▼'; font-size: .75em; }
 tbody td { border-top: 1px solid var(--line); transition: background .15s; }
 tbody tr:hover td { background: var(--accent-soft); }
 td.num { color: var(--muted); text-align: right; width: 3ch; }
-td.what { min-width: 18ch; }
-td.sys { white-space: nowrap; }
+/* 説明を主役にし、権限 6 列は幅を固定して揺れないようにする。 */
+td.what { width: 34%; }
+td.sys  { width: 8rem; }
 thead th.sub { font-weight: 500; font-size: .8rem; }
 thead th[colspan] { text-align: center; }
-td.mk { text-align: center; font-size: 1.05rem; width: 1%; line-height: 1.35; white-space: nowrap; cursor: help; }
+thead th.sub, td.mk { width: 3.5rem; min-width: 3.5rem; text-align: center; }
+td.mk { font-size: 1.05rem; line-height: 1.35; white-space: nowrap; cursor: help; }
 #tip {
   position: fixed; z-index: 50; pointer-events: none; opacity: 0; transition: opacity .12s;
   max-width: 24rem; padding: .6rem .85rem; border-radius: 8px;
@@ -149,7 +151,7 @@ a { color: var(--accent); }
           <td class="num">4</td>
           <td><code>sap_call_fm</code></td>
           <td class="what">Call a Function Module / BAPI over RFC</td>
-          <td class="sys">ABAP system</td>
+          <td class="sys">ABAP</td>
           <td class="mk" data-tip="All envs: read &amp; update" aria-label="All envs: read &amp; update">🟢</td><td class="mk" data-tip="All envs: read &amp; update" aria-label="All envs: read &amp; update">🟢</td>
           <td class="mk" data-tip="DEV/QAS: read &amp; update / PRD blocked" aria-label="DEV/QAS: read &amp; update / PRD blocked">🔴</td><td class="mk" data-tip="DEV/QAS: read &amp; update / PRD blocked" aria-label="DEV/QAS: read &amp; update / PRD blocked">🟢</td>
           <td class="mk" data-tip="DEV/QAS: read &amp; update" aria-label="DEV/QAS: read &amp; update">🔴</td><td class="mk" data-tip="DEV/QAS: read &amp; update" aria-label="DEV/QAS: read &amp; update">🟢</td>
@@ -159,7 +161,7 @@ a { color: var(--accent); }
           <td class="num">5</td>
           <td><code>sap_select_table</code></td>
           <td class="what">Read a table through an RFC_READ_TABLE equivalent</td>
-          <td class="sys">ABAP system</td>
+          <td class="sys">ABAP</td>
           <td class="mk" data-tip="All envs: read" aria-label="All envs: read">🟡</td><td class="mk" data-tip="All envs: read" aria-label="All envs: read">🟡</td>
           <td class="mk" data-tip="All envs: read" aria-label="All envs: read">🟡</td><td class="mk" data-tip="All envs: read" aria-label="All envs: read">🟡</td>
           <td class="mk" data-tip="DEV/QAS: read" aria-label="DEV/QAS: read">🔴</td><td class="mk" data-tip="DEV/QAS: read" aria-label="DEV/QAS: read">🟡</td>
@@ -169,7 +171,7 @@ a { color: var(--accent); }
           <td class="num">6</td>
           <td><code>sap_adt_freestyle</code></td>
           <td class="what">Run free-form SQL through the ADT data preview</td>
-          <td class="sys">ABAP system</td>
+          <td class="sys">ABAP</td>
           <td class="mk" data-tip="All envs: read" aria-label="All envs: read">🟡</td><td class="mk" data-tip="All envs: read" aria-label="All envs: read">🟡</td>
           <td class="mk" data-tip="All envs: read" aria-label="All envs: read">🟡</td><td class="mk" data-tip="All envs: read" aria-label="All envs: read">🟡</td>
           <td class="mk" data-tip="DEV/QAS: read" aria-label="DEV/QAS: read">🔴</td><td class="mk" data-tip="DEV/QAS: read" aria-label="DEV/QAS: read">🟡</td>
@@ -179,7 +181,7 @@ a { color: var(--accent); }
           <td class="num">7</td>
           <td><code>sap_adt_osql</code></td>
           <td class="what">Run Open SQL through ADT</td>
-          <td class="sys">ABAP system</td>
+          <td class="sys">ABAP</td>
           <td class="mk" data-tip="All envs: read" aria-label="All envs: read">🟡</td><td class="mk" data-tip="All envs: read" aria-label="All envs: read">🟡</td>
           <td class="mk" data-tip="All envs: read" aria-label="All envs: read">🟡</td><td class="mk" data-tip="All envs: read" aria-label="All envs: read">🟡</td>
           <td class="mk" data-tip="DEV/QAS: read" aria-label="DEV/QAS: read">🔴</td><td class="mk" data-tip="DEV/QAS: read" aria-label="DEV/QAS: read">🟡</td>
@@ -189,7 +191,7 @@ a { color: var(--accent); }
           <td class="num">8</td>
           <td><code>sap_adt_ddic</code></td>
           <td class="what">SELECT * a DDIC object (table or CDS) through ADT</td>
-          <td class="sys">ABAP system</td>
+          <td class="sys">ABAP</td>
           <td class="mk" data-tip="All envs: read" aria-label="All envs: read">🟡</td><td class="mk" data-tip="All envs: read" aria-label="All envs: read">🟡</td>
           <td class="mk" data-tip="All envs: read" aria-label="All envs: read">🟡</td><td class="mk" data-tip="All envs: read" aria-label="All envs: read">🟡</td>
           <td class="mk" data-tip="DEV/QAS: read" aria-label="DEV/QAS: read">🔴</td><td class="mk" data-tip="DEV/QAS: read" aria-label="DEV/QAS: read">🟡</td>
@@ -199,7 +201,7 @@ a { color: var(--accent); }
           <td class="num">9</td>
           <td><code>sap_abap_read_source</code></td>
           <td class="what">Read program or function module source through ADT</td>
-          <td class="sys">ABAP system</td>
+          <td class="sys">ABAP</td>
           <td class="mk" data-tip="All envs: read" aria-label="All envs: read">🟡</td><td class="mk" data-tip="All envs: read" aria-label="All envs: read">🟡</td>
           <td class="mk" data-tip="All envs: read" aria-label="All envs: read">🟡</td><td class="mk" data-tip="All envs: read" aria-label="All envs: read">🟡</td>
           <td class="mk" data-tip="DEV/QAS: read" aria-label="DEV/QAS: read">🔴</td><td class="mk" data-tip="DEV/QAS: read" aria-label="DEV/QAS: read">🟡</td>
@@ -209,7 +211,7 @@ a { color: var(--accent); }
           <td class="num">10</td>
           <td><code>sap_abap_write_source</code></td>
           <td class="what">Create or update a report/program through ADT and activate it</td>
-          <td class="sys">ABAP system</td>
+          <td class="sys">ABAP</td>
           <td class="mk" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update">🔴</td><td class="mk" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update">🟢</td>
           <td class="mk" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update">🔴</td><td class="mk" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update">🟢</td>
           <td class="mk" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update">🔴</td><td class="mk" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update">🟢</td>
@@ -219,7 +221,7 @@ a { color: var(--accent); }
           <td class="num">11</td>
           <td><code>sap_abap_delete_source</code></td>
           <td class="what">Delete a program or CDS DDL through ADT</td>
-          <td class="sys">ABAP system</td>
+          <td class="sys">ABAP</td>
           <td class="mk" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update">🔴</td><td class="mk" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update">🟢</td>
           <td class="mk" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update">🔴</td><td class="mk" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update">🟢</td>
           <td class="mk" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update">🔴</td><td class="mk" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update">🟢</td>
@@ -229,7 +231,7 @@ a { color: var(--accent); }
           <td class="num">12</td>
           <td><code>sap_abap_write_fm</code></td>
           <td class="what">Create or update a function module through ADT and activate it</td>
-          <td class="sys">ABAP system</td>
+          <td class="sys">ABAP</td>
           <td class="mk" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update">🔴</td><td class="mk" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update">🟢</td>
           <td class="mk" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update">🔴</td><td class="mk" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update">🟢</td>
           <td class="mk" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update">🔴</td><td class="mk" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update">🟢</td>
@@ -239,7 +241,7 @@ a { color: var(--accent); }
           <td class="num">13</td>
           <td><code>sap_create_transport</code></td>
           <td class="what">Create a transport request by calling a function module</td>
-          <td class="sys">ABAP system</td>
+          <td class="sys">ABAP</td>
           <td class="mk" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update">🔴</td><td class="mk" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update">🟢</td>
           <td class="mk" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update">🔴</td><td class="mk" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update">🟢</td>
           <td class="mk" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update">🔴</td><td class="mk" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update">🟢</td>
@@ -249,7 +251,7 @@ a { color: var(--accent); }
           <td class="num">14</td>
           <td><code>sap_release_transport</code></td>
           <td class="what">Release a transport request by calling a function module</td>
-          <td class="sys">ABAP system</td>
+          <td class="sys">ABAP</td>
           <td class="mk" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update">🔴</td><td class="mk" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update">🟢</td>
           <td class="mk" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update">🔴</td><td class="mk" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update">🟢</td>
           <td class="mk" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update">🔴</td><td class="mk" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update">🟢</td>
@@ -259,7 +261,7 @@ a { color: var(--accent); }
           <td class="num">15</td>
           <td><code>sap_abap_activate</code></td>
           <td class="what">Activate an object through ADT and return the syntax check result</td>
-          <td class="sys">ABAP system</td>
+          <td class="sys">ABAP</td>
           <td class="mk" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update">🔴</td><td class="mk" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update">🟢</td>
           <td class="mk" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update">🔴</td><td class="mk" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update">🟢</td>
           <td class="mk" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update">🔴</td><td class="mk" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update">🟢</td>
@@ -449,7 +451,7 @@ a { color: var(--accent); }
           <td class="num">34</td>
           <td><code>sap_call_s4_api</code></td>
           <td class="what">Call OData/REST through the destination; any SICF path works too</td>
-          <td class="sys">ABAP system</td>
+          <td class="sys">ABAP</td>
           <td class="mk" data-tip="All envs: read &amp; update" aria-label="All envs: read &amp; update">🟢</td><td class="mk" data-tip="All envs: read &amp; update" aria-label="All envs: read &amp; update">🟢</td>
           <td class="mk" data-tip="DEV/QAS: read &amp; update / PRD read-only" aria-label="DEV/QAS: read &amp; update / PRD read-only">🟡</td><td class="mk" data-tip="DEV/QAS: read &amp; update / PRD read-only" aria-label="DEV/QAS: read &amp; update / PRD read-only">🟢</td>
           <td class="mk" data-tip="DEV/QAS: read only" aria-label="DEV/QAS: read only">🔴</td><td class="mk" data-tip="DEV/QAS: read only" aria-label="DEV/QAS: read only">🟡</td>
@@ -459,7 +461,7 @@ a { color: var(--accent); }
           <td class="num">35</td>
           <td><code>sap_call_soap</code></td>
           <td class="what">Call a SOAP service, passing the envelope through</td>
-          <td class="sys">ABAP system</td>
+          <td class="sys">ABAP</td>
           <td class="mk" data-tip="All envs: read &amp; update" aria-label="All envs: read &amp; update">🟢</td><td class="mk" data-tip="All envs: read &amp; update" aria-label="All envs: read &amp; update">🟢</td>
           <td class="mk" data-tip="DEV/QAS: read &amp; update / PRD read-only" aria-label="DEV/QAS: read &amp; update / PRD read-only">🟡</td><td class="mk" data-tip="DEV/QAS: read &amp; update / PRD read-only" aria-label="DEV/QAS: read &amp; update / PRD read-only">🟢</td>
           <td class="mk" data-tip="DEV/QAS: read only" aria-label="DEV/QAS: read only">🔴</td><td class="mk" data-tip="DEV/QAS: read only" aria-label="DEV/QAS: read only">🟡</td>

@@ -47,11 +47,13 @@ thead th.desc::after { content: ' ▼'; font-size: .75em; }
 tbody td { border-top: 1px solid var(--line); transition: background .15s; }
 tbody tr:hover td { background: var(--accent-soft); }
 td.num { color: var(--muted); text-align: right; width: 3ch; }
-td.what { min-width: 18ch; }
-td.sys { white-space: nowrap; }
+/* 説明を主役にし、権限 6 列は幅を固定して揺れないようにする。 */
+td.what { width: 34%; }
+td.sys  { width: 8rem; }
 thead th.sub { font-weight: 500; font-size: .8rem; }
 thead th[colspan] { text-align: center; }
-td.mk { text-align: center; font-size: 1.05rem; width: 1%; line-height: 1.35; white-space: nowrap; cursor: help; }
+thead th.sub, td.mk { width: 3.5rem; min-width: 3.5rem; text-align: center; }
+td.mk { font-size: 1.05rem; line-height: 1.35; white-space: nowrap; cursor: help; }
 #tip {
   position: fixed; z-index: 50; pointer-events: none; opacity: 0; transition: opacity .12s;
   max-width: 24rem; padding: .6rem .85rem; border-radius: 8px;
@@ -149,7 +151,7 @@ a { color: var(--accent); }
           <td class="num">4</td>
           <td><code>sap_call_fm</code></td>
           <td class="what">Function Module / BAPI を RFC で呼び出して実行する</td>
-          <td class="sys">ABAP システム</td>
+          <td class="sys">ABAP</td>
           <td class="mk" data-tip="全環境で参照・更新" aria-label="全環境で参照・更新">🟢</td><td class="mk" data-tip="全環境で参照・更新" aria-label="全環境で参照・更新">🟢</td>
           <td class="mk" data-tip="開発・品証で参照・更新 / 本番は不可" aria-label="開発・品証で参照・更新 / 本番は不可">🔴</td><td class="mk" data-tip="開発・品証で参照・更新 / 本番は不可" aria-label="開発・品証で参照・更新 / 本番は不可">🟢</td>
           <td class="mk" data-tip="開発・品証で参照・更新" aria-label="開発・品証で参照・更新">🔴</td><td class="mk" data-tip="開発・品証で参照・更新" aria-label="開発・品証で参照・更新">🟢</td>
@@ -159,7 +161,7 @@ a { color: var(--accent); }
           <td class="num">5</td>
           <td><code>sap_select_table</code></td>
           <td class="what">テーブルを RFC_READ_TABLE 相当で読み、行を取得する</td>
-          <td class="sys">ABAP システム</td>
+          <td class="sys">ABAP</td>
           <td class="mk" data-tip="全環境で参照" aria-label="全環境で参照">🟡</td><td class="mk" data-tip="全環境で参照" aria-label="全環境で参照">🟡</td>
           <td class="mk" data-tip="全環境で参照" aria-label="全環境で参照">🟡</td><td class="mk" data-tip="全環境で参照" aria-label="全環境で参照">🟡</td>
           <td class="mk" data-tip="開発・品証で参照" aria-label="開発・品証で参照">🔴</td><td class="mk" data-tip="開発・品証で参照" aria-label="開発・品証で参照">🟡</td>
@@ -169,7 +171,7 @@ a { color: var(--accent); }
           <td class="num">6</td>
           <td><code>sap_adt_freestyle</code></td>
           <td class="what">ADT のデータプレビューで自由形式 SQL を実行し、結果を取得する</td>
-          <td class="sys">ABAP システム</td>
+          <td class="sys">ABAP</td>
           <td class="mk" data-tip="全環境で参照" aria-label="全環境で参照">🟡</td><td class="mk" data-tip="全環境で参照" aria-label="全環境で参照">🟡</td>
           <td class="mk" data-tip="全環境で参照" aria-label="全環境で参照">🟡</td><td class="mk" data-tip="全環境で参照" aria-label="全環境で参照">🟡</td>
           <td class="mk" data-tip="開発・品証で参照" aria-label="開発・品証で参照">🔴</td><td class="mk" data-tip="開発・品証で参照" aria-label="開発・品証で参照">🟡</td>
@@ -179,7 +181,7 @@ a { color: var(--accent); }
           <td class="num">7</td>
           <td><code>sap_adt_osql</code></td>
           <td class="what">ADT で Open SQL を実行し、結果を取得する</td>
-          <td class="sys">ABAP システム</td>
+          <td class="sys">ABAP</td>
           <td class="mk" data-tip="全環境で参照" aria-label="全環境で参照">🟡</td><td class="mk" data-tip="全環境で参照" aria-label="全環境で参照">🟡</td>
           <td class="mk" data-tip="全環境で参照" aria-label="全環境で参照">🟡</td><td class="mk" data-tip="全環境で参照" aria-label="全環境で参照">🟡</td>
           <td class="mk" data-tip="開発・品証で参照" aria-label="開発・品証で参照">🔴</td><td class="mk" data-tip="開発・品証で参照" aria-label="開発・品証で参照">🟡</td>
@@ -189,7 +191,7 @@ a { color: var(--accent); }
           <td class="num">8</td>
           <td><code>sap_adt_ddic</code></td>
           <td class="what">DDIC オブジェクト（テーブル / CDS）を ADT 経由で SELECT * する</td>
-          <td class="sys">ABAP システム</td>
+          <td class="sys">ABAP</td>
           <td class="mk" data-tip="全環境で参照" aria-label="全環境で参照">🟡</td><td class="mk" data-tip="全環境で参照" aria-label="全環境で参照">🟡</td>
           <td class="mk" data-tip="全環境で参照" aria-label="全環境で参照">🟡</td><td class="mk" data-tip="全環境で参照" aria-label="全環境で参照">🟡</td>
           <td class="mk" data-tip="開発・品証で参照" aria-label="開発・品証で参照">🔴</td><td class="mk" data-tip="開発・品証で参照" aria-label="開発・品証で参照">🟡</td>
@@ -199,7 +201,7 @@ a { color: var(--accent); }
           <td class="num">9</td>
           <td><code>sap_abap_read_source</code></td>
           <td class="what">ADT でプログラムや Function Module のソースを読む</td>
-          <td class="sys">ABAP システム</td>
+          <td class="sys">ABAP</td>
           <td class="mk" data-tip="全環境で参照" aria-label="全環境で参照">🟡</td><td class="mk" data-tip="全環境で参照" aria-label="全環境で参照">🟡</td>
           <td class="mk" data-tip="全環境で参照" aria-label="全環境で参照">🟡</td><td class="mk" data-tip="全環境で参照" aria-label="全環境で参照">🟡</td>
           <td class="mk" data-tip="開発・品証で参照" aria-label="開発・品証で参照">🔴</td><td class="mk" data-tip="開発・品証で参照" aria-label="開発・品証で参照">🟡</td>
@@ -209,7 +211,7 @@ a { color: var(--accent); }
           <td class="num">10</td>
           <td><code>sap_abap_write_source</code></td>
           <td class="what">ADT でレポート / プログラムを作成・更新し、活性化する</td>
-          <td class="sys">ABAP システム</td>
+          <td class="sys">ABAP</td>
           <td class="mk" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新">🔴</td><td class="mk" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新">🟢</td>
           <td class="mk" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新">🔴</td><td class="mk" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新">🟢</td>
           <td class="mk" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新">🔴</td><td class="mk" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新">🟢</td>
@@ -219,7 +221,7 @@ a { color: var(--accent); }
           <td class="num">11</td>
           <td><code>sap_abap_delete_source</code></td>
           <td class="what">ADT でプログラムや CDS DDL を削除する</td>
-          <td class="sys">ABAP システム</td>
+          <td class="sys">ABAP</td>
           <td class="mk" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新">🔴</td><td class="mk" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新">🟢</td>
           <td class="mk" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新">🔴</td><td class="mk" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新">🟢</td>
           <td class="mk" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新">🔴</td><td class="mk" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新">🟢</td>
@@ -229,7 +231,7 @@ a { color: var(--accent); }
           <td class="num">12</td>
           <td><code>sap_abap_write_fm</code></td>
           <td class="what">ADT で Function Module を作成・更新し、活性化する</td>
-          <td class="sys">ABAP システム</td>
+          <td class="sys">ABAP</td>
           <td class="mk" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新">🔴</td><td class="mk" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新">🟢</td>
           <td class="mk" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新">🔴</td><td class="mk" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新">🟢</td>
           <td class="mk" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新">🔴</td><td class="mk" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新">🟢</td>
@@ -239,7 +241,7 @@ a { color: var(--accent); }
           <td class="num">13</td>
           <td><code>sap_create_transport</code></td>
           <td class="what">Function Module を呼び出して移送リクエストを作成する</td>
-          <td class="sys">ABAP システム</td>
+          <td class="sys">ABAP</td>
           <td class="mk" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新">🔴</td><td class="mk" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新">🟢</td>
           <td class="mk" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新">🔴</td><td class="mk" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新">🟢</td>
           <td class="mk" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新">🔴</td><td class="mk" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新">🟢</td>
@@ -249,7 +251,7 @@ a { color: var(--accent); }
           <td class="num">14</td>
           <td><code>sap_release_transport</code></td>
           <td class="what">Function Module を呼び出して移送リクエストを解放する</td>
-          <td class="sys">ABAP システム</td>
+          <td class="sys">ABAP</td>
           <td class="mk" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新">🔴</td><td class="mk" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新">🟢</td>
           <td class="mk" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新">🔴</td><td class="mk" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新">🟢</td>
           <td class="mk" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新">🔴</td><td class="mk" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新">🟢</td>
@@ -259,7 +261,7 @@ a { color: var(--accent); }
           <td class="num">15</td>
           <td><code>sap_abap_activate</code></td>
           <td class="what">ADT でオブジェクトを活性化し、構文チェック結果を返す</td>
-          <td class="sys">ABAP システム</td>
+          <td class="sys">ABAP</td>
           <td class="mk" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新">🔴</td><td class="mk" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新">🟢</td>
           <td class="mk" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新">🔴</td><td class="mk" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新">🟢</td>
           <td class="mk" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新">🔴</td><td class="mk" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新">🟢</td>
@@ -449,7 +451,7 @@ a { color: var(--accent); }
           <td class="num">34</td>
           <td><code>sap_call_s4_api</code></td>
           <td class="what">OData / REST を Destination 経由で呼び出す。任意の SICF パスも通る</td>
-          <td class="sys">ABAP システム</td>
+          <td class="sys">ABAP</td>
           <td class="mk" data-tip="全環境で参照・更新" aria-label="全環境で参照・更新">🟢</td><td class="mk" data-tip="全環境で参照・更新" aria-label="全環境で参照・更新">🟢</td>
           <td class="mk" data-tip="開発・品証で参照・更新 / 本番は参照のみ" aria-label="開発・品証で参照・更新 / 本番は参照のみ">🟡</td><td class="mk" data-tip="開発・品証で参照・更新 / 本番は参照のみ" aria-label="開発・品証で参照・更新 / 本番は参照のみ">🟢</td>
           <td class="mk" data-tip="開発・品証で参照のみ" aria-label="開発・品証で参照のみ">🔴</td><td class="mk" data-tip="開発・品証で参照のみ" aria-label="開発・品証で参照のみ">🟡</td>
@@ -459,7 +461,7 @@ a { color: var(--accent); }
           <td class="num">35</td>
           <td><code>sap_call_soap</code></td>
           <td class="what">SOAP サービスを呼び出す。envelope は透過で送る</td>
-          <td class="sys">ABAP システム</td>
+          <td class="sys">ABAP</td>
           <td class="mk" data-tip="全環境で参照・更新" aria-label="全環境で参照・更新">🟢</td><td class="mk" data-tip="全環境で参照・更新" aria-label="全環境で参照・更新">🟢</td>
           <td class="mk" data-tip="開発・品証で参照・更新 / 本番は参照のみ" aria-label="開発・品証で参照・更新 / 本番は参照のみ">🟡</td><td class="mk" data-tip="開発・品証で参照・更新 / 本番は参照のみ" aria-label="開発・品証で参照・更新 / 本番は参照のみ">🟢</td>
           <td class="mk" data-tip="開発・品証で参照のみ" aria-label="開発・品証で参照のみ">🔴</td><td class="mk" data-tip="開発・品証で参照のみ" aria-label="開発・品証で参照のみ">🟡</td>
