@@ -10,6 +10,7 @@
   --head: hsl(230 60% 50%); --head-fg: #ffffff;
   --accent: hsl(230 60% 42%); --accent-soft: hsl(230 60% 50% / .12);
   --role-full: hsl(150 55% 32%); --role-ro: hsl(205 75% 42%); --role-dev: hsl(28 85% 45%);
+  --v-full: hsl(150 60% 26%); --v-ro: hsl(30 95% 32%);
   --shadow: 0 6px 16px rgba(0, 0, 0, .07); --overlay: rgba(9, 24, 46, .55);
 }
 @media (prefers-color-scheme: dark) {
@@ -18,6 +19,7 @@
     --head: hsl(230 45% 38%); --head-fg: #ffffff;
     --accent: hsl(230 70% 74%); --accent-soft: hsl(230 60% 60% / .16);
     --role-full: hsl(150 45% 26%); --role-ro: hsl(205 55% 32%); --role-dev: hsl(28 60% 36%);
+    --v-full: hsl(150 60% 70%); --v-ro: hsl(38 90% 66%);
     --shadow: 0 6px 16px rgba(0, 0, 0, .45); --overlay: rgba(2, 8, 18, .8);
   }
 }
@@ -50,10 +52,22 @@ td.num { color: var(--muted); text-align: right; width: 3ch; }
 /* 説明を主役にし、権限 6 列は幅を固定して揺れないようにする。 */
 td.what { width: 34%; }
 td.sys  { width: 8rem; }
-thead th.sub { font-weight: 500; font-size: .8rem; }
-thead th[colspan] { text-align: center; }
-thead th.sub, td.mk { width: 3.5rem; min-width: 3.5rem; text-align: center; }
-td.mk { font-size: 1.05rem; line-height: 1.35; white-space: nowrap; cursor: help; }
+td.mk { width: 6.5rem; min-width: 6.5rem; text-align: center; white-space: nowrap; cursor: help; font-size: .8rem; }
+td.mk span {
+  display: inline-block; min-width: 5.4rem; padding: .15rem .4rem;
+  border-radius: 999px; font-weight: 600; letter-spacing: .01em;
+}
+td.mk .v-full { background: hsl(150 55% 32% / .16); color: var(--v-full); }
+td.mk .v-ro   { background: hsl(35 90% 45% / .18);  color: var(--v-ro); }
+td.mk .v-no   { background: transparent;            color: var(--muted); font-weight: 400; }
+.envbar { display: flex; align-items: center; gap: .5rem; margin: 0 0 1rem; }
+.envlabel { color: var(--muted); font-size: .85rem; margin-right: .25rem; }
+.envbtn {
+  font: inherit; font-size: .85rem; padding: .3rem .9rem; cursor: pointer;
+  border: 1px solid var(--line); border-radius: 999px;
+  background: var(--surface); color: var(--fg);
+}
+.envbtn.on { background: var(--head); color: var(--head-fg); border-color: var(--head); }
 #tip {
   position: fixed; z-index: 50; pointer-events: none; opacity: 0; transition: opacity .12s;
   max-width: 24rem; padding: .6rem .85rem; border-radius: 8px;
@@ -102,18 +116,17 @@ a { color: var(--accent); }
     <a href="ja/" hreflang="ja">日本語</a>
   </div>
 
+  <div class="envbar" role="group" aria-label="Environment">
+    <span class="envlabel">Environment</span>
+    <button type="button" class="envbtn on" data-env="prd">PRD</button>
+    <button type="button" class="envbtn" data-env="nonprd">QAS / DEV</button>
+  </div>
+
   <div class="wrap">
     <table>
       <thead>
         <tr>
-          <th rowspan="2" data-i="0" aria-sort="none">No</th><th rowspan="2" data-i="1" aria-sort="none">Tool</th><th rowspan="2" data-i="2" aria-sort="none">Description</th><th rowspan="2" data-i="3" aria-sort="none">System</th>
-          <th class="r-full" colspan="2">Full</th>
-          <th class="r-ro"   colspan="2">Read-only</th>
-          <th class="r-dev"  colspan="2">Developer</th>
-          <th rowspan="2"></th>
-        </tr>
-        <tr>
-          <th class="r-full sub" data-i="4" aria-sort="none">PRD</th><th class="r-full sub" data-i="5" aria-sort="none">Non-PRD</th><th class="r-ro sub" data-i="6" aria-sort="none">PRD</th><th class="r-ro sub" data-i="7" aria-sort="none">Non-PRD</th><th class="r-dev sub" data-i="8" aria-sort="none">PRD</th><th class="r-dev sub" data-i="9" aria-sort="none">Non-PRD</th>
+          <th class="" data-i="0" aria-sort="none">No</th><th class="" data-i="1" aria-sort="none">Tool</th><th class="" data-i="2" aria-sort="none">Description</th><th class="" data-i="3" aria-sort="none">System</th><th class="r-full" data-i="4" aria-sort="none">Full</th><th class="r-ro" data-i="5" aria-sort="none">Read-only</th><th class="r-dev" data-i="6" aria-sort="none">Developer</th><th></th>
         </tr>
       </thead>
       <tbody>
@@ -122,9 +135,9 @@ a { color: var(--accent); }
           <td><code>sap_list_destinations</code></td>
           <td class="what">List the destinations you can reach</td>
           <td class="sys">Common</td>
-          <td class="mk">—</td><td class="mk">—</td>
-          <td class="mk">—</td><td class="mk">—</td>
-          <td class="mk">—</td><td class="mk">—</td>
+          <td class="mk" data-prd="—" data-nonprd="—"><span></span></td>
+          <td class="mk" data-prd="—" data-nonprd="—"><span></span></td>
+          <td class="mk" data-prd="—" data-nonprd="—"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="1">Details</button></td>
         </tr>
         <tr data-id="sap_use_destination">
@@ -132,9 +145,9 @@ a { color: var(--accent); }
           <td><code>sap_use_destination</code></td>
           <td class="what">Switch the session default destination</td>
           <td class="sys">Common</td>
-          <td class="mk">—</td><td class="mk">—</td>
-          <td class="mk">—</td><td class="mk">—</td>
-          <td class="mk">—</td><td class="mk">—</td>
+          <td class="mk" data-prd="—" data-nonprd="—"><span></span></td>
+          <td class="mk" data-prd="—" data-nonprd="—"><span></span></td>
+          <td class="mk" data-prd="—" data-nonprd="—"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="2">Details</button></td>
         </tr>
         <tr data-id="sap_current_destination">
@@ -142,9 +155,9 @@ a { color: var(--accent); }
           <td><code>sap_current_destination</code></td>
           <td class="what">Show the current default destination</td>
           <td class="sys">Common</td>
-          <td class="mk">—</td><td class="mk">—</td>
-          <td class="mk">—</td><td class="mk">—</td>
-          <td class="mk">—</td><td class="mk">—</td>
+          <td class="mk" data-prd="—" data-nonprd="—"><span></span></td>
+          <td class="mk" data-prd="—" data-nonprd="—"><span></span></td>
+          <td class="mk" data-prd="—" data-nonprd="—"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="3">Details</button></td>
         </tr>
         <tr data-id="sap_call_fm">
@@ -152,9 +165,9 @@ a { color: var(--accent); }
           <td><code>sap_call_fm</code></td>
           <td class="what">Call a Function Module / BAPI over RFC</td>
           <td class="sys">ABAP</td>
-          <td class="mk" data-tip="All envs: read &amp; update" aria-label="All envs: read &amp; update">🟢</td><td class="mk" data-tip="All envs: read &amp; update" aria-label="All envs: read &amp; update">🟢</td>
-          <td class="mk" data-tip="DEV/QAS: read &amp; update / PRD blocked" aria-label="DEV/QAS: read &amp; update / PRD blocked">🔴</td><td class="mk" data-tip="DEV/QAS: read &amp; update / PRD blocked" aria-label="DEV/QAS: read &amp; update / PRD blocked">🟢</td>
-          <td class="mk" data-tip="DEV/QAS: read &amp; update" aria-label="DEV/QAS: read &amp; update">🔴</td><td class="mk" data-tip="DEV/QAS: read &amp; update" aria-label="DEV/QAS: read &amp; update">🟢</td>
+          <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="All envs: read &amp; update" aria-label="All envs: read &amp; update"><span></span></td>
+          <td class="mk" data-prd="-" data-nonprd="Full" data-tip="DEV/QAS: read &amp; update / PRD blocked" aria-label="DEV/QAS: read &amp; update / PRD blocked"><span></span></td>
+          <td class="mk" data-prd="-" data-nonprd="Full" data-tip="DEV/QAS: read &amp; update" aria-label="DEV/QAS: read &amp; update"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="4">Details</button></td>
         </tr>
         <tr data-id="sap_select_table">
@@ -162,9 +175,9 @@ a { color: var(--accent); }
           <td><code>sap_select_table</code></td>
           <td class="what">Read a table through an RFC_READ_TABLE equivalent</td>
           <td class="sys">ABAP</td>
-          <td class="mk" data-tip="All envs: read" aria-label="All envs: read">🟡</td><td class="mk" data-tip="All envs: read" aria-label="All envs: read">🟡</td>
-          <td class="mk" data-tip="All envs: read" aria-label="All envs: read">🟡</td><td class="mk" data-tip="All envs: read" aria-label="All envs: read">🟡</td>
-          <td class="mk" data-tip="DEV/QAS: read" aria-label="DEV/QAS: read">🔴</td><td class="mk" data-tip="DEV/QAS: read" aria-label="DEV/QAS: read">🟡</td>
+          <td class="mk" data-prd="Read Only" data-nonprd="Read Only" data-tip="All envs: read" aria-label="All envs: read"><span></span></td>
+          <td class="mk" data-prd="Read Only" data-nonprd="Read Only" data-tip="All envs: read" aria-label="All envs: read"><span></span></td>
+          <td class="mk" data-prd="-" data-nonprd="Read Only" data-tip="DEV/QAS: read" aria-label="DEV/QAS: read"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="5">Details</button></td>
         </tr>
         <tr data-id="sap_adt_freestyle">
@@ -172,9 +185,9 @@ a { color: var(--accent); }
           <td><code>sap_adt_freestyle</code></td>
           <td class="what">Run free-form SQL through the ADT data preview</td>
           <td class="sys">ABAP</td>
-          <td class="mk" data-tip="All envs: read" aria-label="All envs: read">🟡</td><td class="mk" data-tip="All envs: read" aria-label="All envs: read">🟡</td>
-          <td class="mk" data-tip="All envs: read" aria-label="All envs: read">🟡</td><td class="mk" data-tip="All envs: read" aria-label="All envs: read">🟡</td>
-          <td class="mk" data-tip="DEV/QAS: read" aria-label="DEV/QAS: read">🔴</td><td class="mk" data-tip="DEV/QAS: read" aria-label="DEV/QAS: read">🟡</td>
+          <td class="mk" data-prd="Read Only" data-nonprd="Read Only" data-tip="All envs: read" aria-label="All envs: read"><span></span></td>
+          <td class="mk" data-prd="Read Only" data-nonprd="Read Only" data-tip="All envs: read" aria-label="All envs: read"><span></span></td>
+          <td class="mk" data-prd="-" data-nonprd="Read Only" data-tip="DEV/QAS: read" aria-label="DEV/QAS: read"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="6">Details</button></td>
         </tr>
         <tr data-id="sap_adt_osql">
@@ -182,9 +195,9 @@ a { color: var(--accent); }
           <td><code>sap_adt_osql</code></td>
           <td class="what">Run Open SQL through ADT</td>
           <td class="sys">ABAP</td>
-          <td class="mk" data-tip="All envs: read" aria-label="All envs: read">🟡</td><td class="mk" data-tip="All envs: read" aria-label="All envs: read">🟡</td>
-          <td class="mk" data-tip="All envs: read" aria-label="All envs: read">🟡</td><td class="mk" data-tip="All envs: read" aria-label="All envs: read">🟡</td>
-          <td class="mk" data-tip="DEV/QAS: read" aria-label="DEV/QAS: read">🔴</td><td class="mk" data-tip="DEV/QAS: read" aria-label="DEV/QAS: read">🟡</td>
+          <td class="mk" data-prd="Read Only" data-nonprd="Read Only" data-tip="All envs: read" aria-label="All envs: read"><span></span></td>
+          <td class="mk" data-prd="Read Only" data-nonprd="Read Only" data-tip="All envs: read" aria-label="All envs: read"><span></span></td>
+          <td class="mk" data-prd="-" data-nonprd="Read Only" data-tip="DEV/QAS: read" aria-label="DEV/QAS: read"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="7">Details</button></td>
         </tr>
         <tr data-id="sap_adt_ddic">
@@ -192,9 +205,9 @@ a { color: var(--accent); }
           <td><code>sap_adt_ddic</code></td>
           <td class="what">SELECT * a DDIC object (table or CDS) through ADT</td>
           <td class="sys">ABAP</td>
-          <td class="mk" data-tip="All envs: read" aria-label="All envs: read">🟡</td><td class="mk" data-tip="All envs: read" aria-label="All envs: read">🟡</td>
-          <td class="mk" data-tip="All envs: read" aria-label="All envs: read">🟡</td><td class="mk" data-tip="All envs: read" aria-label="All envs: read">🟡</td>
-          <td class="mk" data-tip="DEV/QAS: read" aria-label="DEV/QAS: read">🔴</td><td class="mk" data-tip="DEV/QAS: read" aria-label="DEV/QAS: read">🟡</td>
+          <td class="mk" data-prd="Read Only" data-nonprd="Read Only" data-tip="All envs: read" aria-label="All envs: read"><span></span></td>
+          <td class="mk" data-prd="Read Only" data-nonprd="Read Only" data-tip="All envs: read" aria-label="All envs: read"><span></span></td>
+          <td class="mk" data-prd="-" data-nonprd="Read Only" data-tip="DEV/QAS: read" aria-label="DEV/QAS: read"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="8">Details</button></td>
         </tr>
         <tr data-id="sap_abap_read_source">
@@ -202,9 +215,9 @@ a { color: var(--accent); }
           <td><code>sap_abap_read_source</code></td>
           <td class="what">Read program or function module source through ADT</td>
           <td class="sys">ABAP</td>
-          <td class="mk" data-tip="All envs: read" aria-label="All envs: read">🟡</td><td class="mk" data-tip="All envs: read" aria-label="All envs: read">🟡</td>
-          <td class="mk" data-tip="All envs: read" aria-label="All envs: read">🟡</td><td class="mk" data-tip="All envs: read" aria-label="All envs: read">🟡</td>
-          <td class="mk" data-tip="DEV/QAS: read" aria-label="DEV/QAS: read">🔴</td><td class="mk" data-tip="DEV/QAS: read" aria-label="DEV/QAS: read">🟡</td>
+          <td class="mk" data-prd="Read Only" data-nonprd="Read Only" data-tip="All envs: read" aria-label="All envs: read"><span></span></td>
+          <td class="mk" data-prd="Read Only" data-nonprd="Read Only" data-tip="All envs: read" aria-label="All envs: read"><span></span></td>
+          <td class="mk" data-prd="-" data-nonprd="Read Only" data-tip="DEV/QAS: read" aria-label="DEV/QAS: read"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="9">Details</button></td>
         </tr>
         <tr data-id="sap_abap_write_source">
@@ -212,9 +225,9 @@ a { color: var(--accent); }
           <td><code>sap_abap_write_source</code></td>
           <td class="what">Create or update a report/program through ADT and activate it</td>
           <td class="sys">ABAP</td>
-          <td class="mk" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update">🔴</td><td class="mk" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update">🟢</td>
-          <td class="mk" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update">🔴</td><td class="mk" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update">🟢</td>
-          <td class="mk" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update">🔴</td><td class="mk" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update">🟢</td>
+          <td class="mk" data-prd="-" data-nonprd="Full" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update"><span></span></td>
+          <td class="mk" data-prd="-" data-nonprd="Full" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update"><span></span></td>
+          <td class="mk" data-prd="-" data-nonprd="Full" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="10">Details</button></td>
         </tr>
         <tr data-id="sap_abap_delete_source">
@@ -222,9 +235,9 @@ a { color: var(--accent); }
           <td><code>sap_abap_delete_source</code></td>
           <td class="what">Delete a program or CDS DDL through ADT</td>
           <td class="sys">ABAP</td>
-          <td class="mk" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update">🔴</td><td class="mk" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update">🟢</td>
-          <td class="mk" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update">🔴</td><td class="mk" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update">🟢</td>
-          <td class="mk" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update">🔴</td><td class="mk" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update">🟢</td>
+          <td class="mk" data-prd="-" data-nonprd="Full" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update"><span></span></td>
+          <td class="mk" data-prd="-" data-nonprd="Full" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update"><span></span></td>
+          <td class="mk" data-prd="-" data-nonprd="Full" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="11">Details</button></td>
         </tr>
         <tr data-id="sap_abap_write_fm">
@@ -232,9 +245,9 @@ a { color: var(--accent); }
           <td><code>sap_abap_write_fm</code></td>
           <td class="what">Create or update a function module through ADT and activate it</td>
           <td class="sys">ABAP</td>
-          <td class="mk" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update">🔴</td><td class="mk" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update">🟢</td>
-          <td class="mk" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update">🔴</td><td class="mk" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update">🟢</td>
-          <td class="mk" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update">🔴</td><td class="mk" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update">🟢</td>
+          <td class="mk" data-prd="-" data-nonprd="Full" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update"><span></span></td>
+          <td class="mk" data-prd="-" data-nonprd="Full" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update"><span></span></td>
+          <td class="mk" data-prd="-" data-nonprd="Full" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="12">Details</button></td>
         </tr>
         <tr data-id="sap_create_transport">
@@ -242,9 +255,9 @@ a { color: var(--accent); }
           <td><code>sap_create_transport</code></td>
           <td class="what">Create a transport request by calling a function module</td>
           <td class="sys">ABAP</td>
-          <td class="mk" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update">🔴</td><td class="mk" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update">🟢</td>
-          <td class="mk" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update">🔴</td><td class="mk" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update">🟢</td>
-          <td class="mk" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update">🔴</td><td class="mk" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update">🟢</td>
+          <td class="mk" data-prd="-" data-nonprd="Full" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update"><span></span></td>
+          <td class="mk" data-prd="-" data-nonprd="Full" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update"><span></span></td>
+          <td class="mk" data-prd="-" data-nonprd="Full" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="13">Details</button></td>
         </tr>
         <tr data-id="sap_release_transport">
@@ -252,9 +265,9 @@ a { color: var(--accent); }
           <td><code>sap_release_transport</code></td>
           <td class="what">Release a transport request by calling a function module</td>
           <td class="sys">ABAP</td>
-          <td class="mk" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update">🔴</td><td class="mk" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update">🟢</td>
-          <td class="mk" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update">🔴</td><td class="mk" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update">🟢</td>
-          <td class="mk" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update">🔴</td><td class="mk" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update">🟢</td>
+          <td class="mk" data-prd="-" data-nonprd="Full" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update"><span></span></td>
+          <td class="mk" data-prd="-" data-nonprd="Full" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update"><span></span></td>
+          <td class="mk" data-prd="-" data-nonprd="Full" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="14">Details</button></td>
         </tr>
         <tr data-id="sap_abap_activate">
@@ -262,9 +275,9 @@ a { color: var(--accent); }
           <td><code>sap_abap_activate</code></td>
           <td class="what">Activate an object through ADT and return the syntax check result</td>
           <td class="sys">ABAP</td>
-          <td class="mk" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update">🔴</td><td class="mk" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update">🟢</td>
-          <td class="mk" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update">🔴</td><td class="mk" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update">🟢</td>
-          <td class="mk" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update">🔴</td><td class="mk" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update">🟢</td>
+          <td class="mk" data-prd="-" data-nonprd="Full" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update"><span></span></td>
+          <td class="mk" data-prd="-" data-nonprd="Full" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update"><span></span></td>
+          <td class="mk" data-prd="-" data-nonprd="Full" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="15">Details</button></td>
         </tr>
         <tr data-id="sap_call_ias_admin">
@@ -272,9 +285,9 @@ a { color: var(--accent); }
           <td><code>sap_call_ias_admin</code></td>
           <td class="what">Manage users, groups and applications through the Admin API (SCIM) — handles personal data</td>
           <td class="sys">Cloud Identity Services (IAS)</td>
-          <td class="mk" data-tip="All envs: read &amp; update" aria-label="All envs: read &amp; update">🟢</td><td class="mk" data-tip="All envs: read &amp; update" aria-label="All envs: read &amp; update">🟢</td>
-          <td class="mk" data-tip="Not available" aria-label="Not available">🔴</td><td class="mk" data-tip="Not available" aria-label="Not available">🔴</td>
-          <td class="mk" data-tip="Not available" aria-label="Not available">🔴</td><td class="mk" data-tip="Not available" aria-label="Not available">🔴</td>
+          <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="All envs: read &amp; update" aria-label="All envs: read &amp; update"><span></span></td>
+          <td class="mk" data-prd="-" data-nonprd="-" data-tip="Not available" aria-label="Not available"><span></span></td>
+          <td class="mk" data-prd="-" data-nonprd="-" data-tip="Not available" aria-label="Not available"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="16">Details</button></td>
         </tr>
         <tr data-id="sap_call_ips_job">
@@ -282,9 +295,9 @@ a { color: var(--accent); }
           <td><code>sap_call_ips_job</code></td>
           <td class="what">Inspect and run provisioning jobs through the Jobs / JobLogs API — handles personal data</td>
           <td class="sys">Cloud Identity Services (IPS)</td>
-          <td class="mk" data-tip="All envs: read &amp; update" aria-label="All envs: read &amp; update">🟢</td><td class="mk" data-tip="All envs: read &amp; update" aria-label="All envs: read &amp; update">🟢</td>
-          <td class="mk" data-tip="Not available" aria-label="Not available">🔴</td><td class="mk" data-tip="Not available" aria-label="Not available">🔴</td>
-          <td class="mk" data-tip="Not available" aria-label="Not available">🔴</td><td class="mk" data-tip="Not available" aria-label="Not available">🔴</td>
+          <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="All envs: read &amp; update" aria-label="All envs: read &amp; update"><span></span></td>
+          <td class="mk" data-prd="-" data-nonprd="-" data-tip="Not available" aria-label="Not available"><span></span></td>
+          <td class="mk" data-prd="-" data-nonprd="-" data-tip="Not available" aria-label="Not available"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="17">Details</button></td>
         </tr>
         <tr data-id="sap_call_cf_api">
@@ -292,9 +305,9 @@ a { color: var(--accent); }
           <td><code>sap_call_cf_api</code></td>
           <td class="what">Inspect and manage apps, orgs/spaces and services through the v3 API</td>
           <td class="sys">Cloud Foundry</td>
-          <td class="mk" data-tip="All envs: read &amp; update" aria-label="All envs: read &amp; update">🟢</td><td class="mk" data-tip="All envs: read &amp; update" aria-label="All envs: read &amp; update">🟢</td>
-          <td class="mk" data-tip="DEV/QAS: read &amp; update / PRD read-only" aria-label="DEV/QAS: read &amp; update / PRD read-only">🟡</td><td class="mk" data-tip="DEV/QAS: read &amp; update / PRD read-only" aria-label="DEV/QAS: read &amp; update / PRD read-only">🟢</td>
-          <td class="mk" data-tip="DEV/QAS: read only" aria-label="DEV/QAS: read only">🔴</td><td class="mk" data-tip="DEV/QAS: read only" aria-label="DEV/QAS: read only">🟡</td>
+          <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="All envs: read &amp; update" aria-label="All envs: read &amp; update"><span></span></td>
+          <td class="mk" data-prd="Read Only" data-nonprd="Full" data-tip="DEV/QAS: read &amp; update / PRD read-only" aria-label="DEV/QAS: read &amp; update / PRD read-only"><span></span></td>
+          <td class="mk" data-prd="-" data-nonprd="Read Only" data-tip="DEV/QAS: read only" aria-label="DEV/QAS: read only"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="18">Details</button></td>
         </tr>
         <tr data-id="sap_call_bwz_content">
@@ -302,9 +315,9 @@ a { color: var(--accent); }
           <td><code>sap_call_bwz_content</code></td>
           <td class="what">Read CDM site information and export business content as a zip</td>
           <td class="sys">Build Work Zone</td>
-          <td class="mk" data-tip="All envs: read &amp; update" aria-label="All envs: read &amp; update">🟢</td><td class="mk" data-tip="All envs: read &amp; update" aria-label="All envs: read &amp; update">🟢</td>
-          <td class="mk" data-tip="DEV/QAS: read &amp; update / PRD read-only" aria-label="DEV/QAS: read &amp; update / PRD read-only">🟡</td><td class="mk" data-tip="DEV/QAS: read &amp; update / PRD read-only" aria-label="DEV/QAS: read &amp; update / PRD read-only">🟢</td>
-          <td class="mk" data-tip="DEV/QAS: read only" aria-label="DEV/QAS: read only">🔴</td><td class="mk" data-tip="DEV/QAS: read only" aria-label="DEV/QAS: read only">🟡</td>
+          <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="All envs: read &amp; update" aria-label="All envs: read &amp; update"><span></span></td>
+          <td class="mk" data-prd="Read Only" data-nonprd="Full" data-tip="DEV/QAS: read &amp; update / PRD read-only" aria-label="DEV/QAS: read &amp; update / PRD read-only"><span></span></td>
+          <td class="mk" data-prd="-" data-nonprd="Read Only" data-tip="DEV/QAS: read only" aria-label="DEV/QAS: read only"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="19">Details</button></td>
         </tr>
         <tr data-id="sap_call_ctms_api">
@@ -312,9 +325,9 @@ a { color: var(--accent); }
           <td><code>sap_call_ctms_api</code></td>
           <td class="what">Manage transport nodes, queues and imports through the v2 API</td>
           <td class="sys">Cloud Transport Management</td>
-          <td class="mk" data-tip="All envs: read &amp; update" aria-label="All envs: read &amp; update">🟢</td><td class="mk" data-tip="All envs: read &amp; update" aria-label="All envs: read &amp; update">🟢</td>
-          <td class="mk" data-tip="DEV/QAS: read &amp; update / PRD read-only" aria-label="DEV/QAS: read &amp; update / PRD read-only">🟡</td><td class="mk" data-tip="DEV/QAS: read &amp; update / PRD read-only" aria-label="DEV/QAS: read &amp; update / PRD read-only">🟢</td>
-          <td class="mk" data-tip="DEV/QAS: read only" aria-label="DEV/QAS: read only">🔴</td><td class="mk" data-tip="DEV/QAS: read only" aria-label="DEV/QAS: read only">🟡</td>
+          <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="All envs: read &amp; update" aria-label="All envs: read &amp; update"><span></span></td>
+          <td class="mk" data-prd="Read Only" data-nonprd="Full" data-tip="DEV/QAS: read &amp; update / PRD read-only" aria-label="DEV/QAS: read &amp; update / PRD read-only"><span></span></td>
+          <td class="mk" data-prd="-" data-nonprd="Read Only" data-tip="DEV/QAS: read only" aria-label="DEV/QAS: read only"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="20">Details</button></td>
         </tr>
         <tr data-id="sap_call_forms_api">
@@ -322,9 +335,9 @@ a { color: var(--accent); }
           <td><code>sap_call_forms_api</code></td>
           <td class="what">List and generate forms through the REST API</td>
           <td class="sys">Forms Service by Adobe</td>
-          <td class="mk" data-tip="All envs: read &amp; update" aria-label="All envs: read &amp; update">🟢</td><td class="mk" data-tip="All envs: read &amp; update" aria-label="All envs: read &amp; update">🟢</td>
-          <td class="mk" data-tip="DEV/QAS: read &amp; update / PRD read-only" aria-label="DEV/QAS: read &amp; update / PRD read-only">🟡</td><td class="mk" data-tip="DEV/QAS: read &amp; update / PRD read-only" aria-label="DEV/QAS: read &amp; update / PRD read-only">🟢</td>
-          <td class="mk" data-tip="DEV/QAS: read only" aria-label="DEV/QAS: read only">🔴</td><td class="mk" data-tip="DEV/QAS: read only" aria-label="DEV/QAS: read only">🟡</td>
+          <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="All envs: read &amp; update" aria-label="All envs: read &amp; update"><span></span></td>
+          <td class="mk" data-prd="Read Only" data-nonprd="Full" data-tip="DEV/QAS: read &amp; update / PRD read-only" aria-label="DEV/QAS: read &amp; update / PRD read-only"><span></span></td>
+          <td class="mk" data-prd="-" data-nonprd="Read Only" data-tip="DEV/QAS: read only" aria-label="DEV/QAS: read only"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="21">Details</button></td>
         </tr>
         <tr data-id="sap_call_cis_api">
@@ -332,9 +345,9 @@ a { color: var(--accent); }
           <td><code>sap_call_cis_api</code></td>
           <td class="what">Inspect accounts, subaccounts and entitlements through the CIS Central API</td>
           <td class="sys">BTP account</td>
-          <td class="mk" data-tip="All envs: read &amp; update" aria-label="All envs: read &amp; update">🟢</td><td class="mk" data-tip="All envs: read &amp; update" aria-label="All envs: read &amp; update">🟢</td>
-          <td class="mk" data-tip="DEV/QAS: read &amp; update / PRD read-only" aria-label="DEV/QAS: read &amp; update / PRD read-only">🟡</td><td class="mk" data-tip="DEV/QAS: read &amp; update / PRD read-only" aria-label="DEV/QAS: read &amp; update / PRD read-only">🟢</td>
-          <td class="mk" data-tip="DEV/QAS: read only" aria-label="DEV/QAS: read only">🔴</td><td class="mk" data-tip="DEV/QAS: read only" aria-label="DEV/QAS: read only">🟡</td>
+          <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="All envs: read &amp; update" aria-label="All envs: read &amp; update"><span></span></td>
+          <td class="mk" data-prd="Read Only" data-nonprd="Full" data-tip="DEV/QAS: read &amp; update / PRD read-only" aria-label="DEV/QAS: read &amp; update / PRD read-only"><span></span></td>
+          <td class="mk" data-prd="-" data-nonprd="Read Only" data-tip="DEV/QAS: read only" aria-label="DEV/QAS: read only"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="22">Details</button></td>
         </tr>
         <tr data-id="sap_call_cpi_api">
@@ -342,9 +355,9 @@ a { color: var(--accent); }
           <td><code>sap_call_cpi_api</code></td>
           <td class="what">Inspect message processing logs and integration artifacts through the audit/monitoring API</td>
           <td class="sys">Integration Suite</td>
-          <td class="mk" data-tip="All envs: read &amp; update" aria-label="All envs: read &amp; update">🟢</td><td class="mk" data-tip="All envs: read &amp; update" aria-label="All envs: read &amp; update">🟢</td>
-          <td class="mk" data-tip="DEV/QAS: read &amp; update / PRD read-only" aria-label="DEV/QAS: read &amp; update / PRD read-only">🟡</td><td class="mk" data-tip="DEV/QAS: read &amp; update / PRD read-only" aria-label="DEV/QAS: read &amp; update / PRD read-only">🟢</td>
-          <td class="mk" data-tip="DEV/QAS: read only" aria-label="DEV/QAS: read only">🔴</td><td class="mk" data-tip="DEV/QAS: read only" aria-label="DEV/QAS: read only">🟡</td>
+          <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="All envs: read &amp; update" aria-label="All envs: read &amp; update"><span></span></td>
+          <td class="mk" data-prd="Read Only" data-nonprd="Full" data-tip="DEV/QAS: read &amp; update / PRD read-only" aria-label="DEV/QAS: read &amp; update / PRD read-only"><span></span></td>
+          <td class="mk" data-prd="-" data-nonprd="Read Only" data-tip="DEV/QAS: read only" aria-label="DEV/QAS: read only"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="23">Details</button></td>
         </tr>
         <tr data-id="sap_call_ans_api">
@@ -352,9 +365,9 @@ a { color: var(--accent); }
           <td><code>sap_call_ans_api</code></td>
           <td class="what">Manage conditions, actions, subscriptions and events through the REST API</td>
           <td class="sys">Alert Notification Service</td>
-          <td class="mk" data-tip="All envs: read &amp; update" aria-label="All envs: read &amp; update">🟢</td><td class="mk" data-tip="All envs: read &amp; update" aria-label="All envs: read &amp; update">🟢</td>
-          <td class="mk" data-tip="DEV/QAS: read &amp; update / PRD read-only" aria-label="DEV/QAS: read &amp; update / PRD read-only">🟡</td><td class="mk" data-tip="DEV/QAS: read &amp; update / PRD read-only" aria-label="DEV/QAS: read &amp; update / PRD read-only">🟢</td>
-          <td class="mk" data-tip="DEV/QAS: read only" aria-label="DEV/QAS: read only">🔴</td><td class="mk" data-tip="DEV/QAS: read only" aria-label="DEV/QAS: read only">🟡</td>
+          <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="All envs: read &amp; update" aria-label="All envs: read &amp; update"><span></span></td>
+          <td class="mk" data-prd="Read Only" data-nonprd="Full" data-tip="DEV/QAS: read &amp; update / PRD read-only" aria-label="DEV/QAS: read &amp; update / PRD read-only"><span></span></td>
+          <td class="mk" data-prd="-" data-nonprd="Read Only" data-tip="DEV/QAS: read only" aria-label="DEV/QAS: read only"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="24">Details</button></td>
         </tr>
         <tr data-id="sap_call_sbpa_api">
@@ -362,9 +375,9 @@ a { color: var(--accent); }
           <td><code>sap_call_sbpa_api</code></td>
           <td class="what">Inspect and drive workflow definitions and instances through the REST API</td>
           <td class="sys">Build Process Automation</td>
-          <td class="mk" data-tip="All envs: read &amp; update" aria-label="All envs: read &amp; update">🟢</td><td class="mk" data-tip="All envs: read &amp; update" aria-label="All envs: read &amp; update">🟢</td>
-          <td class="mk" data-tip="DEV/QAS: read &amp; update / PRD read-only" aria-label="DEV/QAS: read &amp; update / PRD read-only">🟡</td><td class="mk" data-tip="DEV/QAS: read &amp; update / PRD read-only" aria-label="DEV/QAS: read &amp; update / PRD read-only">🟢</td>
-          <td class="mk" data-tip="DEV/QAS: read only" aria-label="DEV/QAS: read only">🔴</td><td class="mk" data-tip="DEV/QAS: read only" aria-label="DEV/QAS: read only">🟡</td>
+          <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="All envs: read &amp; update" aria-label="All envs: read &amp; update"><span></span></td>
+          <td class="mk" data-prd="Read Only" data-nonprd="Full" data-tip="DEV/QAS: read &amp; update / PRD read-only" aria-label="DEV/QAS: read &amp; update / PRD read-only"><span></span></td>
+          <td class="mk" data-prd="-" data-nonprd="Read Only" data-tip="DEV/QAS: read only" aria-label="DEV/QAS: read only"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="25">Details</button></td>
         </tr>
         <tr data-id="sap_call_datasphere_api">
@@ -372,9 +385,9 @@ a { color: var(--accent); }
           <td><code>sap_call_datasphere_api</code></td>
           <td class="what">Manage catalog, connections and task chains through the public REST/OData API</td>
           <td class="sys">Datasphere</td>
-          <td class="mk" data-tip="All envs: read &amp; update" aria-label="All envs: read &amp; update">🟢</td><td class="mk" data-tip="All envs: read &amp; update" aria-label="All envs: read &amp; update">🟢</td>
-          <td class="mk" data-tip="DEV/QAS: read &amp; update / PRD read-only" aria-label="DEV/QAS: read &amp; update / PRD read-only">🟡</td><td class="mk" data-tip="DEV/QAS: read &amp; update / PRD read-only" aria-label="DEV/QAS: read &amp; update / PRD read-only">🟢</td>
-          <td class="mk" data-tip="DEV/QAS: read only" aria-label="DEV/QAS: read only">🔴</td><td class="mk" data-tip="DEV/QAS: read only" aria-label="DEV/QAS: read only">🟡</td>
+          <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="All envs: read &amp; update" aria-label="All envs: read &amp; update"><span></span></td>
+          <td class="mk" data-prd="Read Only" data-nonprd="Full" data-tip="DEV/QAS: read &amp; update / PRD read-only" aria-label="DEV/QAS: read &amp; update / PRD read-only"><span></span></td>
+          <td class="mk" data-prd="-" data-nonprd="Read Only" data-tip="DEV/QAS: read only" aria-label="DEV/QAS: read only"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="26">Details</button></td>
         </tr>
         <tr data-id="sap_call_calm_api">
@@ -382,9 +395,9 @@ a { color: var(--accent); }
           <td><code>sap_call_calm_api</code></td>
           <td class="what">Manage projects, tasks, alerts and support cases through the REST API</td>
           <td class="sys">Cloud ALM</td>
-          <td class="mk" data-tip="All envs: read &amp; update" aria-label="All envs: read &amp; update">🟢</td><td class="mk" data-tip="All envs: read &amp; update" aria-label="All envs: read &amp; update">🟢</td>
-          <td class="mk" data-tip="DEV/QAS: read &amp; update / PRD read-only" aria-label="DEV/QAS: read &amp; update / PRD read-only">🟡</td><td class="mk" data-tip="DEV/QAS: read &amp; update / PRD read-only" aria-label="DEV/QAS: read &amp; update / PRD read-only">🟢</td>
-          <td class="mk" data-tip="DEV/QAS: read only" aria-label="DEV/QAS: read only">🔴</td><td class="mk" data-tip="DEV/QAS: read only" aria-label="DEV/QAS: read only">🟡</td>
+          <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="All envs: read &amp; update" aria-label="All envs: read &amp; update"><span></span></td>
+          <td class="mk" data-prd="Read Only" data-nonprd="Full" data-tip="DEV/QAS: read &amp; update / PRD read-only" aria-label="DEV/QAS: read &amp; update / PRD read-only"><span></span></td>
+          <td class="mk" data-prd="-" data-nonprd="Read Only" data-tip="DEV/QAS: read only" aria-label="DEV/QAS: read only"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="27">Details</button></td>
         </tr>
         <tr data-id="sap_call_btp_cli">
@@ -392,9 +405,9 @@ a { color: var(--accent); }
           <td><code>sap_call_btp_cli</code></td>
           <td class="what">Run the btp CLI server-side and return its output (v2.106.1)</td>
           <td class="sys">BTP account</td>
-          <td class="mk" data-tip="All envs: run" aria-label="All envs: run">🟢</td><td class="mk" data-tip="All envs: run" aria-label="All envs: run">🟢</td>
-          <td class="mk" data-tip="Not available" aria-label="Not available">🔴</td><td class="mk" data-tip="Not available" aria-label="Not available">🔴</td>
-          <td class="mk" data-tip="Not available" aria-label="Not available">🔴</td><td class="mk" data-tip="Not available" aria-label="Not available">🔴</td>
+          <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="All envs: run" aria-label="All envs: run"><span></span></td>
+          <td class="mk" data-prd="-" data-nonprd="-" data-tip="Not available" aria-label="Not available"><span></span></td>
+          <td class="mk" data-prd="-" data-nonprd="-" data-tip="Not available" aria-label="Not available"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="28">Details</button></td>
         </tr>
         <tr data-id="sap_call_cf_cli">
@@ -402,9 +415,9 @@ a { color: var(--accent); }
           <td><code>sap_call_cf_cli</code></td>
           <td class="what">Run the cf CLI server-side and return its output (v8.18.3)</td>
           <td class="sys">Cloud Foundry</td>
-          <td class="mk" data-tip="All envs: run" aria-label="All envs: run">🟢</td><td class="mk" data-tip="All envs: run" aria-label="All envs: run">🟢</td>
-          <td class="mk" data-tip="Not available" aria-label="Not available">🔴</td><td class="mk" data-tip="Not available" aria-label="Not available">🔴</td>
-          <td class="mk" data-tip="Not available" aria-label="Not available">🔴</td><td class="mk" data-tip="Not available" aria-label="Not available">🔴</td>
+          <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="All envs: run" aria-label="All envs: run"><span></span></td>
+          <td class="mk" data-prd="-" data-nonprd="-" data-tip="Not available" aria-label="Not available"><span></span></td>
+          <td class="mk" data-prd="-" data-nonprd="-" data-tip="Not available" aria-label="Not available"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="29">Details</button></td>
         </tr>
         <tr data-id="sap_call_datasphere_cli">
@@ -412,9 +425,9 @@ a { color: var(--accent); }
           <td><code>sap_call_datasphere_cli</code></td>
           <td class="what">Run the datasphere CLI server-side and return its output (v2026.13.0)</td>
           <td class="sys">Datasphere</td>
-          <td class="mk" data-tip="All envs: run" aria-label="All envs: run">🟢</td><td class="mk" data-tip="All envs: run" aria-label="All envs: run">🟢</td>
-          <td class="mk" data-tip="Not available" aria-label="Not available">🔴</td><td class="mk" data-tip="Not available" aria-label="Not available">🔴</td>
-          <td class="mk" data-tip="Not available" aria-label="Not available">🔴</td><td class="mk" data-tip="Not available" aria-label="Not available">🔴</td>
+          <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="All envs: run" aria-label="All envs: run"><span></span></td>
+          <td class="mk" data-prd="-" data-nonprd="-" data-tip="Not available" aria-label="Not available"><span></span></td>
+          <td class="mk" data-prd="-" data-nonprd="-" data-tip="Not available" aria-label="Not available"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="30">Details</button></td>
         </tr>
         <tr data-id="app_call_jira_api">
@@ -422,9 +435,9 @@ a { color: var(--accent); }
           <td><code>app_call_jira_api</code></td>
           <td class="what">Read, create, transition and search issues through the REST API</td>
           <td class="sys">Jira</td>
-          <td class="mk" data-tip="All envs: all operations" aria-label="All envs: all operations">🟢</td><td class="mk" data-tip="All envs: all operations" aria-label="All envs: all operations">🟢</td>
-          <td class="mk" data-tip="DEV/QAS: all operations / PRD read-only" aria-label="DEV/QAS: all operations / PRD read-only">🟡</td><td class="mk" data-tip="DEV/QAS: all operations / PRD read-only" aria-label="DEV/QAS: all operations / PRD read-only">🟢</td>
-          <td class="mk" data-tip="DEV/QAS: all operations / PRD blocked" aria-label="DEV/QAS: all operations / PRD blocked">🔴</td><td class="mk" data-tip="DEV/QAS: all operations / PRD blocked" aria-label="DEV/QAS: all operations / PRD blocked">🟢</td>
+          <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="All envs: all operations" aria-label="All envs: all operations"><span></span></td>
+          <td class="mk" data-prd="Read Only" data-nonprd="Full" data-tip="DEV/QAS: all operations / PRD read-only" aria-label="DEV/QAS: all operations / PRD read-only"><span></span></td>
+          <td class="mk" data-prd="-" data-nonprd="Full" data-tip="DEV/QAS: all operations / PRD blocked" aria-label="DEV/QAS: all operations / PRD blocked"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="31">Details</button></td>
         </tr>
         <tr data-id="app_call_smartdb_api">
@@ -432,9 +445,9 @@ a { color: var(--accent); }
           <td><code>app_call_smartdb_api</code></td>
           <td class="what">Manage documents, views and processes through the REST API v3</td>
           <td class="sys">SmartDB</td>
-          <td class="mk" data-tip="All envs: all operations" aria-label="All envs: all operations">🟢</td><td class="mk" data-tip="All envs: all operations" aria-label="All envs: all operations">🟢</td>
-          <td class="mk" data-tip="DEV/QAS: all operations / PRD read-only" aria-label="DEV/QAS: all operations / PRD read-only">🟡</td><td class="mk" data-tip="DEV/QAS: all operations / PRD read-only" aria-label="DEV/QAS: all operations / PRD read-only">🟢</td>
-          <td class="mk" data-tip="DEV/QAS: all operations / PRD blocked" aria-label="DEV/QAS: all operations / PRD blocked">🔴</td><td class="mk" data-tip="DEV/QAS: all operations / PRD blocked" aria-label="DEV/QAS: all operations / PRD blocked">🟢</td>
+          <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="All envs: all operations" aria-label="All envs: all operations"><span></span></td>
+          <td class="mk" data-prd="Read Only" data-nonprd="Full" data-tip="DEV/QAS: all operations / PRD read-only" aria-label="DEV/QAS: all operations / PRD read-only"><span></span></td>
+          <td class="mk" data-prd="-" data-nonprd="Full" data-tip="DEV/QAS: all operations / PRD blocked" aria-label="DEV/QAS: all operations / PRD blocked"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="32">Details</button></td>
         </tr>
         <tr data-id="sap_call_ibp_api">
@@ -442,9 +455,9 @@ a { color: var(--accent); }
           <td><code>sap_call_ibp_api</code></td>
           <td class="what">Read and write master, planning and stock data through the OData API</td>
           <td class="sys">IBP</td>
-          <td class="mk" data-tip="All envs: read &amp; update" aria-label="All envs: read &amp; update">🟢</td><td class="mk" data-tip="All envs: read &amp; update" aria-label="All envs: read &amp; update">🟢</td>
-          <td class="mk" data-tip="DEV/QAS: read &amp; update / PRD read-only" aria-label="DEV/QAS: read &amp; update / PRD read-only">🟡</td><td class="mk" data-tip="DEV/QAS: read &amp; update / PRD read-only" aria-label="DEV/QAS: read &amp; update / PRD read-only">🟢</td>
-          <td class="mk" data-tip="DEV/QAS: read &amp; update" aria-label="DEV/QAS: read &amp; update">🔴</td><td class="mk" data-tip="DEV/QAS: read &amp; update" aria-label="DEV/QAS: read &amp; update">🟢</td>
+          <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="All envs: read &amp; update" aria-label="All envs: read &amp; update"><span></span></td>
+          <td class="mk" data-prd="Read Only" data-nonprd="Full" data-tip="DEV/QAS: read &amp; update / PRD read-only" aria-label="DEV/QAS: read &amp; update / PRD read-only"><span></span></td>
+          <td class="mk" data-prd="-" data-nonprd="Full" data-tip="DEV/QAS: read &amp; update" aria-label="DEV/QAS: read &amp; update"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="33">Details</button></td>
         </tr>
         <tr data-id="sap_call_s4_api">
@@ -452,9 +465,9 @@ a { color: var(--accent); }
           <td><code>sap_call_s4_api</code></td>
           <td class="what">Call OData/REST through the destination; any SICF path works too</td>
           <td class="sys">ABAP</td>
-          <td class="mk" data-tip="All envs: read &amp; update" aria-label="All envs: read &amp; update">🟢</td><td class="mk" data-tip="All envs: read &amp; update" aria-label="All envs: read &amp; update">🟢</td>
-          <td class="mk" data-tip="DEV/QAS: read &amp; update / PRD read-only" aria-label="DEV/QAS: read &amp; update / PRD read-only">🟡</td><td class="mk" data-tip="DEV/QAS: read &amp; update / PRD read-only" aria-label="DEV/QAS: read &amp; update / PRD read-only">🟢</td>
-          <td class="mk" data-tip="DEV/QAS: read only" aria-label="DEV/QAS: read only">🔴</td><td class="mk" data-tip="DEV/QAS: read only" aria-label="DEV/QAS: read only">🟡</td>
+          <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="All envs: read &amp; update" aria-label="All envs: read &amp; update"><span></span></td>
+          <td class="mk" data-prd="Read Only" data-nonprd="Full" data-tip="DEV/QAS: read &amp; update / PRD read-only" aria-label="DEV/QAS: read &amp; update / PRD read-only"><span></span></td>
+          <td class="mk" data-prd="-" data-nonprd="Read Only" data-tip="DEV/QAS: read only" aria-label="DEV/QAS: read only"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="34">Details</button></td>
         </tr>
         <tr data-id="sap_call_soap">
@@ -462,9 +475,9 @@ a { color: var(--accent); }
           <td><code>sap_call_soap</code></td>
           <td class="what">Call a SOAP service, passing the envelope through</td>
           <td class="sys">ABAP</td>
-          <td class="mk" data-tip="All envs: read &amp; update" aria-label="All envs: read &amp; update">🟢</td><td class="mk" data-tip="All envs: read &amp; update" aria-label="All envs: read &amp; update">🟢</td>
-          <td class="mk" data-tip="DEV/QAS: read &amp; update / PRD read-only" aria-label="DEV/QAS: read &amp; update / PRD read-only">🟡</td><td class="mk" data-tip="DEV/QAS: read &amp; update / PRD read-only" aria-label="DEV/QAS: read &amp; update / PRD read-only">🟢</td>
-          <td class="mk" data-tip="DEV/QAS: read only" aria-label="DEV/QAS: read only">🔴</td><td class="mk" data-tip="DEV/QAS: read only" aria-label="DEV/QAS: read only">🟡</td>
+          <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="All envs: read &amp; update" aria-label="All envs: read &amp; update"><span></span></td>
+          <td class="mk" data-prd="Read Only" data-nonprd="Full" data-tip="DEV/QAS: read &amp; update / PRD read-only" aria-label="DEV/QAS: read &amp; update / PRD read-only"><span></span></td>
+          <td class="mk" data-prd="-" data-nonprd="Read Only" data-tip="DEV/QAS: read only" aria-label="DEV/QAS: read only"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="35">Details</button></td>
         </tr>
       </tbody>
@@ -546,6 +559,20 @@ heads.forEach((th) => {
       .forEach((r) => tb.append(r));
   });
 });
+const VCLASS = { 'Full': 'v-full', 'Read Only': 'v-ro', '-': 'v-no', '—': 'v-no' };
+const cells = [...document.querySelectorAll('td.mk')];
+function applyEnv(env) {
+  for (const td of cells) {
+    const v = td.dataset[env === 'prd' ? 'prd' : 'nonprd'];
+    const sp = td.firstElementChild;
+    sp.textContent = v;
+    sp.className = VCLASS[v] || 'v-no';
+  }
+  for (const b of document.querySelectorAll('.envbtn')) b.classList.toggle('on', b.dataset.env === env);
+}
+document.querySelectorAll('.envbtn').forEach((b) => b.addEventListener('click', () => applyEnv(b.dataset.env)));
+applyEnv('prd');
+
 const tip = document.createElement('div');
 tip.id = 'tip';
 document.body.append(tip);

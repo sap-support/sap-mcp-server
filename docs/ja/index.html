@@ -10,6 +10,7 @@
   --head: hsl(230 60% 50%); --head-fg: #ffffff;
   --accent: hsl(230 60% 42%); --accent-soft: hsl(230 60% 50% / .12);
   --role-full: hsl(150 55% 32%); --role-ro: hsl(205 75% 42%); --role-dev: hsl(28 85% 45%);
+  --v-full: hsl(150 60% 26%); --v-ro: hsl(30 95% 32%);
   --shadow: 0 6px 16px rgba(0, 0, 0, .07); --overlay: rgba(9, 24, 46, .55);
 }
 @media (prefers-color-scheme: dark) {
@@ -18,6 +19,7 @@
     --head: hsl(230 45% 38%); --head-fg: #ffffff;
     --accent: hsl(230 70% 74%); --accent-soft: hsl(230 60% 60% / .16);
     --role-full: hsl(150 45% 26%); --role-ro: hsl(205 55% 32%); --role-dev: hsl(28 60% 36%);
+    --v-full: hsl(150 60% 70%); --v-ro: hsl(38 90% 66%);
     --shadow: 0 6px 16px rgba(0, 0, 0, .45); --overlay: rgba(2, 8, 18, .8);
   }
 }
@@ -50,10 +52,22 @@ td.num { color: var(--muted); text-align: right; width: 3ch; }
 /* 説明を主役にし、権限 6 列は幅を固定して揺れないようにする。 */
 td.what { width: 34%; }
 td.sys  { width: 8rem; }
-thead th.sub { font-weight: 500; font-size: .8rem; }
-thead th[colspan] { text-align: center; }
-thead th.sub, td.mk { width: 3.5rem; min-width: 3.5rem; text-align: center; }
-td.mk { font-size: 1.05rem; line-height: 1.35; white-space: nowrap; cursor: help; }
+td.mk { width: 6.5rem; min-width: 6.5rem; text-align: center; white-space: nowrap; cursor: help; font-size: .8rem; }
+td.mk span {
+  display: inline-block; min-width: 5.4rem; padding: .15rem .4rem;
+  border-radius: 999px; font-weight: 600; letter-spacing: .01em;
+}
+td.mk .v-full { background: hsl(150 55% 32% / .16); color: var(--v-full); }
+td.mk .v-ro   { background: hsl(35 90% 45% / .18);  color: var(--v-ro); }
+td.mk .v-no   { background: transparent;            color: var(--muted); font-weight: 400; }
+.envbar { display: flex; align-items: center; gap: .5rem; margin: 0 0 1rem; }
+.envlabel { color: var(--muted); font-size: .85rem; margin-right: .25rem; }
+.envbtn {
+  font: inherit; font-size: .85rem; padding: .3rem .9rem; cursor: pointer;
+  border: 1px solid var(--line); border-radius: 999px;
+  background: var(--surface); color: var(--fg);
+}
+.envbtn.on { background: var(--head); color: var(--head-fg); border-color: var(--head); }
 #tip {
   position: fixed; z-index: 50; pointer-events: none; opacity: 0; transition: opacity .12s;
   max-width: 24rem; padding: .6rem .85rem; border-radius: 8px;
@@ -102,18 +116,17 @@ a { color: var(--accent); }
     <a href="../" hreflang="en">English</a>
   </div>
 
+  <div class="envbar" role="group" aria-label="環境">
+    <span class="envlabel">環境</span>
+    <button type="button" class="envbtn on" data-env="prd">本番</button>
+    <button type="button" class="envbtn" data-env="nonprd">品証 / 開発</button>
+  </div>
+
   <div class="wrap">
     <table>
       <thead>
         <tr>
-          <th rowspan="2" data-i="0" aria-sort="none">No</th><th rowspan="2" data-i="1" aria-sort="none">ツール</th><th rowspan="2" data-i="2" aria-sort="none">説明</th><th rowspan="2" data-i="3" aria-sort="none">対象システム</th>
-          <th class="r-full" colspan="2">フル</th>
-          <th class="r-ro"   colspan="2">参照専用</th>
-          <th class="r-dev"  colspan="2">開発専用</th>
-          <th rowspan="2"></th>
-        </tr>
-        <tr>
-          <th class="r-full sub" data-i="4" aria-sort="none">PRD</th><th class="r-full sub" data-i="5" aria-sort="none">非PRD</th><th class="r-ro sub" data-i="6" aria-sort="none">PRD</th><th class="r-ro sub" data-i="7" aria-sort="none">非PRD</th><th class="r-dev sub" data-i="8" aria-sort="none">PRD</th><th class="r-dev sub" data-i="9" aria-sort="none">非PRD</th>
+          <th class="" data-i="0" aria-sort="none">No</th><th class="" data-i="1" aria-sort="none">ツール</th><th class="" data-i="2" aria-sort="none">説明</th><th class="" data-i="3" aria-sort="none">対象システム</th><th class="r-full" data-i="4" aria-sort="none">フル</th><th class="r-ro" data-i="5" aria-sort="none">参照専用</th><th class="r-dev" data-i="6" aria-sort="none">開発専用</th><th></th>
         </tr>
       </thead>
       <tbody>
@@ -122,9 +135,9 @@ a { color: var(--accent); }
           <td><code>sap_list_destinations</code></td>
           <td class="what">接続先の一覧を取得する</td>
           <td class="sys">Tool 共通</td>
-          <td class="mk">—</td><td class="mk">—</td>
-          <td class="mk">—</td><td class="mk">—</td>
-          <td class="mk">—</td><td class="mk">—</td>
+          <td class="mk" data-prd="—" data-nonprd="—"><span></span></td>
+          <td class="mk" data-prd="—" data-nonprd="—"><span></span></td>
+          <td class="mk" data-prd="—" data-nonprd="—"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="1">詳細</button></td>
         </tr>
         <tr data-id="sap_use_destination">
@@ -132,9 +145,9 @@ a { color: var(--accent); }
           <td><code>sap_use_destination</code></td>
           <td class="what">セッション既定の接続先を切り替える</td>
           <td class="sys">Tool 共通</td>
-          <td class="mk">—</td><td class="mk">—</td>
-          <td class="mk">—</td><td class="mk">—</td>
-          <td class="mk">—</td><td class="mk">—</td>
+          <td class="mk" data-prd="—" data-nonprd="—"><span></span></td>
+          <td class="mk" data-prd="—" data-nonprd="—"><span></span></td>
+          <td class="mk" data-prd="—" data-nonprd="—"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="2">詳細</button></td>
         </tr>
         <tr data-id="sap_current_destination">
@@ -142,9 +155,9 @@ a { color: var(--accent); }
           <td><code>sap_current_destination</code></td>
           <td class="what">現在の既定接続先を表示する</td>
           <td class="sys">Tool 共通</td>
-          <td class="mk">—</td><td class="mk">—</td>
-          <td class="mk">—</td><td class="mk">—</td>
-          <td class="mk">—</td><td class="mk">—</td>
+          <td class="mk" data-prd="—" data-nonprd="—"><span></span></td>
+          <td class="mk" data-prd="—" data-nonprd="—"><span></span></td>
+          <td class="mk" data-prd="—" data-nonprd="—"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="3">詳細</button></td>
         </tr>
         <tr data-id="sap_call_fm">
@@ -152,9 +165,9 @@ a { color: var(--accent); }
           <td><code>sap_call_fm</code></td>
           <td class="what">Function Module / BAPI を RFC で呼び出して実行する</td>
           <td class="sys">ABAP</td>
-          <td class="mk" data-tip="全環境で参照・更新" aria-label="全環境で参照・更新">🟢</td><td class="mk" data-tip="全環境で参照・更新" aria-label="全環境で参照・更新">🟢</td>
-          <td class="mk" data-tip="開発・品証で参照・更新 / 本番は不可" aria-label="開発・品証で参照・更新 / 本番は不可">🔴</td><td class="mk" data-tip="開発・品証で参照・更新 / 本番は不可" aria-label="開発・品証で参照・更新 / 本番は不可">🟢</td>
-          <td class="mk" data-tip="開発・品証で参照・更新" aria-label="開発・品証で参照・更新">🔴</td><td class="mk" data-tip="開発・品証で参照・更新" aria-label="開発・品証で参照・更新">🟢</td>
+          <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="全環境で参照・更新" aria-label="全環境で参照・更新"><span></span></td>
+          <td class="mk" data-prd="-" data-nonprd="Full" data-tip="開発・品証で参照・更新 / 本番は不可" aria-label="開発・品証で参照・更新 / 本番は不可"><span></span></td>
+          <td class="mk" data-prd="-" data-nonprd="Full" data-tip="開発・品証で参照・更新" aria-label="開発・品証で参照・更新"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="4">詳細</button></td>
         </tr>
         <tr data-id="sap_select_table">
@@ -162,9 +175,9 @@ a { color: var(--accent); }
           <td><code>sap_select_table</code></td>
           <td class="what">テーブルを RFC_READ_TABLE 相当で読み、行を取得する</td>
           <td class="sys">ABAP</td>
-          <td class="mk" data-tip="全環境で参照" aria-label="全環境で参照">🟡</td><td class="mk" data-tip="全環境で参照" aria-label="全環境で参照">🟡</td>
-          <td class="mk" data-tip="全環境で参照" aria-label="全環境で参照">🟡</td><td class="mk" data-tip="全環境で参照" aria-label="全環境で参照">🟡</td>
-          <td class="mk" data-tip="開発・品証で参照" aria-label="開発・品証で参照">🔴</td><td class="mk" data-tip="開発・品証で参照" aria-label="開発・品証で参照">🟡</td>
+          <td class="mk" data-prd="Read Only" data-nonprd="Read Only" data-tip="全環境で参照" aria-label="全環境で参照"><span></span></td>
+          <td class="mk" data-prd="Read Only" data-nonprd="Read Only" data-tip="全環境で参照" aria-label="全環境で参照"><span></span></td>
+          <td class="mk" data-prd="-" data-nonprd="Read Only" data-tip="開発・品証で参照" aria-label="開発・品証で参照"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="5">詳細</button></td>
         </tr>
         <tr data-id="sap_adt_freestyle">
@@ -172,9 +185,9 @@ a { color: var(--accent); }
           <td><code>sap_adt_freestyle</code></td>
           <td class="what">ADT のデータプレビューで自由形式 SQL を実行し、結果を取得する</td>
           <td class="sys">ABAP</td>
-          <td class="mk" data-tip="全環境で参照" aria-label="全環境で参照">🟡</td><td class="mk" data-tip="全環境で参照" aria-label="全環境で参照">🟡</td>
-          <td class="mk" data-tip="全環境で参照" aria-label="全環境で参照">🟡</td><td class="mk" data-tip="全環境で参照" aria-label="全環境で参照">🟡</td>
-          <td class="mk" data-tip="開発・品証で参照" aria-label="開発・品証で参照">🔴</td><td class="mk" data-tip="開発・品証で参照" aria-label="開発・品証で参照">🟡</td>
+          <td class="mk" data-prd="Read Only" data-nonprd="Read Only" data-tip="全環境で参照" aria-label="全環境で参照"><span></span></td>
+          <td class="mk" data-prd="Read Only" data-nonprd="Read Only" data-tip="全環境で参照" aria-label="全環境で参照"><span></span></td>
+          <td class="mk" data-prd="-" data-nonprd="Read Only" data-tip="開発・品証で参照" aria-label="開発・品証で参照"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="6">詳細</button></td>
         </tr>
         <tr data-id="sap_adt_osql">
@@ -182,9 +195,9 @@ a { color: var(--accent); }
           <td><code>sap_adt_osql</code></td>
           <td class="what">ADT で Open SQL を実行し、結果を取得する</td>
           <td class="sys">ABAP</td>
-          <td class="mk" data-tip="全環境で参照" aria-label="全環境で参照">🟡</td><td class="mk" data-tip="全環境で参照" aria-label="全環境で参照">🟡</td>
-          <td class="mk" data-tip="全環境で参照" aria-label="全環境で参照">🟡</td><td class="mk" data-tip="全環境で参照" aria-label="全環境で参照">🟡</td>
-          <td class="mk" data-tip="開発・品証で参照" aria-label="開発・品証で参照">🔴</td><td class="mk" data-tip="開発・品証で参照" aria-label="開発・品証で参照">🟡</td>
+          <td class="mk" data-prd="Read Only" data-nonprd="Read Only" data-tip="全環境で参照" aria-label="全環境で参照"><span></span></td>
+          <td class="mk" data-prd="Read Only" data-nonprd="Read Only" data-tip="全環境で参照" aria-label="全環境で参照"><span></span></td>
+          <td class="mk" data-prd="-" data-nonprd="Read Only" data-tip="開発・品証で参照" aria-label="開発・品証で参照"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="7">詳細</button></td>
         </tr>
         <tr data-id="sap_adt_ddic">
@@ -192,9 +205,9 @@ a { color: var(--accent); }
           <td><code>sap_adt_ddic</code></td>
           <td class="what">DDIC オブジェクト（テーブル / CDS）を ADT 経由で SELECT * する</td>
           <td class="sys">ABAP</td>
-          <td class="mk" data-tip="全環境で参照" aria-label="全環境で参照">🟡</td><td class="mk" data-tip="全環境で参照" aria-label="全環境で参照">🟡</td>
-          <td class="mk" data-tip="全環境で参照" aria-label="全環境で参照">🟡</td><td class="mk" data-tip="全環境で参照" aria-label="全環境で参照">🟡</td>
-          <td class="mk" data-tip="開発・品証で参照" aria-label="開発・品証で参照">🔴</td><td class="mk" data-tip="開発・品証で参照" aria-label="開発・品証で参照">🟡</td>
+          <td class="mk" data-prd="Read Only" data-nonprd="Read Only" data-tip="全環境で参照" aria-label="全環境で参照"><span></span></td>
+          <td class="mk" data-prd="Read Only" data-nonprd="Read Only" data-tip="全環境で参照" aria-label="全環境で参照"><span></span></td>
+          <td class="mk" data-prd="-" data-nonprd="Read Only" data-tip="開発・品証で参照" aria-label="開発・品証で参照"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="8">詳細</button></td>
         </tr>
         <tr data-id="sap_abap_read_source">
@@ -202,9 +215,9 @@ a { color: var(--accent); }
           <td><code>sap_abap_read_source</code></td>
           <td class="what">ADT でプログラムや Function Module のソースを読む</td>
           <td class="sys">ABAP</td>
-          <td class="mk" data-tip="全環境で参照" aria-label="全環境で参照">🟡</td><td class="mk" data-tip="全環境で参照" aria-label="全環境で参照">🟡</td>
-          <td class="mk" data-tip="全環境で参照" aria-label="全環境で参照">🟡</td><td class="mk" data-tip="全環境で参照" aria-label="全環境で参照">🟡</td>
-          <td class="mk" data-tip="開発・品証で参照" aria-label="開発・品証で参照">🔴</td><td class="mk" data-tip="開発・品証で参照" aria-label="開発・品証で参照">🟡</td>
+          <td class="mk" data-prd="Read Only" data-nonprd="Read Only" data-tip="全環境で参照" aria-label="全環境で参照"><span></span></td>
+          <td class="mk" data-prd="Read Only" data-nonprd="Read Only" data-tip="全環境で参照" aria-label="全環境で参照"><span></span></td>
+          <td class="mk" data-prd="-" data-nonprd="Read Only" data-tip="開発・品証で参照" aria-label="開発・品証で参照"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="9">詳細</button></td>
         </tr>
         <tr data-id="sap_abap_write_source">
@@ -212,9 +225,9 @@ a { color: var(--accent); }
           <td><code>sap_abap_write_source</code></td>
           <td class="what">ADT でレポート / プログラムを作成・更新し、活性化する</td>
           <td class="sys">ABAP</td>
-          <td class="mk" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新">🔴</td><td class="mk" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新">🟢</td>
-          <td class="mk" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新">🔴</td><td class="mk" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新">🟢</td>
-          <td class="mk" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新">🔴</td><td class="mk" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新">🟢</td>
+          <td class="mk" data-prd="-" data-nonprd="Full" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新"><span></span></td>
+          <td class="mk" data-prd="-" data-nonprd="Full" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新"><span></span></td>
+          <td class="mk" data-prd="-" data-nonprd="Full" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="10">詳細</button></td>
         </tr>
         <tr data-id="sap_abap_delete_source">
@@ -222,9 +235,9 @@ a { color: var(--accent); }
           <td><code>sap_abap_delete_source</code></td>
           <td class="what">ADT でプログラムや CDS DDL を削除する</td>
           <td class="sys">ABAP</td>
-          <td class="mk" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新">🔴</td><td class="mk" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新">🟢</td>
-          <td class="mk" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新">🔴</td><td class="mk" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新">🟢</td>
-          <td class="mk" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新">🔴</td><td class="mk" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新">🟢</td>
+          <td class="mk" data-prd="-" data-nonprd="Full" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新"><span></span></td>
+          <td class="mk" data-prd="-" data-nonprd="Full" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新"><span></span></td>
+          <td class="mk" data-prd="-" data-nonprd="Full" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="11">詳細</button></td>
         </tr>
         <tr data-id="sap_abap_write_fm">
@@ -232,9 +245,9 @@ a { color: var(--accent); }
           <td><code>sap_abap_write_fm</code></td>
           <td class="what">ADT で Function Module を作成・更新し、活性化する</td>
           <td class="sys">ABAP</td>
-          <td class="mk" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新">🔴</td><td class="mk" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新">🟢</td>
-          <td class="mk" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新">🔴</td><td class="mk" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新">🟢</td>
-          <td class="mk" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新">🔴</td><td class="mk" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新">🟢</td>
+          <td class="mk" data-prd="-" data-nonprd="Full" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新"><span></span></td>
+          <td class="mk" data-prd="-" data-nonprd="Full" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新"><span></span></td>
+          <td class="mk" data-prd="-" data-nonprd="Full" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="12">詳細</button></td>
         </tr>
         <tr data-id="sap_create_transport">
@@ -242,9 +255,9 @@ a { color: var(--accent); }
           <td><code>sap_create_transport</code></td>
           <td class="what">Function Module を呼び出して移送リクエストを作成する</td>
           <td class="sys">ABAP</td>
-          <td class="mk" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新">🔴</td><td class="mk" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新">🟢</td>
-          <td class="mk" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新">🔴</td><td class="mk" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新">🟢</td>
-          <td class="mk" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新">🔴</td><td class="mk" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新">🟢</td>
+          <td class="mk" data-prd="-" data-nonprd="Full" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新"><span></span></td>
+          <td class="mk" data-prd="-" data-nonprd="Full" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新"><span></span></td>
+          <td class="mk" data-prd="-" data-nonprd="Full" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="13">詳細</button></td>
         </tr>
         <tr data-id="sap_release_transport">
@@ -252,9 +265,9 @@ a { color: var(--accent); }
           <td><code>sap_release_transport</code></td>
           <td class="what">Function Module を呼び出して移送リクエストを解放する</td>
           <td class="sys">ABAP</td>
-          <td class="mk" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新">🔴</td><td class="mk" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新">🟢</td>
-          <td class="mk" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新">🔴</td><td class="mk" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新">🟢</td>
-          <td class="mk" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新">🔴</td><td class="mk" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新">🟢</td>
+          <td class="mk" data-prd="-" data-nonprd="Full" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新"><span></span></td>
+          <td class="mk" data-prd="-" data-nonprd="Full" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新"><span></span></td>
+          <td class="mk" data-prd="-" data-nonprd="Full" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="14">詳細</button></td>
         </tr>
         <tr data-id="sap_abap_activate">
@@ -262,9 +275,9 @@ a { color: var(--accent); }
           <td><code>sap_abap_activate</code></td>
           <td class="what">ADT でオブジェクトを活性化し、構文チェック結果を返す</td>
           <td class="sys">ABAP</td>
-          <td class="mk" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新">🔴</td><td class="mk" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新">🟢</td>
-          <td class="mk" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新">🔴</td><td class="mk" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新">🟢</td>
-          <td class="mk" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新">🔴</td><td class="mk" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新">🟢</td>
+          <td class="mk" data-prd="-" data-nonprd="Full" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新"><span></span></td>
+          <td class="mk" data-prd="-" data-nonprd="Full" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新"><span></span></td>
+          <td class="mk" data-prd="-" data-nonprd="Full" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="15">詳細</button></td>
         </tr>
         <tr data-id="sap_call_ias_admin">
@@ -272,9 +285,9 @@ a { color: var(--accent); }
           <td><code>sap_call_ias_admin</code></td>
           <td class="what">Admin API（SCIM）でユーザ・グループ・アプリを操作する。個人情報を扱う</td>
           <td class="sys">Cloud Identity Services (IAS)</td>
-          <td class="mk" data-tip="全環境で参照・更新" aria-label="全環境で参照・更新">🟢</td><td class="mk" data-tip="全環境で参照・更新" aria-label="全環境で参照・更新">🟢</td>
-          <td class="mk" data-tip="利用不可" aria-label="利用不可">🔴</td><td class="mk" data-tip="利用不可" aria-label="利用不可">🔴</td>
-          <td class="mk" data-tip="利用不可" aria-label="利用不可">🔴</td><td class="mk" data-tip="利用不可" aria-label="利用不可">🔴</td>
+          <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="全環境で参照・更新" aria-label="全環境で参照・更新"><span></span></td>
+          <td class="mk" data-prd="-" data-nonprd="-" data-tip="利用不可" aria-label="利用不可"><span></span></td>
+          <td class="mk" data-prd="-" data-nonprd="-" data-tip="利用不可" aria-label="利用不可"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="16">詳細</button></td>
         </tr>
         <tr data-id="sap_call_ips_job">
@@ -282,9 +295,9 @@ a { color: var(--accent); }
           <td><code>sap_call_ips_job</code></td>
           <td class="what">Jobs / JobLogs API でプロビジョニングジョブを確認・実行する。個人情報を扱う</td>
           <td class="sys">Cloud Identity Services (IPS)</td>
-          <td class="mk" data-tip="全環境で参照・更新" aria-label="全環境で参照・更新">🟢</td><td class="mk" data-tip="全環境で参照・更新" aria-label="全環境で参照・更新">🟢</td>
-          <td class="mk" data-tip="利用不可" aria-label="利用不可">🔴</td><td class="mk" data-tip="利用不可" aria-label="利用不可">🔴</td>
-          <td class="mk" data-tip="利用不可" aria-label="利用不可">🔴</td><td class="mk" data-tip="利用不可" aria-label="利用不可">🔴</td>
+          <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="全環境で参照・更新" aria-label="全環境で参照・更新"><span></span></td>
+          <td class="mk" data-prd="-" data-nonprd="-" data-tip="利用不可" aria-label="利用不可"><span></span></td>
+          <td class="mk" data-prd="-" data-nonprd="-" data-tip="利用不可" aria-label="利用不可"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="17">詳細</button></td>
         </tr>
         <tr data-id="sap_call_cf_api">
@@ -292,9 +305,9 @@ a { color: var(--accent); }
           <td><code>sap_call_cf_api</code></td>
           <td class="what">v3 API でアプリ・Org / Space・サービスを参照・操作する</td>
           <td class="sys">Cloud Foundry</td>
-          <td class="mk" data-tip="全環境で参照・更新" aria-label="全環境で参照・更新">🟢</td><td class="mk" data-tip="全環境で参照・更新" aria-label="全環境で参照・更新">🟢</td>
-          <td class="mk" data-tip="開発・品証で参照・更新 / 本番は参照のみ" aria-label="開発・品証で参照・更新 / 本番は参照のみ">🟡</td><td class="mk" data-tip="開発・品証で参照・更新 / 本番は参照のみ" aria-label="開発・品証で参照・更新 / 本番は参照のみ">🟢</td>
-          <td class="mk" data-tip="開発・品証で参照のみ" aria-label="開発・品証で参照のみ">🔴</td><td class="mk" data-tip="開発・品証で参照のみ" aria-label="開発・品証で参照のみ">🟡</td>
+          <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="全環境で参照・更新" aria-label="全環境で参照・更新"><span></span></td>
+          <td class="mk" data-prd="Read Only" data-nonprd="Full" data-tip="開発・品証で参照・更新 / 本番は参照のみ" aria-label="開発・品証で参照・更新 / 本番は参照のみ"><span></span></td>
+          <td class="mk" data-prd="-" data-nonprd="Read Only" data-tip="開発・品証で参照のみ" aria-label="開発・品証で参照のみ"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="18">詳細</button></td>
         </tr>
         <tr data-id="sap_call_bwz_content">
@@ -302,9 +315,9 @@ a { color: var(--accent); }
           <td><code>sap_call_bwz_content</code></td>
           <td class="what">CDM のサイト情報を参照し、業務コンテンツを zip でエクスポートする</td>
           <td class="sys">Build Work Zone</td>
-          <td class="mk" data-tip="全環境で参照・更新" aria-label="全環境で参照・更新">🟢</td><td class="mk" data-tip="全環境で参照・更新" aria-label="全環境で参照・更新">🟢</td>
-          <td class="mk" data-tip="開発・品証で参照・更新 / 本番は参照のみ" aria-label="開発・品証で参照・更新 / 本番は参照のみ">🟡</td><td class="mk" data-tip="開発・品証で参照・更新 / 本番は参照のみ" aria-label="開発・品証で参照・更新 / 本番は参照のみ">🟢</td>
-          <td class="mk" data-tip="開発・品証で参照のみ" aria-label="開発・品証で参照のみ">🔴</td><td class="mk" data-tip="開発・品証で参照のみ" aria-label="開発・品証で参照のみ">🟡</td>
+          <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="全環境で参照・更新" aria-label="全環境で参照・更新"><span></span></td>
+          <td class="mk" data-prd="Read Only" data-nonprd="Full" data-tip="開発・品証で参照・更新 / 本番は参照のみ" aria-label="開発・品証で参照・更新 / 本番は参照のみ"><span></span></td>
+          <td class="mk" data-prd="-" data-nonprd="Read Only" data-tip="開発・品証で参照のみ" aria-label="開発・品証で参照のみ"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="19">詳細</button></td>
         </tr>
         <tr data-id="sap_call_ctms_api">
@@ -312,9 +325,9 @@ a { color: var(--accent); }
           <td><code>sap_call_ctms_api</code></td>
           <td class="what">v2 API で移送のノード・キュー・インポートを操作する</td>
           <td class="sys">Cloud Transport Management</td>
-          <td class="mk" data-tip="全環境で参照・更新" aria-label="全環境で参照・更新">🟢</td><td class="mk" data-tip="全環境で参照・更新" aria-label="全環境で参照・更新">🟢</td>
-          <td class="mk" data-tip="開発・品証で参照・更新 / 本番は参照のみ" aria-label="開発・品証で参照・更新 / 本番は参照のみ">🟡</td><td class="mk" data-tip="開発・品証で参照・更新 / 本番は参照のみ" aria-label="開発・品証で参照・更新 / 本番は参照のみ">🟢</td>
-          <td class="mk" data-tip="開発・品証で参照のみ" aria-label="開発・品証で参照のみ">🔴</td><td class="mk" data-tip="開発・品証で参照のみ" aria-label="開発・品証で参照のみ">🟡</td>
+          <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="全環境で参照・更新" aria-label="全環境で参照・更新"><span></span></td>
+          <td class="mk" data-prd="Read Only" data-nonprd="Full" data-tip="開発・品証で参照・更新 / 本番は参照のみ" aria-label="開発・品証で参照・更新 / 本番は参照のみ"><span></span></td>
+          <td class="mk" data-prd="-" data-nonprd="Read Only" data-tip="開発・品証で参照のみ" aria-label="開発・品証で参照のみ"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="20">詳細</button></td>
         </tr>
         <tr data-id="sap_call_forms_api">
@@ -322,9 +335,9 @@ a { color: var(--accent); }
           <td><code>sap_call_forms_api</code></td>
           <td class="what">REST API で帳票を一覧・生成する</td>
           <td class="sys">Forms Service by Adobe</td>
-          <td class="mk" data-tip="全環境で参照・更新" aria-label="全環境で参照・更新">🟢</td><td class="mk" data-tip="全環境で参照・更新" aria-label="全環境で参照・更新">🟢</td>
-          <td class="mk" data-tip="開発・品証で参照・更新 / 本番は参照のみ" aria-label="開発・品証で参照・更新 / 本番は参照のみ">🟡</td><td class="mk" data-tip="開発・品証で参照・更新 / 本番は参照のみ" aria-label="開発・品証で参照・更新 / 本番は参照のみ">🟢</td>
-          <td class="mk" data-tip="開発・品証で参照のみ" aria-label="開発・品証で参照のみ">🔴</td><td class="mk" data-tip="開発・品証で参照のみ" aria-label="開発・品証で参照のみ">🟡</td>
+          <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="全環境で参照・更新" aria-label="全環境で参照・更新"><span></span></td>
+          <td class="mk" data-prd="Read Only" data-nonprd="Full" data-tip="開発・品証で参照・更新 / 本番は参照のみ" aria-label="開発・品証で参照・更新 / 本番は参照のみ"><span></span></td>
+          <td class="mk" data-prd="-" data-nonprd="Read Only" data-tip="開発・品証で参照のみ" aria-label="開発・品証で参照のみ"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="21">詳細</button></td>
         </tr>
         <tr data-id="sap_call_cis_api">
@@ -332,9 +345,9 @@ a { color: var(--accent); }
           <td><code>sap_call_cis_api</code></td>
           <td class="what">CIS Central API でアカウント・サブアカウント・エンタイトルメントを参照する</td>
           <td class="sys">BTP アカウント</td>
-          <td class="mk" data-tip="全環境で参照・更新" aria-label="全環境で参照・更新">🟢</td><td class="mk" data-tip="全環境で参照・更新" aria-label="全環境で参照・更新">🟢</td>
-          <td class="mk" data-tip="開発・品証で参照・更新 / 本番は参照のみ" aria-label="開発・品証で参照・更新 / 本番は参照のみ">🟡</td><td class="mk" data-tip="開発・品証で参照・更新 / 本番は参照のみ" aria-label="開発・品証で参照・更新 / 本番は参照のみ">🟢</td>
-          <td class="mk" data-tip="開発・品証で参照のみ" aria-label="開発・品証で参照のみ">🔴</td><td class="mk" data-tip="開発・品証で参照のみ" aria-label="開発・品証で参照のみ">🟡</td>
+          <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="全環境で参照・更新" aria-label="全環境で参照・更新"><span></span></td>
+          <td class="mk" data-prd="Read Only" data-nonprd="Full" data-tip="開発・品証で参照・更新 / 本番は参照のみ" aria-label="開発・品証で参照・更新 / 本番は参照のみ"><span></span></td>
+          <td class="mk" data-prd="-" data-nonprd="Read Only" data-tip="開発・品証で参照のみ" aria-label="開発・品証で参照のみ"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="22">詳細</button></td>
         </tr>
         <tr data-id="sap_call_cpi_api">
@@ -342,9 +355,9 @@ a { color: var(--accent); }
           <td><code>sap_call_cpi_api</code></td>
           <td class="what">監査・監視 API でメッセージ処理ログや連携成果物を参照する</td>
           <td class="sys">Integration Suite</td>
-          <td class="mk" data-tip="全環境で参照・更新" aria-label="全環境で参照・更新">🟢</td><td class="mk" data-tip="全環境で参照・更新" aria-label="全環境で参照・更新">🟢</td>
-          <td class="mk" data-tip="開発・品証で参照・更新 / 本番は参照のみ" aria-label="開発・品証で参照・更新 / 本番は参照のみ">🟡</td><td class="mk" data-tip="開発・品証で参照・更新 / 本番は参照のみ" aria-label="開発・品証で参照・更新 / 本番は参照のみ">🟢</td>
-          <td class="mk" data-tip="開発・品証で参照のみ" aria-label="開発・品証で参照のみ">🔴</td><td class="mk" data-tip="開発・品証で参照のみ" aria-label="開発・品証で参照のみ">🟡</td>
+          <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="全環境で参照・更新" aria-label="全環境で参照・更新"><span></span></td>
+          <td class="mk" data-prd="Read Only" data-nonprd="Full" data-tip="開発・品証で参照・更新 / 本番は参照のみ" aria-label="開発・品証で参照・更新 / 本番は参照のみ"><span></span></td>
+          <td class="mk" data-prd="-" data-nonprd="Read Only" data-tip="開発・品証で参照のみ" aria-label="開発・品証で参照のみ"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="23">詳細</button></td>
         </tr>
         <tr data-id="sap_call_ans_api">
@@ -352,9 +365,9 @@ a { color: var(--accent); }
           <td><code>sap_call_ans_api</code></td>
           <td class="what">REST API で条件・アクション・購読とイベントを操作する</td>
           <td class="sys">Alert Notification Service</td>
-          <td class="mk" data-tip="全環境で参照・更新" aria-label="全環境で参照・更新">🟢</td><td class="mk" data-tip="全環境で参照・更新" aria-label="全環境で参照・更新">🟢</td>
-          <td class="mk" data-tip="開発・品証で参照・更新 / 本番は参照のみ" aria-label="開発・品証で参照・更新 / 本番は参照のみ">🟡</td><td class="mk" data-tip="開発・品証で参照・更新 / 本番は参照のみ" aria-label="開発・品証で参照・更新 / 本番は参照のみ">🟢</td>
-          <td class="mk" data-tip="開発・品証で参照のみ" aria-label="開発・品証で参照のみ">🔴</td><td class="mk" data-tip="開発・品証で参照のみ" aria-label="開発・品証で参照のみ">🟡</td>
+          <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="全環境で参照・更新" aria-label="全環境で参照・更新"><span></span></td>
+          <td class="mk" data-prd="Read Only" data-nonprd="Full" data-tip="開発・品証で参照・更新 / 本番は参照のみ" aria-label="開発・品証で参照・更新 / 本番は参照のみ"><span></span></td>
+          <td class="mk" data-prd="-" data-nonprd="Read Only" data-tip="開発・品証で参照のみ" aria-label="開発・品証で参照のみ"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="24">詳細</button></td>
         </tr>
         <tr data-id="sap_call_sbpa_api">
@@ -362,9 +375,9 @@ a { color: var(--accent); }
           <td><code>sap_call_sbpa_api</code></td>
           <td class="what">REST API でワークフロー定義とインスタンスを参照・操作する</td>
           <td class="sys">Build Process Automation</td>
-          <td class="mk" data-tip="全環境で参照・更新" aria-label="全環境で参照・更新">🟢</td><td class="mk" data-tip="全環境で参照・更新" aria-label="全環境で参照・更新">🟢</td>
-          <td class="mk" data-tip="開発・品証で参照・更新 / 本番は参照のみ" aria-label="開発・品証で参照・更新 / 本番は参照のみ">🟡</td><td class="mk" data-tip="開発・品証で参照・更新 / 本番は参照のみ" aria-label="開発・品証で参照・更新 / 本番は参照のみ">🟢</td>
-          <td class="mk" data-tip="開発・品証で参照のみ" aria-label="開発・品証で参照のみ">🔴</td><td class="mk" data-tip="開発・品証で参照のみ" aria-label="開発・品証で参照のみ">🟡</td>
+          <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="全環境で参照・更新" aria-label="全環境で参照・更新"><span></span></td>
+          <td class="mk" data-prd="Read Only" data-nonprd="Full" data-tip="開発・品証で参照・更新 / 本番は参照のみ" aria-label="開発・品証で参照・更新 / 本番は参照のみ"><span></span></td>
+          <td class="mk" data-prd="-" data-nonprd="Read Only" data-tip="開発・品証で参照のみ" aria-label="開発・品証で参照のみ"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="25">詳細</button></td>
         </tr>
         <tr data-id="sap_call_datasphere_api">
@@ -372,9 +385,9 @@ a { color: var(--accent); }
           <td><code>sap_call_datasphere_api</code></td>
           <td class="what">公開 REST / OData API でカタログ・接続・タスクチェーンを操作する</td>
           <td class="sys">Datasphere</td>
-          <td class="mk" data-tip="全環境で参照・更新" aria-label="全環境で参照・更新">🟢</td><td class="mk" data-tip="全環境で参照・更新" aria-label="全環境で参照・更新">🟢</td>
-          <td class="mk" data-tip="開発・品証で参照・更新 / 本番は参照のみ" aria-label="開発・品証で参照・更新 / 本番は参照のみ">🟡</td><td class="mk" data-tip="開発・品証で参照・更新 / 本番は参照のみ" aria-label="開発・品証で参照・更新 / 本番は参照のみ">🟢</td>
-          <td class="mk" data-tip="開発・品証で参照のみ" aria-label="開発・品証で参照のみ">🔴</td><td class="mk" data-tip="開発・品証で参照のみ" aria-label="開発・品証で参照のみ">🟡</td>
+          <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="全環境で参照・更新" aria-label="全環境で参照・更新"><span></span></td>
+          <td class="mk" data-prd="Read Only" data-nonprd="Full" data-tip="開発・品証で参照・更新 / 本番は参照のみ" aria-label="開発・品証で参照・更新 / 本番は参照のみ"><span></span></td>
+          <td class="mk" data-prd="-" data-nonprd="Read Only" data-tip="開発・品証で参照のみ" aria-label="開発・品証で参照のみ"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="26">詳細</button></td>
         </tr>
         <tr data-id="sap_call_calm_api">
@@ -382,9 +395,9 @@ a { color: var(--accent); }
           <td><code>sap_call_calm_api</code></td>
           <td class="what">REST API でプロジェクト・タスク・アラート・サポートケースを操作する</td>
           <td class="sys">Cloud ALM</td>
-          <td class="mk" data-tip="全環境で参照・更新" aria-label="全環境で参照・更新">🟢</td><td class="mk" data-tip="全環境で参照・更新" aria-label="全環境で参照・更新">🟢</td>
-          <td class="mk" data-tip="開発・品証で参照・更新 / 本番は参照のみ" aria-label="開発・品証で参照・更新 / 本番は参照のみ">🟡</td><td class="mk" data-tip="開発・品証で参照・更新 / 本番は参照のみ" aria-label="開発・品証で参照・更新 / 本番は参照のみ">🟢</td>
-          <td class="mk" data-tip="開発・品証で参照のみ" aria-label="開発・品証で参照のみ">🔴</td><td class="mk" data-tip="開発・品証で参照のみ" aria-label="開発・品証で参照のみ">🟡</td>
+          <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="全環境で参照・更新" aria-label="全環境で参照・更新"><span></span></td>
+          <td class="mk" data-prd="Read Only" data-nonprd="Full" data-tip="開発・品証で参照・更新 / 本番は参照のみ" aria-label="開発・品証で参照・更新 / 本番は参照のみ"><span></span></td>
+          <td class="mk" data-prd="-" data-nonprd="Read Only" data-tip="開発・品証で参照のみ" aria-label="開発・品証で参照のみ"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="27">詳細</button></td>
         </tr>
         <tr data-id="sap_call_btp_cli">
@@ -392,9 +405,9 @@ a { color: var(--accent); }
           <td><code>sap_call_btp_cli</code></td>
           <td class="what">btp CLI をサーバ側で実行し、出力を返す（v2.106.1）</td>
           <td class="sys">BTP アカウント</td>
-          <td class="mk" data-tip="全環境で実行" aria-label="全環境で実行">🟢</td><td class="mk" data-tip="全環境で実行" aria-label="全環境で実行">🟢</td>
-          <td class="mk" data-tip="利用不可" aria-label="利用不可">🔴</td><td class="mk" data-tip="利用不可" aria-label="利用不可">🔴</td>
-          <td class="mk" data-tip="利用不可" aria-label="利用不可">🔴</td><td class="mk" data-tip="利用不可" aria-label="利用不可">🔴</td>
+          <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="全環境で実行" aria-label="全環境で実行"><span></span></td>
+          <td class="mk" data-prd="-" data-nonprd="-" data-tip="利用不可" aria-label="利用不可"><span></span></td>
+          <td class="mk" data-prd="-" data-nonprd="-" data-tip="利用不可" aria-label="利用不可"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="28">詳細</button></td>
         </tr>
         <tr data-id="sap_call_cf_cli">
@@ -402,9 +415,9 @@ a { color: var(--accent); }
           <td><code>sap_call_cf_cli</code></td>
           <td class="what">cf CLI をサーバ側で実行し、出力を返す（v8.18.3）</td>
           <td class="sys">Cloud Foundry</td>
-          <td class="mk" data-tip="全環境で実行" aria-label="全環境で実行">🟢</td><td class="mk" data-tip="全環境で実行" aria-label="全環境で実行">🟢</td>
-          <td class="mk" data-tip="利用不可" aria-label="利用不可">🔴</td><td class="mk" data-tip="利用不可" aria-label="利用不可">🔴</td>
-          <td class="mk" data-tip="利用不可" aria-label="利用不可">🔴</td><td class="mk" data-tip="利用不可" aria-label="利用不可">🔴</td>
+          <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="全環境で実行" aria-label="全環境で実行"><span></span></td>
+          <td class="mk" data-prd="-" data-nonprd="-" data-tip="利用不可" aria-label="利用不可"><span></span></td>
+          <td class="mk" data-prd="-" data-nonprd="-" data-tip="利用不可" aria-label="利用不可"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="29">詳細</button></td>
         </tr>
         <tr data-id="sap_call_datasphere_cli">
@@ -412,9 +425,9 @@ a { color: var(--accent); }
           <td><code>sap_call_datasphere_cli</code></td>
           <td class="what">datasphere CLI をサーバ側で実行し、出力を返す（v2026.13.0）</td>
           <td class="sys">Datasphere</td>
-          <td class="mk" data-tip="全環境で実行" aria-label="全環境で実行">🟢</td><td class="mk" data-tip="全環境で実行" aria-label="全環境で実行">🟢</td>
-          <td class="mk" data-tip="利用不可" aria-label="利用不可">🔴</td><td class="mk" data-tip="利用不可" aria-label="利用不可">🔴</td>
-          <td class="mk" data-tip="利用不可" aria-label="利用不可">🔴</td><td class="mk" data-tip="利用不可" aria-label="利用不可">🔴</td>
+          <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="全環境で実行" aria-label="全環境で実行"><span></span></td>
+          <td class="mk" data-prd="-" data-nonprd="-" data-tip="利用不可" aria-label="利用不可"><span></span></td>
+          <td class="mk" data-prd="-" data-nonprd="-" data-tip="利用不可" aria-label="利用不可"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="30">詳細</button></td>
         </tr>
         <tr data-id="app_call_jira_api">
@@ -422,9 +435,9 @@ a { color: var(--accent); }
           <td><code>app_call_jira_api</code></td>
           <td class="what">REST API で課題の参照・作成・状態遷移・検索を行う</td>
           <td class="sys">Jira</td>
-          <td class="mk" data-tip="全環境で全操作（起票/遷移/コメント/照会）" aria-label="全環境で全操作（起票/遷移/コメント/照会）">🟢</td><td class="mk" data-tip="全環境で全操作（起票/遷移/コメント/照会）" aria-label="全環境で全操作（起票/遷移/コメント/照会）">🟢</td>
-          <td class="mk" data-tip="開発・品証で全操作 / 本番は参照のみ" aria-label="開発・品証で全操作 / 本番は参照のみ">🟡</td><td class="mk" data-tip="開発・品証で全操作 / 本番は参照のみ" aria-label="開発・品証で全操作 / 本番は参照のみ">🟢</td>
-          <td class="mk" data-tip="開発・品証で全操作可 / 本番は不可" aria-label="開発・品証で全操作可 / 本番は不可">🔴</td><td class="mk" data-tip="開発・品証で全操作可 / 本番は不可" aria-label="開発・品証で全操作可 / 本番は不可">🟢</td>
+          <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="全環境で全操作（起票/遷移/コメント/照会）" aria-label="全環境で全操作（起票/遷移/コメント/照会）"><span></span></td>
+          <td class="mk" data-prd="Read Only" data-nonprd="Full" data-tip="開発・品証で全操作 / 本番は参照のみ" aria-label="開発・品証で全操作 / 本番は参照のみ"><span></span></td>
+          <td class="mk" data-prd="-" data-nonprd="Full" data-tip="開発・品証で全操作可 / 本番は不可" aria-label="開発・品証で全操作可 / 本番は不可"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="31">詳細</button></td>
         </tr>
         <tr data-id="app_call_smartdb_api">
@@ -432,9 +445,9 @@ a { color: var(--accent); }
           <td><code>app_call_smartdb_api</code></td>
           <td class="what">REST API v3 で文書・ビュー・業務プロセスを操作する</td>
           <td class="sys">SmartDB</td>
-          <td class="mk" data-tip="全環境で全操作（文書 CRUD/プロセス実行）" aria-label="全環境で全操作（文書 CRUD/プロセス実行）">🟢</td><td class="mk" data-tip="全環境で全操作（文書 CRUD/プロセス実行）" aria-label="全環境で全操作（文書 CRUD/プロセス実行）">🟢</td>
-          <td class="mk" data-tip="開発・品証で全操作 / 本番は参照のみ" aria-label="開発・品証で全操作 / 本番は参照のみ">🟡</td><td class="mk" data-tip="開発・品証で全操作 / 本番は参照のみ" aria-label="開発・品証で全操作 / 本番は参照のみ">🟢</td>
-          <td class="mk" data-tip="開発・品証で全操作可 / 本番は不可" aria-label="開発・品証で全操作可 / 本番は不可">🔴</td><td class="mk" data-tip="開発・品証で全操作可 / 本番は不可" aria-label="開発・品証で全操作可 / 本番は不可">🟢</td>
+          <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="全環境で全操作（文書 CRUD/プロセス実行）" aria-label="全環境で全操作（文書 CRUD/プロセス実行）"><span></span></td>
+          <td class="mk" data-prd="Read Only" data-nonprd="Full" data-tip="開発・品証で全操作 / 本番は参照のみ" aria-label="開発・品証で全操作 / 本番は参照のみ"><span></span></td>
+          <td class="mk" data-prd="-" data-nonprd="Full" data-tip="開発・品証で全操作可 / 本番は不可" aria-label="開発・品証で全操作可 / 本番は不可"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="32">詳細</button></td>
         </tr>
         <tr data-id="sap_call_ibp_api">
@@ -442,9 +455,9 @@ a { color: var(--accent); }
           <td><code>sap_call_ibp_api</code></td>
           <td class="what">OData API でマスタ・計画・在庫データを参照・登録する</td>
           <td class="sys">IBP</td>
-          <td class="mk" data-tip="全環境で参照・更新" aria-label="全環境で参照・更新">🟢</td><td class="mk" data-tip="全環境で参照・更新" aria-label="全環境で参照・更新">🟢</td>
-          <td class="mk" data-tip="開発・品証で参照・更新 / 本番は参照のみ" aria-label="開発・品証で参照・更新 / 本番は参照のみ">🟡</td><td class="mk" data-tip="開発・品証で参照・更新 / 本番は参照のみ" aria-label="開発・品証で参照・更新 / 本番は参照のみ">🟢</td>
-          <td class="mk" data-tip="開発・品証で参照・更新" aria-label="開発・品証で参照・更新">🔴</td><td class="mk" data-tip="開発・品証で参照・更新" aria-label="開発・品証で参照・更新">🟢</td>
+          <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="全環境で参照・更新" aria-label="全環境で参照・更新"><span></span></td>
+          <td class="mk" data-prd="Read Only" data-nonprd="Full" data-tip="開発・品証で参照・更新 / 本番は参照のみ" aria-label="開発・品証で参照・更新 / 本番は参照のみ"><span></span></td>
+          <td class="mk" data-prd="-" data-nonprd="Full" data-tip="開発・品証で参照・更新" aria-label="開発・品証で参照・更新"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="33">詳細</button></td>
         </tr>
         <tr data-id="sap_call_s4_api">
@@ -452,9 +465,9 @@ a { color: var(--accent); }
           <td><code>sap_call_s4_api</code></td>
           <td class="what">OData / REST を Destination 経由で呼び出す。任意の SICF パスも通る</td>
           <td class="sys">ABAP</td>
-          <td class="mk" data-tip="全環境で参照・更新" aria-label="全環境で参照・更新">🟢</td><td class="mk" data-tip="全環境で参照・更新" aria-label="全環境で参照・更新">🟢</td>
-          <td class="mk" data-tip="開発・品証で参照・更新 / 本番は参照のみ" aria-label="開発・品証で参照・更新 / 本番は参照のみ">🟡</td><td class="mk" data-tip="開発・品証で参照・更新 / 本番は参照のみ" aria-label="開発・品証で参照・更新 / 本番は参照のみ">🟢</td>
-          <td class="mk" data-tip="開発・品証で参照のみ" aria-label="開発・品証で参照のみ">🔴</td><td class="mk" data-tip="開発・品証で参照のみ" aria-label="開発・品証で参照のみ">🟡</td>
+          <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="全環境で参照・更新" aria-label="全環境で参照・更新"><span></span></td>
+          <td class="mk" data-prd="Read Only" data-nonprd="Full" data-tip="開発・品証で参照・更新 / 本番は参照のみ" aria-label="開発・品証で参照・更新 / 本番は参照のみ"><span></span></td>
+          <td class="mk" data-prd="-" data-nonprd="Read Only" data-tip="開発・品証で参照のみ" aria-label="開発・品証で参照のみ"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="34">詳細</button></td>
         </tr>
         <tr data-id="sap_call_soap">
@@ -462,9 +475,9 @@ a { color: var(--accent); }
           <td><code>sap_call_soap</code></td>
           <td class="what">SOAP サービスを呼び出す。envelope は透過で送る</td>
           <td class="sys">ABAP</td>
-          <td class="mk" data-tip="全環境で参照・更新" aria-label="全環境で参照・更新">🟢</td><td class="mk" data-tip="全環境で参照・更新" aria-label="全環境で参照・更新">🟢</td>
-          <td class="mk" data-tip="開発・品証で参照・更新 / 本番は参照のみ" aria-label="開発・品証で参照・更新 / 本番は参照のみ">🟡</td><td class="mk" data-tip="開発・品証で参照・更新 / 本番は参照のみ" aria-label="開発・品証で参照・更新 / 本番は参照のみ">🟢</td>
-          <td class="mk" data-tip="開発・品証で参照のみ" aria-label="開発・品証で参照のみ">🔴</td><td class="mk" data-tip="開発・品証で参照のみ" aria-label="開発・品証で参照のみ">🟡</td>
+          <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="全環境で参照・更新" aria-label="全環境で参照・更新"><span></span></td>
+          <td class="mk" data-prd="Read Only" data-nonprd="Full" data-tip="開発・品証で参照・更新 / 本番は参照のみ" aria-label="開発・品証で参照・更新 / 本番は参照のみ"><span></span></td>
+          <td class="mk" data-prd="-" data-nonprd="Read Only" data-tip="開発・品証で参照のみ" aria-label="開発・品証で参照のみ"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="35">詳細</button></td>
         </tr>
       </tbody>
@@ -546,6 +559,20 @@ heads.forEach((th) => {
       .forEach((r) => tb.append(r));
   });
 });
+const VCLASS = { 'Full': 'v-full', 'Read Only': 'v-ro', '-': 'v-no', '—': 'v-no' };
+const cells = [...document.querySelectorAll('td.mk')];
+function applyEnv(env) {
+  for (const td of cells) {
+    const v = td.dataset[env === 'prd' ? 'prd' : 'nonprd'];
+    const sp = td.firstElementChild;
+    sp.textContent = v;
+    sp.className = VCLASS[v] || 'v-no';
+  }
+  for (const b of document.querySelectorAll('.envbtn')) b.classList.toggle('on', b.dataset.env === env);
+}
+document.querySelectorAll('.envbtn').forEach((b) => b.addEventListener('click', () => applyEnv(b.dataset.env)));
+applyEnv('prd');
+
 const tip = document.createElement('div');
 tip.id = 'tip';
 document.body.append(tip);
