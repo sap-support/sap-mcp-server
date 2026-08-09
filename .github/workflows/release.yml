@@ -45,6 +45,9 @@ jobs:
         with:
           repository: ${{ env.UPSTREAM_REPO }}
           ref: ${{ inputs.version }}
+          # The default GITHUB_TOKEN only works for this repository. A token with
+          # read access to the upstream repository is required.
+          token: ${{ secrets.UPSTREAM_TOKEN }}
           path: upstream
 
       - uses: actions/setup-node@v7
