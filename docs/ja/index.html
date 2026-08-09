@@ -40,6 +40,7 @@ thead th {
   background: var(--head); color: var(--head-fg); font-weight: 600; white-space: nowrap;
   cursor: pointer; user-select: none;
 }
+thead th.r-full, thead th.r-ro, thead th.r-dev { text-align: center; }
 thead th.r-full { background: var(--role-full); }
 thead th.r-ro   { background: var(--role-ro); }
 thead th.r-dev  { background: var(--role-dev); }
@@ -166,8 +167,8 @@ a { color: var(--accent); }
           <td class="what">Function Module / BAPI を RFC で呼び出して実行する</td>
           <td class="sys">ABAP</td>
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="全環境で参照・更新" aria-label="全環境で参照・更新"><span></span></td>
-          <td class="mk" data-prd="-" data-nonprd="Full" data-tip="開発・品証で参照・更新 / 本番は不可" aria-label="開発・品証で参照・更新 / 本番は不可"><span></span></td>
-          <td class="mk" data-prd="-" data-nonprd="Full" data-tip="開発・品証で参照・更新" aria-label="開発・品証で参照・更新"><span></span></td>
+          <td class="mk" data-prd="—" data-nonprd="Full" data-tip="開発・品証で参照・更新 / 本番は不可" aria-label="開発・品証で参照・更新 / 本番は不可"><span></span></td>
+          <td class="mk" data-prd="—" data-nonprd="Full" data-tip="開発・品証で参照・更新" aria-label="開発・品証で参照・更新"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="4">詳細</button></td>
         </tr>
         <tr data-id="sap_select_table">
@@ -175,9 +176,9 @@ a { color: var(--accent); }
           <td><code>sap_select_table</code></td>
           <td class="what">テーブルを RFC_READ_TABLE 相当で読み、行を取得する</td>
           <td class="sys">ABAP</td>
-          <td class="mk" data-prd="Read Only" data-nonprd="Read Only" data-tip="全環境で参照" aria-label="全環境で参照"><span></span></td>
-          <td class="mk" data-prd="Read Only" data-nonprd="Read Only" data-tip="全環境で参照" aria-label="全環境で参照"><span></span></td>
-          <td class="mk" data-prd="-" data-nonprd="Read Only" data-tip="開発・品証で参照" aria-label="開発・品証で参照"><span></span></td>
+          <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="全環境で参照" aria-label="全環境で参照"><span></span></td>
+          <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="全環境で参照" aria-label="全環境で参照"><span></span></td>
+          <td class="mk" data-prd="—" data-nonprd="Full" data-tip="開発・品証で参照" aria-label="開発・品証で参照"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="5">詳細</button></td>
         </tr>
         <tr data-id="sap_adt_freestyle">
@@ -185,9 +186,9 @@ a { color: var(--accent); }
           <td><code>sap_adt_freestyle</code></td>
           <td class="what">ADT のデータプレビューで自由形式 SQL を実行し、結果を取得する</td>
           <td class="sys">ABAP</td>
-          <td class="mk" data-prd="Read Only" data-nonprd="Read Only" data-tip="全環境で参照" aria-label="全環境で参照"><span></span></td>
-          <td class="mk" data-prd="Read Only" data-nonprd="Read Only" data-tip="全環境で参照" aria-label="全環境で参照"><span></span></td>
-          <td class="mk" data-prd="-" data-nonprd="Read Only" data-tip="開発・品証で参照" aria-label="開発・品証で参照"><span></span></td>
+          <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="全環境で参照" aria-label="全環境で参照"><span></span></td>
+          <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="全環境で参照" aria-label="全環境で参照"><span></span></td>
+          <td class="mk" data-prd="—" data-nonprd="Full" data-tip="開発・品証で参照" aria-label="開発・品証で参照"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="6">詳細</button></td>
         </tr>
         <tr data-id="sap_adt_osql">
@@ -195,9 +196,9 @@ a { color: var(--accent); }
           <td><code>sap_adt_osql</code></td>
           <td class="what">ADT で Open SQL を実行し、結果を取得する</td>
           <td class="sys">ABAP</td>
-          <td class="mk" data-prd="Read Only" data-nonprd="Read Only" data-tip="全環境で参照" aria-label="全環境で参照"><span></span></td>
-          <td class="mk" data-prd="Read Only" data-nonprd="Read Only" data-tip="全環境で参照" aria-label="全環境で参照"><span></span></td>
-          <td class="mk" data-prd="-" data-nonprd="Read Only" data-tip="開発・品証で参照" aria-label="開発・品証で参照"><span></span></td>
+          <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="全環境で参照" aria-label="全環境で参照"><span></span></td>
+          <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="全環境で参照" aria-label="全環境で参照"><span></span></td>
+          <td class="mk" data-prd="—" data-nonprd="Full" data-tip="開発・品証で参照" aria-label="開発・品証で参照"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="7">詳細</button></td>
         </tr>
         <tr data-id="sap_adt_ddic">
@@ -205,9 +206,9 @@ a { color: var(--accent); }
           <td><code>sap_adt_ddic</code></td>
           <td class="what">DDIC オブジェクト（テーブル / CDS）を ADT 経由で SELECT * する</td>
           <td class="sys">ABAP</td>
-          <td class="mk" data-prd="Read Only" data-nonprd="Read Only" data-tip="全環境で参照" aria-label="全環境で参照"><span></span></td>
-          <td class="mk" data-prd="Read Only" data-nonprd="Read Only" data-tip="全環境で参照" aria-label="全環境で参照"><span></span></td>
-          <td class="mk" data-prd="-" data-nonprd="Read Only" data-tip="開発・品証で参照" aria-label="開発・品証で参照"><span></span></td>
+          <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="全環境で参照" aria-label="全環境で参照"><span></span></td>
+          <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="全環境で参照" aria-label="全環境で参照"><span></span></td>
+          <td class="mk" data-prd="—" data-nonprd="Full" data-tip="開発・品証で参照" aria-label="開発・品証で参照"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="8">詳細</button></td>
         </tr>
         <tr data-id="sap_abap_read_source">
@@ -215,9 +216,9 @@ a { color: var(--accent); }
           <td><code>sap_abap_read_source</code></td>
           <td class="what">ADT でプログラムや Function Module のソースを読む</td>
           <td class="sys">ABAP</td>
-          <td class="mk" data-prd="Read Only" data-nonprd="Read Only" data-tip="全環境で参照" aria-label="全環境で参照"><span></span></td>
-          <td class="mk" data-prd="Read Only" data-nonprd="Read Only" data-tip="全環境で参照" aria-label="全環境で参照"><span></span></td>
-          <td class="mk" data-prd="-" data-nonprd="Read Only" data-tip="開発・品証で参照" aria-label="開発・品証で参照"><span></span></td>
+          <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="全環境で参照" aria-label="全環境で参照"><span></span></td>
+          <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="全環境で参照" aria-label="全環境で参照"><span></span></td>
+          <td class="mk" data-prd="—" data-nonprd="Full" data-tip="開発・品証で参照" aria-label="開発・品証で参照"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="9">詳細</button></td>
         </tr>
         <tr data-id="sap_abap_write_source">
@@ -225,9 +226,9 @@ a { color: var(--accent); }
           <td><code>sap_abap_write_source</code></td>
           <td class="what">ADT でレポート / プログラムを作成・更新し、活性化する</td>
           <td class="sys">ABAP</td>
-          <td class="mk" data-prd="-" data-nonprd="Full" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新"><span></span></td>
-          <td class="mk" data-prd="-" data-nonprd="Full" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新"><span></span></td>
-          <td class="mk" data-prd="-" data-nonprd="Full" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新"><span></span></td>
+          <td class="mk" data-prd="—" data-nonprd="Full" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新"><span></span></td>
+          <td class="mk" data-prd="—" data-nonprd="Full" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新"><span></span></td>
+          <td class="mk" data-prd="—" data-nonprd="Full" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="10">詳細</button></td>
         </tr>
         <tr data-id="sap_abap_delete_source">
@@ -235,9 +236,9 @@ a { color: var(--accent); }
           <td><code>sap_abap_delete_source</code></td>
           <td class="what">ADT でプログラムや CDS DDL を削除する</td>
           <td class="sys">ABAP</td>
-          <td class="mk" data-prd="-" data-nonprd="Full" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新"><span></span></td>
-          <td class="mk" data-prd="-" data-nonprd="Full" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新"><span></span></td>
-          <td class="mk" data-prd="-" data-nonprd="Full" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新"><span></span></td>
+          <td class="mk" data-prd="—" data-nonprd="Full" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新"><span></span></td>
+          <td class="mk" data-prd="—" data-nonprd="Full" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新"><span></span></td>
+          <td class="mk" data-prd="—" data-nonprd="Full" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="11">詳細</button></td>
         </tr>
         <tr data-id="sap_abap_write_fm">
@@ -245,9 +246,9 @@ a { color: var(--accent); }
           <td><code>sap_abap_write_fm</code></td>
           <td class="what">ADT で Function Module を作成・更新し、活性化する</td>
           <td class="sys">ABAP</td>
-          <td class="mk" data-prd="-" data-nonprd="Full" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新"><span></span></td>
-          <td class="mk" data-prd="-" data-nonprd="Full" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新"><span></span></td>
-          <td class="mk" data-prd="-" data-nonprd="Full" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新"><span></span></td>
+          <td class="mk" data-prd="—" data-nonprd="Full" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新"><span></span></td>
+          <td class="mk" data-prd="—" data-nonprd="Full" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新"><span></span></td>
+          <td class="mk" data-prd="—" data-nonprd="Full" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="12">詳細</button></td>
         </tr>
         <tr data-id="sap_create_transport">
@@ -255,9 +256,9 @@ a { color: var(--accent); }
           <td><code>sap_create_transport</code></td>
           <td class="what">Function Module を呼び出して移送リクエストを作成する</td>
           <td class="sys">ABAP</td>
-          <td class="mk" data-prd="-" data-nonprd="Full" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新"><span></span></td>
-          <td class="mk" data-prd="-" data-nonprd="Full" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新"><span></span></td>
-          <td class="mk" data-prd="-" data-nonprd="Full" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新"><span></span></td>
+          <td class="mk" data-prd="—" data-nonprd="Full" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新"><span></span></td>
+          <td class="mk" data-prd="—" data-nonprd="Full" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新"><span></span></td>
+          <td class="mk" data-prd="—" data-nonprd="Full" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="13">詳細</button></td>
         </tr>
         <tr data-id="sap_release_transport">
@@ -265,9 +266,9 @@ a { color: var(--accent); }
           <td><code>sap_release_transport</code></td>
           <td class="what">Function Module を呼び出して移送リクエストを解放する</td>
           <td class="sys">ABAP</td>
-          <td class="mk" data-prd="-" data-nonprd="Full" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新"><span></span></td>
-          <td class="mk" data-prd="-" data-nonprd="Full" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新"><span></span></td>
-          <td class="mk" data-prd="-" data-nonprd="Full" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新"><span></span></td>
+          <td class="mk" data-prd="—" data-nonprd="Full" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新"><span></span></td>
+          <td class="mk" data-prd="—" data-nonprd="Full" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新"><span></span></td>
+          <td class="mk" data-prd="—" data-nonprd="Full" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="14">詳細</button></td>
         </tr>
         <tr data-id="sap_abap_activate">
@@ -275,9 +276,9 @@ a { color: var(--accent); }
           <td><code>sap_abap_activate</code></td>
           <td class="what">ADT でオブジェクトを活性化し、構文チェック結果を返す</td>
           <td class="sys">ABAP</td>
-          <td class="mk" data-prd="-" data-nonprd="Full" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新"><span></span></td>
-          <td class="mk" data-prd="-" data-nonprd="Full" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新"><span></span></td>
-          <td class="mk" data-prd="-" data-nonprd="Full" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新"><span></span></td>
+          <td class="mk" data-prd="—" data-nonprd="Full" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新"><span></span></td>
+          <td class="mk" data-prd="—" data-nonprd="Full" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新"><span></span></td>
+          <td class="mk" data-prd="—" data-nonprd="Full" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="15">詳細</button></td>
         </tr>
         <tr data-id="sap_call_ias_admin">
@@ -286,8 +287,8 @@ a { color: var(--accent); }
           <td class="what">Admin API（SCIM）でユーザ・グループ・アプリを操作する。個人情報を扱う</td>
           <td class="sys">Cloud Identity Services (IAS)</td>
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="全環境で参照・更新" aria-label="全環境で参照・更新"><span></span></td>
-          <td class="mk" data-prd="-" data-nonprd="-" data-tip="利用不可" aria-label="利用不可"><span></span></td>
-          <td class="mk" data-prd="-" data-nonprd="-" data-tip="利用不可" aria-label="利用不可"><span></span></td>
+          <td class="mk" data-prd="—" data-nonprd="—" data-tip="利用不可" aria-label="利用不可"><span></span></td>
+          <td class="mk" data-prd="—" data-nonprd="—" data-tip="利用不可" aria-label="利用不可"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="16">詳細</button></td>
         </tr>
         <tr data-id="sap_call_ips_job">
@@ -296,8 +297,8 @@ a { color: var(--accent); }
           <td class="what">Jobs / JobLogs API でプロビジョニングジョブを確認・実行する。個人情報を扱う</td>
           <td class="sys">Cloud Identity Services (IPS)</td>
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="全環境で参照・更新" aria-label="全環境で参照・更新"><span></span></td>
-          <td class="mk" data-prd="-" data-nonprd="-" data-tip="利用不可" aria-label="利用不可"><span></span></td>
-          <td class="mk" data-prd="-" data-nonprd="-" data-tip="利用不可" aria-label="利用不可"><span></span></td>
+          <td class="mk" data-prd="—" data-nonprd="—" data-tip="利用不可" aria-label="利用不可"><span></span></td>
+          <td class="mk" data-prd="—" data-nonprd="—" data-tip="利用不可" aria-label="利用不可"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="17">詳細</button></td>
         </tr>
         <tr data-id="sap_call_cf_api">
@@ -307,7 +308,7 @@ a { color: var(--accent); }
           <td class="sys">Cloud Foundry</td>
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="全環境で参照・更新" aria-label="全環境で参照・更新"><span></span></td>
           <td class="mk" data-prd="Read Only" data-nonprd="Full" data-tip="開発・品証で参照・更新 / 本番は参照のみ" aria-label="開発・品証で参照・更新 / 本番は参照のみ"><span></span></td>
-          <td class="mk" data-prd="-" data-nonprd="Read Only" data-tip="開発・品証で参照のみ" aria-label="開発・品証で参照のみ"><span></span></td>
+          <td class="mk" data-prd="—" data-nonprd="Full" data-tip="開発・品証で参照のみ" aria-label="開発・品証で参照のみ"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="18">詳細</button></td>
         </tr>
         <tr data-id="sap_call_bwz_content">
@@ -317,7 +318,7 @@ a { color: var(--accent); }
           <td class="sys">Build Work Zone</td>
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="全環境で参照・更新" aria-label="全環境で参照・更新"><span></span></td>
           <td class="mk" data-prd="Read Only" data-nonprd="Full" data-tip="開発・品証で参照・更新 / 本番は参照のみ" aria-label="開発・品証で参照・更新 / 本番は参照のみ"><span></span></td>
-          <td class="mk" data-prd="-" data-nonprd="Read Only" data-tip="開発・品証で参照のみ" aria-label="開発・品証で参照のみ"><span></span></td>
+          <td class="mk" data-prd="—" data-nonprd="Full" data-tip="開発・品証で参照のみ" aria-label="開発・品証で参照のみ"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="19">詳細</button></td>
         </tr>
         <tr data-id="sap_call_ctms_api">
@@ -327,7 +328,7 @@ a { color: var(--accent); }
           <td class="sys">Cloud Transport Management</td>
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="全環境で参照・更新" aria-label="全環境で参照・更新"><span></span></td>
           <td class="mk" data-prd="Read Only" data-nonprd="Full" data-tip="開発・品証で参照・更新 / 本番は参照のみ" aria-label="開発・品証で参照・更新 / 本番は参照のみ"><span></span></td>
-          <td class="mk" data-prd="-" data-nonprd="Read Only" data-tip="開発・品証で参照のみ" aria-label="開発・品証で参照のみ"><span></span></td>
+          <td class="mk" data-prd="—" data-nonprd="Full" data-tip="開発・品証で参照のみ" aria-label="開発・品証で参照のみ"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="20">詳細</button></td>
         </tr>
         <tr data-id="sap_call_forms_api">
@@ -337,7 +338,7 @@ a { color: var(--accent); }
           <td class="sys">Forms Service by Adobe</td>
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="全環境で参照・更新" aria-label="全環境で参照・更新"><span></span></td>
           <td class="mk" data-prd="Read Only" data-nonprd="Full" data-tip="開発・品証で参照・更新 / 本番は参照のみ" aria-label="開発・品証で参照・更新 / 本番は参照のみ"><span></span></td>
-          <td class="mk" data-prd="-" data-nonprd="Read Only" data-tip="開発・品証で参照のみ" aria-label="開発・品証で参照のみ"><span></span></td>
+          <td class="mk" data-prd="—" data-nonprd="Full" data-tip="開発・品証で参照のみ" aria-label="開発・品証で参照のみ"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="21">詳細</button></td>
         </tr>
         <tr data-id="sap_call_cis_api">
@@ -347,7 +348,7 @@ a { color: var(--accent); }
           <td class="sys">BTP アカウント</td>
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="全環境で参照・更新" aria-label="全環境で参照・更新"><span></span></td>
           <td class="mk" data-prd="Read Only" data-nonprd="Full" data-tip="開発・品証で参照・更新 / 本番は参照のみ" aria-label="開発・品証で参照・更新 / 本番は参照のみ"><span></span></td>
-          <td class="mk" data-prd="-" data-nonprd="Read Only" data-tip="開発・品証で参照のみ" aria-label="開発・品証で参照のみ"><span></span></td>
+          <td class="mk" data-prd="—" data-nonprd="Full" data-tip="開発・品証で参照のみ" aria-label="開発・品証で参照のみ"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="22">詳細</button></td>
         </tr>
         <tr data-id="sap_call_cpi_api">
@@ -357,7 +358,7 @@ a { color: var(--accent); }
           <td class="sys">Integration Suite</td>
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="全環境で参照・更新" aria-label="全環境で参照・更新"><span></span></td>
           <td class="mk" data-prd="Read Only" data-nonprd="Full" data-tip="開発・品証で参照・更新 / 本番は参照のみ" aria-label="開発・品証で参照・更新 / 本番は参照のみ"><span></span></td>
-          <td class="mk" data-prd="-" data-nonprd="Read Only" data-tip="開発・品証で参照のみ" aria-label="開発・品証で参照のみ"><span></span></td>
+          <td class="mk" data-prd="—" data-nonprd="Full" data-tip="開発・品証で参照のみ" aria-label="開発・品証で参照のみ"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="23">詳細</button></td>
         </tr>
         <tr data-id="sap_call_ans_api">
@@ -367,7 +368,7 @@ a { color: var(--accent); }
           <td class="sys">Alert Notification Service</td>
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="全環境で参照・更新" aria-label="全環境で参照・更新"><span></span></td>
           <td class="mk" data-prd="Read Only" data-nonprd="Full" data-tip="開発・品証で参照・更新 / 本番は参照のみ" aria-label="開発・品証で参照・更新 / 本番は参照のみ"><span></span></td>
-          <td class="mk" data-prd="-" data-nonprd="Read Only" data-tip="開発・品証で参照のみ" aria-label="開発・品証で参照のみ"><span></span></td>
+          <td class="mk" data-prd="—" data-nonprd="Full" data-tip="開発・品証で参照のみ" aria-label="開発・品証で参照のみ"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="24">詳細</button></td>
         </tr>
         <tr data-id="sap_call_sbpa_api">
@@ -377,7 +378,7 @@ a { color: var(--accent); }
           <td class="sys">Build Process Automation</td>
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="全環境で参照・更新" aria-label="全環境で参照・更新"><span></span></td>
           <td class="mk" data-prd="Read Only" data-nonprd="Full" data-tip="開発・品証で参照・更新 / 本番は参照のみ" aria-label="開発・品証で参照・更新 / 本番は参照のみ"><span></span></td>
-          <td class="mk" data-prd="-" data-nonprd="Read Only" data-tip="開発・品証で参照のみ" aria-label="開発・品証で参照のみ"><span></span></td>
+          <td class="mk" data-prd="—" data-nonprd="Full" data-tip="開発・品証で参照のみ" aria-label="開発・品証で参照のみ"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="25">詳細</button></td>
         </tr>
         <tr data-id="sap_call_datasphere_api">
@@ -387,7 +388,7 @@ a { color: var(--accent); }
           <td class="sys">Datasphere</td>
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="全環境で参照・更新" aria-label="全環境で参照・更新"><span></span></td>
           <td class="mk" data-prd="Read Only" data-nonprd="Full" data-tip="開発・品証で参照・更新 / 本番は参照のみ" aria-label="開発・品証で参照・更新 / 本番は参照のみ"><span></span></td>
-          <td class="mk" data-prd="-" data-nonprd="Read Only" data-tip="開発・品証で参照のみ" aria-label="開発・品証で参照のみ"><span></span></td>
+          <td class="mk" data-prd="—" data-nonprd="Full" data-tip="開発・品証で参照のみ" aria-label="開発・品証で参照のみ"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="26">詳細</button></td>
         </tr>
         <tr data-id="sap_call_calm_api">
@@ -397,7 +398,7 @@ a { color: var(--accent); }
           <td class="sys">Cloud ALM</td>
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="全環境で参照・更新" aria-label="全環境で参照・更新"><span></span></td>
           <td class="mk" data-prd="Read Only" data-nonprd="Full" data-tip="開発・品証で参照・更新 / 本番は参照のみ" aria-label="開発・品証で参照・更新 / 本番は参照のみ"><span></span></td>
-          <td class="mk" data-prd="-" data-nonprd="Read Only" data-tip="開発・品証で参照のみ" aria-label="開発・品証で参照のみ"><span></span></td>
+          <td class="mk" data-prd="—" data-nonprd="Full" data-tip="開発・品証で参照のみ" aria-label="開発・品証で参照のみ"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="27">詳細</button></td>
         </tr>
         <tr data-id="sap_call_btp_cli">
@@ -406,8 +407,8 @@ a { color: var(--accent); }
           <td class="what">btp CLI をサーバ側で実行し、出力を返す（v2.106.1）</td>
           <td class="sys">BTP アカウント</td>
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="全環境で実行" aria-label="全環境で実行"><span></span></td>
-          <td class="mk" data-prd="-" data-nonprd="-" data-tip="利用不可" aria-label="利用不可"><span></span></td>
-          <td class="mk" data-prd="-" data-nonprd="-" data-tip="利用不可" aria-label="利用不可"><span></span></td>
+          <td class="mk" data-prd="—" data-nonprd="—" data-tip="利用不可" aria-label="利用不可"><span></span></td>
+          <td class="mk" data-prd="—" data-nonprd="—" data-tip="利用不可" aria-label="利用不可"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="28">詳細</button></td>
         </tr>
         <tr data-id="sap_call_cf_cli">
@@ -416,8 +417,8 @@ a { color: var(--accent); }
           <td class="what">cf CLI をサーバ側で実行し、出力を返す（v8.18.3）</td>
           <td class="sys">Cloud Foundry</td>
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="全環境で実行" aria-label="全環境で実行"><span></span></td>
-          <td class="mk" data-prd="-" data-nonprd="-" data-tip="利用不可" aria-label="利用不可"><span></span></td>
-          <td class="mk" data-prd="-" data-nonprd="-" data-tip="利用不可" aria-label="利用不可"><span></span></td>
+          <td class="mk" data-prd="—" data-nonprd="—" data-tip="利用不可" aria-label="利用不可"><span></span></td>
+          <td class="mk" data-prd="—" data-nonprd="—" data-tip="利用不可" aria-label="利用不可"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="29">詳細</button></td>
         </tr>
         <tr data-id="sap_call_datasphere_cli">
@@ -426,8 +427,8 @@ a { color: var(--accent); }
           <td class="what">datasphere CLI をサーバ側で実行し、出力を返す（v2026.13.0）</td>
           <td class="sys">Datasphere</td>
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="全環境で実行" aria-label="全環境で実行"><span></span></td>
-          <td class="mk" data-prd="-" data-nonprd="-" data-tip="利用不可" aria-label="利用不可"><span></span></td>
-          <td class="mk" data-prd="-" data-nonprd="-" data-tip="利用不可" aria-label="利用不可"><span></span></td>
+          <td class="mk" data-prd="—" data-nonprd="—" data-tip="利用不可" aria-label="利用不可"><span></span></td>
+          <td class="mk" data-prd="—" data-nonprd="—" data-tip="利用不可" aria-label="利用不可"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="30">詳細</button></td>
         </tr>
         <tr data-id="app_call_jira_api">
@@ -437,7 +438,7 @@ a { color: var(--accent); }
           <td class="sys">Jira</td>
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="全環境で全操作（起票/遷移/コメント/照会）" aria-label="全環境で全操作（起票/遷移/コメント/照会）"><span></span></td>
           <td class="mk" data-prd="Read Only" data-nonprd="Full" data-tip="開発・品証で全操作 / 本番は参照のみ" aria-label="開発・品証で全操作 / 本番は参照のみ"><span></span></td>
-          <td class="mk" data-prd="-" data-nonprd="Full" data-tip="開発・品証で全操作可 / 本番は不可" aria-label="開発・品証で全操作可 / 本番は不可"><span></span></td>
+          <td class="mk" data-prd="—" data-nonprd="Full" data-tip="開発・品証で全操作可 / 本番は不可" aria-label="開発・品証で全操作可 / 本番は不可"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="31">詳細</button></td>
         </tr>
         <tr data-id="app_call_smartdb_api">
@@ -447,7 +448,7 @@ a { color: var(--accent); }
           <td class="sys">SmartDB</td>
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="全環境で全操作（文書 CRUD/プロセス実行）" aria-label="全環境で全操作（文書 CRUD/プロセス実行）"><span></span></td>
           <td class="mk" data-prd="Read Only" data-nonprd="Full" data-tip="開発・品証で全操作 / 本番は参照のみ" aria-label="開発・品証で全操作 / 本番は参照のみ"><span></span></td>
-          <td class="mk" data-prd="-" data-nonprd="Full" data-tip="開発・品証で全操作可 / 本番は不可" aria-label="開発・品証で全操作可 / 本番は不可"><span></span></td>
+          <td class="mk" data-prd="—" data-nonprd="Full" data-tip="開発・品証で全操作可 / 本番は不可" aria-label="開発・品証で全操作可 / 本番は不可"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="32">詳細</button></td>
         </tr>
         <tr data-id="sap_call_ibp_api">
@@ -457,7 +458,7 @@ a { color: var(--accent); }
           <td class="sys">IBP</td>
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="全環境で参照・更新" aria-label="全環境で参照・更新"><span></span></td>
           <td class="mk" data-prd="Read Only" data-nonprd="Full" data-tip="開発・品証で参照・更新 / 本番は参照のみ" aria-label="開発・品証で参照・更新 / 本番は参照のみ"><span></span></td>
-          <td class="mk" data-prd="-" data-nonprd="Full" data-tip="開発・品証で参照・更新" aria-label="開発・品証で参照・更新"><span></span></td>
+          <td class="mk" data-prd="—" data-nonprd="Full" data-tip="開発・品証で参照・更新" aria-label="開発・品証で参照・更新"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="33">詳細</button></td>
         </tr>
         <tr data-id="sap_call_s4_api">
@@ -467,7 +468,7 @@ a { color: var(--accent); }
           <td class="sys">ABAP</td>
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="全環境で参照・更新" aria-label="全環境で参照・更新"><span></span></td>
           <td class="mk" data-prd="Read Only" data-nonprd="Full" data-tip="開発・品証で参照・更新 / 本番は参照のみ" aria-label="開発・品証で参照・更新 / 本番は参照のみ"><span></span></td>
-          <td class="mk" data-prd="-" data-nonprd="Read Only" data-tip="開発・品証で参照のみ" aria-label="開発・品証で参照のみ"><span></span></td>
+          <td class="mk" data-prd="—" data-nonprd="Full" data-tip="開発・品証で参照のみ" aria-label="開発・品証で参照のみ"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="34">詳細</button></td>
         </tr>
         <tr data-id="sap_call_soap">
@@ -477,7 +478,7 @@ a { color: var(--accent); }
           <td class="sys">ABAP</td>
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="全環境で参照・更新" aria-label="全環境で参照・更新"><span></span></td>
           <td class="mk" data-prd="Read Only" data-nonprd="Full" data-tip="開発・品証で参照・更新 / 本番は参照のみ" aria-label="開発・品証で参照・更新 / 本番は参照のみ"><span></span></td>
-          <td class="mk" data-prd="-" data-nonprd="Read Only" data-tip="開発・品証で参照のみ" aria-label="開発・品証で参照のみ"><span></span></td>
+          <td class="mk" data-prd="—" data-nonprd="Full" data-tip="開発・品証で参照のみ" aria-label="開発・品証で参照のみ"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="35">詳細</button></td>
         </tr>
       </tbody>
@@ -559,7 +560,7 @@ heads.forEach((th) => {
       .forEach((r) => tb.append(r));
   });
 });
-const VCLASS = { 'Full': 'v-full', 'Read Only': 'v-ro', '-': 'v-no', '—': 'v-no' };
+const VCLASS = { 'Full': 'v-full', 'Read Only': 'v-ro', '—': 'v-no' };
 const cells = [...document.querySelectorAll('td.mk')];
 function applyEnv(env) {
   for (const td of cells) {
