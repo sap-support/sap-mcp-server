@@ -1,0 +1,460 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>sap-mcp-server — ツール一覧</title>
+<style>
+:root {
+  --bg: #ffffff; --fg: #10233f; --muted: #4a5f7a; --line: #b9c7da;
+  --head: #10336b; --head-fg: #ffffff; --accent: #10336b; --accent-soft: #eef3fb;
+  --overlay: rgba(9, 24, 46, .55);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0a1526; --fg: #dfe8f5; --muted: #93a6c0; --line: #274063;
+    --head: #16345f; --head-fg: #ffffff; --accent: #7fb0f0; --accent-soft: #12253f;
+    --overlay: rgba(2, 8, 18, .8);
+  }
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; padding: 2rem 1rem 4rem; background: var(--bg); color: var(--fg);
+  font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+}
+main { max-width: 1100px; margin: 0 auto; }
+h1 { font-size: 1.6rem; margin: 0 0 1.5rem; color: var(--accent); }
+.wrap { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: .875rem; border: 1px solid var(--line); }
+th, td { text-align: left; padding: .55rem .7rem; border: 1px solid var(--line); vertical-align: top; }
+thead th {
+  background: var(--head); color: var(--head-fg); font-weight: 600; white-space: nowrap;
+  position: sticky; top: 0; border-color: var(--head);
+}
+td.num { color: var(--muted); text-align: right; width: 3ch; }
+td.what { min-width: 20ch; }
+td.act { width: 1%; white-space: nowrap; }
+code { font-size: .9em; }
+button.detail {
+  padding: .15rem .6rem; font: inherit; font-size: .8rem;
+  color: var(--accent); background: var(--accent-soft);
+  border: 1px solid var(--line); border-radius: 4px; cursor: pointer;
+}
+button.detail:hover { border-color: var(--accent); }
+dialog {
+  border: 1px solid var(--line); border-radius: 8px; background: var(--bg); color: var(--fg);
+  padding: 0; max-width: 44rem; width: calc(100% - 2rem);
+}
+dialog::backdrop { background: var(--overlay); }
+.dh { display: flex; align-items: center; gap: 1rem; padding: 1rem 1.25rem; border-bottom: 1px solid var(--line); }
+.dh code { font-size: 1rem; }
+.dh button { margin-left: auto; font: inherit; background: none; border: 0; color: var(--muted); cursor: pointer; font-size: 1.3rem; line-height: 1; }
+.db { padding: 1rem 1.25rem; }
+.db table { font-size: .875rem; }
+.db th { width: 11rem; color: var(--muted); font-weight: 500; }
+.db ul { margin: 0; padding-left: 1.1rem; }
+.db li { margin: .15rem 0; }
+.db li span { color: var(--muted); }
+a { color: var(--accent); }
+footer { margin-top: 2rem; color: var(--muted); font-size: .8rem; }
+.top { display: flex; align-items: baseline; gap: 1rem; margin: 0 0 1.5rem; }
+.top h1 { margin: 0; }
+.top a { margin-left: auto; font-size: .85rem; }
+</style>
+</head>
+<body>
+<main>
+  <div class="top">
+    <h1>sap-mcp-server — ツール一覧</h1>
+    <a href="../" hreflang="en">English</a>
+  </div>
+
+  <div class="wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>No</th><th>ツール</th><th>機能</th><th>フル</th><th>参照専用</th><th>開発専用</th><th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr data-id="sap_list_destinations">
+          <td class="num">1</td>
+          <td><code>sap_list_destinations</code></td>
+          <td class="what">接続(Destination)一覧</td>
+          <td>全環境の一覧を参照</td>
+          <td>全環境の一覧を参照</td>
+          <td>開発・品証のみ参照</td>
+          <td class="act"><button type="button" class="detail" data-no="1">詳細</button></td>
+        </tr>
+        <tr data-id="sap_use_destination">
+          <td class="num">2</td>
+          <td><code>sap_use_destination</code></td>
+          <td class="what">セッション既定の接続を切替</td>
+          <td>全環境で利用可</td>
+          <td>全環境で利用可</td>
+          <td>全環境で利用可</td>
+          <td class="act"><button type="button" class="detail" data-no="2">詳細</button></td>
+        </tr>
+        <tr data-id="sap_current_destination">
+          <td class="num">3</td>
+          <td><code>sap_current_destination</code></td>
+          <td class="what">現在の既定接続を表示</td>
+          <td>全環境で利用可</td>
+          <td>全環境で利用可</td>
+          <td>全環境で利用可</td>
+          <td class="act"><button type="button" class="detail" data-no="3">詳細</button></td>
+        </tr>
+        <tr data-id="sap_call_fm">
+          <td class="num">4</td>
+          <td><code>sap_call_fm</code></td>
+          <td class="what">ABAP Function Module 呼出</td>
+          <td>全環境で参照・更新</td>
+          <td>開発・品証で参照・更新<br>本番は不可</td>
+          <td>開発・品証で参照・更新</td>
+          <td class="act"><button type="button" class="detail" data-no="4">詳細</button></td>
+        </tr>
+        <tr data-id="sap_select_table">
+          <td class="num">5</td>
+          <td><code>sap_select_table</code></td>
+          <td class="what">SAP テーブル動的 SELECT</td>
+          <td>全環境で参照</td>
+          <td>全環境で参照</td>
+          <td>開発・品証で参照</td>
+          <td class="act"><button type="button" class="detail" data-no="5">詳細</button></td>
+        </tr>
+        <tr data-id="sap_adt_freestyle">
+          <td class="num">6</td>
+          <td><code>sap_adt_freestyle</code></td>
+          <td class="what">ADT で自由形式 SQL 実行</td>
+          <td>全環境で参照</td>
+          <td>全環境で参照</td>
+          <td>開発・品証で参照</td>
+          <td class="act"><button type="button" class="detail" data-no="6">詳細</button></td>
+        </tr>
+        <tr data-id="sap_adt_osql">
+          <td class="num">7</td>
+          <td><code>sap_adt_osql</code></td>
+          <td class="what">ADT で Open SQL 実行</td>
+          <td>全環境で参照</td>
+          <td>全環境で参照</td>
+          <td>開発・品証で参照</td>
+          <td class="act"><button type="button" class="detail" data-no="7">詳細</button></td>
+        </tr>
+        <tr data-id="sap_adt_ddic">
+          <td class="num">8</td>
+          <td><code>sap_adt_ddic</code></td>
+          <td class="what">DDIC オブジェクト(テーブル/CDS)を SELECT *</td>
+          <td>全環境で参照</td>
+          <td>全環境で参照</td>
+          <td>開発・品証で参照</td>
+          <td class="act"><button type="button" class="detail" data-no="8">詳細</button></td>
+        </tr>
+        <tr data-id="sap_abap_read_source">
+          <td class="num">9</td>
+          <td><code>sap_abap_read_source</code></td>
+          <td class="what">ABAP ソース読取</td>
+          <td>全環境で参照</td>
+          <td>全環境で参照</td>
+          <td>開発・品証で参照</td>
+          <td class="act"><button type="button" class="detail" data-no="9">詳細</button></td>
+        </tr>
+        <tr data-id="sap_abap_write_source">
+          <td class="num">10</td>
+          <td><code>sap_abap_write_source</code></td>
+          <td class="what">ABAP レポート/プログラム作成・更新＋活性化</td>
+          <td>開発環境で作成・更新</td>
+          <td>開発環境で作成・更新</td>
+          <td>開発環境で作成・更新</td>
+          <td class="act"><button type="button" class="detail" data-no="10">詳細</button></td>
+        </tr>
+        <tr data-id="sap_abap_delete_source">
+          <td class="num">11</td>
+          <td><code>sap_abap_delete_source</code></td>
+          <td class="what">ABAP プログラム/CDS DDL 削除</td>
+          <td>開発環境で作成・更新</td>
+          <td>開発環境で作成・更新</td>
+          <td>開発環境で作成・更新</td>
+          <td class="act"><button type="button" class="detail" data-no="11">詳細</button></td>
+        </tr>
+        <tr data-id="sap_abap_write_fm">
+          <td class="num">12</td>
+          <td><code>sap_abap_write_fm</code></td>
+          <td class="what">ABAP Function Module(SE37)作成・更新＋活性化</td>
+          <td>開発環境で作成・更新</td>
+          <td>開発環境で作成・更新</td>
+          <td>開発環境で作成・更新</td>
+          <td class="act"><button type="button" class="detail" data-no="12">詳細</button></td>
+        </tr>
+        <tr data-id="sap_create_transport">
+          <td class="num">13</td>
+          <td><code>sap_create_transport</code></td>
+          <td class="what">移送リクエスト作成</td>
+          <td>開発環境で作成・更新</td>
+          <td>開発環境で作成・更新</td>
+          <td>開発環境で作成・更新</td>
+          <td class="act"><button type="button" class="detail" data-no="13">詳細</button></td>
+        </tr>
+        <tr data-id="sap_release_transport">
+          <td class="num">14</td>
+          <td><code>sap_release_transport</code></td>
+          <td class="what">移送リクエスト解放</td>
+          <td>開発環境で作成・更新</td>
+          <td>開発環境で作成・更新</td>
+          <td>開発環境で作成・更新</td>
+          <td class="act"><button type="button" class="detail" data-no="14">詳細</button></td>
+        </tr>
+        <tr data-id="sap_abap_activate">
+          <td class="num">15</td>
+          <td><code>sap_abap_activate</code></td>
+          <td class="what">ABAP オブジェクト活性化＋構文チェック</td>
+          <td>開発環境で作成・更新</td>
+          <td>開発環境で作成・更新</td>
+          <td>開発環境で作成・更新</td>
+          <td class="act"><button type="button" class="detail" data-no="15">詳細</button></td>
+        </tr>
+        <tr data-id="sap_call_ias_admin">
+          <td class="num">16</td>
+          <td><code>sap_call_ias_admin</code></td>
+          <td class="what">IAS(Cloud Identity)Admin API。個人情報を扱う</td>
+          <td>全環境で参照・更新</td>
+          <td>利用不可</td>
+          <td>利用不可</td>
+          <td class="act"><button type="button" class="detail" data-no="16">詳細</button></td>
+        </tr>
+        <tr data-id="sap_call_ips_job">
+          <td class="num">17</td>
+          <td><code>sap_call_ips_job</code></td>
+          <td class="what">IPS(Identity Provisioning)Jobs/JobLogs API。個人情報を扱う</td>
+          <td>全環境で参照・更新</td>
+          <td>利用不可</td>
+          <td>利用不可</td>
+          <td class="act"><button type="button" class="detail" data-no="17">詳細</button></td>
+        </tr>
+        <tr data-id="sap_call_cf_api">
+          <td class="num">18</td>
+          <td><code>sap_call_cf_api</code></td>
+          <td class="what">Cloud Foundry API v3</td>
+          <td>全環境で参照・更新</td>
+          <td>開発・品証で参照・更新<br>本番は参照のみ</td>
+          <td>開発・品証で参照のみ</td>
+          <td class="act"><button type="button" class="detail" data-no="18">詳細</button></td>
+        </tr>
+        <tr data-id="sap_call_bwz_content">
+          <td class="num">19</td>
+          <td><code>sap_call_bwz_content</code></td>
+          <td class="what">Build Work Zone Standard Content API</td>
+          <td>全環境で参照・更新</td>
+          <td>開発・品証で参照・更新<br>本番は参照のみ</td>
+          <td>開発・品証で参照のみ</td>
+          <td class="act"><button type="button" class="detail" data-no="19">詳細</button></td>
+        </tr>
+        <tr data-id="sap_call_ctms_api">
+          <td class="num">20</td>
+          <td><code>sap_call_ctms_api</code></td>
+          <td class="what">Cloud Transport Management v2 API</td>
+          <td>全環境で参照・更新</td>
+          <td>開発・品証で参照・更新<br>本番は参照のみ</td>
+          <td>開発・品証で参照のみ</td>
+          <td class="act"><button type="button" class="detail" data-no="20">詳細</button></td>
+        </tr>
+        <tr data-id="sap_call_forms_api">
+          <td class="num">21</td>
+          <td><code>sap_call_forms_api</code></td>
+          <td class="what">Forms Service by Adobe REST API</td>
+          <td>全環境で参照・更新</td>
+          <td>開発・品証で参照・更新<br>本番は参照のみ</td>
+          <td>開発・品証で参照のみ</td>
+          <td class="act"><button type="button" class="detail" data-no="21">詳細</button></td>
+        </tr>
+        <tr data-id="sap_call_cis_api">
+          <td class="num">22</td>
+          <td><code>sap_call_cis_api</code></td>
+          <td class="what">Cloud Information Service(CIS Central)</td>
+          <td>全環境で参照・更新</td>
+          <td>開発・品証で参照・更新<br>本番は参照のみ</td>
+          <td>開発・品証で参照のみ</td>
+          <td class="act"><button type="button" class="detail" data-no="22">詳細</button></td>
+        </tr>
+        <tr data-id="sap_call_cpi_api">
+          <td class="num">23</td>
+          <td><code>sap_call_cpi_api</code></td>
+          <td class="what">Integration Suite(CPI)Audit/Monitoring API</td>
+          <td>全環境で参照・更新</td>
+          <td>開発・品証で参照・更新<br>本番は参照のみ</td>
+          <td>開発・品証で参照のみ</td>
+          <td class="act"><button type="button" class="detail" data-no="23">詳細</button></td>
+        </tr>
+        <tr data-id="sap_call_ans_api">
+          <td class="num">24</td>
+          <td><code>sap_call_ans_api</code></td>
+          <td class="what">Alert Notification Service REST API</td>
+          <td>全環境で参照・更新</td>
+          <td>開発・品証で参照・更新<br>本番は参照のみ</td>
+          <td>開発・品証で参照のみ</td>
+          <td class="act"><button type="button" class="detail" data-no="24">詳細</button></td>
+        </tr>
+        <tr data-id="sap_call_sbpa_api">
+          <td class="num">25</td>
+          <td><code>sap_call_sbpa_api</code></td>
+          <td class="what">Build Process Automation REST API</td>
+          <td>全環境で参照・更新</td>
+          <td>開発・品証で参照・更新<br>本番は参照のみ</td>
+          <td>開発・品証で参照のみ</td>
+          <td class="act"><button type="button" class="detail" data-no="25">詳細</button></td>
+        </tr>
+        <tr data-id="sap_call_datasphere_api">
+          <td class="num">26</td>
+          <td><code>sap_call_datasphere_api</code></td>
+          <td class="what">Datasphere 公開 REST/OData API</td>
+          <td>全環境で参照・更新</td>
+          <td>開発・品証で参照・更新<br>本番は参照のみ</td>
+          <td>開発・品証で参照のみ</td>
+          <td class="act"><button type="button" class="detail" data-no="26">詳細</button></td>
+        </tr>
+        <tr data-id="sap_call_calm_api">
+          <td class="num">27</td>
+          <td><code>sap_call_calm_api</code></td>
+          <td class="what">Cloud ALM REST API</td>
+          <td>全環境で参照・更新</td>
+          <td>開発・品証で参照・更新<br>本番は参照のみ</td>
+          <td>開発・品証で参照のみ</td>
+          <td class="act"><button type="button" class="detail" data-no="27">詳細</button></td>
+        </tr>
+        <tr data-id="sap_call_btp_cli">
+          <td class="num">28</td>
+          <td><code>sap_call_btp_cli</code></td>
+          <td class="what">btp CLI 実行（SAP BTP CLI v2.106.1）</td>
+          <td>全環境で実行</td>
+          <td>利用不可</td>
+          <td>利用不可</td>
+          <td class="act"><button type="button" class="detail" data-no="28">詳細</button></td>
+        </tr>
+        <tr data-id="sap_call_cf_cli">
+          <td class="num">29</td>
+          <td><code>sap_call_cf_cli</code></td>
+          <td class="what">cf CLI 実行（Cloud Foundry CLI v8.18.3）</td>
+          <td>全環境で実行</td>
+          <td>利用不可</td>
+          <td>利用不可</td>
+          <td class="act"><button type="button" class="detail" data-no="29">詳細</button></td>
+        </tr>
+        <tr data-id="sap_call_datasphere_cli">
+          <td class="num">30</td>
+          <td><code>sap_call_datasphere_cli</code></td>
+          <td class="what">datasphere CLI 実行（SAP Datasphere CLI v2026.13.0）</td>
+          <td>全環境で実行</td>
+          <td>利用不可</td>
+          <td>利用不可</td>
+          <td class="act"><button type="button" class="detail" data-no="30">詳細</button></td>
+        </tr>
+        <tr data-id="app_call_jira_api">
+          <td class="num">31</td>
+          <td><code>app_call_jira_api</code></td>
+          <td class="what">JIRA REST API（外部アプリ / Apps &amp; Services）</td>
+          <td>全環境で全操作（起票/遷移/コメント/照会）</td>
+          <td>開発・品証で全操作<br>本番は参照のみ</td>
+          <td>開発・品証で全操作可<br>本番は不可</td>
+          <td class="act"><button type="button" class="detail" data-no="31">詳細</button></td>
+        </tr>
+        <tr data-id="app_call_smartdb_api">
+          <td class="num">32</td>
+          <td><code>app_call_smartdb_api</code></td>
+          <td class="what">SmartDB REST API v3（外部アプリ / Apps &amp; Services）</td>
+          <td>全環境で全操作（文書 CRUD/プロセス実行）</td>
+          <td>開発・品証で全操作<br>本番は参照のみ</td>
+          <td>開発・品証で全操作可<br>本番は不可</td>
+          <td class="act"><button type="button" class="detail" data-no="32">詳細</button></td>
+        </tr>
+        <tr data-id="sap_call_ibp_api">
+          <td class="num">33</td>
+          <td><code>sap_call_ibp_api</code></td>
+          <td class="what">Integrated Business Planning(IBP)OData API</td>
+          <td>全環境で参照・更新</td>
+          <td>開発・品証で参照・更新<br>本番は参照のみ</td>
+          <td>開発・品証で参照・更新</td>
+          <td class="act"><button type="button" class="detail" data-no="33">詳細</button></td>
+        </tr>
+        <tr data-id="sap_call_s4_api">
+          <td class="num">34</td>
+          <td><code>sap_call_s4_api</code></td>
+          <td class="what">S/4HANA OData/REST API</td>
+          <td>全環境で参照・更新</td>
+          <td>開発・品証で参照・更新<br>本番は参照のみ</td>
+          <td>開発・品証で参照のみ</td>
+          <td class="act"><button type="button" class="detail" data-no="34">詳細</button></td>
+        </tr>
+        <tr data-id="sap_call_soap">
+          <td class="num">35</td>
+          <td><code>sap_call_soap</code></td>
+          <td class="what">S/4HANA SOAP API</td>
+          <td>全環境で参照・更新</td>
+          <td>開発・品証で参照・更新<br>本番は参照のみ</td>
+          <td>開発・品証で参照のみ</td>
+          <td class="act"><button type="button" class="detail" data-no="35">詳細</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <footer>接続先（Destination）は環境ごとに定義されるためここには載せない。利用できるものは <code>sap_list_destinations</code> で取得する。</footer>
+</main>
+
+<dialog id="d">
+  <div class="dh"><code id="d-id"></code><button type="button" id="d-x" aria-label="閉じる">&times;</button></div>
+  <div class="db">
+    <table><tbody>
+      <tr><th>機能</th><td id="d-sum"></td></tr>
+      <tr><th>認証</th><td id="d-auth"></td></tr>
+      <tr><th>呼出経路</th><td id="d-path"></td></tr>
+      <tr><th>フル</th><td id="d-full"></td></tr>
+      <tr><th>参照専用</th><td id="d-ro"></td></tr>
+      <tr><th>開発専用</th><td id="d-dev"></td></tr>
+      <tr><th>公式ドキュメント</th><td id="d-url"></td></tr>
+    </tbody></table>
+  </div>
+</dialog>
+
+<script>
+const TOOLS = [{"no":1,"id":"sap_list_destinations","summary":"接続(Destination)一覧","officialUrl":"https://help.sap.com/docs/connectivity","auth":"—（Destination Service 接続管理）","callPath":[{"purpose":"接続一覧を取得","path":"（Destination Service）"}],"roles":{"full":"全環境の一覧を参照","ro":"全環境の一覧を参照","dev":"開発・品証のみ参照"}},{"no":2,"id":"sap_use_destination","summary":"セッション既定の接続を切替","officialUrl":"https://help.sap.com/docs/connectivity","auth":"—（セッション状態）","callPath":[{"purpose":"既定 Destination を切替","path":"—"}],"roles":{"full":"全環境で利用可","ro":"全環境で利用可","dev":"全環境で利用可"}},{"no":3,"id":"sap_current_destination","summary":"現在の既定接続を表示","officialUrl":"https://help.sap.com/docs/connectivity","auth":"—（セッション状態）","callPath":[{"purpose":"現在の既定 Destination を表示","path":"—"}],"roles":{"full":"全環境で利用可","ro":"全環境で利用可","dev":"全環境で利用可"}},{"no":4,"id":"sap_call_fm","summary":"ABAP Function Module 呼出","officialUrl":"https://help.sap.com/docs/ABAP_PLATFORM_NEW","auth":"BasicAuthentication / PrincipalPropagation","callPath":[{"purpose":"Function Module 呼出","path":"backend relay /api/tableread/mcp/call-fm → FM(例 RFC_READ_TABLE)"}],"roles":{"full":"全環境で参照・更新","ro":"開発・品証で参照・更新\n本番は不可","dev":"開発・品証で参照・更新"}},{"no":5,"id":"sap_select_table","summary":"SAP テーブル動的 SELECT","officialUrl":"https://help.sap.com/docs/ABAP_PLATFORM_NEW","auth":"BasicAuthentication / PrincipalPropagation","callPath":[{"purpose":"テーブル動的 SELECT","path":"backend relay → RFC_READ_TABLE 相当"}],"roles":{"full":"全環境で参照","ro":"全環境で参照","dev":"開発・品証で参照"}},{"no":6,"id":"sap_adt_freestyle","summary":"ADT で自由形式 SQL 実行","officialUrl":"https://help.sap.com/docs/ABAP_PLATFORM_NEW","auth":"BasicAuthentication / PrincipalPropagation","callPath":[{"purpose":"自由形式 SQL","path":"/sap/bc/adt/datapreview/freestyle"}],"roles":{"full":"全環境で参照","ro":"全環境で参照","dev":"開発・品証で参照"}},{"no":7,"id":"sap_adt_osql","summary":"ADT で Open SQL 実行","officialUrl":"https://help.sap.com/docs/ABAP_PLATFORM_NEW","auth":"BasicAuthentication / PrincipalPropagation","callPath":[{"purpose":"Open SQL 実行","path":"/sap/bc/adt/datapreview/freestyle"}],"roles":{"full":"全環境で参照","ro":"全環境で参照","dev":"開発・品証で参照"}},{"no":8,"id":"sap_adt_ddic","summary":"DDIC オブジェクト(テーブル/CDS)を SELECT *","officialUrl":"https://help.sap.com/docs/ABAP_PLATFORM_NEW","auth":"BasicAuthentication / PrincipalPropagation","callPath":[{"purpose":"DDIC を SELECT *","path":"/sap/bc/adt/datapreview/ddic"}],"roles":{"full":"全環境で参照","ro":"全環境で参照","dev":"開発・品証で参照"}},{"no":9,"id":"sap_abap_read_source","summary":"ABAP ソース読取","officialUrl":"https://help.sap.com/docs/ABAP_PLATFORM_NEW","auth":"BasicAuthentication / PrincipalPropagation","callPath":[{"purpose":"ABAP ソース読取","path":"/sap/bc/adt/programs|functions/..."}],"roles":{"full":"全環境で参照","ro":"全環境で参照","dev":"開発・品証で参照"}},{"no":10,"id":"sap_abap_write_source","summary":"ABAP レポート/プログラム作成・更新＋活性化","officialUrl":"https://help.sap.com/docs/ABAP_PLATFORM_NEW","auth":"BasicAuthentication / PrincipalPropagation","callPath":[{"purpose":"ABAP プログラム作成/更新+活性化","path":"/sap/bc/adt/programs/programs/..."}],"roles":{"full":"開発環境で作成・更新","ro":"開発環境で作成・更新","dev":"開発環境で作成・更新"}},{"no":11,"id":"sap_abap_delete_source","summary":"ABAP プログラム/CDS DDL 削除","officialUrl":"https://help.sap.com/docs/ABAP_PLATFORM_NEW","auth":"BasicAuthentication / PrincipalPropagation","callPath":[{"purpose":"ABAP/CDS 削除","path":"/sap/bc/adt/programs|ddic/ddl/... (DELETE)"}],"roles":{"full":"開発環境で作成・更新","ro":"開発環境で作成・更新","dev":"開発環境で作成・更新"}},{"no":12,"id":"sap_abap_write_fm","summary":"ABAP Function Module(SE37)作成・更新＋活性化","officialUrl":"https://help.sap.com/docs/ABAP_PLATFORM_NEW","auth":"BasicAuthentication / PrincipalPropagation","callPath":[{"purpose":"Function Module 作成/更新+活性化","path":"/sap/bc/adt/functions/groups/{grp}/fmodules/..."}],"roles":{"full":"開発環境で作成・更新","ro":"開発環境で作成・更新","dev":"開発環境で作成・更新"}},{"no":13,"id":"sap_create_transport","summary":"移送リクエスト作成","officialUrl":"https://help.sap.com/docs/ABAP_PLATFORM_NEW","auth":"BasicAuthentication / PrincipalPropagation","callPath":[{"purpose":"移送リクエスト作成","path":"backend relay → FM TR_INSERT_REQUEST_WITH_TASKS"}],"roles":{"full":"開発環境で作成・更新","ro":"開発環境で作成・更新","dev":"開発環境で作成・更新"}},{"no":14,"id":"sap_release_transport","summary":"移送リクエスト解放","officialUrl":"https://help.sap.com/docs/ABAP_PLATFORM_NEW","auth":"BasicAuthentication / PrincipalPropagation","callPath":[{"purpose":"移送リクエスト解放","path":"backend relay → FM TR_RELEASE_REQUEST"}],"roles":{"full":"開発環境で作成・更新","ro":"開発環境で作成・更新","dev":"開発環境で作成・更新"}},{"no":15,"id":"sap_abap_activate","summary":"ABAP オブジェクト活性化＋構文チェック","officialUrl":"https://help.sap.com/docs/ABAP_PLATFORM_NEW","auth":"BasicAuthentication / PrincipalPropagation","callPath":[{"purpose":"ABAP オブジェクト活性化","path":"/sap/bc/adt/activation"}],"roles":{"full":"開発環境で作成・更新","ro":"開発環境で作成・更新","dev":"開発環境で作成・更新"}},{"no":16,"id":"sap_call_ias_admin","summary":"IAS(Cloud Identity)Admin API。個人情報を扱う","officialUrl":"https://api.sap.com/package/SCPIdentityServices","auth":"OAuth2ClientCredentials","callPath":[{"purpose":"ユーザ一覧/管理","path":"GET/POST/PUT /scim/Users"},{"purpose":"グループ管理","path":"GET/POST/PUT /scim/Groups"},{"purpose":"アプリケーション","path":"GET /Applications/v1"}],"roles":{"full":"全環境で参照・更新","ro":"利用不可","dev":"利用不可"}},{"no":17,"id":"sap_call_ips_job","summary":"IPS(Identity Provisioning)Jobs/JobLogs API。個人情報を扱う","officialUrl":"https://api.sap.com/package/SCPIdentityServices","auth":"OAuth2ClientCredentials（IAS Destination 再利用）","callPath":[{"purpose":"プロビジョニングジョブ","path":"GET /service/scim/Jobs"},{"purpose":"ジョブログ","path":"GET /service/scim/JobLogs"}],"roles":{"full":"全環境で参照・更新","ro":"利用不可","dev":"利用不可"}},{"no":18,"id":"sap_call_cf_api","summary":"Cloud Foundry API v3","officialUrl":"https://v3-apidocs.cloudfoundry.org/","auth":"OAuth2Password（+ cf client）","callPath":[{"purpose":"アプリ一覧/操作","path":"GET /v3/apps"},{"purpose":"Org/Space","path":"GET /v3/organizations, /v3/spaces"},{"purpose":"サービスインスタンス/キー","path":"GET /v3/service_instances, /v3/service_credential_bindings"}],"roles":{"full":"全環境で参照・更新","ro":"開発・品証で参照・更新\n本番は参照のみ","dev":"開発・品証で参照のみ"}},{"no":19,"id":"sap_call_bwz_content","summary":"Build Work Zone Standard Content API","officialUrl":"https://help.sap.com/docs/build-work-zone-standard-edition","auth":"OAuth2ClientCredentials","callPath":[{"purpose":"タイル/グループ/ロール","path":"GET/POST /api/v1/Tiles, /Groups, /Roles"},{"purpose":"ページ/コンテンツパッケージ","path":"GET /api/v1/Pages, /ContentPackages"}],"roles":{"full":"全環境で参照・更新","ro":"開発・品証で参照・更新\n本番は参照のみ","dev":"開発・品証で参照のみ"}},{"no":20,"id":"sap_call_ctms_api","summary":"Cloud Transport Management v2 API","officialUrl":"https://help.sap.com/docs/cloud-transport-management","auth":"OAuth2ClientCredentials","callPath":[{"purpose":"ノード一覧","path":"GET /v2/nodes"},{"purpose":"移送リクエスト一覧(nodeId+status+top/skip 必須)","path":"GET /v2/nodes/{nodeId}/transportRequests"},{"purpose":"インポート(body: transportRequests:[id])","path":"POST /v2/nodes/{nodeId}/transportRequests/import"}],"roles":{"full":"全環境で参照・更新","ro":"開発・品証で参照・更新\n本番は参照のみ","dev":"開発・品証で参照のみ"}},{"no":21,"id":"sap_call_forms_api","summary":"Forms Service by Adobe REST API","officialUrl":"https://api.sap.com/package/SAPFormsServicebyAdobe","auth":"OAuth2ClientCredentials","callPath":[{"purpose":"API 仕様(OpenAPI 3.1)","path":"GET /v3/api-docs"},{"purpose":"帳票一覧","path":"GET /v1/forms"},{"purpose":"帳票生成","path":"POST /v3/forms/{id}/data"}],"roles":{"full":"全環境で参照・更新","ro":"開発・品証で参照・更新\n本番は参照のみ","dev":"開発・品証で参照のみ"}},{"no":22,"id":"sap_call_cis_api","summary":"Cloud Information Service(CIS Central)","officialUrl":"https://help.sap.com/docs/btp","auth":"OAuth2ClientCredentials（GA Viewer/Admin ロール）","callPath":[{"purpose":"グローバルアカウント","path":"GET /accounts/v1/globalAccount"},{"purpose":"サブアカウント一覧","path":"GET /accounts/v1/subaccounts"},{"purpose":"エンタイトルメント","path":"GET /entitlements/v1/assignedQuotas"}],"roles":{"full":"全環境で参照・更新","ro":"開発・品証で参照・更新\n本番は参照のみ","dev":"開発・品証で参照のみ"}},{"no":23,"id":"sap_call_cpi_api","summary":"Integration Suite(CPI)Audit/Monitoring API","officialUrl":"https://help.sap.com/docs/cloud-integration","auth":"OAuth2ClientCredentials","callPath":[{"purpose":"メッセージ処理ログ","path":"GET /api/v1/MessageProcessingLogs"},{"purpose":"統合パッケージ","path":"GET /api/v1/IntegrationPackages"},{"purpose":"ランタイム成果物","path":"GET /api/v1/IntegrationRuntimeArtifacts"}],"roles":{"full":"全環境で参照・更新","ro":"開発・品証で参照・更新\n本番は参照のみ","dev":"開発・品証で参照のみ"}},{"no":24,"id":"sap_call_ans_api","summary":"Alert Notification Service REST API","officialUrl":"https://api.sap.com/package/AlertNotification","auth":"OAuth2ClientCredentials","callPath":[{"purpose":"条件/アクション/購読(CRUD)","path":"GET/POST/PUT/DELETE /cf/configuration/v1/condition|action|subscription"},{"purpose":"配信イベント参照","path":"GET /cf/consumer/v1/matched-events|undelivered-events"},{"purpose":"イベント送信","path":"POST /cf/producer/v1/resource-events"}],"roles":{"full":"全環境で参照・更新","ro":"開発・品証で参照・更新\n本番は参照のみ","dev":"開発・品証で参照のみ"}},{"no":25,"id":"sap_call_sbpa_api","summary":"Build Process Automation REST API","officialUrl":"https://help.sap.com/docs/build-process-automation","auth":"OAuth2ClientCredentials","callPath":[{"purpose":"ワークフロー定義","path":"GET /workflow/rest/v1/workflow-definitions"},{"purpose":"タスク定義","path":"GET /workflow/rest/v1/task-definitions"},{"purpose":"インスタンス操作","path":"GET/POST /workflow/rest/v1/workflow-instances|task-instances"}],"roles":{"full":"全環境で参照・更新","ro":"開発・品証で参照・更新\n本番は参照のみ","dev":"開発・品証で参照のみ"}},{"no":26,"id":"sap_call_datasphere_api","summary":"Datasphere 公開 REST/OData API","officialUrl":"https://api.sap.com/package/sapdatasphere","auth":"OAuth2ClientCredentials（Technical User）","callPath":[{"purpose":"カタログ(OData v4)","path":"GET /api/v1/dwc/catalog/spaces|assets"},{"purpose":"接続/証明書","path":"GET /api/v1/datasphere/spaces/{space}/connections"},{"purpose":"SCIM 2.0","path":"GET /api/v1/scim2/Users|Groups"},{"purpose":"タスクチェーン実行/監視","path":"POST /api/v1/datasphere/tasks/chains/{space}/run/{objectid}"}],"roles":{"full":"全環境で参照・更新","ro":"開発・品証で参照・更新\n本番は参照のみ","dev":"開発・品証で参照のみ"}},{"no":27,"id":"sap_call_calm_api","summary":"Cloud ALM REST API","officialUrl":"https://api.sap.com/package/SAPCloudALM","auth":"OAuth2ClientCredentials","callPath":[{"purpose":"プロジェクト一覧","path":"GET /api/calm-projects/v1/projects"},{"purpose":"タスク一覧(projectId 必須)","path":"GET /api/calm-tasks/v1/tasks?projectId={uuid}"},{"purpose":"ステータスイベント(アラート)取得","path":"GET /api/bsm-service/v1/events （scope calm-api.bsm.read）"},{"purpose":"イベント状況をクローズ(acknowledge)","path":"PUT /api/calm-event-situations/v1/event-situations/{id} （scope calm-api.event-situations.write）"},{"purpose":"ITSM: サポートケースID一覧","path":"GET /api/calm-itsmapi/v1/supportcases/cases/ids?reporter=&customerNumber= （scope calm-api.itsm.read）"},{"purpose":"ITSM: ケース作成","path":"POST /api/calm-itsmapi/v1/supportcases/cases （scope calm-api.itsm.write）"}],"roles":{"full":"全環境で参照・更新","ro":"開発・品証で参照・更新\n本番は参照のみ","dev":"開発・品証で参照のみ"}},{"no":28,"id":"sap_call_btp_cli","summary":"btp CLI 実行（SAP BTP CLI v2.106.1）","officialUrl":"https://help.sap.com/docs/btp/btp-cli-command-reference/btp-cli-command-reference","auth":"BasicAuthentication","callPath":[{"purpose":"btp CLI 実行","path":"args: [\"list\",\"accounts/subaccount\"] 等"}],"roles":{"full":"全環境で実行","ro":"利用不可","dev":"利用不可"}},{"no":29,"id":"sap_call_cf_cli","summary":"cf CLI 実行（Cloud Foundry CLI v8.18.3）","officialUrl":"https://cli.cloudfoundry.org/en-US/v8/","auth":"OAuth2Password（+ cf client）","callPath":[{"purpose":"cf CLI 実行","path":"args: [\"apps\"] 等"}],"roles":{"full":"全環境で実行","ro":"利用不可","dev":"利用不可"}},{"no":30,"id":"sap_call_datasphere_cli","summary":"datasphere CLI 実行（SAP Datasphere CLI v2026.13.0）","officialUrl":"https://help.sap.com/docs/SAP_DATASPHERE/d0ecd6f297ac40249072a44df0549c1a/12d2b51987034daf822511ed1a229a6c.html","auth":"OAuth2ClientCredentials（Datasphere CLI）","callPath":[{"purpose":"datasphere CLI 実行","path":"args: [\"spaces\",\"read\"] 等"}],"roles":{"full":"全環境で実行","ro":"利用不可","dev":"利用不可"}},{"no":31,"id":"app_call_jira_api","summary":"JIRA REST API（外部アプリ / Apps & Services）","officialUrl":"https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/#","auth":"ClientCertificateAuthentication(mTLS)+bearer（Destination 側で解決）","callPath":[{"purpose":"課題 参照/更新","path":"GET/PUT /rest/api/2/issue/{key} , POST /rest/api/2/issue"},{"purpose":"状態遷移","path":"GET/POST /rest/api/2/issue/{key}/transitions"},{"purpose":"コメント","path":"POST /rest/api/2/issue/{key}/comment"},{"purpose":"Service Desk 起票/照会","path":"POST/GET /rest/servicedeskapi/request"},{"purpose":"検索(JQL)","path":"GET /rest/api/2/search?jql=..."}],"roles":{"full":"全環境で全操作（起票/遷移/コメント/照会）","ro":"開発・品証で全操作\n本番は参照のみ","dev":"開発・品証で全操作可\n本番は不可"}},{"no":32,"id":"app_call_smartdb_api","summary":"SmartDB REST API v3（外部アプリ / Apps & Services）","officialUrl":"https://doc.support-dreamarts.com/SmartDB/Document/RestDocDocumentV3/index.html","auth":"NoAuthentication + 静的 bearer（バインダトークン・Destination の URL.headers.Authorization で解決）","callPath":[{"purpose":"バインダ詳細/ビュー一覧","path":"GET /binders/{binder} , GET /binders/{binder}/views"},{"purpose":"文書一覧（ビュー指定）","path":"GET /binders/{binder}/views/{view}/documents"},{"purpose":"文書 参照/登録/更新/削除","path":"GET/PUT/DELETE /binders/{binder}/documents/{document} , POST /binders/{binder}/documents"},{"purpose":"業務プロセス/アクティビティ","path":"POST /processes/start , GET /activities/worklist , PUT /activities/{activity}"},{"purpose":"CSV 入出力","path":"GET /binders/{binder}/views/{view}/documents/csv , POST/PUT /binders/{binder}/documents/csv"}],"roles":{"full":"全環境で全操作（文書 CRUD/プロセス実行）","ro":"開発・品証で全操作\n本番は参照のみ","dev":"開発・品証で全操作可\n本番は不可"}},{"no":33,"id":"sap_call_ibp_api","summary":"Integrated Business Planning(IBP)OData API","officialUrl":"https://help.sap.com/docs/SAP_INTEGRATED_BUSINESS_PLANNING","auth":"BasicAuthentication（Communication User・Destination 側で解決）","callPath":[{"purpose":"マスタデータ参照/登録","path":"GET/POST /sap/opu/odata/IBP/MASTER_DATA_API_SRV/..."},{"purpose":"計画データ参照/登録","path":"GET/POST /sap/opu/odata/IBP/PLANNING_DATA_API_SRV/..."},{"purpose":"在庫/バッチ(OData v4)","path":"GET /sap/opu/odata4/ibp/api_stock/srvd_a2x/ibp/api_stock/0001/..."},{"purpose":"分析データ抽出","path":"GET /sap/opu/odata/IBP/EXTRACT_ODATA_SRV/..."}],"roles":{"full":"全環境で参照・更新","ro":"開発・品証で参照・更新\n本番は参照のみ","dev":"開発・品証で参照・更新"}},{"no":34,"id":"sap_call_s4_api","summary":"S/4HANA OData/REST API","officialUrl":"https://api.sap.com/products/SAPS4HANACloudPrivateEdition/apis/all","auth":"—（Destination 側で解決。ABAP 系 Destination を使用）","callPath":[{"purpose":"OData V2 参照/更新","path":"GET/POST /sap/opu/odata/sap/\u003cSERVICE>/..."},{"purpose":"OData V4 参照/更新","path":"GET/POST /sap/opu/odata4/sap/\u003csrv>/srvd_a2x/sap/\u003csrv>/0001/..."},{"purpose":"スキーマ取得","path":"GET /sap/opu/odata/sap/\u003cSERVICE>/$metadata"},{"purpose":"公開サービス一覧","path":"GET /sap/opu/odata/IWFND/CATALOGSERVICE;v=2/ServiceCollection"}],"roles":{"full":"全環境で参照・更新","ro":"開発・品証で参照・更新\n本番は参照のみ","dev":"開発・品証で参照のみ"}},{"no":35,"id":"sap_call_soap","summary":"S/4HANA SOAP API","officialUrl":"https://api.sap.com/products/SAPS4HANACloudPrivateEdition/apis/all","auth":"—（Destination 側で解決。ABAP 系 Destination を使用）","callPath":[{"purpose":"SOAP サービス呼出","path":"POST /sap/bc/srt/rfc/sap/\u003cservice>/\u003cclient>/\u003cservice>/\u003cbinding>"},{"purpose":"WSDL 取得","path":"GET \u003cendpoint>?wsdl（sap_call_s4_api で取得）"}],"roles":{"full":"全環境で参照・更新","ro":"開発・品証で参照・更新\n本番は参照のみ","dev":"開発・品証で参照のみ"}}];
+const d = document.getElementById('d');
+const set = (id, text) => { document.getElementById(id).textContent = text; };
+document.querySelectorAll('button.detail').forEach((b) => {
+  b.addEventListener('click', () => {
+    const t = TOOLS.find((x) => String(x.no) === b.dataset.no);
+    if (!t) return;
+    set('d-id', t.id); set('d-sum', t.summary); set('d-auth', t.auth);
+    set('d-full', t.roles.full); set('d-ro', t.roles.ro); set('d-dev', t.roles.dev);
+    const path = document.getElementById('d-path');
+    path.textContent = '';
+    if (t.callPath.length) {
+      const ul = document.createElement('ul');
+      for (const c of t.callPath) {
+        const li = document.createElement('li');
+        const s = document.createElement('span');
+        s.textContent = c.purpose + ' — ';
+        const code = document.createElement('code');
+        code.textContent = c.path;
+        li.append(s, code);
+        ul.append(li);
+      }
+      path.append(ul);
+    } else {
+      path.textContent = '—';
+    }
+    const url = document.getElementById('d-url');
+    url.textContent = '';
+    if (t.officialUrl) {
+      const a = document.createElement('a');
+      a.href = t.officialUrl; a.textContent = t.officialUrl; a.rel = 'noreferrer';
+      url.append(a);
+    } else {
+      url.textContent = '—';
+    }
+    d.showModal();
+  });
+});
+document.getElementById('d-x').addEventListener('click', () => d.close());
+d.addEventListener('click', (e) => { if (e.target === d) d.close(); });
+</script>
+</body>
+</html>
