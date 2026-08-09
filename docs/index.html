@@ -49,7 +49,14 @@ tbody tr:hover td { background: var(--accent-soft); }
 td.num { color: var(--muted); text-align: right; width: 3ch; }
 td.what { min-width: 18ch; }
 td.sys { white-space: nowrap; }
-td.mk { text-align: center; font-size: 1.05rem; white-space: nowrap; cursor: help; }
+td.mk { text-align: center; font-size: 1.15rem; line-height: 1.35; white-space: nowrap; cursor: help; }
+#tip {
+  position: fixed; z-index: 50; pointer-events: none; opacity: 0; transition: opacity .12s;
+  max-width: 24rem; padding: .6rem .85rem; border-radius: 8px;
+  background: var(--head); color: var(--head-fg); box-shadow: var(--shadow);
+  font-size: 1rem; line-height: 1.5;
+}
+#tip.on { opacity: 1; }
 td.act { width: 1%; white-space: nowrap; }
 code { font-size: .9em; }
 button.detail {
@@ -104,9 +111,9 @@ a { color: var(--accent); }
           <td><code>sap_list_destinations</code></td>
           <td class="what">List the destinations you can reach</td>
           <td class="sys">Common</td>
-          <td class="mk" title="List all">○</td>
-          <td class="mk" title="List all">○</td>
-          <td class="mk" title="DEV/QAS only">△</td>
+          <td class="mk" data-tip="List all" aria-label="List all">◕</td>
+          <td class="mk" data-tip="List all" aria-label="List all">◕</td>
+          <td class="mk" data-tip="DEV/QAS only" aria-label="DEV/QAS only">◔</td>
           <td class="act"><button type="button" class="detail" data-no="1">Details</button></td>
         </tr>
         <tr data-id="sap_use_destination">
@@ -114,9 +121,9 @@ a { color: var(--accent); }
           <td><code>sap_use_destination</code></td>
           <td class="what">Switch the session default destination</td>
           <td class="sys">Common</td>
-          <td class="mk" title="All envs: available">◎</td>
-          <td class="mk" title="All envs: available">◎</td>
-          <td class="mk" title="All envs: available">◎</td>
+          <td class="mk" data-tip="All envs: available" aria-label="All envs: available">●</td>
+          <td class="mk" data-tip="All envs: available" aria-label="All envs: available">●</td>
+          <td class="mk" data-tip="All envs: available" aria-label="All envs: available">●</td>
           <td class="act"><button type="button" class="detail" data-no="2">Details</button></td>
         </tr>
         <tr data-id="sap_current_destination">
@@ -124,9 +131,9 @@ a { color: var(--accent); }
           <td><code>sap_current_destination</code></td>
           <td class="what">Show the current default destination</td>
           <td class="sys">Common</td>
-          <td class="mk" title="All envs: available">◎</td>
-          <td class="mk" title="All envs: available">◎</td>
-          <td class="mk" title="All envs: available">◎</td>
+          <td class="mk" data-tip="All envs: available" aria-label="All envs: available">●</td>
+          <td class="mk" data-tip="All envs: available" aria-label="All envs: available">●</td>
+          <td class="mk" data-tip="All envs: available" aria-label="All envs: available">●</td>
           <td class="act"><button type="button" class="detail" data-no="3">Details</button></td>
         </tr>
         <tr data-id="sap_call_fm">
@@ -134,9 +141,9 @@ a { color: var(--accent); }
           <td><code>sap_call_fm</code></td>
           <td class="what">Call a Function Module / BAPI over RFC</td>
           <td class="sys">ABAP system</td>
-          <td class="mk" title="All envs: read &amp; update">◎</td>
-          <td class="mk" title="DEV/QAS: read &amp; update / PRD blocked">△</td>
-          <td class="mk" title="DEV/QAS: read &amp; update">△</td>
+          <td class="mk" data-tip="All envs: read &amp; update" aria-label="All envs: read &amp; update">●</td>
+          <td class="mk" data-tip="DEV/QAS: read &amp; update / PRD blocked" aria-label="DEV/QAS: read &amp; update / PRD blocked">◔</td>
+          <td class="mk" data-tip="DEV/QAS: read &amp; update" aria-label="DEV/QAS: read &amp; update">◔</td>
           <td class="act"><button type="button" class="detail" data-no="4">Details</button></td>
         </tr>
         <tr data-id="sap_select_table">
@@ -144,9 +151,9 @@ a { color: var(--accent); }
           <td><code>sap_select_table</code></td>
           <td class="what">Read a table through an RFC_READ_TABLE equivalent</td>
           <td class="sys">ABAP system</td>
-          <td class="mk" title="All envs: read">○</td>
-          <td class="mk" title="All envs: read">○</td>
-          <td class="mk" title="DEV/QAS: read">△</td>
+          <td class="mk" data-tip="All envs: read" aria-label="All envs: read">◕</td>
+          <td class="mk" data-tip="All envs: read" aria-label="All envs: read">◕</td>
+          <td class="mk" data-tip="DEV/QAS: read" aria-label="DEV/QAS: read">◔</td>
           <td class="act"><button type="button" class="detail" data-no="5">Details</button></td>
         </tr>
         <tr data-id="sap_adt_freestyle">
@@ -154,9 +161,9 @@ a { color: var(--accent); }
           <td><code>sap_adt_freestyle</code></td>
           <td class="what">Run free-form SQL through the ADT data preview</td>
           <td class="sys">ABAP system</td>
-          <td class="mk" title="All envs: read">○</td>
-          <td class="mk" title="All envs: read">○</td>
-          <td class="mk" title="DEV/QAS: read">△</td>
+          <td class="mk" data-tip="All envs: read" aria-label="All envs: read">◕</td>
+          <td class="mk" data-tip="All envs: read" aria-label="All envs: read">◕</td>
+          <td class="mk" data-tip="DEV/QAS: read" aria-label="DEV/QAS: read">◔</td>
           <td class="act"><button type="button" class="detail" data-no="6">Details</button></td>
         </tr>
         <tr data-id="sap_adt_osql">
@@ -164,9 +171,9 @@ a { color: var(--accent); }
           <td><code>sap_adt_osql</code></td>
           <td class="what">Run Open SQL through ADT</td>
           <td class="sys">ABAP system</td>
-          <td class="mk" title="All envs: read">○</td>
-          <td class="mk" title="All envs: read">○</td>
-          <td class="mk" title="DEV/QAS: read">△</td>
+          <td class="mk" data-tip="All envs: read" aria-label="All envs: read">◕</td>
+          <td class="mk" data-tip="All envs: read" aria-label="All envs: read">◕</td>
+          <td class="mk" data-tip="DEV/QAS: read" aria-label="DEV/QAS: read">◔</td>
           <td class="act"><button type="button" class="detail" data-no="7">Details</button></td>
         </tr>
         <tr data-id="sap_adt_ddic">
@@ -174,9 +181,9 @@ a { color: var(--accent); }
           <td><code>sap_adt_ddic</code></td>
           <td class="what">SELECT * a DDIC object (table or CDS) through ADT</td>
           <td class="sys">ABAP system</td>
-          <td class="mk" title="All envs: read">○</td>
-          <td class="mk" title="All envs: read">○</td>
-          <td class="mk" title="DEV/QAS: read">△</td>
+          <td class="mk" data-tip="All envs: read" aria-label="All envs: read">◕</td>
+          <td class="mk" data-tip="All envs: read" aria-label="All envs: read">◕</td>
+          <td class="mk" data-tip="DEV/QAS: read" aria-label="DEV/QAS: read">◔</td>
           <td class="act"><button type="button" class="detail" data-no="8">Details</button></td>
         </tr>
         <tr data-id="sap_abap_read_source">
@@ -184,9 +191,9 @@ a { color: var(--accent); }
           <td><code>sap_abap_read_source</code></td>
           <td class="what">Read program or function module source through ADT</td>
           <td class="sys">ABAP system</td>
-          <td class="mk" title="All envs: read">○</td>
-          <td class="mk" title="All envs: read">○</td>
-          <td class="mk" title="DEV/QAS: read">△</td>
+          <td class="mk" data-tip="All envs: read" aria-label="All envs: read">◕</td>
+          <td class="mk" data-tip="All envs: read" aria-label="All envs: read">◕</td>
+          <td class="mk" data-tip="DEV/QAS: read" aria-label="DEV/QAS: read">◔</td>
           <td class="act"><button type="button" class="detail" data-no="9">Details</button></td>
         </tr>
         <tr data-id="sap_abap_write_source">
@@ -194,9 +201,9 @@ a { color: var(--accent); }
           <td><code>sap_abap_write_source</code></td>
           <td class="what">Create or update a report/program through ADT and activate it</td>
           <td class="sys">ABAP system</td>
-          <td class="mk" title="DEV only: create &amp; update">△</td>
-          <td class="mk" title="DEV only: create &amp; update">△</td>
-          <td class="mk" title="DEV only: create &amp; update">△</td>
+          <td class="mk" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update">◔</td>
+          <td class="mk" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update">◔</td>
+          <td class="mk" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update">◔</td>
           <td class="act"><button type="button" class="detail" data-no="10">Details</button></td>
         </tr>
         <tr data-id="sap_abap_delete_source">
@@ -204,9 +211,9 @@ a { color: var(--accent); }
           <td><code>sap_abap_delete_source</code></td>
           <td class="what">Delete a program or CDS DDL through ADT</td>
           <td class="sys">ABAP system</td>
-          <td class="mk" title="DEV only: create &amp; update">△</td>
-          <td class="mk" title="DEV only: create &amp; update">△</td>
-          <td class="mk" title="DEV only: create &amp; update">△</td>
+          <td class="mk" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update">◔</td>
+          <td class="mk" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update">◔</td>
+          <td class="mk" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update">◔</td>
           <td class="act"><button type="button" class="detail" data-no="11">Details</button></td>
         </tr>
         <tr data-id="sap_abap_write_fm">
@@ -214,9 +221,9 @@ a { color: var(--accent); }
           <td><code>sap_abap_write_fm</code></td>
           <td class="what">Create or update a function module through ADT and activate it</td>
           <td class="sys">ABAP system</td>
-          <td class="mk" title="DEV only: create &amp; update">△</td>
-          <td class="mk" title="DEV only: create &amp; update">△</td>
-          <td class="mk" title="DEV only: create &amp; update">△</td>
+          <td class="mk" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update">◔</td>
+          <td class="mk" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update">◔</td>
+          <td class="mk" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update">◔</td>
           <td class="act"><button type="button" class="detail" data-no="12">Details</button></td>
         </tr>
         <tr data-id="sap_create_transport">
@@ -224,9 +231,9 @@ a { color: var(--accent); }
           <td><code>sap_create_transport</code></td>
           <td class="what">Create a transport request by calling a function module</td>
           <td class="sys">ABAP system</td>
-          <td class="mk" title="DEV only: create &amp; update">△</td>
-          <td class="mk" title="DEV only: create &amp; update">△</td>
-          <td class="mk" title="DEV only: create &amp; update">△</td>
+          <td class="mk" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update">◔</td>
+          <td class="mk" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update">◔</td>
+          <td class="mk" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update">◔</td>
           <td class="act"><button type="button" class="detail" data-no="13">Details</button></td>
         </tr>
         <tr data-id="sap_release_transport">
@@ -234,9 +241,9 @@ a { color: var(--accent); }
           <td><code>sap_release_transport</code></td>
           <td class="what">Release a transport request by calling a function module</td>
           <td class="sys">ABAP system</td>
-          <td class="mk" title="DEV only: create &amp; update">△</td>
-          <td class="mk" title="DEV only: create &amp; update">△</td>
-          <td class="mk" title="DEV only: create &amp; update">△</td>
+          <td class="mk" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update">◔</td>
+          <td class="mk" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update">◔</td>
+          <td class="mk" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update">◔</td>
           <td class="act"><button type="button" class="detail" data-no="14">Details</button></td>
         </tr>
         <tr data-id="sap_abap_activate">
@@ -244,9 +251,9 @@ a { color: var(--accent); }
           <td><code>sap_abap_activate</code></td>
           <td class="what">Activate an object through ADT and return the syntax check result</td>
           <td class="sys">ABAP system</td>
-          <td class="mk" title="DEV only: create &amp; update">△</td>
-          <td class="mk" title="DEV only: create &amp; update">△</td>
-          <td class="mk" title="DEV only: create &amp; update">△</td>
+          <td class="mk" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update">◔</td>
+          <td class="mk" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update">◔</td>
+          <td class="mk" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update">◔</td>
           <td class="act"><button type="button" class="detail" data-no="15">Details</button></td>
         </tr>
         <tr data-id="sap_call_ias_admin">
@@ -254,9 +261,9 @@ a { color: var(--accent); }
           <td><code>sap_call_ias_admin</code></td>
           <td class="what">Manage users, groups and applications through the Admin API (SCIM) — handles personal data</td>
           <td class="sys">Cloud Identity Services (IAS)</td>
-          <td class="mk" title="All envs: read &amp; update">◎</td>
-          <td class="mk" title="Not available">✕</td>
-          <td class="mk" title="Not available">✕</td>
+          <td class="mk" data-tip="All envs: read &amp; update" aria-label="All envs: read &amp; update">●</td>
+          <td class="mk" data-tip="Not available" aria-label="Not available">○</td>
+          <td class="mk" data-tip="Not available" aria-label="Not available">○</td>
           <td class="act"><button type="button" class="detail" data-no="16">Details</button></td>
         </tr>
         <tr data-id="sap_call_ips_job">
@@ -264,9 +271,9 @@ a { color: var(--accent); }
           <td><code>sap_call_ips_job</code></td>
           <td class="what">Inspect and run provisioning jobs through the Jobs / JobLogs API — handles personal data</td>
           <td class="sys">Cloud Identity Services (IPS)</td>
-          <td class="mk" title="All envs: read &amp; update">◎</td>
-          <td class="mk" title="Not available">✕</td>
-          <td class="mk" title="Not available">✕</td>
+          <td class="mk" data-tip="All envs: read &amp; update" aria-label="All envs: read &amp; update">●</td>
+          <td class="mk" data-tip="Not available" aria-label="Not available">○</td>
+          <td class="mk" data-tip="Not available" aria-label="Not available">○</td>
           <td class="act"><button type="button" class="detail" data-no="17">Details</button></td>
         </tr>
         <tr data-id="sap_call_cf_api">
@@ -274,9 +281,9 @@ a { color: var(--accent); }
           <td><code>sap_call_cf_api</code></td>
           <td class="what">Inspect and manage apps, orgs/spaces and services through the v3 API</td>
           <td class="sys">Cloud Foundry</td>
-          <td class="mk" title="All envs: read &amp; update">◎</td>
-          <td class="mk" title="DEV/QAS: read &amp; update / PRD read-only">△</td>
-          <td class="mk" title="DEV/QAS: read only">△</td>
+          <td class="mk" data-tip="All envs: read &amp; update" aria-label="All envs: read &amp; update">●</td>
+          <td class="mk" data-tip="DEV/QAS: read &amp; update / PRD read-only" aria-label="DEV/QAS: read &amp; update / PRD read-only">◔</td>
+          <td class="mk" data-tip="DEV/QAS: read only" aria-label="DEV/QAS: read only">◔</td>
           <td class="act"><button type="button" class="detail" data-no="18">Details</button></td>
         </tr>
         <tr data-id="sap_call_bwz_content">
@@ -284,9 +291,9 @@ a { color: var(--accent); }
           <td><code>sap_call_bwz_content</code></td>
           <td class="what">Read CDM site information and export business content as a zip</td>
           <td class="sys">Build Work Zone</td>
-          <td class="mk" title="All envs: read &amp; update">◎</td>
-          <td class="mk" title="DEV/QAS: read &amp; update / PRD read-only">△</td>
-          <td class="mk" title="DEV/QAS: read only">△</td>
+          <td class="mk" data-tip="All envs: read &amp; update" aria-label="All envs: read &amp; update">●</td>
+          <td class="mk" data-tip="DEV/QAS: read &amp; update / PRD read-only" aria-label="DEV/QAS: read &amp; update / PRD read-only">◔</td>
+          <td class="mk" data-tip="DEV/QAS: read only" aria-label="DEV/QAS: read only">◔</td>
           <td class="act"><button type="button" class="detail" data-no="19">Details</button></td>
         </tr>
         <tr data-id="sap_call_ctms_api">
@@ -294,9 +301,9 @@ a { color: var(--accent); }
           <td><code>sap_call_ctms_api</code></td>
           <td class="what">Manage transport nodes, queues and imports through the v2 API</td>
           <td class="sys">Cloud Transport Management</td>
-          <td class="mk" title="All envs: read &amp; update">◎</td>
-          <td class="mk" title="DEV/QAS: read &amp; update / PRD read-only">△</td>
-          <td class="mk" title="DEV/QAS: read only">△</td>
+          <td class="mk" data-tip="All envs: read &amp; update" aria-label="All envs: read &amp; update">●</td>
+          <td class="mk" data-tip="DEV/QAS: read &amp; update / PRD read-only" aria-label="DEV/QAS: read &amp; update / PRD read-only">◔</td>
+          <td class="mk" data-tip="DEV/QAS: read only" aria-label="DEV/QAS: read only">◔</td>
           <td class="act"><button type="button" class="detail" data-no="20">Details</button></td>
         </tr>
         <tr data-id="sap_call_forms_api">
@@ -304,9 +311,9 @@ a { color: var(--accent); }
           <td><code>sap_call_forms_api</code></td>
           <td class="what">List and generate forms through the REST API</td>
           <td class="sys">Forms Service by Adobe</td>
-          <td class="mk" title="All envs: read &amp; update">◎</td>
-          <td class="mk" title="DEV/QAS: read &amp; update / PRD read-only">△</td>
-          <td class="mk" title="DEV/QAS: read only">△</td>
+          <td class="mk" data-tip="All envs: read &amp; update" aria-label="All envs: read &amp; update">●</td>
+          <td class="mk" data-tip="DEV/QAS: read &amp; update / PRD read-only" aria-label="DEV/QAS: read &amp; update / PRD read-only">◔</td>
+          <td class="mk" data-tip="DEV/QAS: read only" aria-label="DEV/QAS: read only">◔</td>
           <td class="act"><button type="button" class="detail" data-no="21">Details</button></td>
         </tr>
         <tr data-id="sap_call_cis_api">
@@ -314,9 +321,9 @@ a { color: var(--accent); }
           <td><code>sap_call_cis_api</code></td>
           <td class="what">Inspect accounts, subaccounts and entitlements through the CIS Central API</td>
           <td class="sys">BTP account</td>
-          <td class="mk" title="All envs: read &amp; update">◎</td>
-          <td class="mk" title="DEV/QAS: read &amp; update / PRD read-only">△</td>
-          <td class="mk" title="DEV/QAS: read only">△</td>
+          <td class="mk" data-tip="All envs: read &amp; update" aria-label="All envs: read &amp; update">●</td>
+          <td class="mk" data-tip="DEV/QAS: read &amp; update / PRD read-only" aria-label="DEV/QAS: read &amp; update / PRD read-only">◔</td>
+          <td class="mk" data-tip="DEV/QAS: read only" aria-label="DEV/QAS: read only">◔</td>
           <td class="act"><button type="button" class="detail" data-no="22">Details</button></td>
         </tr>
         <tr data-id="sap_call_cpi_api">
@@ -324,9 +331,9 @@ a { color: var(--accent); }
           <td><code>sap_call_cpi_api</code></td>
           <td class="what">Inspect message processing logs and integration artifacts through the audit/monitoring API</td>
           <td class="sys">Integration Suite</td>
-          <td class="mk" title="All envs: read &amp; update">◎</td>
-          <td class="mk" title="DEV/QAS: read &amp; update / PRD read-only">△</td>
-          <td class="mk" title="DEV/QAS: read only">△</td>
+          <td class="mk" data-tip="All envs: read &amp; update" aria-label="All envs: read &amp; update">●</td>
+          <td class="mk" data-tip="DEV/QAS: read &amp; update / PRD read-only" aria-label="DEV/QAS: read &amp; update / PRD read-only">◔</td>
+          <td class="mk" data-tip="DEV/QAS: read only" aria-label="DEV/QAS: read only">◔</td>
           <td class="act"><button type="button" class="detail" data-no="23">Details</button></td>
         </tr>
         <tr data-id="sap_call_ans_api">
@@ -334,9 +341,9 @@ a { color: var(--accent); }
           <td><code>sap_call_ans_api</code></td>
           <td class="what">Manage conditions, actions, subscriptions and events through the REST API</td>
           <td class="sys">Alert Notification Service</td>
-          <td class="mk" title="All envs: read &amp; update">◎</td>
-          <td class="mk" title="DEV/QAS: read &amp; update / PRD read-only">△</td>
-          <td class="mk" title="DEV/QAS: read only">△</td>
+          <td class="mk" data-tip="All envs: read &amp; update" aria-label="All envs: read &amp; update">●</td>
+          <td class="mk" data-tip="DEV/QAS: read &amp; update / PRD read-only" aria-label="DEV/QAS: read &amp; update / PRD read-only">◔</td>
+          <td class="mk" data-tip="DEV/QAS: read only" aria-label="DEV/QAS: read only">◔</td>
           <td class="act"><button type="button" class="detail" data-no="24">Details</button></td>
         </tr>
         <tr data-id="sap_call_sbpa_api">
@@ -344,9 +351,9 @@ a { color: var(--accent); }
           <td><code>sap_call_sbpa_api</code></td>
           <td class="what">Inspect and drive workflow definitions and instances through the REST API</td>
           <td class="sys">Build Process Automation</td>
-          <td class="mk" title="All envs: read &amp; update">◎</td>
-          <td class="mk" title="DEV/QAS: read &amp; update / PRD read-only">△</td>
-          <td class="mk" title="DEV/QAS: read only">△</td>
+          <td class="mk" data-tip="All envs: read &amp; update" aria-label="All envs: read &amp; update">●</td>
+          <td class="mk" data-tip="DEV/QAS: read &amp; update / PRD read-only" aria-label="DEV/QAS: read &amp; update / PRD read-only">◔</td>
+          <td class="mk" data-tip="DEV/QAS: read only" aria-label="DEV/QAS: read only">◔</td>
           <td class="act"><button type="button" class="detail" data-no="25">Details</button></td>
         </tr>
         <tr data-id="sap_call_datasphere_api">
@@ -354,9 +361,9 @@ a { color: var(--accent); }
           <td><code>sap_call_datasphere_api</code></td>
           <td class="what">Manage catalog, connections and task chains through the public REST/OData API</td>
           <td class="sys">Datasphere</td>
-          <td class="mk" title="All envs: read &amp; update">◎</td>
-          <td class="mk" title="DEV/QAS: read &amp; update / PRD read-only">△</td>
-          <td class="mk" title="DEV/QAS: read only">△</td>
+          <td class="mk" data-tip="All envs: read &amp; update" aria-label="All envs: read &amp; update">●</td>
+          <td class="mk" data-tip="DEV/QAS: read &amp; update / PRD read-only" aria-label="DEV/QAS: read &amp; update / PRD read-only">◔</td>
+          <td class="mk" data-tip="DEV/QAS: read only" aria-label="DEV/QAS: read only">◔</td>
           <td class="act"><button type="button" class="detail" data-no="26">Details</button></td>
         </tr>
         <tr data-id="sap_call_calm_api">
@@ -364,9 +371,9 @@ a { color: var(--accent); }
           <td><code>sap_call_calm_api</code></td>
           <td class="what">Manage projects, tasks, alerts and support cases through the REST API</td>
           <td class="sys">Cloud ALM</td>
-          <td class="mk" title="All envs: read &amp; update">◎</td>
-          <td class="mk" title="DEV/QAS: read &amp; update / PRD read-only">△</td>
-          <td class="mk" title="DEV/QAS: read only">△</td>
+          <td class="mk" data-tip="All envs: read &amp; update" aria-label="All envs: read &amp; update">●</td>
+          <td class="mk" data-tip="DEV/QAS: read &amp; update / PRD read-only" aria-label="DEV/QAS: read &amp; update / PRD read-only">◔</td>
+          <td class="mk" data-tip="DEV/QAS: read only" aria-label="DEV/QAS: read only">◔</td>
           <td class="act"><button type="button" class="detail" data-no="27">Details</button></td>
         </tr>
         <tr data-id="sap_call_btp_cli">
@@ -374,9 +381,9 @@ a { color: var(--accent); }
           <td><code>sap_call_btp_cli</code></td>
           <td class="what">Run the btp CLI server-side and return its output (v2.106.1)</td>
           <td class="sys">BTP account</td>
-          <td class="mk" title="All envs: run">◎</td>
-          <td class="mk" title="Not available">✕</td>
-          <td class="mk" title="Not available">✕</td>
+          <td class="mk" data-tip="All envs: run" aria-label="All envs: run">●</td>
+          <td class="mk" data-tip="Not available" aria-label="Not available">○</td>
+          <td class="mk" data-tip="Not available" aria-label="Not available">○</td>
           <td class="act"><button type="button" class="detail" data-no="28">Details</button></td>
         </tr>
         <tr data-id="sap_call_cf_cli">
@@ -384,9 +391,9 @@ a { color: var(--accent); }
           <td><code>sap_call_cf_cli</code></td>
           <td class="what">Run the cf CLI server-side and return its output (v8.18.3)</td>
           <td class="sys">Cloud Foundry</td>
-          <td class="mk" title="All envs: run">◎</td>
-          <td class="mk" title="Not available">✕</td>
-          <td class="mk" title="Not available">✕</td>
+          <td class="mk" data-tip="All envs: run" aria-label="All envs: run">●</td>
+          <td class="mk" data-tip="Not available" aria-label="Not available">○</td>
+          <td class="mk" data-tip="Not available" aria-label="Not available">○</td>
           <td class="act"><button type="button" class="detail" data-no="29">Details</button></td>
         </tr>
         <tr data-id="sap_call_datasphere_cli">
@@ -394,9 +401,9 @@ a { color: var(--accent); }
           <td><code>sap_call_datasphere_cli</code></td>
           <td class="what">Run the datasphere CLI server-side and return its output (v2026.13.0)</td>
           <td class="sys">Datasphere</td>
-          <td class="mk" title="All envs: run">◎</td>
-          <td class="mk" title="Not available">✕</td>
-          <td class="mk" title="Not available">✕</td>
+          <td class="mk" data-tip="All envs: run" aria-label="All envs: run">●</td>
+          <td class="mk" data-tip="Not available" aria-label="Not available">○</td>
+          <td class="mk" data-tip="Not available" aria-label="Not available">○</td>
           <td class="act"><button type="button" class="detail" data-no="30">Details</button></td>
         </tr>
         <tr data-id="app_call_jira_api">
@@ -404,9 +411,9 @@ a { color: var(--accent); }
           <td><code>app_call_jira_api</code></td>
           <td class="what">Read, create, transition and search issues through the REST API</td>
           <td class="sys">Jira</td>
-          <td class="mk" title="All envs: all operations">◎</td>
-          <td class="mk" title="DEV/QAS: all operations / PRD read-only">△</td>
-          <td class="mk" title="DEV/QAS: all operations / PRD blocked">△</td>
+          <td class="mk" data-tip="All envs: all operations" aria-label="All envs: all operations">●</td>
+          <td class="mk" data-tip="DEV/QAS: all operations / PRD read-only" aria-label="DEV/QAS: all operations / PRD read-only">◔</td>
+          <td class="mk" data-tip="DEV/QAS: all operations / PRD blocked" aria-label="DEV/QAS: all operations / PRD blocked">◔</td>
           <td class="act"><button type="button" class="detail" data-no="31">Details</button></td>
         </tr>
         <tr data-id="app_call_smartdb_api">
@@ -414,9 +421,9 @@ a { color: var(--accent); }
           <td><code>app_call_smartdb_api</code></td>
           <td class="what">Manage documents, views and processes through the REST API v3</td>
           <td class="sys">SmartDB</td>
-          <td class="mk" title="All envs: all operations">◎</td>
-          <td class="mk" title="DEV/QAS: all operations / PRD read-only">△</td>
-          <td class="mk" title="DEV/QAS: all operations / PRD blocked">△</td>
+          <td class="mk" data-tip="All envs: all operations" aria-label="All envs: all operations">●</td>
+          <td class="mk" data-tip="DEV/QAS: all operations / PRD read-only" aria-label="DEV/QAS: all operations / PRD read-only">◔</td>
+          <td class="mk" data-tip="DEV/QAS: all operations / PRD blocked" aria-label="DEV/QAS: all operations / PRD blocked">◔</td>
           <td class="act"><button type="button" class="detail" data-no="32">Details</button></td>
         </tr>
         <tr data-id="sap_call_ibp_api">
@@ -424,9 +431,9 @@ a { color: var(--accent); }
           <td><code>sap_call_ibp_api</code></td>
           <td class="what">Read and write master, planning and stock data through the OData API</td>
           <td class="sys">IBP</td>
-          <td class="mk" title="All envs: read &amp; update">◎</td>
-          <td class="mk" title="DEV/QAS: read &amp; update / PRD read-only">△</td>
-          <td class="mk" title="DEV/QAS: read &amp; update">△</td>
+          <td class="mk" data-tip="All envs: read &amp; update" aria-label="All envs: read &amp; update">●</td>
+          <td class="mk" data-tip="DEV/QAS: read &amp; update / PRD read-only" aria-label="DEV/QAS: read &amp; update / PRD read-only">◔</td>
+          <td class="mk" data-tip="DEV/QAS: read &amp; update" aria-label="DEV/QAS: read &amp; update">◔</td>
           <td class="act"><button type="button" class="detail" data-no="33">Details</button></td>
         </tr>
         <tr data-id="sap_call_s4_api">
@@ -434,9 +441,9 @@ a { color: var(--accent); }
           <td><code>sap_call_s4_api</code></td>
           <td class="what">Call OData/REST through the destination; any SICF path works too</td>
           <td class="sys">ABAP system</td>
-          <td class="mk" title="All envs: read &amp; update">◎</td>
-          <td class="mk" title="DEV/QAS: read &amp; update / PRD read-only">△</td>
-          <td class="mk" title="DEV/QAS: read only">△</td>
+          <td class="mk" data-tip="All envs: read &amp; update" aria-label="All envs: read &amp; update">●</td>
+          <td class="mk" data-tip="DEV/QAS: read &amp; update / PRD read-only" aria-label="DEV/QAS: read &amp; update / PRD read-only">◔</td>
+          <td class="mk" data-tip="DEV/QAS: read only" aria-label="DEV/QAS: read only">◔</td>
           <td class="act"><button type="button" class="detail" data-no="34">Details</button></td>
         </tr>
         <tr data-id="sap_call_soap">
@@ -444,9 +451,9 @@ a { color: var(--accent); }
           <td><code>sap_call_soap</code></td>
           <td class="what">Call a SOAP service, passing the envelope through</td>
           <td class="sys">ABAP system</td>
-          <td class="mk" title="All envs: read &amp; update">◎</td>
-          <td class="mk" title="DEV/QAS: read &amp; update / PRD read-only">△</td>
-          <td class="mk" title="DEV/QAS: read only">△</td>
+          <td class="mk" data-tip="All envs: read &amp; update" aria-label="All envs: read &amp; update">●</td>
+          <td class="mk" data-tip="DEV/QAS: read &amp; update / PRD read-only" aria-label="DEV/QAS: read &amp; update / PRD read-only">◔</td>
+          <td class="mk" data-tip="DEV/QAS: read only" aria-label="DEV/QAS: read only">◔</td>
           <td class="act"><button type="button" class="detail" data-no="35">Details</button></td>
         </tr>
       </tbody>
@@ -471,7 +478,7 @@ a { color: var(--accent); }
 </dialog>
 
 <script>
-const TOOLS = [{"no":1,"id":"sap_list_destinations","summary":"List the destinations you can reach","officialUrl":"https://api.sap.com/package/scpconnectivity","auth":"— (managed by the Destination service)","callPath":[{"purpose":"List destinations","path":"(Destination service)"}],"roles":{"full":"List all","ro":"List all","dev":"DEV/QAS only"}},{"no":2,"id":"sap_use_destination","summary":"Switch the session default destination","officialUrl":"https://api.sap.com/package/scpconnectivity","auth":"— (session state)","callPath":[{"purpose":"Switch default destination","path":"—"}],"roles":{"full":"All envs: available","ro":"All envs: available","dev":"All envs: available"}},{"no":3,"id":"sap_current_destination","summary":"Show the current default destination","officialUrl":"https://api.sap.com/package/scpconnectivity","auth":"— (session state)","callPath":[{"purpose":"Show current destination","path":"—"}],"roles":{"full":"All envs: available","ro":"All envs: available","dev":"All envs: available"}},{"no":4,"id":"sap_call_fm","summary":"Call a Function Module / BAPI over RFC","officialUrl":"https://help.sap.com/docs/ABAP_PLATFORM_NEW","auth":"BasicAuthentication / PrincipalPropagation","callPath":[{"purpose":"Call Function Module","path":"backend relay /api/tableread/mcp/call-fm → FM (e.g. RFC_READ_TABLE)"}],"roles":{"full":"All envs: read & update","ro":"DEV/QAS: read & update\nPRD blocked","dev":"DEV/QAS: read & update"}},{"no":5,"id":"sap_select_table","summary":"Read a table through an RFC_READ_TABLE equivalent","officialUrl":"https://help.sap.com/docs/ABAP_PLATFORM_NEW","auth":"BasicAuthentication / PrincipalPropagation","callPath":[{"purpose":"Dynamic table SELECT","path":"backend relay → RFC_READ_TABLE equivalent"}],"roles":{"full":"All envs: read","ro":"All envs: read","dev":"DEV/QAS: read"}},{"no":6,"id":"sap_adt_freestyle","summary":"Run free-form SQL through the ADT data preview","officialUrl":"https://help.sap.com/docs/ABAP_PLATFORM_NEW","auth":"BasicAuthentication / PrincipalPropagation","callPath":[{"purpose":"Free-form SQL","path":"/sap/bc/adt/datapreview/freestyle"}],"roles":{"full":"All envs: read","ro":"All envs: read","dev":"DEV/QAS: read"}},{"no":7,"id":"sap_adt_osql","summary":"Run Open SQL through ADT","officialUrl":"https://help.sap.com/docs/ABAP_PLATFORM_NEW","auth":"BasicAuthentication / PrincipalPropagation","callPath":[{"purpose":"Open SQL","path":"/sap/bc/adt/datapreview/freestyle"}],"roles":{"full":"All envs: read","ro":"All envs: read","dev":"DEV/QAS: read"}},{"no":8,"id":"sap_adt_ddic","summary":"SELECT * a DDIC object (table or CDS) through ADT","officialUrl":"https://help.sap.com/docs/ABAP_PLATFORM_NEW","auth":"BasicAuthentication / PrincipalPropagation","callPath":[{"purpose":"SELECT * a DDIC object","path":"/sap/bc/adt/datapreview/ddic"}],"roles":{"full":"All envs: read","ro":"All envs: read","dev":"DEV/QAS: read"}},{"no":9,"id":"sap_abap_read_source","summary":"Read program or function module source through ADT","officialUrl":"https://help.sap.com/docs/ABAP_PLATFORM_NEW","auth":"BasicAuthentication / PrincipalPropagation","callPath":[{"purpose":"Read ABAP source","path":"/sap/bc/adt/programs|functions/..."}],"roles":{"full":"All envs: read","ro":"All envs: read","dev":"DEV/QAS: read"}},{"no":10,"id":"sap_abap_write_source","summary":"Create or update a report/program through ADT and activate it","officialUrl":"https://help.sap.com/docs/ABAP_PLATFORM_NEW","auth":"BasicAuthentication / PrincipalPropagation","callPath":[{"purpose":"Create/update ABAP program","path":"/sap/bc/adt/programs/programs/..."}],"roles":{"full":"DEV only: create & update","ro":"DEV only: create & update","dev":"DEV only: create & update"}},{"no":11,"id":"sap_abap_delete_source","summary":"Delete a program or CDS DDL through ADT","officialUrl":"https://help.sap.com/docs/ABAP_PLATFORM_NEW","auth":"BasicAuthentication / PrincipalPropagation","callPath":[{"purpose":"Delete ABAP/CDS","path":"/sap/bc/adt/programs|ddic/ddl/... (DELETE)"}],"roles":{"full":"DEV only: create & update","ro":"DEV only: create & update","dev":"DEV only: create & update"}},{"no":12,"id":"sap_abap_write_fm","summary":"Create or update a function module through ADT and activate it","officialUrl":"https://help.sap.com/docs/ABAP_PLATFORM_NEW","auth":"BasicAuthentication / PrincipalPropagation","callPath":[{"purpose":"Create/update FM","path":"/sap/bc/adt/functions/groups/{grp}/fmodules/..."}],"roles":{"full":"DEV only: create & update","ro":"DEV only: create & update","dev":"DEV only: create & update"}},{"no":13,"id":"sap_create_transport","summary":"Create a transport request by calling a function module","officialUrl":"https://help.sap.com/docs/ABAP_PLATFORM_NEW","auth":"BasicAuthentication / PrincipalPropagation","callPath":[{"purpose":"Create transport","path":"backend relay → FM TR_INSERT_REQUEST_WITH_TASKS"}],"roles":{"full":"DEV only: create & update","ro":"DEV only: create & update","dev":"DEV only: create & update"}},{"no":14,"id":"sap_release_transport","summary":"Release a transport request by calling a function module","officialUrl":"https://help.sap.com/docs/ABAP_PLATFORM_NEW","auth":"BasicAuthentication / PrincipalPropagation","callPath":[{"purpose":"Release transport","path":"backend relay → FM TR_RELEASE_REQUEST"}],"roles":{"full":"DEV only: create & update","ro":"DEV only: create & update","dev":"DEV only: create & update"}},{"no":15,"id":"sap_abap_activate","summary":"Activate an object through ADT and return the syntax check result","officialUrl":"https://help.sap.com/docs/ABAP_PLATFORM_NEW","auth":"BasicAuthentication / PrincipalPropagation","callPath":[{"purpose":"Activate ABAP object","path":"/sap/bc/adt/activation"}],"roles":{"full":"DEV only: create & update","ro":"DEV only: create & update","dev":"DEV only: create & update"}},{"no":16,"id":"sap_call_ias_admin","summary":"Manage users, groups and applications through the Admin API (SCIM) — handles personal data","officialUrl":"https://api.sap.com/package/SCPIdentityServices","auth":"OAuth2ClientCredentials","callPath":[{"purpose":"Users","path":"GET/POST/PUT /scim/Users"},{"purpose":"Groups","path":"GET/POST/PUT /scim/Groups"},{"purpose":"Applications","path":"GET /Applications/v1"}],"roles":{"full":"All envs: read & update","ro":"Not available","dev":"Not available"}},{"no":17,"id":"sap_call_ips_job","summary":"Inspect and run provisioning jobs through the Jobs / JobLogs API — handles personal data","officialUrl":"https://api.sap.com/package/SCPIdentityServices","auth":"OAuth2ClientCredentials (reuses the IAS destination)","callPath":[{"purpose":"Jobs","path":"GET /service/scim/Jobs"},{"purpose":"Job logs","path":"GET /service/scim/JobLogs"}],"roles":{"full":"All envs: read & update","ro":"Not available","dev":"Not available"}},{"no":18,"id":"sap_call_cf_api","summary":"Inspect and manage apps, orgs/spaces and services through the v3 API","officialUrl":"https://v3-apidocs.cloudfoundry.org/","auth":"OAuth2Password (with the cf client)","callPath":[{"purpose":"Apps","path":"GET /v3/apps"},{"purpose":"Orgs/Spaces","path":"GET /v3/organizations, /v3/spaces"},{"purpose":"Service instances/keys","path":"GET /v3/service_instances, /v3/service_credential_bindings"}],"roles":{"full":"All envs: read & update","ro":"DEV/QAS: read & update\nPRD read-only","dev":"DEV/QAS: read only"}},{"no":19,"id":"sap_call_bwz_content","summary":"Read CDM site information and export business content as a zip","officialUrl":"https://api.sap.com/package/SAPBuildWorkZone","auth":"OAuth2ClientCredentials","callPath":[{"purpose":"Sites","path":"GET /semantic/entity/site"},{"purpose":"Tenant configuration","path":"GET /semantic/entity/site?isTenantConf=true"},{"purpose":"Export a site as zip","path":"GET /cdm_export_service/v1/export/site(siteID='{siteId}')"},{"purpose":"Export content items as zip","path":"POST /cdm_export_service/v1/export/Entities"},{"purpose":"Send to cTMS","path":"POST /cdm_export_service/v1/export/site_to_ctms | entities_to_ctms"}],"roles":{"full":"All envs: read & update","ro":"DEV/QAS: read & update\nPRD read-only","dev":"DEV/QAS: read only"}},{"no":20,"id":"sap_call_ctms_api","summary":"Manage transport nodes, queues and imports through the v2 API","officialUrl":"https://api.sap.com/package/TmsForCloudPub","auth":"OAuth2ClientCredentials","callPath":[{"purpose":"Nodes","path":"GET /v2/nodes"},{"purpose":"Transport requests","path":"GET /v2/nodes/{nodeId}/transportRequests"},{"purpose":"Import","path":"POST /v2/nodes/{nodeId}/transportRequests/import"}],"roles":{"full":"All envs: read & update","ro":"DEV/QAS: read & update\nPRD read-only","dev":"DEV/QAS: read only"}},{"no":21,"id":"sap_call_forms_api","summary":"List and generate forms through the REST API","officialUrl":"https://api.sap.com/package/SAPFormsServicebyAdobe","auth":"OAuth2ClientCredentials","callPath":[{"purpose":"API docs","path":"GET /v3/api-docs"},{"purpose":"Forms","path":"GET /v1/forms"},{"purpose":"Generate","path":"POST /v3/forms/{id}/data"}],"roles":{"full":"All envs: read & update","ro":"DEV/QAS: read & update\nPRD read-only","dev":"DEV/QAS: read only"}},{"no":22,"id":"sap_call_cis_api","summary":"Inspect accounts, subaccounts and entitlements through the CIS Central API","officialUrl":"https://api.sap.com/package/SAPCloudPlatformCoreServices","auth":"OAuth2ClientCredentials (global account Viewer/Admin role)","callPath":[{"purpose":"Global account","path":"GET /accounts/v1/globalAccount"},{"purpose":"Subaccounts","path":"GET /accounts/v1/subaccounts"},{"purpose":"Entitlements","path":"GET /entitlements/v1/assignedQuotas"}],"roles":{"full":"All envs: read & update","ro":"DEV/QAS: read & update\nPRD read-only","dev":"DEV/QAS: read only"}},{"no":23,"id":"sap_call_cpi_api","summary":"Inspect message processing logs and integration artifacts through the audit/monitoring API","officialUrl":"https://help.sap.com/docs/cloud-integration","auth":"OAuth2ClientCredentials","callPath":[{"purpose":"Message processing logs","path":"GET /api/v1/MessageProcessingLogs"},{"purpose":"Integration packages","path":"GET /api/v1/IntegrationPackages"},{"purpose":"Runtime artifacts","path":"GET /api/v1/IntegrationRuntimeArtifacts"}],"roles":{"full":"All envs: read & update","ro":"DEV/QAS: read & update\nPRD read-only","dev":"DEV/QAS: read only"}},{"no":24,"id":"sap_call_ans_api","summary":"Manage conditions, actions, subscriptions and events through the REST API","officialUrl":"https://api.sap.com/package/AlertNotification","auth":"OAuth2ClientCredentials","callPath":[{"purpose":"Configuration","path":"GET/POST/PUT/DELETE /cf/configuration/v1/condition|action|subscription"},{"purpose":"Consumer","path":"GET /cf/consumer/v1/matched-events|undelivered-events"},{"purpose":"Producer","path":"POST /cf/producer/v1/resource-events"}],"roles":{"full":"All envs: read & update","ro":"DEV/QAS: read & update\nPRD read-only","dev":"DEV/QAS: read only"}},{"no":25,"id":"sap_call_sbpa_api","summary":"Inspect and drive workflow definitions and instances through the REST API","officialUrl":"https://api.sap.com/package/SAPProcessAutomation","auth":"OAuth2ClientCredentials","callPath":[{"purpose":"Workflow definitions","path":"GET /workflow/rest/v1/workflow-definitions"},{"purpose":"Task definitions","path":"GET /workflow/rest/v1/task-definitions"},{"purpose":"Instances","path":"GET/POST /workflow/rest/v1/workflow-instances|task-instances"}],"roles":{"full":"All envs: read & update","ro":"DEV/QAS: read & update\nPRD read-only","dev":"DEV/QAS: read only"}},{"no":26,"id":"sap_call_datasphere_api","summary":"Manage catalog, connections and task chains through the public REST/OData API","officialUrl":"https://api.sap.com/package/sapdatasphere","auth":"OAuth2ClientCredentials (technical user)","callPath":[{"purpose":"Catalog","path":"GET /api/v1/dwc/catalog/spaces|assets"},{"purpose":"Connections/Certs","path":"GET /api/v1/datasphere/spaces/{space}/connections"},{"purpose":"SCIM","path":"GET /api/v1/scim2/Users|Groups"},{"purpose":"Task chains","path":"POST /api/v1/datasphere/tasks/chains/{space}/run/{objectid}"}],"roles":{"full":"All envs: read & update","ro":"DEV/QAS: read & update\nPRD read-only","dev":"DEV/QAS: read only"}},{"no":27,"id":"sap_call_calm_api","summary":"Manage projects, tasks, alerts and support cases through the REST API","officialUrl":"https://api.sap.com/package/SAPCloudALM","auth":"OAuth2ClientCredentials","callPath":[{"purpose":"Projects","path":"GET /api/calm-projects/v1/projects"},{"purpose":"Tasks","path":"GET /api/calm-tasks/v1/tasks?projectId={uuid}"},{"purpose":"Status events (alerts)","path":"GET /api/bsm-service/v1/events （scope calm-api.bsm.read）"},{"purpose":"Close event situation","path":"PUT /api/calm-event-situations/v1/event-situations/{id} （scope calm-api.event-situations.write）"},{"purpose":"ITSM: list support case ids","path":"GET /api/calm-itsmapi/v1/supportcases/cases/ids?reporter=&customerNumber= （scope calm-api.itsm.read）"},{"purpose":"ITSM: create support case","path":"POST /api/calm-itsmapi/v1/supportcases/cases （scope calm-api.itsm.write）"}],"roles":{"full":"All envs: read & update","ro":"DEV/QAS: read & update\nPRD read-only","dev":"DEV/QAS: read only"}},{"no":28,"id":"sap_call_btp_cli","summary":"Run the btp CLI server-side and return its output (v2.106.1)","officialUrl":"https://help.sap.com/docs/btp/btp-cli-command-reference/btp-cli-command-reference","auth":"BasicAuthentication","callPath":[{"purpose":"Run btp CLI","path":"args: [\"list\",\"accounts/subaccount\"] etc."}],"roles":{"full":"All envs: run","ro":"Not available","dev":"Not available"}},{"no":29,"id":"sap_call_cf_cli","summary":"Run the cf CLI server-side and return its output (v8.18.3)","officialUrl":"https://cli.cloudfoundry.org/en-US/v8/","auth":"OAuth2Password (with the cf client)","callPath":[{"purpose":"Run cf CLI","path":"args: [\"apps\"] etc."}],"roles":{"full":"All envs: run","ro":"Not available","dev":"Not available"}},{"no":30,"id":"sap_call_datasphere_cli","summary":"Run the datasphere CLI server-side and return its output (v2026.13.0)","officialUrl":"https://help.sap.com/docs/SAP_DATASPHERE/d0ecd6f297ac40249072a44df0549c1a/12d2b51987034daf822511ed1a229a6c.html","auth":"OAuth2ClientCredentials (Datasphere CLI)","callPath":[{"purpose":"Run datasphere CLI","path":"args: [\"spaces\",\"read\"] etc."}],"roles":{"full":"All envs: run","ro":"Not available","dev":"Not available"}},{"no":31,"id":"app_call_jira_api","summary":"Read, create, transition and search issues through the REST API","officialUrl":"https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/#","auth":"ClientCertificateAuthentication (mTLS) + bearer (resolved by the destination)","callPath":[{"purpose":"Issue read/update","path":"GET/PUT /rest/api/2/issue/{key} , POST /rest/api/2/issue"},{"purpose":"Transition","path":"GET/POST /rest/api/2/issue/{key}/transitions"},{"purpose":"Comment","path":"POST /rest/api/2/issue/{key}/comment"},{"purpose":"Service Desk request","path":"POST/GET /rest/servicedeskapi/request"},{"purpose":"Search (JQL)","path":"GET /rest/api/2/search?jql=..."}],"roles":{"full":"All envs: all operations","ro":"DEV/QAS: all operations\nPRD read-only","dev":"DEV/QAS: all operations\nPRD blocked"}},{"no":32,"id":"app_call_smartdb_api","summary":"Manage documents, views and processes through the REST API v3","officialUrl":"https://doc.support-dreamarts.com/SmartDB/Document/RestDocDocumentV3/index.html","auth":"NoAuthentication + static bearer (binder token, resolved via the destination URL.headers.Authorization)","callPath":[{"purpose":"Binder detail / views","path":"GET /binders/{binder} , GET /binders/{binder}/views"},{"purpose":"Document list by view","path":"GET /binders/{binder}/views/{view}/documents"},{"purpose":"Document CRUD","path":"GET/PUT/DELETE /binders/{binder}/documents/{document} , POST /binders/{binder}/documents"},{"purpose":"Process / activity","path":"POST /processes/start , GET /activities/worklist , PUT /activities/{activity}"},{"purpose":"CSV import/export","path":"GET /binders/{binder}/views/{view}/documents/csv , POST/PUT /binders/{binder}/documents/csv"}],"roles":{"full":"All envs: all operations","ro":"DEV/QAS: all operations\nPRD read-only","dev":"DEV/QAS: all operations\nPRD blocked"}},{"no":33,"id":"sap_call_ibp_api","summary":"Read and write master, planning and stock data through the OData API","officialUrl":"https://api.sap.com/products/SAPIntegratedBusinessPlanningforSupplyChain/apis/all","auth":"BasicAuthentication (communication user, resolved by the destination)","callPath":[{"purpose":"Master data read/write","path":"GET/POST /sap/opu/odata/IBP/MASTER_DATA_API_SRV/..."},{"purpose":"Planning data read/write","path":"GET/POST /sap/opu/odata/IBP/PLANNING_DATA_API_SRV/..."},{"purpose":"Stock/Batch (OData v4)","path":"GET /sap/opu/odata4/ibp/api_stock/srvd_a2x/ibp/api_stock/0001/..."},{"purpose":"Analytics extract","path":"GET /sap/opu/odata/IBP/EXTRACT_ODATA_SRV/..."}],"roles":{"full":"All envs: read & update","ro":"DEV/QAS: read & update\nPRD read-only","dev":"DEV/QAS: read & update"}},{"no":34,"id":"sap_call_s4_api","summary":"Call OData/REST through the destination; any SICF path works too","officialUrl":"https://api.sap.com/products/SAPS4HANACloudPrivateEdition/apis/all","auth":"— (resolved by the destination; uses an ABAP destination)","callPath":[{"purpose":"OData V2 read/write","path":"GET/POST /sap/opu/odata/sap/\u003cSERVICE>/..."},{"purpose":"OData V4 read/write","path":"GET/POST /sap/opu/odata4/sap/\u003csrv>/srvd_a2x/sap/\u003csrv>/0001/..."},{"purpose":"Fetch schema","path":"GET /sap/opu/odata/sap/\u003cSERVICE>/$metadata"},{"purpose":"List published services","path":"GET /sap/opu/odata/IWFND/CATALOGSERVICE;v=2/ServiceCollection"}],"roles":{"full":"All envs: read & update","ro":"DEV/QAS: read & update\nPRD read-only","dev":"DEV/QAS: read only"}},{"no":35,"id":"sap_call_soap","summary":"Call a SOAP service, passing the envelope through","officialUrl":"https://api.sap.com/products/SAPS4HANACloudPrivateEdition/apis/all","auth":"— (resolved by the destination; uses an ABAP destination)","callPath":[{"purpose":"Call SOAP service","path":"POST /sap/bc/srt/rfc/sap/\u003cservice>/\u003cclient>/\u003cservice>/\u003cbinding>"},{"purpose":"Fetch WSDL","path":"GET \u003cendpoint>?wsdl (fetch it with sap_call_s4_api)"}],"roles":{"full":"All envs: read & update","ro":"DEV/QAS: read & update\nPRD read-only","dev":"DEV/QAS: read only"}}];
+const TOOLS = [{"no":1,"id":"sap_list_destinations","summary":"List the destinations you can reach","officialUrl":"https://api.sap.com/package/scpconnectivity","auth":"OAuth2ClientCredentials (XSUAA, to the backend)","callPath":[{"purpose":"List destinations","path":"(Destination service)"}],"roles":{"full":"List all","ro":"List all","dev":"DEV/QAS only"}},{"no":2,"id":"sap_use_destination","summary":"Switch the session default destination","officialUrl":"https://api.sap.com/package/scpconnectivity","auth":"OAuth2ClientCredentials (XSUAA, to the backend)","callPath":[{"purpose":"Switch default destination","path":"—"}],"roles":{"full":"All envs: available","ro":"All envs: available","dev":"All envs: available"}},{"no":3,"id":"sap_current_destination","summary":"Show the current default destination","officialUrl":"https://api.sap.com/package/scpconnectivity","auth":"OAuth2ClientCredentials (XSUAA, to the backend)","callPath":[{"purpose":"Show current destination","path":"—"}],"roles":{"full":"All envs: available","ro":"All envs: available","dev":"All envs: available"}},{"no":4,"id":"sap_call_fm","summary":"Call a Function Module / BAPI over RFC","officialUrl":"https://help.sap.com/docs/ABAP_PLATFORM_NEW","auth":"BasicAuthentication / PrincipalPropagation","callPath":[{"purpose":"Call Function Module","path":"backend relay /api/tableread/mcp/call-fm → FM (e.g. RFC_READ_TABLE)"}],"roles":{"full":"All envs: read & update","ro":"DEV/QAS: read & update\nPRD blocked","dev":"DEV/QAS: read & update"}},{"no":5,"id":"sap_select_table","summary":"Read a table through an RFC_READ_TABLE equivalent","officialUrl":"https://help.sap.com/docs/ABAP_PLATFORM_NEW","auth":"BasicAuthentication / PrincipalPropagation","callPath":[{"purpose":"Dynamic table SELECT","path":"backend relay → RFC_READ_TABLE equivalent"}],"roles":{"full":"All envs: read","ro":"All envs: read","dev":"DEV/QAS: read"}},{"no":6,"id":"sap_adt_freestyle","summary":"Run free-form SQL through the ADT data preview","officialUrl":"https://help.sap.com/docs/ABAP_PLATFORM_NEW","auth":"BasicAuthentication / PrincipalPropagation","callPath":[{"purpose":"Free-form SQL","path":"/sap/bc/adt/datapreview/freestyle"}],"roles":{"full":"All envs: read","ro":"All envs: read","dev":"DEV/QAS: read"}},{"no":7,"id":"sap_adt_osql","summary":"Run Open SQL through ADT","officialUrl":"https://help.sap.com/docs/ABAP_PLATFORM_NEW","auth":"BasicAuthentication / PrincipalPropagation","callPath":[{"purpose":"Open SQL","path":"/sap/bc/adt/datapreview/freestyle"}],"roles":{"full":"All envs: read","ro":"All envs: read","dev":"DEV/QAS: read"}},{"no":8,"id":"sap_adt_ddic","summary":"SELECT * a DDIC object (table or CDS) through ADT","officialUrl":"https://help.sap.com/docs/ABAP_PLATFORM_NEW","auth":"BasicAuthentication / PrincipalPropagation","callPath":[{"purpose":"SELECT * a DDIC object","path":"/sap/bc/adt/datapreview/ddic"}],"roles":{"full":"All envs: read","ro":"All envs: read","dev":"DEV/QAS: read"}},{"no":9,"id":"sap_abap_read_source","summary":"Read program or function module source through ADT","officialUrl":"https://help.sap.com/docs/ABAP_PLATFORM_NEW","auth":"BasicAuthentication / PrincipalPropagation","callPath":[{"purpose":"Read ABAP source","path":"/sap/bc/adt/programs|functions/..."}],"roles":{"full":"All envs: read","ro":"All envs: read","dev":"DEV/QAS: read"}},{"no":10,"id":"sap_abap_write_source","summary":"Create or update a report/program through ADT and activate it","officialUrl":"https://help.sap.com/docs/ABAP_PLATFORM_NEW","auth":"BasicAuthentication / PrincipalPropagation","callPath":[{"purpose":"Create/update ABAP program","path":"/sap/bc/adt/programs/programs/..."}],"roles":{"full":"DEV only: create & update","ro":"DEV only: create & update","dev":"DEV only: create & update"}},{"no":11,"id":"sap_abap_delete_source","summary":"Delete a program or CDS DDL through ADT","officialUrl":"https://help.sap.com/docs/ABAP_PLATFORM_NEW","auth":"BasicAuthentication / PrincipalPropagation","callPath":[{"purpose":"Delete ABAP/CDS","path":"/sap/bc/adt/programs|ddic/ddl/... (DELETE)"}],"roles":{"full":"DEV only: create & update","ro":"DEV only: create & update","dev":"DEV only: create & update"}},{"no":12,"id":"sap_abap_write_fm","summary":"Create or update a function module through ADT and activate it","officialUrl":"https://help.sap.com/docs/ABAP_PLATFORM_NEW","auth":"BasicAuthentication / PrincipalPropagation","callPath":[{"purpose":"Create/update FM","path":"/sap/bc/adt/functions/groups/{grp}/fmodules/..."}],"roles":{"full":"DEV only: create & update","ro":"DEV only: create & update","dev":"DEV only: create & update"}},{"no":13,"id":"sap_create_transport","summary":"Create a transport request by calling a function module","officialUrl":"https://help.sap.com/docs/ABAP_PLATFORM_NEW","auth":"BasicAuthentication / PrincipalPropagation","callPath":[{"purpose":"Create transport","path":"backend relay → FM TR_INSERT_REQUEST_WITH_TASKS"}],"roles":{"full":"DEV only: create & update","ro":"DEV only: create & update","dev":"DEV only: create & update"}},{"no":14,"id":"sap_release_transport","summary":"Release a transport request by calling a function module","officialUrl":"https://help.sap.com/docs/ABAP_PLATFORM_NEW","auth":"BasicAuthentication / PrincipalPropagation","callPath":[{"purpose":"Release transport","path":"backend relay → FM TR_RELEASE_REQUEST"}],"roles":{"full":"DEV only: create & update","ro":"DEV only: create & update","dev":"DEV only: create & update"}},{"no":15,"id":"sap_abap_activate","summary":"Activate an object through ADT and return the syntax check result","officialUrl":"https://help.sap.com/docs/ABAP_PLATFORM_NEW","auth":"BasicAuthentication / PrincipalPropagation","callPath":[{"purpose":"Activate ABAP object","path":"/sap/bc/adt/activation"}],"roles":{"full":"DEV only: create & update","ro":"DEV only: create & update","dev":"DEV only: create & update"}},{"no":16,"id":"sap_call_ias_admin","summary":"Manage users, groups and applications through the Admin API (SCIM) — handles personal data","officialUrl":"https://api.sap.com/package/SCPIdentityServices","auth":"OAuth2ClientCredentials","callPath":[{"purpose":"Users","path":"GET/POST/PUT /scim/Users"},{"purpose":"Groups","path":"GET/POST/PUT /scim/Groups"},{"purpose":"Applications","path":"GET /Applications/v1"}],"roles":{"full":"All envs: read & update","ro":"Not available","dev":"Not available"}},{"no":17,"id":"sap_call_ips_job","summary":"Inspect and run provisioning jobs through the Jobs / JobLogs API — handles personal data","officialUrl":"https://api.sap.com/package/SCPIdentityServices","auth":"OAuth2ClientCredentials","callPath":[{"purpose":"Jobs","path":"GET /service/scim/Jobs"},{"purpose":"Job logs","path":"GET /service/scim/JobLogs"}],"roles":{"full":"All envs: read & update","ro":"Not available","dev":"Not available"}},{"no":18,"id":"sap_call_cf_api","summary":"Inspect and manage apps, orgs/spaces and services through the v3 API","officialUrl":"https://v3-apidocs.cloudfoundry.org/","auth":"OAuth2Password (with the cf client)","callPath":[{"purpose":"Apps","path":"GET /v3/apps"},{"purpose":"Orgs/Spaces","path":"GET /v3/organizations, /v3/spaces"},{"purpose":"Service instances/keys","path":"GET /v3/service_instances, /v3/service_credential_bindings"}],"roles":{"full":"All envs: read & update","ro":"DEV/QAS: read & update\nPRD read-only","dev":"DEV/QAS: read only"}},{"no":19,"id":"sap_call_bwz_content","summary":"Read CDM site information and export business content as a zip","officialUrl":"https://api.sap.com/package/SAPBuildWorkZone","auth":"OAuth2ClientCredentials","callPath":[{"purpose":"Sites","path":"GET /semantic/entity/site"},{"purpose":"Tenant configuration","path":"GET /semantic/entity/site?isTenantConf=true"},{"purpose":"Export a site as zip","path":"GET /cdm_export_service/v1/export/site(siteID='{siteId}')"},{"purpose":"Export content items as zip","path":"POST /cdm_export_service/v1/export/Entities"},{"purpose":"Send to cTMS","path":"POST /cdm_export_service/v1/export/site_to_ctms | entities_to_ctms"}],"roles":{"full":"All envs: read & update","ro":"DEV/QAS: read & update\nPRD read-only","dev":"DEV/QAS: read only"}},{"no":20,"id":"sap_call_ctms_api","summary":"Manage transport nodes, queues and imports through the v2 API","officialUrl":"https://api.sap.com/package/TmsForCloudPub","auth":"OAuth2ClientCredentials","callPath":[{"purpose":"Nodes","path":"GET /v2/nodes"},{"purpose":"Transport requests","path":"GET /v2/nodes/{nodeId}/transportRequests"},{"purpose":"Import","path":"POST /v2/nodes/{nodeId}/transportRequests/import"}],"roles":{"full":"All envs: read & update","ro":"DEV/QAS: read & update\nPRD read-only","dev":"DEV/QAS: read only"}},{"no":21,"id":"sap_call_forms_api","summary":"List and generate forms through the REST API","officialUrl":"https://api.sap.com/package/SAPFormsServicebyAdobe","auth":"OAuth2ClientCredentials","callPath":[{"purpose":"API docs","path":"GET /v3/api-docs"},{"purpose":"Forms","path":"GET /v1/forms"},{"purpose":"Generate","path":"POST /v3/forms/{id}/data"}],"roles":{"full":"All envs: read & update","ro":"DEV/QAS: read & update\nPRD read-only","dev":"DEV/QAS: read only"}},{"no":22,"id":"sap_call_cis_api","summary":"Inspect accounts, subaccounts and entitlements through the CIS Central API","officialUrl":"https://api.sap.com/package/SAPCloudPlatformCoreServices","auth":"OAuth2ClientCredentials (global account Viewer/Admin role)","callPath":[{"purpose":"Global account","path":"GET /accounts/v1/globalAccount"},{"purpose":"Subaccounts","path":"GET /accounts/v1/subaccounts"},{"purpose":"Entitlements","path":"GET /entitlements/v1/assignedQuotas"}],"roles":{"full":"All envs: read & update","ro":"DEV/QAS: read & update\nPRD read-only","dev":"DEV/QAS: read only"}},{"no":23,"id":"sap_call_cpi_api","summary":"Inspect message processing logs and integration artifacts through the audit/monitoring API","officialUrl":"https://help.sap.com/docs/cloud-integration","auth":"OAuth2ClientCredentials","callPath":[{"purpose":"Message processing logs","path":"GET /api/v1/MessageProcessingLogs"},{"purpose":"Integration packages","path":"GET /api/v1/IntegrationPackages"},{"purpose":"Runtime artifacts","path":"GET /api/v1/IntegrationRuntimeArtifacts"}],"roles":{"full":"All envs: read & update","ro":"DEV/QAS: read & update\nPRD read-only","dev":"DEV/QAS: read only"}},{"no":24,"id":"sap_call_ans_api","summary":"Manage conditions, actions, subscriptions and events through the REST API","officialUrl":"https://api.sap.com/package/AlertNotification","auth":"OAuth2ClientCredentials","callPath":[{"purpose":"Configuration","path":"GET/POST/PUT/DELETE /cf/configuration/v1/condition|action|subscription"},{"purpose":"Consumer","path":"GET /cf/consumer/v1/matched-events|undelivered-events"},{"purpose":"Producer","path":"POST /cf/producer/v1/resource-events"}],"roles":{"full":"All envs: read & update","ro":"DEV/QAS: read & update\nPRD read-only","dev":"DEV/QAS: read only"}},{"no":25,"id":"sap_call_sbpa_api","summary":"Inspect and drive workflow definitions and instances through the REST API","officialUrl":"https://api.sap.com/package/SAPProcessAutomation","auth":"OAuth2ClientCredentials","callPath":[{"purpose":"Workflow definitions","path":"GET /workflow/rest/v1/workflow-definitions"},{"purpose":"Task definitions","path":"GET /workflow/rest/v1/task-definitions"},{"purpose":"Instances","path":"GET/POST /workflow/rest/v1/workflow-instances|task-instances"}],"roles":{"full":"All envs: read & update","ro":"DEV/QAS: read & update\nPRD read-only","dev":"DEV/QAS: read only"}},{"no":26,"id":"sap_call_datasphere_api","summary":"Manage catalog, connections and task chains through the public REST/OData API","officialUrl":"https://api.sap.com/package/sapdatasphere","auth":"OAuth2ClientCredentials (technical user)","callPath":[{"purpose":"Catalog","path":"GET /api/v1/dwc/catalog/spaces|assets"},{"purpose":"Connections/Certs","path":"GET /api/v1/datasphere/spaces/{space}/connections"},{"purpose":"SCIM","path":"GET /api/v1/scim2/Users|Groups"},{"purpose":"Task chains","path":"POST /api/v1/datasphere/tasks/chains/{space}/run/{objectid}"}],"roles":{"full":"All envs: read & update","ro":"DEV/QAS: read & update\nPRD read-only","dev":"DEV/QAS: read only"}},{"no":27,"id":"sap_call_calm_api","summary":"Manage projects, tasks, alerts and support cases through the REST API","officialUrl":"https://api.sap.com/package/SAPCloudALM","auth":"OAuth2ClientCredentials","callPath":[{"purpose":"Projects","path":"GET /api/calm-projects/v1/projects"},{"purpose":"Tasks","path":"GET /api/calm-tasks/v1/tasks?projectId={uuid}"},{"purpose":"Status events (alerts)","path":"GET /api/bsm-service/v1/events （scope calm-api.bsm.read）"},{"purpose":"Close event situation","path":"PUT /api/calm-event-situations/v1/event-situations/{id} （scope calm-api.event-situations.write）"},{"purpose":"ITSM: list support case ids","path":"GET /api/calm-itsmapi/v1/supportcases/cases/ids?reporter=&customerNumber= （scope calm-api.itsm.read）"},{"purpose":"ITSM: create support case","path":"POST /api/calm-itsmapi/v1/supportcases/cases （scope calm-api.itsm.write）"}],"roles":{"full":"All envs: read & update","ro":"DEV/QAS: read & update\nPRD read-only","dev":"DEV/QAS: read only"}},{"no":28,"id":"sap_call_btp_cli","summary":"Run the btp CLI server-side and return its output (v2.106.1)","officialUrl":"https://help.sap.com/docs/btp/btp-cli-command-reference/btp-cli-command-reference","auth":"BasicAuthentication","callPath":[{"purpose":"Run btp CLI","path":"args: [\"list\",\"accounts/subaccount\"] etc."}],"roles":{"full":"All envs: run","ro":"Not available","dev":"Not available"}},{"no":29,"id":"sap_call_cf_cli","summary":"Run the cf CLI server-side and return its output (v8.18.3)","officialUrl":"https://cli.cloudfoundry.org/en-US/v8/","auth":"OAuth2Password (with the cf client)","callPath":[{"purpose":"Run cf CLI","path":"args: [\"apps\"] etc."}],"roles":{"full":"All envs: run","ro":"Not available","dev":"Not available"}},{"no":30,"id":"sap_call_datasphere_cli","summary":"Run the datasphere CLI server-side and return its output (v2026.13.0)","officialUrl":"https://help.sap.com/docs/SAP_DATASPHERE/d0ecd6f297ac40249072a44df0549c1a/12d2b51987034daf822511ed1a229a6c.html","auth":"OAuth2ClientCredentials (Datasphere CLI)","callPath":[{"purpose":"Run datasphere CLI","path":"args: [\"spaces\",\"read\"] etc."}],"roles":{"full":"All envs: run","ro":"Not available","dev":"Not available"}},{"no":31,"id":"app_call_jira_api","summary":"Read, create, transition and search issues through the REST API","officialUrl":"https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/#","auth":"ClientCertificateAuthentication (mTLS) + bearer (resolved by the destination)","callPath":[{"purpose":"Issue read/update","path":"GET/PUT /rest/api/2/issue/{key} , POST /rest/api/2/issue"},{"purpose":"Transition","path":"GET/POST /rest/api/2/issue/{key}/transitions"},{"purpose":"Comment","path":"POST /rest/api/2/issue/{key}/comment"},{"purpose":"Service Desk request","path":"POST/GET /rest/servicedeskapi/request"},{"purpose":"Search (JQL)","path":"GET /rest/api/2/search?jql=..."}],"roles":{"full":"All envs: all operations","ro":"DEV/QAS: all operations\nPRD read-only","dev":"DEV/QAS: all operations\nPRD blocked"}},{"no":32,"id":"app_call_smartdb_api","summary":"Manage documents, views and processes through the REST API v3","officialUrl":"https://doc.support-dreamarts.com/SmartDB/Document/RestDocDocumentV3/index.html","auth":"NoAuthentication + static bearer (resolved via the destination URL.headers.Authorization)","callPath":[{"purpose":"Binder detail / views","path":"GET /binders/{binder} , GET /binders/{binder}/views"},{"purpose":"Document list by view","path":"GET /binders/{binder}/views/{view}/documents"},{"purpose":"Document CRUD","path":"GET/PUT/DELETE /binders/{binder}/documents/{document} , POST /binders/{binder}/documents"},{"purpose":"Process / activity","path":"POST /processes/start , GET /activities/worklist , PUT /activities/{activity}"},{"purpose":"CSV import/export","path":"GET /binders/{binder}/views/{view}/documents/csv , POST/PUT /binders/{binder}/documents/csv"}],"roles":{"full":"All envs: all operations","ro":"DEV/QAS: all operations\nPRD read-only","dev":"DEV/QAS: all operations\nPRD blocked"}},{"no":33,"id":"sap_call_ibp_api","summary":"Read and write master, planning and stock data through the OData API","officialUrl":"https://api.sap.com/products/SAPIntegratedBusinessPlanningforSupplyChain/apis/all","auth":"BasicAuthentication (communication user, resolved by the destination)","callPath":[{"purpose":"Master data read/write","path":"GET/POST /sap/opu/odata/IBP/MASTER_DATA_API_SRV/..."},{"purpose":"Planning data read/write","path":"GET/POST /sap/opu/odata/IBP/PLANNING_DATA_API_SRV/..."},{"purpose":"Stock/Batch (OData v4)","path":"GET /sap/opu/odata4/ibp/api_stock/srvd_a2x/ibp/api_stock/0001/..."},{"purpose":"Analytics extract","path":"GET /sap/opu/odata/IBP/EXTRACT_ODATA_SRV/..."}],"roles":{"full":"All envs: read & update","ro":"DEV/QAS: read & update\nPRD read-only","dev":"DEV/QAS: read & update"}},{"no":34,"id":"sap_call_s4_api","summary":"Call OData/REST through the destination; any SICF path works too","officialUrl":"https://api.sap.com/products/SAPS4HANACloudPrivateEdition/apis/all","auth":"BasicAuthentication / PrincipalPropagation","callPath":[{"purpose":"OData V2 read/write","path":"GET/POST /sap/opu/odata/sap/\u003cSERVICE>/..."},{"purpose":"OData V4 read/write","path":"GET/POST /sap/opu/odata4/sap/\u003csrv>/srvd_a2x/sap/\u003csrv>/0001/..."},{"purpose":"Fetch schema","path":"GET /sap/opu/odata/sap/\u003cSERVICE>/$metadata"},{"purpose":"List published services","path":"GET /sap/opu/odata/IWFND/CATALOGSERVICE;v=2/ServiceCollection"}],"roles":{"full":"All envs: read & update","ro":"DEV/QAS: read & update\nPRD read-only","dev":"DEV/QAS: read only"}},{"no":35,"id":"sap_call_soap","summary":"Call a SOAP service, passing the envelope through","officialUrl":"https://api.sap.com/products/SAPS4HANACloudPrivateEdition/apis/all","auth":"BasicAuthentication / PrincipalPropagation","callPath":[{"purpose":"Call SOAP service","path":"POST /sap/bc/srt/rfc/sap/\u003cservice>/\u003cclient>/\u003cservice>/\u003cbinding>"},{"purpose":"Fetch WSDL","path":"GET \u003cendpoint>?wsdl (fetch it with sap_call_s4_api)"}],"roles":{"full":"All envs: read & update","ro":"DEV/QAS: read & update\nPRD read-only","dev":"DEV/QAS: read only"}}];
 const d = document.getElementById('d');
 const set = (id, text) => { document.getElementById(id).textContent = text; };
 document.querySelectorAll('button.detail').forEach((b) => {
@@ -527,6 +534,23 @@ heads.forEach((th) => {
       })
       .forEach((r) => tb.append(r));
   });
+});
+const tip = document.createElement('div');
+tip.id = 'tip';
+document.body.append(tip);
+const place = (e) => {
+  const pad = 14;
+  let x = e.clientX + pad, y = e.clientY + pad;
+  const r = tip.getBoundingClientRect();
+  if (x + r.width > innerWidth - 8) x = e.clientX - r.width - pad;
+  if (y + r.height > innerHeight - 8) y = e.clientY - r.height - pad;
+  tip.style.left = x + 'px';
+  tip.style.top = y + 'px';
+};
+document.querySelectorAll('td.mk[data-tip]').forEach((td) => {
+  td.addEventListener('mouseenter', (e) => { tip.textContent = td.dataset.tip; tip.classList.add('on'); place(e); });
+  td.addEventListener('mousemove', place);
+  td.addEventListener('mouseleave', () => tip.classList.remove('on'));
 });
 document.getElementById('d-x').addEventListener('click', () => d.close());
 d.addEventListener('click', (e) => { if (e.target === d) d.close(); });
