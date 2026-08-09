@@ -39,6 +39,8 @@ jobs:
 
       - name: Check out this repository
         uses: actions/checkout@v7
+        with:
+          persist-credentials: false
 
       - name: Check out upstream source at the requested tag
         uses: actions/checkout@v7
@@ -48,6 +50,11 @@ jobs:
           # The default GITHUB_TOKEN only works for this repository. A token with
           # read access to the upstream repository is required.
           token: ${{ secrets.UPSTREAM_TOKEN }}
+          # Do NOT leave the token behind in upstream/.git/config: the build step below
+          # runs third-party code (npm lifecycle scripts) in this very directory, and it
+          # would be able to read a credential for the private upstream repository.
+          # Nothing after the checkout performs git operations, so this costs nothing.
+          persist-credentials: false
           path: upstream
 
       - uses: actions/setup-node@v7
