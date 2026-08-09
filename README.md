@@ -38,22 +38,11 @@ Three scopes — `mcp` (**Full**), `mcp_readonly` (**Reference-only**) and `mcp_
 5. **Hard-deny** — PII tools (IAS / IPS) and CLI execution are `mcp`-only, regardless of environment.
 6. **ABAP writes stay in development** — write / delete / transport / activate target `DEV`-tagged destinations only, for every scope. `QAS` and `PRD` are not modifiable under standard SAP practice; changes arrive by transport.
 
-| Tool | Full (`mcp`) | Reference-only (`mcp_readonly`) | Development-only (`mcp_developer`) |
-|---|---|---|---|
-| `sap_list_destinations` | all | all | DEV/QAS only |
-| `sap_use_destination` / `sap_current_destination` | all envs | all envs | all envs |
-| `sap_select_table` | all envs | all envs (read) | DEV/QAS only |
-| `sap_adt_freestyle` / `osql` / `ddic` | all envs | all envs (read) | DEV/QAS only |
-| `sap_abap_read_source` | all envs | all envs (read) | DEV/QAS only |
-| `sap_call_fm` (incl. `commit`) | all envs | DEV/QAS only (**PRD denied**) | DEV/QAS only |
-| `sap_abap_write_source` / `write_fm` / `delete_source` / `activate` (writes) | DEV-role destinations only | DEV-role destinations only | DEV-role destinations only |
-| `sap_create_transport` / `sap_release_transport` | DEV-role destinations only | DEV-role destinations only | DEV-role destinations only |
-| `sap_call_ias_admin` (IAS · PII) | all envs | **denied** | **denied** |
-| `sap_call_ips_job` (IPS · PII) | all envs | **denied** | **denied** |
-| `sap_call_cf_api` / `bwz_content` / `ctms_api` / `forms_api` / `cis_api` / `cpi_api` / `ans_api` / `sbpa_api` / `datasphere_api` / `calm_api` | all envs, any method | any method on DEV/QAS, `GET` on PRD | `GET` + DEV/QAS only |
-| `sap_call_s4_api` / `sap_call_soap` (S/4 OData · REST · SOAP) | all envs, any method | any method on DEV/QAS, `GET` on PRD | `GET` + DEV/QAS only |
-| `app_call_jira_api` / `app_call_smartdb_api` / `sap_call_ibp_api` | all envs, any method | any method on DEV/QAS, `GET` on PRD | any method on DEV/QAS |
-| `sap_call_btp_cli` / `cf_cli` / `datasphere_cli` | all envs | **denied** | **denied** |
+The per-tool matrix is generated from the tool catalog that ships inside the binary, so it always
+matches the release. It is published as a page rather than duplicated here:
+
+- **[Tool reference](https://sap-support.github.io/sap-mcp-server/)** — switch between **PRD** and **QAS / DEV** to see what each scope may do, with the authentication and call path behind every tool
+- **[ツール一覧（日本語）](https://sap-support.github.io/sap-mcp-server/ja/)**
 
 Operational controls (defense in depth): (1) MCP key issuance, (2) scope `mcp` / `mcp_readonly` / `mcp_developer`, (3) key revoke, (4) audit log of every call, (5) per-destination environment tag.
 
@@ -62,11 +51,8 @@ Operational controls (defense in depth): (1) MCP key issuance, (2) scope `mcp` /
 **35 tools.** Per-tool descriptions, official API references and per-scope permissions are carried in
 the tool catalog embedded in the binary, which your MCP client shows once the server is connected.
 
-Browse the same catalog as a page — what each tool does, which role may call it, how it authenticates
-and the path it calls:
-
-- **[Tool reference](https://sap-support.github.io/sap-mcp-server/)**
-- **[ツール一覧（日本語）](https://sap-support.github.io/sap-mcp-server/ja/)**
+The same catalog is published as the [Tool reference](https://sap-support.github.io/sap-mcp-server/)
+page linked above.
 
 - **Connection**
   - List destinations, switch the active destination, show the current one
