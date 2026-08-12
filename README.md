@@ -48,7 +48,7 @@ Operational controls (defense in depth): (1) MCP key issuance, (2) scope `mcp` /
 
 ## Capabilities
 
-**35 tools.** Per-tool descriptions, official API references and per-scope permissions are carried in
+**36 tools.** Per-tool descriptions, official API references and per-scope permissions are carried in
 the tool catalog embedded in the binary, which your MCP client shows once the server is connected.
 
 The same catalog is published as the [Tool reference](https://sap-support.github.io/sap-mcp-server/)
@@ -77,6 +77,7 @@ page linked above.
   - Alert Notification Service (ANS)
   - Build Process Automation (SBPA)
   - Datasphere (public REST / OData API)
+  - Analytics Cloud (SAC REST API)
   - Cloud ALM (REST API)
 - **SAP applications**
   - Integrated Business Planning (IBP) OData API
