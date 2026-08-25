@@ -48,7 +48,7 @@ Operational controls (defense in depth): (1) MCP key issuance, (2) scope `mcp` /
 
 ## Capabilities
 
-**36 tools.** Per-tool descriptions, official API references and per-scope permissions are carried in
+**37 tools.** Per-tool descriptions, official API references and per-scope permissions are carried in
 the tool catalog embedded in the binary, which your MCP client shows once the server is connected.
 
 The same catalog is published as the [Tool reference](https://sap-support.github.io/sap-mcp-server/)
