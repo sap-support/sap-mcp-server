@@ -35,7 +35,7 @@ Three scopes — `mcp` (**Full**), `mcp_readonly` (**Reference-only**) and `mcp_
 2. **Environment gate (per destination)** — each destination is tagged `DEV` / `QAS` / `PRD`. `mcp_developer` may reach only `DEV`/`QAS`; `mcp_readonly` may also reach `PRD` but for reads only. Untagged destinations are denied for restricted scopes (fail-closed). `mcp` reaches all.
 3. **Method gate (REST relays)** — `mcp_readonly` may use any method on `DEV`/`QAS` and only `GET` on `PRD`. `mcp_developer` is limited to `GET` (external app relays allow any method on `DEV`/`QAS`).
 4. **No function modules in production** — `mcp_readonly` is denied `sap_call_fm` against `PRD` **regardless of the `commit` flag**. Many function modules write without an explicit commit, so "read-only" cannot be delegated to a caller-supplied flag.
-5. **Hard-deny** — PII tools (IAS / IPS) and CLI execution are `mcp`-only, regardless of environment.
+5. **Hard-deny** — PII tools (IAS / IPS), CLI execution and OS SSH execution (`os_call_windows_ssh` / `os_call_linux_ssh`) are `mcp`-only, regardless of environment.
 6. **ABAP writes stay in development** — write / delete / transport / activate target `DEV`-tagged destinations only, for every scope. `QAS` and `PRD` are not modifiable under standard SAP practice; changes arrive by transport.
 
 The per-tool matrix is generated from the tool catalog that ships inside the binary, so it always
@@ -48,7 +48,7 @@ Operational controls (defense in depth): (1) MCP key issuance, (2) scope `mcp` /
 
 ## Capabilities
 
-**37 tools.** Per-tool descriptions, official API references and per-scope permissions are carried in
+**41 tools.** Per-tool descriptions, official API references and per-scope permissions are carried in
 the tool catalog embedded in the binary, which your MCP client shows once the server is connected.
 
 The same catalog is published as the [Tool reference](https://sap-support.github.io/sap-mcp-server/)
@@ -86,6 +86,10 @@ page linked above.
 - **External app relays**
   - JIRA REST API v3
   - SmartDB REST API v3
+- **On-premise OS / monitoring** (SSH via Connectivity SOCKS5 + Cloud Connector / Zabbix 7.0 API)
+  - Arbitrary OS command execution on Windows / Linux hosts over SSH (`mcp` scope only)
+  - Allow-listed JP1/AJS3 - Manager commands over SSH
+  - Zabbix 7.0 JSON-RPC API (monitoring configuration, problems, maintenance windows)
 
 ## Install
 
