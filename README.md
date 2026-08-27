@@ -35,7 +35,7 @@ Three scopes — `mcp` (**Full**), `mcp_readonly` (**Reference-only**) and `mcp_
 2. **Environment gate (per destination)** — each destination is tagged `DEV` / `QAS` / `PRD`. `mcp_developer` may reach only `DEV`/`QAS`; `mcp_readonly` may also reach `PRD` but for reads only. Untagged destinations are denied for restricted scopes (fail-closed). `mcp` reaches all.
 3. **Method gate (REST relays)** — `mcp_readonly` may use any method on `DEV`/`QAS` and only `GET` on `PRD`. `mcp_developer` is limited to `GET` (external app relays allow any method on `DEV`/`QAS`).
 4. **No function modules in production** — `mcp_readonly` is denied `sap_call_fm` against `PRD` **regardless of the `commit` flag**. Many function modules write without an explicit commit, so "read-only" cannot be delegated to a caller-supplied flag.
-5. **Hard-deny** — PII tools (IAS / IPS), CLI execution and OS SSH execution (`os_call_windows_ssh` / `os_call_linux_ssh`) are `mcp`-only, regardless of environment.
+5. **Hard-deny** — PII tools (IAS / IPS), CLI execution, OS SSH execution (`os_call_windows_ssh` / `os_call_linux_ssh`) and Cloud Connector administration (`sap_call_scc_api`) are `mcp`-only, regardless of environment. For `sap_call_scc_api`, operations whose blast radius is the whole connector are additionally rejected for `mcp` as well (HA role switch, authentication settings, backup, bulk delete of a collection, subaccount delete, audit level, traffic trace).
 6. **ABAP writes stay in development** — write / delete / transport / activate target `DEV`-tagged destinations only, for every scope. `QAS` and `PRD` are not modifiable under standard SAP practice; changes arrive by transport.
 
 The per-tool matrix is generated from the tool catalog that ships inside the binary, so it always
@@ -48,7 +48,7 @@ Operational controls (defense in depth): (1) MCP key issuance, (2) scope `mcp` /
 
 ## Capabilities
 
-**41 tools.** Per-tool descriptions, official API references and per-scope permissions are carried in
+**42 tools.** Per-tool descriptions, official API references and per-scope permissions are carried in
 the tool catalog embedded in the binary, which your MCP client shows once the server is connected.
 
 The same catalog is published as the [Tool reference](https://sap-support.github.io/sap-mcp-server/)
