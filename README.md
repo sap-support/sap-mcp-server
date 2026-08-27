@@ -101,9 +101,9 @@ curl -fsSL https://github.com/sap-support/sap-mcp-server/releases/latest/downloa
 
 ### Verifying a download
 
-Every binary ships with a `*.sha256` checksum and a GitHub build provenance attestation. The binary
-is additionally signed with [sigstore](https://www.sigstore.dev/) — keyless, so there is no
-long-lived private key to protect; the signing identity is the release workflow itself.
+Every binary ships with a `*.sha256` checksum and is signed with
+[sigstore](https://www.sigstore.dev/) — keyless, so there is no long-lived private key to protect;
+the signing identity is the release workflow of this repository.
 
 ```bash
 sha256sum -c sap-mcp-server-linux.sha256
@@ -113,10 +113,17 @@ cosign verify-blob sap-mcp-server-linux \
   --bundle sap-mcp-server-linux.cosign.bundle \
   --certificate-identity-regexp '^https://github.com/sap-support/sap-mcp-server/' \
   --certificate-oidc-issuer https://token.actions.githubusercontent.com
-
-# build provenance (requires GitHub CLI 2.49 or later)
-gh attestation verify sap-mcp-server-linux --repo sap-support/sap-mcp-server
 ```
+
+The signature covers the exact bytes you downloaded and is recorded on the public sigstore
+transparency log, so it can be verified by anyone.
+
+Releases up to and including `v0.16.0` also carried a GitHub build provenance attestation
+verifiable with `gh attestation verify --repo sap-support/sap-mcp-server`. From `v0.17.0` the
+binary is compiled in the private source repository and only signed here, so build provenance is
+attested there instead. Attestations from private repositories are recorded on GitHub's own
+sigstore instance, which has no public transparency log, and are therefore not externally
+verifiable. The signature above is the verification path for everyone outside that repository.
 
 ## Configuration
 

@@ -1,22 +1,41 @@
 name: release
 
-# Builds the Linux binary from a tag of the upstream development repository and publishes it here
-# as a signed release asset. This repository holds no source; the upstream tag is the input.
+# Publishes the Linux binary as a signed release asset. This repository holds no source.
+#
+# The binary is built in the source repository (the `UPSTREAM_REPO` variable) and handed over as a
+# workflow artifact; this workflow downloads that one file, verifies it, signs it and publishes it.
+#
+# Why the build is not done here (2026-08-27):
+#   The source now lives inside a larger private repository. Checking that out here would place
+#   several hundred unrelated files in a public workflow that also runs third-party npm lifecycle
+#   scripts. Receiving a single binary keeps the token scope narrow (Actions: read) and this
+#   workflow's working tree free of source it does not need.
+#
+# What each attestation covers:
+#   - The sigstore signature below is produced here and lands on the public transparency log, so
+#     anyone can verify it. It attests that this release pipeline signed this exact binary.
+#   - Build provenance is attested in the source repository, where the build actually happens.
+#     Because that repository is private, its attestation goes to GitHub's own Sigstore instance,
+#     which has no public transparency log and is therefore not externally verifiable.
 on:
   workflow_dispatch:
     inputs:
       version:
-        description: "Upstream tag to build and publish (e.g. v0.14.2)"
+        description: "Version to publish (e.g. v0.17.0). Must already be built upstream."
         required: true
         type: string
+      dry_run:
+        description: "Download and verify only; do not create or update the release"
+        required: false
+        default: false
+        type: boolean
 
 permissions:
   contents: write # create the release and upload assets
-  id-token: write # OIDC token for sigstore keyless signing and provenance
-  attestations: write # artifact attestation
+  id-token: write # OIDC token for sigstore keyless signing
 
 env:
-  # Repository variable holding "<owner>/<repo>" of the source to build from.
+  # Repository variable holding "<owner>/<repo>" of the source repository that builds the binary.
   UPSTREAM_REPO: ${{ vars.UPSTREAM_REPO }}
 
 jobs:
@@ -30,7 +49,7 @@ jobs:
           # Keep the input out of the command line: expand it only as a shell variable.
           case "$VERSION" in
             v[0-9]*) ;;
-            *) echo "version must be a tag like 'v0.14.2' (got '$VERSION')" >&2; exit 1 ;;
+            *) echo "version must be a tag like 'v0.17.0' (got '$VERSION')" >&2; exit 1 ;;
           esac
           if [ -z "$UPSTREAM_REPO" ]; then
             echo "the UPSTREAM_REPO repository variable is not set (Settings → Actions → Variables)" >&2
@@ -42,34 +61,50 @@ jobs:
         with:
           persist-credentials: false
 
-      - name: Check out upstream source at the requested tag
-        uses: actions/checkout@v7
-        with:
-          repository: ${{ env.UPSTREAM_REPO }}
-          ref: ${{ inputs.version }}
-          # The default GITHUB_TOKEN only works for this repository. A token with
-          # read access to the upstream repository is required.
-          token: ${{ secrets.UPSTREAM_TOKEN }}
-          # Do NOT leave the token behind in upstream/.git/config: the build step below
-          # runs third-party code (npm lifecycle scripts) in this very directory, and it
-          # would be able to read a credential for the private upstream repository.
-          # Nothing after the checkout performs git operations, so this costs nothing.
-          persist-credentials: false
-          path: upstream
-
-      - uses: actions/setup-node@v7
-        with:
-          node-version: 22
-
-      - name: Build Linux binary
-        working-directory: upstream
+      # The upstream build uploads an artifact named sap-mcp-server-linux-<version>. Look it up by
+      # name so the lookup is keyed on the version rather than on a run id someone has to copy.
+      - name: Download the upstream build
+        env:
+          # Needs Actions: read on the upstream repository — narrower than the repository-wide
+          # read the previous full checkout required.
+          GH_TOKEN: ${{ secrets.UPSTREAM_TOKEN }}
+          VERSION: ${{ inputs.version }}
         run: |
-          npm ci
-          npm run build:bin:linux
+          set -euo pipefail
+          name="sap-mcp-server-linux-${VERSION}"
+          # Newest non-expired artifact with that exact name.
+          id=$(gh api --paginate \
+                 "repos/${UPSTREAM_REPO}/actions/artifacts?name=${name}&per_page=100" \
+                 --jq '[.artifacts[] | select(.expired == false)] | sort_by(.created_at) | last | .id')
+          if [ -z "$id" ] || [ "$id" = "null" ]; then
+            echo "no artifact named '${name}' in ${UPSTREAM_REPO}." >&2
+            echo "Run the upstream build for ${VERSION} first, and note that artifacts expire." >&2
+            exit 1
+          fi
+          echo "artifact id: $id"
+          mkdir -p build
+          gh api "repos/${UPSTREAM_REPO}/actions/artifacts/${id}/zip" > build/artifact.zip
+          unzip -o -j build/artifact.zip -d build
+          rm build/artifact.zip
+          ls -l build
 
-      - name: Checksum
-        working-directory: upstream/build
-        run: sha256sum sap-mcp-server-linux > sap-mcp-server-linux.sha256
+      # The binary was produced elsewhere, so check it before putting a signature on it.
+      - name: Verify the downloaded binary
+        env:
+          VERSION: ${{ inputs.version }}
+        working-directory: build
+        run: |
+          set -euo pipefail
+          test -f sap-mcp-server-linux
+          test -f sap-mcp-server-linux.sha256
+          sha256sum -c sap-mcp-server-linux.sha256
+          chmod +x sap-mcp-server-linux
+          got=$(./sap-mcp-server-linux --version)
+          echo "binary reports: $got"
+          case "$got" in
+            *"${VERSION#v}"*) ;;
+            *) echo "the binary does not report ${VERSION}" >&2; exit 1 ;;
+          esac
 
       - name: Install cosign
         # cosign-installer publishes no moving tags (v4 etc.), so pin the exact version by SHA.
@@ -78,16 +113,14 @@ jobs:
       - name: Sign binary (sigstore keyless)
         # No key is held: signing uses the GitHub Actions OIDC token. The bundle carries the
         # certificate and the Rekor transparency log entry, so verification needs that one file.
+        # The certificate identity stays this repository, so published verification commands and
+        # the documented identity regexp are unchanged by the 2026-08-27 build split.
         run: |
-          cosign sign-blob --yes upstream/build/sap-mcp-server-linux \
-            --bundle upstream/build/sap-mcp-server-linux.cosign.bundle
-
-      - name: Attest provenance
-        uses: actions/attest-build-provenance@v4
-        with:
-          subject-path: upstream/build/sap-mcp-server-linux
+          cosign sign-blob --yes build/sap-mcp-server-linux \
+            --bundle build/sap-mcp-server-linux.cosign.bundle
 
       - name: Create release if absent
+        if: ${{ !inputs.dry_run }}
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           VERSION: ${{ inputs.version }}
@@ -96,19 +129,26 @@ jobs:
             echo "Release $VERSION already exists — its assets will be replaced."
           else
             gh release create "$VERSION" --repo "$GITHUB_REPOSITORY" --title "$VERSION" --target main --notes \
-              "Linux binary built from [\`${UPSTREAM_REPO}@${VERSION}\`](https://github.com/${UPSTREAM_REPO}/releases/tag/${VERSION}).
+              "Linux binary for \`$VERSION\`, built from source and signed by this release pipeline.
 
-          Signed with sigstore (keyless) and shipped with a build provenance attestation — see [Verifying a download](https://github.com/${GITHUB_REPOSITORY}#verifying-a-download)."
+          Signed with sigstore (keyless) — see [Verifying a download](https://github.com/${GITHUB_REPOSITORY}#verifying-a-download)."
           fi
 
       - name: Upload assets
+        if: ${{ !inputs.dry_run }}
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           VERSION: ${{ inputs.version }}
         run: |
           gh release upload "$VERSION" --repo "$GITHUB_REPOSITORY" --clobber \
-            upstream/build/sap-mcp-server-linux \
-            upstream/build/sap-mcp-server-linux.sha256 \
-            upstream/build/sap-mcp-server-linux.cosign.bundle \
+            build/sap-mcp-server-linux \
+            build/sap-mcp-server-linux.sha256 \
+            build/sap-mcp-server-linux.cosign.bundle \
             connections.example.json \
             scripts/install-sap-mcp.sh
+
+      - name: Dry run summary
+        if: ${{ inputs.dry_run }}
+        run: |
+          echo "Dry run: the binary was downloaded, verified and signed, but nothing was published."
+          ls -l build
