@@ -46,6 +46,29 @@ matches the release. It is published as a page rather than duplicated here:
 
 Operational controls (defense in depth): (1) MCP key issuance, (2) scope `mcp` / `mcp_readonly` / `mcp_developer`, (3) key revoke, (4) audit log of every call, (5) per-destination environment tag.
 
+### Operator identity in the audit log
+
+Every relay call carries an operator identifier, which the backend records in its audit log alongside
+the destination, the operation and the outcome. **No configuration is required** — the identifier is
+resolved automatically, in this order:
+
+| Order | Source | Identifier |
+|---|---|---|
+| 1 | `mcpUser` in `connections.json`, when set | the configured value |
+| 2 | `USER_NAME` environment variable, when it looks like an e-mail address — injected by **SAP Business Application Studio** | `bas:<e-mail address>` |
+| 3 | otherwise | `host:<OS user name>@<host name>` |
+
+This makes an audited call attributable to a person under normal use, including from a shared
+development space where the OS user name is identical for everyone.
+
+> ⚠ The identifier is **reported by the client**, so a determined operator can change it. It is an
+> attribution aid for the audit trail, **not** an authentication mechanism. The authorization boundary
+> remains the OAuth2 scope of the credentials in `connections.json`; the identifier never grants or
+> widens access.
+
+Unattended use (scheduled jobs, CI) resolves to the `host:` form, so automated activity is attributed
+to the account and machine that ran it rather than being absent from the audit trail.
+
 ## Capabilities
 
 **45 tools.** Per-tool descriptions, official API references and per-scope permissions are carried in
@@ -159,6 +182,7 @@ The binary reads a `connections.json` describing one or more backend connections
 | `relayBasePath` | **required*** | Path where the backend mounts the MCP relay. **It must match your backend.** The provided reference backend mounts it at **`/api/tableread/mcp`**. |
 | `clientId` / `clientSecret` | **required** | OAuth2 `client_credentials` of the XSUAA service key that protects the backend. |
 | `tokenUrl` | **required** | XSUAA token endpoint (ends with `/oauth/token`). |
+| `mcpUser` | optional | Operator identifier sent with every call and recorded in the backend's audit log. Leave it unset — it is [resolved automatically](#operator-identity-in-the-audit-log) from the runtime environment. Set it only to override that. |
 
 > ⚠ **Most common failure — "cannot connect / tools return 404".**
 > If `relayBasePath` is omitted it defaults to `/api/mcp`, which does **not** match the reference
