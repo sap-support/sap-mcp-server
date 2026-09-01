@@ -71,7 +71,7 @@ to the account and machine that ran it rather than being absent from the audit t
 
 ## Capabilities
 
-**45 tools.** Per-tool descriptions, official API references and per-scope permissions are carried in
+**46 tools.** Per-tool descriptions, official API references and per-scope permissions are carried in
 the tool catalog embedded in the binary, which your MCP client shows once the server is connected.
 
 The same catalog is published as the [Tool reference](https://sap-support.github.io/sap-mcp-server/)
