@@ -28,7 +28,7 @@ body {
   margin: 0; padding: 2rem 1rem 4rem; background: var(--bg); color: var(--fg);
   font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
 }
-main { max-width: 1100px; margin: 0 auto; }
+main { max-width: 1220px; margin: 0 auto; }
 h1 { font-size: 1.6rem; margin: 0 0 1.5rem; color: var(--accent); }
 .wrap {
   overflow-x: auto; background: var(--surface);
@@ -50,8 +50,10 @@ thead th.desc::after { content: ' ▼'; font-size: .75em; }
 tbody td { border-top: 1px solid var(--line); transition: background .15s; }
 tbody tr:hover td { background: var(--accent-soft); }
 td.num { color: var(--muted); text-align: right; width: 3ch; }
+/* ツール名は一覧を目で追うための見出し。折り返すと表が縦に伸びるので幅を固定する。 */
+td.nm { width: 9rem; font-weight: 600; white-space: nowrap; }
 /* 説明を主役にし、権限 6 列は幅を固定して揺れないようにする。 */
-td.what { width: 34%; }
+td.what { width: 32%; }
 td.sys  { width: 8rem; }
 td.mk { width: 6.5rem; min-width: 6.5rem; text-align: center; white-space: nowrap; cursor: help; font-size: .8rem; }
 td.mk span {
@@ -91,7 +93,8 @@ dialog {
 }
 dialog::backdrop { background: var(--overlay); }
 .dh { display: flex; align-items: center; gap: 1rem; padding: 1rem 1.25rem; border-bottom: 1px solid var(--line); }
-.dh code { font-size: 1rem; }
+.dh strong { font-size: 1.05rem; }
+.dh code { font-size: .95rem; color: var(--muted); }
 .dh button { margin-left: auto; font: inherit; background: none; border: 0; color: var(--muted); cursor: pointer; font-size: 1.3rem; line-height: 1; }
 .db { padding: 1rem 1.25rem; }
 .db table { font-size: .875rem; }
@@ -127,12 +130,13 @@ a { color: var(--accent); }
     <table>
       <thead>
         <tr>
-          <th class="" data-i="0" aria-sort="none">No</th><th class="" data-i="1" aria-sort="none">Tool</th><th class="" data-i="2" aria-sort="none">Description</th><th class="" data-i="3" aria-sort="none">System</th><th class="r-full" data-i="4" aria-sort="none">Full</th><th class="r-ro" data-i="5" aria-sort="none">Read-only</th><th class="r-dev" data-i="6" aria-sort="none">Developer</th><th></th>
+          <th class="" data-i="0" aria-sort="none">No</th><th class="" data-i="1" aria-sort="none">Name</th><th class="" data-i="2" aria-sort="none">Tool</th><th class="" data-i="3" aria-sort="none">Description</th><th class="" data-i="4" aria-sort="none">System</th><th class="r-full" data-i="5" aria-sort="none">Full</th><th class="r-ro" data-i="6" aria-sort="none">Read-only</th><th class="r-dev" data-i="7" aria-sort="none">Developer</th><th></th>
         </tr>
       </thead>
       <tbody>
         <tr data-id="sap_list_destinations">
           <td class="num">1</td>
+          <td class="nm">Destination list</td>
           <td><code>sap_list_destinations</code></td>
           <td class="what">List the destinations you can reach</td>
           <td class="sys">Common</td>
@@ -143,6 +147,7 @@ a { color: var(--accent); }
         </tr>
         <tr data-id="sap_use_destination">
           <td class="num">2</td>
+          <td class="nm">Destination switch</td>
           <td><code>sap_use_destination</code></td>
           <td class="what">Switch the session default destination</td>
           <td class="sys">Common</td>
@@ -153,6 +158,7 @@ a { color: var(--accent); }
         </tr>
         <tr data-id="sap_current_destination">
           <td class="num">3</td>
+          <td class="nm">Current destination</td>
           <td><code>sap_current_destination</code></td>
           <td class="what">Show the current default destination</td>
           <td class="sys">Common</td>
@@ -163,6 +169,7 @@ a { color: var(--accent); }
         </tr>
         <tr data-id="sap_call_fm">
           <td class="num">4</td>
+          <td class="nm">Function module call</td>
           <td><code>sap_call_fm</code></td>
           <td class="what">Call a Function Module / BAPI over RFC</td>
           <td class="sys">ABAP</td>
@@ -173,6 +180,7 @@ a { color: var(--accent); }
         </tr>
         <tr data-id="sap_select_table">
           <td class="num">5</td>
+          <td class="nm">Table read</td>
           <td><code>sap_select_table</code></td>
           <td class="what">Read a table through an RFC_READ_TABLE equivalent</td>
           <td class="sys">ABAP</td>
@@ -183,6 +191,7 @@ a { color: var(--accent); }
         </tr>
         <tr data-id="sap_adt_freestyle">
           <td class="num">6</td>
+          <td class="nm">Free-form SQL</td>
           <td><code>sap_adt_freestyle</code></td>
           <td class="what">Run free-form SQL through the ADT data preview</td>
           <td class="sys">ABAP</td>
@@ -193,6 +202,7 @@ a { color: var(--accent); }
         </tr>
         <tr data-id="sap_adt_osql">
           <td class="num">7</td>
+          <td class="nm">Open SQL</td>
           <td><code>sap_adt_osql</code></td>
           <td class="what">Run Open SQL through ADT</td>
           <td class="sys">ABAP</td>
@@ -203,6 +213,7 @@ a { color: var(--accent); }
         </tr>
         <tr data-id="sap_adt_ddic">
           <td class="num">8</td>
+          <td class="nm">DDIC read</td>
           <td><code>sap_adt_ddic</code></td>
           <td class="what">SELECT * a DDIC object (table or CDS) through ADT</td>
           <td class="sys">ABAP</td>
@@ -213,6 +224,7 @@ a { color: var(--accent); }
         </tr>
         <tr data-id="sap_abap_read_source">
           <td class="num">9</td>
+          <td class="nm">Source read</td>
           <td><code>sap_abap_read_source</code></td>
           <td class="what">Read program or function module source through ADT</td>
           <td class="sys">ABAP</td>
@@ -223,6 +235,7 @@ a { color: var(--accent); }
         </tr>
         <tr data-id="sap_abap_write_source">
           <td class="num">10</td>
+          <td class="nm">Source write</td>
           <td><code>sap_abap_write_source</code></td>
           <td class="what">Create or update a report/program through ADT and activate it</td>
           <td class="sys">ABAP</td>
@@ -233,6 +246,7 @@ a { color: var(--accent); }
         </tr>
         <tr data-id="sap_abap_delete_source">
           <td class="num">11</td>
+          <td class="nm">Source delete</td>
           <td><code>sap_abap_delete_source</code></td>
           <td class="what">Delete a program or CDS DDL through ADT</td>
           <td class="sys">ABAP</td>
@@ -243,6 +257,7 @@ a { color: var(--accent); }
         </tr>
         <tr data-id="sap_abap_write_fm">
           <td class="num">12</td>
+          <td class="nm">Function module write</td>
           <td><code>sap_abap_write_fm</code></td>
           <td class="what">Create or update a function module through ADT and activate it</td>
           <td class="sys">ABAP</td>
@@ -253,6 +268,7 @@ a { color: var(--accent); }
         </tr>
         <tr data-id="sap_create_transport">
           <td class="num">13</td>
+          <td class="nm">Transport create</td>
           <td><code>sap_create_transport</code></td>
           <td class="what">Create a transport request by calling a function module</td>
           <td class="sys">ABAP</td>
@@ -263,6 +279,7 @@ a { color: var(--accent); }
         </tr>
         <tr data-id="sap_release_transport">
           <td class="num">14</td>
+          <td class="nm">Transport release</td>
           <td><code>sap_release_transport</code></td>
           <td class="what">Release a transport request by calling a function module</td>
           <td class="sys">ABAP</td>
@@ -273,6 +290,7 @@ a { color: var(--accent); }
         </tr>
         <tr data-id="sap_abap_activate">
           <td class="num">15</td>
+          <td class="nm">Activation</td>
           <td><code>sap_abap_activate</code></td>
           <td class="what">Activate an object through ADT and return the syntax check result</td>
           <td class="sys">ABAP</td>
@@ -283,6 +301,7 @@ a { color: var(--accent); }
         </tr>
         <tr data-id="sap_list_odata_services">
           <td class="num">16</td>
+          <td class="nm">OData service list</td>
           <td><code>sap_list_odata_services</code></td>
           <td class="what">Discover the OData services published on the system and their entity sets</td>
           <td class="sys">ABAP</td>
@@ -293,6 +312,7 @@ a { color: var(--accent); }
         </tr>
         <tr data-id="sap_call_s4_api">
           <td class="num">17</td>
+          <td class="nm">S/4 API call</td>
           <td><code>sap_call_s4_api</code></td>
           <td class="what">Call OData/REST through the destination; any SICF path works too</td>
           <td class="sys">ABAP</td>
@@ -303,6 +323,7 @@ a { color: var(--accent); }
         </tr>
         <tr data-id="sap_call_soap">
           <td class="num">18</td>
+          <td class="nm">SOAP call</td>
           <td><code>sap_call_soap</code></td>
           <td class="what">Call a SOAP service, passing the envelope through</td>
           <td class="sys">ABAP</td>
@@ -313,6 +334,7 @@ a { color: var(--accent); }
         </tr>
         <tr data-id="sap_call_ias_admin">
           <td class="num">19</td>
+          <td class="nm">IAS administration</td>
           <td><code>sap_call_ias_admin</code></td>
           <td class="what">Manage users, groups and applications through the Admin API (SCIM) — handles personal data</td>
           <td class="sys">Cloud Identity Services (IAS)</td>
@@ -323,6 +345,7 @@ a { color: var(--accent); }
         </tr>
         <tr data-id="sap_call_ips_job">
           <td class="num">20</td>
+          <td class="nm">IPS jobs</td>
           <td><code>sap_call_ips_job</code></td>
           <td class="what">Inspect and run provisioning jobs through the Jobs / JobLogs API — handles personal data</td>
           <td class="sys">Cloud Identity Services (IPS)</td>
@@ -333,6 +356,7 @@ a { color: var(--accent); }
         </tr>
         <tr data-id="sap_call_cf_api">
           <td class="num">21</td>
+          <td class="nm">Cloud Foundry API</td>
           <td><code>sap_call_cf_api</code></td>
           <td class="what">Inspect and manage apps, orgs/spaces and services through the v3 API</td>
           <td class="sys">Cloud Foundry</td>
@@ -343,6 +367,7 @@ a { color: var(--accent); }
         </tr>
         <tr data-id="sap_call_bwz_content">
           <td class="num">22</td>
+          <td class="nm">Work Zone content</td>
           <td><code>sap_call_bwz_content</code></td>
           <td class="what">Read CDM site information and export business content as a zip</td>
           <td class="sys">Build Work Zone</td>
@@ -353,6 +378,7 @@ a { color: var(--accent); }
         </tr>
         <tr data-id="sap_call_ctms_api">
           <td class="num">23</td>
+          <td class="nm">cTMS transport</td>
           <td><code>sap_call_ctms_api</code></td>
           <td class="what">Manage transport nodes, queues and imports through the v2 API</td>
           <td class="sys">Cloud Transport Management</td>
@@ -363,6 +389,7 @@ a { color: var(--accent); }
         </tr>
         <tr data-id="sap_call_forms_api">
           <td class="num">24</td>
+          <td class="nm">Form generation</td>
           <td><code>sap_call_forms_api</code></td>
           <td class="what">List and generate forms through the REST API</td>
           <td class="sys">Forms Service by Adobe</td>
@@ -373,6 +400,7 @@ a { color: var(--accent); }
         </tr>
         <tr data-id="sap_call_cis_api">
           <td class="num">25</td>
+          <td class="nm">Account read</td>
           <td><code>sap_call_cis_api</code></td>
           <td class="what">Inspect accounts, subaccounts and entitlements through the CIS Central API</td>
           <td class="sys">BTP account</td>
@@ -383,6 +411,7 @@ a { color: var(--accent); }
         </tr>
         <tr data-id="sap_call_cpi_api">
           <td class="num">26</td>
+          <td class="nm">Integration monitoring</td>
           <td><code>sap_call_cpi_api</code></td>
           <td class="what">Inspect message processing logs and integration artifacts through the audit/monitoring API</td>
           <td class="sys">Integration Suite</td>
@@ -393,6 +422,7 @@ a { color: var(--accent); }
         </tr>
         <tr data-id="sap_call_ans_api">
           <td class="num">27</td>
+          <td class="nm">Alert notification</td>
           <td><code>sap_call_ans_api</code></td>
           <td class="what">Manage conditions, actions, subscriptions and events through the REST API</td>
           <td class="sys">Alert Notification Service</td>
@@ -403,6 +433,7 @@ a { color: var(--accent); }
         </tr>
         <tr data-id="sap_call_sbpa_api">
           <td class="num">28</td>
+          <td class="nm">Workflow operation</td>
           <td><code>sap_call_sbpa_api</code></td>
           <td class="what">Inspect and drive workflow definitions and instances through the REST API</td>
           <td class="sys">Build Process Automation</td>
@@ -413,6 +444,7 @@ a { color: var(--accent); }
         </tr>
         <tr data-id="sap_call_datasphere_api">
           <td class="num">29</td>
+          <td class="nm">Datasphere API</td>
           <td><code>sap_call_datasphere_api</code></td>
           <td class="what">Manage catalog, connections and task chains through the public REST/OData API</td>
           <td class="sys">Datasphere</td>
@@ -423,6 +455,7 @@ a { color: var(--accent); }
         </tr>
         <tr data-id="sap_call_calm_api">
           <td class="num">30</td>
+          <td class="nm">Cloud ALM API</td>
           <td><code>sap_call_calm_api</code></td>
           <td class="what">Manage projects, tasks, alerts and support cases through the REST API</td>
           <td class="sys">Cloud ALM</td>
@@ -433,6 +466,7 @@ a { color: var(--accent); }
         </tr>
         <tr data-id="sap_call_btp_cli">
           <td class="num">31</td>
+          <td class="nm">btp CLI</td>
           <td><code>sap_call_btp_cli</code></td>
           <td class="what">Run the btp CLI server-side and return its output (v2.106.1)</td>
           <td class="sys">BTP account</td>
@@ -443,6 +477,7 @@ a { color: var(--accent); }
         </tr>
         <tr data-id="sap_call_cf_cli">
           <td class="num">32</td>
+          <td class="nm">cf CLI</td>
           <td><code>sap_call_cf_cli</code></td>
           <td class="what">Run the cf CLI server-side and return its output (v8.18.3)</td>
           <td class="sys">Cloud Foundry</td>
@@ -453,6 +488,7 @@ a { color: var(--accent); }
         </tr>
         <tr data-id="sap_call_datasphere_cli">
           <td class="num">33</td>
+          <td class="nm">Datasphere CLI</td>
           <td><code>sap_call_datasphere_cli</code></td>
           <td class="what">Run the datasphere CLI server-side and return its output (v2026.13.0)</td>
           <td class="sys">Datasphere</td>
@@ -463,6 +499,7 @@ a { color: var(--accent); }
         </tr>
         <tr data-id="sap_call_ibp_api">
           <td class="num">34</td>
+          <td class="nm">IBP data</td>
           <td><code>sap_call_ibp_api</code></td>
           <td class="what">Read and write master, planning and stock data through the OData API</td>
           <td class="sys">IBP</td>
@@ -473,6 +510,7 @@ a { color: var(--accent); }
         </tr>
         <tr data-id="sap_call_sac_api">
           <td class="num">35</td>
+          <td class="nm">SAC API</td>
           <td><code>sap_call_sac_api</code></td>
           <td class="what">Manage stories, models and data import/export through the REST and OData APIs</td>
           <td class="sys">Analytics Cloud</td>
@@ -483,6 +521,7 @@ a { color: var(--accent); }
         </tr>
         <tr data-id="app_call_jira_api">
           <td class="num">36</td>
+          <td class="nm">Jira issues</td>
           <td><code>app_call_jira_api</code></td>
           <td class="what">Read, create, transition and search issues through the REST API</td>
           <td class="sys">Jira</td>
@@ -493,6 +532,7 @@ a { color: var(--accent); }
         </tr>
         <tr data-id="app_call_smartdb_api">
           <td class="num">37</td>
+          <td class="nm">SmartDB operation</td>
           <td><code>app_call_smartdb_api</code></td>
           <td class="what">Manage documents, views and processes through the REST API v3</td>
           <td class="sys">SmartDB</td>
@@ -503,8 +543,9 @@ a { color: var(--accent); }
         </tr>
         <tr data-id="os_call_windows_ssh">
           <td class="num">38</td>
+          <td class="nm">Windows command</td>
           <td><code>os_call_windows_ssh</code></td>
-          <td class="what">Run any OS command on an on-premise Windows server over SSH</td>
+          <td class="what">Run any OS command on an on-premise Windows server (OS connection, Windows)</td>
           <td class="sys">On-premise Windows (e.g. JP1 Manager)</td>
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="All envs (always treated as write)" aria-label="All envs (always treated as write)"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="—" data-tip="Not allowed" aria-label="Not allowed"><span></span></td>
@@ -513,8 +554,9 @@ a { color: var(--accent); }
         </tr>
         <tr data-id="os_call_linux_ssh">
           <td class="num">39</td>
+          <td class="nm">Linux command</td>
           <td><code>os_call_linux_ssh</code></td>
-          <td class="what">Run any OS command on an on-premise Linux server over SSH</td>
+          <td class="what">Run any OS command on an on-premise Linux server (OS connection, Linux)</td>
           <td class="sys">On-premise Linux (Zabbix Server, S/4 app/DB servers, etc.)</td>
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="All envs (always treated as write)" aria-label="All envs (always treated as write)"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="—" data-tip="Not allowed" aria-label="Not allowed"><span></span></td>
@@ -523,8 +565,9 @@ a { color: var(--accent); }
         </tr>
         <tr data-id="os_call_jp1_command">
           <td class="num">40</td>
+          <td class="nm">JP1 command</td>
           <td><code>os_call_jp1_command</code></td>
-          <td class="what">Run allow-listed JP1/AJS3 - Manager commands (show, operate, define, backup, service control) over SSH</td>
+          <td class="what">Run allow-listed JP1/AJS3 - Manager commands (show, operate, define, backup, service control)</td>
           <td class="sys">JP1/AJS3 - Manager (Windows)</td>
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="All envs: all commands" aria-label="All envs: all commands"><span></span></td>
           <td class="mk" data-prd="Read Only" data-nonprd="Full" data-tip="DEV: all commands / PRD: show commands only (7)" aria-label="DEV: all commands / PRD: show commands only (7)"><span></span></td>
@@ -533,6 +576,7 @@ a { color: var(--accent); }
         </tr>
         <tr data-id="app_call_zabbix_api">
           <td class="num">41</td>
+          <td class="nm">Zabbix operation</td>
           <td><code>app_call_zabbix_api</code></td>
           <td class="what">Read and manage monitoring configuration, problems and maintenance windows through the Zabbix 7.0 JSON-RPC API</td>
           <td class="sys">Zabbix Server 7.0 (on-premise)</td>
@@ -543,6 +587,7 @@ a { color: var(--accent); }
         </tr>
         <tr data-id="sap_call_scc_api">
           <td class="num">42</td>
+          <td class="nm">Cloud Connector admin</td>
           <td><code>sap_call_scc_api</code></td>
           <td class="what">Inspect and configure Cloud Connector through its admin API</td>
           <td class="sys">Cloud Connector</td>
@@ -553,6 +598,7 @@ a { color: var(--accent); }
         </tr>
         <tr data-id="sap_call_dms_admin">
           <td class="num">43</td>
+          <td class="nm">DMS repository admin</td>
           <td><code>sap_call_dms_admin</code></td>
           <td class="what">Manage Document Management Service repositories and usage</td>
           <td class="sys">Document Management Service</td>
@@ -563,6 +609,7 @@ a { color: var(--accent); }
         </tr>
         <tr data-id="sap_call_dms_cmis">
           <td class="num">44</td>
+          <td class="nm">DMS document operation</td>
           <td><code>sap_call_dms_cmis</code></td>
           <td class="what">Browse and manage DMS folders and documents via CMIS</td>
           <td class="sys">Document Management Service</td>
@@ -573,6 +620,7 @@ a { color: var(--accent); }
         </tr>
         <tr data-id="sap_call_dms_file">
           <td class="num">45</td>
+          <td class="nm">DMS file transfer</td>
           <td><code>sap_call_dms_file</code></td>
           <td class="what">Upload and download DMS file content (5 MB cap)</td>
           <td class="sys">Document Management Service</td>
@@ -583,6 +631,7 @@ a { color: var(--accent); }
         </tr>
         <tr data-id="sap_call_audit_log">
           <td class="num">46</td>
+          <td class="nm">Audit log aggregation</td>
           <td><code>sap_call_audit_log</code></td>
           <td class="what">Read and aggregate BTP audit logs</td>
           <td class="sys">SAP BTP</td>
@@ -598,7 +647,7 @@ a { color: var(--accent); }
 </main>
 
 <dialog id="d">
-  <div class="dh"><code id="d-id"></code><button type="button" id="d-x" aria-label="Close">&times;</button></div>
+  <div class="dh"><strong id="d-name"></strong><code id="d-id"></code><button type="button" id="d-x" aria-label="Close">&times;</button></div>
   <div class="db">
     <table><tbody>
       <tr><th>Description</th><td id="d-sum"></td></tr>
@@ -613,14 +662,14 @@ a { color: var(--accent); }
 </dialog>
 
 <script>
-const TOOLS = [{"no":1,"id":"sap_list_destinations","summary":"List the destinations you can reach","officialUrl":"https://api.sap.com/package/scpconnectivity","auth":"OAuth2ClientCredentials to the backend","callPath":[{"purpose":"List destinations","path":"connection settings inside the backend"}],"roles":{"full":"All envs: available","ro":"All envs: available","dev":"All envs: available"}},{"no":2,"id":"sap_use_destination","summary":"Switch the session default destination","officialUrl":"https://api.sap.com/package/scpconnectivity","auth":"OAuth2ClientCredentials to the backend","callPath":[{"purpose":"Switch default destination","path":"connection settings inside the backend"}],"roles":{"full":"All envs: available","ro":"All envs: available","dev":"All envs: available"}},{"no":3,"id":"sap_current_destination","summary":"Show the current default destination","officialUrl":"https://api.sap.com/package/scpconnectivity","auth":"OAuth2ClientCredentials to the backend","callPath":[{"purpose":"Show current destination","path":"connection settings inside the backend"}],"roles":{"full":"All envs: available","ro":"All envs: available","dev":"All envs: available"}},{"no":4,"id":"sap_call_fm","summary":"Call a Function Module / BAPI over RFC","officialUrl":"https://help.sap.com/docs/ABAP_PLATFORM_NEW","auth":"BasicAuthentication / PrincipalPropagation","callPath":[{"purpose":"Call Function Module","path":"backend relay /api/tableread/mcp/call-fm → FM (e.g. RFC_READ_TABLE)"}],"roles":{"full":"All envs: read & update","ro":"DEV/QAS: read & update\nPRD blocked","dev":"DEV/QAS: read & update"}},{"no":5,"id":"sap_select_table","summary":"Read a table through an RFC_READ_TABLE equivalent","officialUrl":"https://help.sap.com/docs/ABAP_PLATFORM_NEW","auth":"BasicAuthentication / PrincipalPropagation","callPath":[{"purpose":"Dynamic table SELECT","path":"backend relay → RFC_READ_TABLE equivalent"}],"roles":{"full":"All envs: read","ro":"All envs: read","dev":"DEV/QAS: read"}},{"no":6,"id":"sap_adt_freestyle","summary":"Run free-form SQL through the ADT data preview","officialUrl":"https://help.sap.com/docs/ABAP_PLATFORM_NEW","auth":"BasicAuthentication / PrincipalPropagation","callPath":[{"purpose":"Free-form SQL","path":"/sap/bc/adt/datapreview/freestyle"}],"roles":{"full":"All envs: read","ro":"All envs: read","dev":"DEV/QAS: read"}},{"no":7,"id":"sap_adt_osql","summary":"Run Open SQL through ADT","officialUrl":"https://help.sap.com/docs/ABAP_PLATFORM_NEW","auth":"BasicAuthentication / PrincipalPropagation","callPath":[{"purpose":"Open SQL","path":"/sap/bc/adt/datapreview/freestyle"}],"roles":{"full":"All envs: read","ro":"All envs: read","dev":"DEV/QAS: read"}},{"no":8,"id":"sap_adt_ddic","summary":"SELECT * a DDIC object (table or CDS) through ADT","officialUrl":"https://help.sap.com/docs/ABAP_PLATFORM_NEW","auth":"BasicAuthentication / PrincipalPropagation","callPath":[{"purpose":"SELECT * a DDIC object (internally posts SELECT * FROM \u003cname> to datapreview/freestyle)","path":"/sap/bc/adt/datapreview/freestyle"}],"roles":{"full":"All envs: read","ro":"All envs: read","dev":"DEV/QAS: read"}},{"no":9,"id":"sap_abap_read_source","summary":"Read program or function module source through ADT","officialUrl":"https://help.sap.com/docs/ABAP_PLATFORM_NEW","auth":"BasicAuthentication / PrincipalPropagation","callPath":[{"purpose":"Read ABAP source","path":"/sap/bc/adt/programs|functions/..."}],"roles":{"full":"All envs: read","ro":"All envs: read","dev":"DEV/QAS: read"}},{"no":10,"id":"sap_abap_write_source","summary":"Create or update a report/program through ADT and activate it","officialUrl":"https://help.sap.com/docs/ABAP_PLATFORM_NEW","auth":"BasicAuthentication / PrincipalPropagation","callPath":[{"purpose":"Create/update ABAP program","path":"/sap/bc/adt/programs/programs/..."}],"roles":{"full":"DEV only: create & update","ro":"DEV only: create & update","dev":"DEV only: create & update"}},{"no":11,"id":"sap_abap_delete_source","summary":"Delete a program or CDS DDL through ADT","officialUrl":"https://help.sap.com/docs/ABAP_PLATFORM_NEW","auth":"BasicAuthentication / PrincipalPropagation","callPath":[{"purpose":"Delete ABAP/CDS","path":"/sap/bc/adt/programs|ddic/ddl/... (DELETE)"}],"roles":{"full":"DEV only: create & update","ro":"DEV only: create & update","dev":"DEV only: create & update"}},{"no":12,"id":"sap_abap_write_fm","summary":"Create or update a function module through ADT and activate it","officialUrl":"https://help.sap.com/docs/ABAP_PLATFORM_NEW","auth":"BasicAuthentication / PrincipalPropagation","callPath":[{"purpose":"Create/update FM","path":"/sap/bc/adt/functions/groups/{grp}/fmodules/..."}],"roles":{"full":"DEV only: create & update","ro":"DEV only: create & update","dev":"DEV only: create & update"}},{"no":13,"id":"sap_create_transport","summary":"Create a transport request by calling a function module","officialUrl":"https://help.sap.com/docs/ABAP_PLATFORM_NEW","auth":"BasicAuthentication / PrincipalPropagation","callPath":[{"purpose":"Create transport","path":"backend relay → FM TR_INSERT_REQUEST_WITH_TASKS"}],"roles":{"full":"DEV only: create & update","ro":"DEV only: create & update","dev":"DEV only: create & update"}},{"no":14,"id":"sap_release_transport","summary":"Release a transport request by calling a function module","officialUrl":"https://help.sap.com/docs/ABAP_PLATFORM_NEW","auth":"BasicAuthentication / PrincipalPropagation","callPath":[{"purpose":"Release transport","path":"backend relay → FM TR_RELEASE_REQUEST"}],"roles":{"full":"DEV only: create & update","ro":"DEV only: create & update","dev":"DEV only: create & update"}},{"no":15,"id":"sap_abap_activate","summary":"Activate an object through ADT and return the syntax check result","officialUrl":"https://help.sap.com/docs/ABAP_PLATFORM_NEW","auth":"BasicAuthentication / PrincipalPropagation","callPath":[{"purpose":"Activate ABAP object","path":"/sap/bc/adt/activation"}],"roles":{"full":"DEV only: create & update","ro":"DEV only: create & update","dev":"DEV only: create & update"}},{"no":16,"id":"sap_list_odata_services","summary":"Discover the OData services published on the system and their entity sets","officialUrl":"https://help.sap.com/docs/ABAP_PLATFORM_NEW/68bf513362174d54b58cddec28794093/7ca326519eff236ee10000000a445394.html","auth":"BasicAuthentication / PrincipalPropagation","callPath":[{"purpose":"List published services","path":"GET /sap/opu/odata/IWFND/CATALOGSERVICE;v=2/ServiceCollection?$format=json&$inlinecount=allpages&$top=200"},{"purpose":"Filter by technical service name","path":"GET /sap/opu/odata/IWFND/CATALOGSERVICE;v=2/ServiceCollection?$filter=substringof('BUSINESS_PARTNER',TechnicalServiceName)"},{"purpose":"List entity sets of one service","path":"GET /sap/opu/odata/sap/\u003cSERVICE>/$metadata"}],"roles":{"full":"All envs: read","ro":"All envs: read","dev":"DEV/QAS: read"}},{"no":17,"id":"sap_call_s4_api","summary":"Call OData/REST through the destination; any SICF path works too","officialUrl":"https://api.sap.com/products/SAPS4HANACloudPrivateEdition/apis/all","auth":"BasicAuthentication / PrincipalPropagation","callPath":[{"purpose":"OData V2 read/write","path":"GET/POST /sap/opu/odata/sap/\u003cSERVICE>/..."},{"purpose":"OData V4 read/write","path":"GET/POST /sap/opu/odata4/sap/\u003csrv>/srvd_a2x/sap/\u003csrv>/0001/..."},{"purpose":"Fetch schema","path":"GET /sap/opu/odata/sap/\u003cSERVICE>/$metadata"},{"purpose":"List published services","path":"GET /sap/opu/odata/IWFND/CATALOGSERVICE;v=2/ServiceCollection"}],"roles":{"full":"All envs: read & update","ro":"DEV/QAS: read & update\nPRD read-only","dev":"DEV/QAS: read only"}},{"no":18,"id":"sap_call_soap","summary":"Call a SOAP service, passing the envelope through","officialUrl":"https://api.sap.com/products/SAPS4HANACloudPrivateEdition/apis/all","auth":"BasicAuthentication / PrincipalPropagation","callPath":[{"purpose":"Call SOAP service","path":"POST /sap/bc/srt/rfc/sap/\u003cservice>/\u003cclient>/\u003cservice>/\u003cbinding>"},{"purpose":"Fetch WSDL","path":"GET \u003cendpoint>?wsdl (fetch it with sap_call_s4_api)"}],"roles":{"full":"All envs: all operations","ro":"DEV/QAS: all operations\nPRD blocked","dev":"Not available"}},{"no":19,"id":"sap_call_ias_admin","summary":"Manage users, groups and applications through the Admin API (SCIM) — handles personal data","officialUrl":"https://api.sap.com/package/SCPIdentityServices","auth":"OAuth2ClientCredentials","callPath":[{"purpose":"Users","path":"GET/POST/PUT /scim/Users"},{"purpose":"Groups","path":"GET/POST/PUT /scim/Groups"},{"purpose":"Applications","path":"GET /Applications/v1"}],"roles":{"full":"All envs: read & update","ro":"Not available","dev":"Not available"}},{"no":20,"id":"sap_call_ips_job","summary":"Inspect and run provisioning jobs through the Jobs / JobLogs API — handles personal data","officialUrl":"https://api.sap.com/package/SCPIdentityServices","auth":"OAuth2ClientCredentials","callPath":[{"purpose":"Jobs","path":"GET /service/scim/Jobs"},{"purpose":"Job logs","path":"GET /service/scim/JobLogs"}],"roles":{"full":"All envs: read & update","ro":"Not available","dev":"Not available"}},{"no":21,"id":"sap_call_cf_api","summary":"Inspect and manage apps, orgs/spaces and services through the v3 API","officialUrl":"https://v3-apidocs.cloudfoundry.org/","auth":"OAuth2Password (with the cf client)","callPath":[{"purpose":"Apps","path":"GET /v3/apps"},{"purpose":"Orgs/Spaces","path":"GET /v3/organizations, /v3/spaces"},{"purpose":"Service instances/keys","path":"GET /v3/service_instances, /v3/service_credential_bindings"}],"roles":{"full":"All envs: read & update","ro":"DEV/QAS: read & update\nPRD read-only","dev":"DEV/QAS: read only"}},{"no":22,"id":"sap_call_bwz_content","summary":"Read CDM site information and export business content as a zip","officialUrl":"https://api.sap.com/package/SAPBuildWorkZone","auth":"OAuth2ClientCredentials","callPath":[{"purpose":"Sites","path":"GET /semantic/entity/site"},{"purpose":"Tenant configuration","path":"GET /semantic/entity/site?isTenantConf=true"},{"purpose":"Export a site as zip","path":"GET /cdm_export_service/v1/export/site(siteID='{siteId}')"},{"purpose":"Export content items as zip","path":"POST /cdm_export_service/v1/export/Entities"},{"purpose":"Send to cTMS","path":"POST /cdm_export_service/v1/export/site_to_ctms | entities_to_ctms"}],"roles":{"full":"All envs: read & update","ro":"DEV/QAS: read & update\nPRD read-only","dev":"DEV/QAS: read only"}},{"no":23,"id":"sap_call_ctms_api","summary":"Manage transport nodes, queues and imports through the v2 API","officialUrl":"https://api.sap.com/package/TmsForCloudPub","auth":"OAuth2ClientCredentials","callPath":[{"purpose":"Nodes","path":"GET /v2/nodes"},{"purpose":"Transport requests","path":"GET /v2/nodes/{nodeId}/transportRequests"},{"purpose":"Import","path":"POST /v2/nodes/{nodeId}/transportRequests/import"}],"roles":{"full":"All envs: read & update","ro":"DEV/QAS: read & update\nPRD read-only","dev":"DEV/QAS: read only"}},{"no":24,"id":"sap_call_forms_api","summary":"List and generate forms through the REST API","officialUrl":"https://api.sap.com/package/SAPFormsServicebyAdobe","auth":"OAuth2ClientCredentials","callPath":[{"purpose":"API docs","path":"GET /v3/api-docs"},{"purpose":"Forms","path":"GET /v1/forms"},{"purpose":"Generate","path":"POST /v3/forms/{id}/data"}],"roles":{"full":"All envs: read & update","ro":"DEV/QAS: read & update\nPRD read-only","dev":"DEV/QAS: read only"}},{"no":25,"id":"sap_call_cis_api","summary":"Inspect accounts, subaccounts and entitlements through the CIS Central API","officialUrl":"https://api.sap.com/package/SAPCloudPlatformCoreServices","auth":"OAuth2ClientCredentials (global account Viewer/Admin role)","callPath":[{"purpose":"Global account","path":"GET /accounts/v1/globalAccount"},{"purpose":"Subaccounts","path":"GET /accounts/v1/subaccounts"},{"purpose":"Entitlements","path":"GET /entitlements/v1/assignedQuotas"}],"roles":{"full":"All envs: read & update","ro":"DEV/QAS: read & update\nPRD read-only","dev":"DEV/QAS: read only"}},{"no":26,"id":"sap_call_cpi_api","summary":"Inspect message processing logs and integration artifacts through the audit/monitoring API","officialUrl":"https://help.sap.com/docs/cloud-integration","auth":"OAuth2ClientCredentials","callPath":[{"purpose":"Message processing logs","path":"GET /api/v1/MessageProcessingLogs"},{"purpose":"Integration packages","path":"GET /api/v1/IntegrationPackages"},{"purpose":"Runtime artifacts","path":"GET /api/v1/IntegrationRuntimeArtifacts"}],"roles":{"full":"All envs: read & update","ro":"DEV/QAS: read & update\nPRD read-only","dev":"DEV/QAS: read only"}},{"no":27,"id":"sap_call_ans_api","summary":"Manage conditions, actions, subscriptions and events through the REST API","officialUrl":"https://api.sap.com/package/AlertNotification","auth":"OAuth2ClientCredentials","callPath":[{"purpose":"Configuration","path":"GET/POST/PUT/DELETE /cf/configuration/v1/condition|action|subscription"},{"purpose":"Consumer","path":"GET /cf/consumer/v1/matched-events|undelivered-events"},{"purpose":"Producer","path":"POST /cf/producer/v1/resource-events"}],"roles":{"full":"All envs: read & update","ro":"DEV/QAS: read & update\nPRD read-only","dev":"DEV/QAS: read only"}},{"no":28,"id":"sap_call_sbpa_api","summary":"Inspect and drive workflow definitions and instances through the REST API","officialUrl":"https://api.sap.com/package/SAPProcessAutomation","auth":"OAuth2ClientCredentials","callPath":[{"purpose":"Workflow definitions","path":"GET /workflow/rest/v1/workflow-definitions"},{"purpose":"Task definitions","path":"GET /workflow/rest/v1/task-definitions"},{"purpose":"Instances","path":"GET/POST /workflow/rest/v1/workflow-instances|task-instances"}],"roles":{"full":"All envs: read & update","ro":"DEV/QAS: read & update\nPRD read-only","dev":"DEV/QAS: read only"}},{"no":29,"id":"sap_call_datasphere_api","summary":"Manage catalog, connections and task chains through the public REST/OData API","officialUrl":"https://api.sap.com/package/sapdatasphere","auth":"OAuth2ClientCredentials (technical user, requires header x-sap-sac-custom-auth: true)","callPath":[{"purpose":"Catalog","path":"GET /api/v1/dwc/catalog/spaces|assets"},{"purpose":"Connections/Certs","path":"GET /api/v1/datasphere/spaces/{space}/connections"},{"purpose":"SCIM","path":"GET /api/v1/scim2/Users|Groups"},{"purpose":"Task chains","path":"POST /api/v1/datasphere/tasks/chains/{space}/run/{objectid}"}],"roles":{"full":"All envs: read & update","ro":"DEV/QAS: read & update\nPRD read-only","dev":"DEV/QAS: read only"}},{"no":30,"id":"sap_call_calm_api","summary":"Manage projects, tasks, alerts and support cases through the REST API","officialUrl":"https://api.sap.com/package/SAPCloudALM","auth":"OAuth2ClientCredentials","callPath":[{"purpose":"Projects","path":"GET /api/calm-projects/v1/projects"},{"purpose":"Tasks","path":"GET /api/calm-tasks/v1/tasks?projectId={uuid}"},{"purpose":"Status events (alerts)","path":"GET /api/bsm-service/v1/events （scope calm-api.bsm.read）"},{"purpose":"Close event situation","path":"PUT /api/calm-event-situations/v1/event-situations/{id} （scope calm-api.event-situations.write）"},{"purpose":"ITSM: list support case ids","path":"GET /api/calm-itsmapi/v1/supportcases/cases/ids?reporter=&customerNumber= （scope calm-api.itsm.read）"},{"purpose":"ITSM: create support case","path":"POST /api/calm-itsmapi/v1/supportcases/cases （scope calm-api.itsm.write）"}],"roles":{"full":"All envs: read & update","ro":"DEV/QAS: read & update\nPRD read-only","dev":"DEV/QAS: read only"}},{"no":31,"id":"sap_call_btp_cli","summary":"Run the btp CLI server-side and return its output (v2.106.1)","officialUrl":"https://help.sap.com/docs/btp/btp-cli-command-reference/btp-cli-command-reference","auth":"BasicAuthentication","callPath":[{"purpose":"Run btp CLI","path":"args: [\"list\",\"accounts/subaccount\"] etc."}],"roles":{"full":"All envs: run","ro":"Not available","dev":"Not available"}},{"no":32,"id":"sap_call_cf_cli","summary":"Run the cf CLI server-side and return its output (v8.18.3)","officialUrl":"https://cli.cloudfoundry.org/en-US/v8/","auth":"OAuth2Password (with the cf client)","callPath":[{"purpose":"Run cf CLI","path":"args: [\"apps\"] etc."}],"roles":{"full":"All envs: run","ro":"Not available","dev":"Not available"}},{"no":33,"id":"sap_call_datasphere_cli","summary":"Run the datasphere CLI server-side and return its output (v2026.13.0)","officialUrl":"https://help.sap.com/docs/SAP_DATASPHERE/d0ecd6f297ac40249072a44df0549c1a/12d2b51987034daf822511ed1a229a6c.html","auth":"OAuth2ClientCredentials (Datasphere CLI)","callPath":[{"purpose":"Run datasphere CLI","path":"args: [\"spaces\",\"read\"] etc."}],"roles":{"full":"All envs: run","ro":"Not available","dev":"Not available"}},{"no":34,"id":"sap_call_ibp_api","summary":"Read and write master, planning and stock data through the OData API","officialUrl":"https://api.sap.com/products/SAPIntegratedBusinessPlanningforSupplyChain/apis/all","auth":"BasicAuthentication (communication user, resolved by the destination)","callPath":[{"purpose":"Master data read/write","path":"GET/POST /sap/opu/odata/IBP/MASTER_DATA_API_SRV/..."},{"purpose":"Planning data read/write","path":"GET/POST /sap/opu/odata/IBP/PLANNING_DATA_API_SRV/..."},{"purpose":"Stock/Batch (OData v4)","path":"GET /sap/opu/odata4/ibp/api_stock/srvd_a2x/ibp/api_stock/0001/..."},{"purpose":"Analytics extract","path":"GET /sap/opu/odata/IBP/EXTRACT_ODATA_SRV/..."}],"roles":{"full":"All envs: read & update","ro":"DEV/QAS: read & update\nPRD read-only","dev":"DEV/QAS: read & update"}},{"no":35,"id":"sap_call_sac_api","summary":"Manage stories, models and data import/export through the REST and OData APIs","officialUrl":"https://api.sap.com/package/SAPAnalyticsCloud","auth":"OAuth2ClientCredentials (requires header x-sap-sac-custom-auth: true)","callPath":[{"purpose":"Stories: list, copy, rename, delete","path":"GET/POST /api/v1/stories , DELETE/PATCH /api/v1/stories/{id}"},{"purpose":"Users and groups (SCIM 2.0)","path":"GET /api/v1/scim2/Users , GET /api/v1/scim2/Groups"},{"purpose":"Data import: models and jobs","path":"GET /api/v1/dataimport/models , GET/POST /api/v1/dataimport/models/{modelID} , GET /api/v1/dataimport/models/{modelID}/metadata"},{"purpose":"Data export: namespaces and providers","path":"GET /api/v1/dataexport/administration/Namespaces , /api/v1/dataexport/administration/Namespaces(NamespaceID='{id}')/Providers"},{"purpose":"Audit: export user activities (CSV)","path":"GET /api/v1/audit/activities/exportActivities"}],"roles":{"full":"All envs: read & update","ro":"DEV/QAS: read & update\nPRD read-only","dev":"DEV/QAS: read only"}},{"no":36,"id":"app_call_jira_api","summary":"Read, create, transition and search issues through the REST API","officialUrl":"https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/#","auth":"ClientCertificateAuthentication (mTLS) + bearer (resolved by the destination)","callPath":[{"purpose":"Issue read/update","path":"GET/PUT /rest/api/2/issue/{key} , POST /rest/api/2/issue"},{"purpose":"Transition","path":"GET/POST /rest/api/2/issue/{key}/transitions"},{"purpose":"Comment","path":"POST /rest/api/2/issue/{key}/comment"},{"purpose":"Service Desk request","path":"POST/GET /rest/servicedeskapi/request"},{"purpose":"Search (JQL)","path":"GET /rest/api/2/search?jql=..."}],"roles":{"full":"All envs: all operations","ro":"DEV/QAS: all operations\nPRD read-only","dev":"DEV/QAS: all operations\nPRD blocked"}},{"no":37,"id":"app_call_smartdb_api","summary":"Manage documents, views and processes through the REST API v3","officialUrl":"https://doc.support-dreamarts.com/SmartDB/Document/RestDocDocumentV3/index.html","auth":"NoAuthentication + static bearer (resolved via the destination URL.headers.Authorization)","callPath":[{"purpose":"Binder detail / views","path":"GET /binders/{binder} , GET /binders/{binder}/views"},{"purpose":"Document list by view","path":"GET /binders/{binder}/views/{view}/documents"},{"purpose":"Document CRUD","path":"GET/PUT/DELETE /binders/{binder}/documents/{document} , POST /binders/{binder}/documents"},{"purpose":"Process / activity","path":"POST /processes/start , GET /activities/worklist , PUT /activities/{activity}"},{"purpose":"CSV import/export","path":"GET /binders/{binder}/views/{view}/documents/csv , POST/PUT /binders/{binder}/documents/csv"}],"roles":{"full":"All envs: all operations","ro":"DEV/QAS: all operations\nPRD read-only","dev":"DEV/QAS: all operations\nPRD blocked"}},{"no":38,"id":"os_call_windows_ssh","summary":"Run any OS command on an on-premise Windows server over SSH","officialUrl":"https://learn.microsoft.com/en-us/windows-server/administration/openssh/openssh-server-configuration","auth":"SSH public-key auth (private key held in connection-backend app env) via Connectivity SOCKS5 + Cloud Connector TCP","callPath":[{"purpose":"Execute","path":"backend relay /api/tableread/mcp/call-ssh (os=windows) -> connection-backend /internal/ssh -> sshd 22/tcp -> PowerShell"}],"roles":{"full":"All envs (always treated as write)","ro":"Not allowed","dev":"Not allowed"}},{"no":39,"id":"os_call_linux_ssh","summary":"Run any OS command on an on-premise Linux server over SSH","officialUrl":"https://www.openssh.com/manual.html","auth":"SSH public-key auth (private key held in connection-backend app env) via Connectivity SOCKS5 + Cloud Connector TCP","callPath":[{"purpose":"Execute","path":"backend relay /api/tableread/mcp/call-ssh (os=linux) -> connection-backend /internal/ssh -> sshd 22/tcp -> bash -c"}],"roles":{"full":"All envs (always treated as write)","ro":"Not allowed","dev":"Not allowed"}},{"no":40,"id":"os_call_jp1_command","summary":"Run allow-listed JP1/AJS3 - Manager commands (show, operate, define, backup, service control) over SSH","officialUrl":"https://itpfdoc.hitachi.co.jp/manuals/3021/30213L4920/AJSO0034.HTM","auth":"SSH public-key auth (same path as os_call_windows_ssh). JP1 ADMACLIMIT is default, so the OS Administrators account can run every operation","callPath":[{"purpose":"Show","path":"command: ajsprint / ajsshow / ajsname / ajsplanout / ajsstatus / ajsschedule / ajscalutil"},{"purpose":"Operate","path":"command: ajsentry / ajsleave / ajsplan / ajschgstat / ajsintrpt / ajskill / ajsrerun / ajssuspend / ajschange"},{"purpose":"Define","path":"command: ajsdefine (definition passed via stdin) / ajschgnet / ajschgjob / ajscopy / ajsdelete / ajsrelease / ajscalendar"},{"purpose":"Backup / restore","path":"command: ajsbackup / ajsrestore / ajsbkudel / ajsrgexport / ajsrgimport"},{"purpose":"Service control","path":"command: ajsstart / ajsstop / ajsalter"}],"roles":{"full":"All envs: all commands","ro":"DEV: all commands\nPRD: show commands only (7)","dev":"DEV: all commands\nPRD blocked"}},{"no":41,"id":"app_call_zabbix_api","summary":"Read and manage monitoring configuration, problems and maintenance windows through the Zabbix 7.0 JSON-RPC API","officialUrl":"https://www.zabbix.com/documentation/7.0/en/manual/api","auth":"API token (Authorization: Bearer, no expiry). The token lives in the Destination (URL.headers.Authorization); full and read-only tokens are separate Destinations distinguished by the property zabbix.tokenScope. The Zabbix user-role method allow-list is the effective restriction","callPath":[{"purpose":"Read","path":"method: host.get / item.get / trigger.get / template.get / problem.get / event.get / maintenance.get / hostgroup.get"},{"purpose":"Acknowledge","path":"method: event.acknowledge"},{"purpose":"Maintenance","path":"method: maintenance.create / update / delete"},{"purpose":"Hosts / templates","path":"method: host.create / update / delete / massupdate, template.*, hostgroup.*"}],"roles":{"full":"All methods (full token)","ro":"*.get only (read-only token)","dev":"Unreachable (Zabbix destinations are PRD only)"}},{"no":42,"id":"sap_call_scc_api","summary":"Inspect and configure Cloud Connector through its admin API","officialUrl":"https://help.sap.com/docs/connectivity/sap-btp-connectivity-cf/rest-apis","auth":"Basic authentication with a dedicated technical user holding the Administrator role. The API is exposed only on the administration port (8443 by default), so it is reached through an OnPremise Destination. Destructive operations are rejected by the backend (HA role switch, authentication settings, backup, bulk delete, subaccount delete, audit level, traffic trace)","callPath":[{"purpose":"Connected subaccounts and tunnel state","path":"GET /api/monitoring/subaccounts"},{"purpose":"Backend connection state","path":"GET /api/monitoring/connections/backends"},{"purpose":"Certificate expiry state","path":"GET /api/monitoring/certificates"},{"purpose":"Access control (system mappings)","path":"GET /api/v1/configuration/subaccounts/\u003cregionHost>/\u003csubaccount>/systemMappings"},{"purpose":"Cloud Connector version","path":"GET /api/v1/connector/version"}],"roles":{"full":"All envs: read & update\nDestructive operations denied","ro":"Not available","dev":"Not available"}},{"no":43,"id":"sap_call_dms_admin","summary":"Manage Document Management Service repositories and usage","officialUrl":"https://help.sap.com/docs/document-management-service","auth":"OAuth2ClientCredentials from the DMS instance service key, resolved on the Destination; callers pass only method/path and payload","callPath":[{"purpose":"List / onboard repositories","path":"GET|POST /rest/v2/repositories"},{"purpose":"Get / update / delete a repository","path":"GET|PUT|DELETE /rest/v2/repositories/{id}"},{"purpose":"API call count","path":"GET /rest/v2/usage/api"},{"purpose":"Storage usage","path":"GET /rest/v2/usage/storage"},{"purpose":"List / restore deleted objects","path":"GET|POST /rest/v2/repositories/{repository_id}/deleted/objects"},{"purpose":"Export repository metadata","path":"POST /rest/v3/repositories/export/{id}"}],"roles":{"full":"All envs: read & update","ro":"DEV/QAS: read & update\nPRD read-only","dev":"DEV/QAS: read only"}},{"no":44,"id":"sap_call_dms_cmis","summary":"Browse and manage DMS folders and documents via CMIS","officialUrl":"https://help.sap.com/docs/document-management-service","auth":"OAuth2ClientCredentials from the DMS instance service key, resolved on the Destination; callers pass only method/path and payload","callPath":[{"purpose":"List repositories (obtain repository_id here)","path":"GET /browser"},{"purpose":"CMIS query (SQL-like search)","path":"GET /browser/{repository_id}"},{"purpose":"All reads (switched by cmisselector)","path":"GET /browser/{repository_id}/root"},{"purpose":"All updates (switched by cmisaction)","path":"POST /browser/{repository_id}/root[/{folder_path}]"}],"roles":{"full":"All envs: read & update","ro":"DEV/QAS: read & update\nPRD read-only","dev":"DEV/QAS: read only"}},{"no":45,"id":"sap_call_dms_file","summary":"Upload and download DMS file content (5 MB cap)","officialUrl":"https://help.sap.com/docs/document-management-service","auth":"OAuth2ClientCredentials from the DMS instance service key, resolved on the Destination; callers pass only method/path and payload","callPath":[{"purpose":"Create document / set content (multipart)","path":"POST /browser/{repository_id}/root"},{"purpose":"Download content","path":"GET /browser/{repository_id}/root?cmisselector=content&objectId=..."}],"roles":{"full":"All envs: read & update","ro":"DEV/QAS: read & update\nPRD read-only","dev":"DEV/QAS: read only"}},{"no":46,"id":"sap_call_audit_log","summary":"Read and aggregate BTP audit logs","officialUrl":"https://api.sap.com/api/AuditLogRetrievalAPI/overview","auth":"OAuth2ClientCredentials to the backend (the backend resolves the audit log service key)","callPath":[{"purpose":"List instances","path":"CF API v3 /v3/service_instances (offering auditlog-management)"},{"purpose":"Fetch audit records","path":"/auditlog/v2/auditlogrecords"}],"roles":{"full":"All envs: available","ro":"Not available (403)","dev":"Not available (403)"}}];
+const TOOLS = [{"no":1,"id":"sap_list_destinations","name":"Destination list","summary":"List the destinations you can reach","officialUrl":"https://api.sap.com/package/scpconnectivity","auth":"OAuth2ClientCredentials to the backend","callPath":[{"purpose":"List destinations","path":"connection settings inside the backend"}],"roles":{"full":"All envs: available","ro":"All envs: available","dev":"All envs: available"}},{"no":2,"id":"sap_use_destination","name":"Destination switch","summary":"Switch the session default destination","officialUrl":"https://api.sap.com/package/scpconnectivity","auth":"OAuth2ClientCredentials to the backend","callPath":[{"purpose":"Switch default destination","path":"connection settings inside the backend"}],"roles":{"full":"All envs: available","ro":"All envs: available","dev":"All envs: available"}},{"no":3,"id":"sap_current_destination","name":"Current destination","summary":"Show the current default destination","officialUrl":"https://api.sap.com/package/scpconnectivity","auth":"OAuth2ClientCredentials to the backend","callPath":[{"purpose":"Show current destination","path":"connection settings inside the backend"}],"roles":{"full":"All envs: available","ro":"All envs: available","dev":"All envs: available"}},{"no":4,"id":"sap_call_fm","name":"Function module call","summary":"Call a Function Module / BAPI over RFC","officialUrl":"https://help.sap.com/docs/ABAP_PLATFORM_NEW","auth":"BasicAuthentication / PrincipalPropagation","callPath":[{"purpose":"Call Function Module","path":"backend relay /api/tableread/mcp/call-fm → FM (e.g. RFC_READ_TABLE)"}],"roles":{"full":"All envs: read & update","ro":"DEV/QAS: read & update\nPRD blocked","dev":"DEV/QAS: read & update"}},{"no":5,"id":"sap_select_table","name":"Table read","summary":"Read a table through an RFC_READ_TABLE equivalent","officialUrl":"https://help.sap.com/docs/ABAP_PLATFORM_NEW","auth":"BasicAuthentication / PrincipalPropagation","callPath":[{"purpose":"Dynamic table SELECT","path":"backend relay → RFC_READ_TABLE equivalent"}],"roles":{"full":"All envs: read","ro":"All envs: read","dev":"DEV/QAS: read"}},{"no":6,"id":"sap_adt_freestyle","name":"Free-form SQL","summary":"Run free-form SQL through the ADT data preview","officialUrl":"https://help.sap.com/docs/ABAP_PLATFORM_NEW","auth":"BasicAuthentication / PrincipalPropagation","callPath":[{"purpose":"Free-form SQL","path":"/sap/bc/adt/datapreview/freestyle"}],"roles":{"full":"All envs: read","ro":"All envs: read","dev":"DEV/QAS: read"}},{"no":7,"id":"sap_adt_osql","name":"Open SQL","summary":"Run Open SQL through ADT","officialUrl":"https://help.sap.com/docs/ABAP_PLATFORM_NEW","auth":"BasicAuthentication / PrincipalPropagation","callPath":[{"purpose":"Open SQL","path":"/sap/bc/adt/datapreview/freestyle"}],"roles":{"full":"All envs: read","ro":"All envs: read","dev":"DEV/QAS: read"}},{"no":8,"id":"sap_adt_ddic","name":"DDIC read","summary":"SELECT * a DDIC object (table or CDS) through ADT","officialUrl":"https://help.sap.com/docs/ABAP_PLATFORM_NEW","auth":"BasicAuthentication / PrincipalPropagation","callPath":[{"purpose":"SELECT * a DDIC object (internally posts SELECT * FROM \u003cname> to datapreview/freestyle)","path":"/sap/bc/adt/datapreview/freestyle"}],"roles":{"full":"All envs: read","ro":"All envs: read","dev":"DEV/QAS: read"}},{"no":9,"id":"sap_abap_read_source","name":"Source read","summary":"Read program or function module source through ADT","officialUrl":"https://help.sap.com/docs/ABAP_PLATFORM_NEW","auth":"BasicAuthentication / PrincipalPropagation","callPath":[{"purpose":"Read ABAP source","path":"/sap/bc/adt/programs|functions/..."}],"roles":{"full":"All envs: read","ro":"All envs: read","dev":"DEV/QAS: read"}},{"no":10,"id":"sap_abap_write_source","name":"Source write","summary":"Create or update a report/program through ADT and activate it","officialUrl":"https://help.sap.com/docs/ABAP_PLATFORM_NEW","auth":"BasicAuthentication / PrincipalPropagation","callPath":[{"purpose":"Create/update ABAP program","path":"/sap/bc/adt/programs/programs/..."}],"roles":{"full":"DEV only: create & update","ro":"DEV only: create & update","dev":"DEV only: create & update"}},{"no":11,"id":"sap_abap_delete_source","name":"Source delete","summary":"Delete a program or CDS DDL through ADT","officialUrl":"https://help.sap.com/docs/ABAP_PLATFORM_NEW","auth":"BasicAuthentication / PrincipalPropagation","callPath":[{"purpose":"Delete ABAP/CDS","path":"/sap/bc/adt/programs|ddic/ddl/... (DELETE)"}],"roles":{"full":"DEV only: create & update","ro":"DEV only: create & update","dev":"DEV only: create & update"}},{"no":12,"id":"sap_abap_write_fm","name":"Function module write","summary":"Create or update a function module through ADT and activate it","officialUrl":"https://help.sap.com/docs/ABAP_PLATFORM_NEW","auth":"BasicAuthentication / PrincipalPropagation","callPath":[{"purpose":"Create/update FM","path":"/sap/bc/adt/functions/groups/{grp}/fmodules/..."}],"roles":{"full":"DEV only: create & update","ro":"DEV only: create & update","dev":"DEV only: create & update"}},{"no":13,"id":"sap_create_transport","name":"Transport create","summary":"Create a transport request by calling a function module","officialUrl":"https://help.sap.com/docs/ABAP_PLATFORM_NEW","auth":"BasicAuthentication / PrincipalPropagation","callPath":[{"purpose":"Create transport","path":"backend relay → FM TR_INSERT_REQUEST_WITH_TASKS"}],"roles":{"full":"DEV only: create & update","ro":"DEV only: create & update","dev":"DEV only: create & update"}},{"no":14,"id":"sap_release_transport","name":"Transport release","summary":"Release a transport request by calling a function module","officialUrl":"https://help.sap.com/docs/ABAP_PLATFORM_NEW","auth":"BasicAuthentication / PrincipalPropagation","callPath":[{"purpose":"Release transport","path":"backend relay → FM TR_RELEASE_REQUEST"}],"roles":{"full":"DEV only: create & update","ro":"DEV only: create & update","dev":"DEV only: create & update"}},{"no":15,"id":"sap_abap_activate","name":"Activation","summary":"Activate an object through ADT and return the syntax check result","officialUrl":"https://help.sap.com/docs/ABAP_PLATFORM_NEW","auth":"BasicAuthentication / PrincipalPropagation","callPath":[{"purpose":"Activate ABAP object","path":"/sap/bc/adt/activation"}],"roles":{"full":"DEV only: create & update","ro":"DEV only: create & update","dev":"DEV only: create & update"}},{"no":16,"id":"sap_list_odata_services","name":"OData service list","summary":"Discover the OData services published on the system and their entity sets","officialUrl":"https://help.sap.com/docs/ABAP_PLATFORM_NEW/68bf513362174d54b58cddec28794093/7ca326519eff236ee10000000a445394.html","auth":"BasicAuthentication / PrincipalPropagation","callPath":[{"purpose":"List published services","path":"GET /sap/opu/odata/IWFND/CATALOGSERVICE;v=2/ServiceCollection?$format=json&$inlinecount=allpages&$top=200"},{"purpose":"Filter by technical service name","path":"GET /sap/opu/odata/IWFND/CATALOGSERVICE;v=2/ServiceCollection?$filter=substringof('BUSINESS_PARTNER',TechnicalServiceName)"},{"purpose":"List entity sets of one service","path":"GET /sap/opu/odata/sap/\u003cSERVICE>/$metadata"}],"roles":{"full":"All envs: read","ro":"All envs: read","dev":"DEV/QAS: read"}},{"no":17,"id":"sap_call_s4_api","name":"S/4 API call","summary":"Call OData/REST through the destination; any SICF path works too","officialUrl":"https://api.sap.com/products/SAPS4HANACloudPrivateEdition/apis/all","auth":"BasicAuthentication / PrincipalPropagation","callPath":[{"purpose":"OData V2 read/write","path":"GET/POST /sap/opu/odata/sap/\u003cSERVICE>/..."},{"purpose":"OData V4 read/write","path":"GET/POST /sap/opu/odata4/sap/\u003csrv>/srvd_a2x/sap/\u003csrv>/0001/..."},{"purpose":"Fetch schema","path":"GET /sap/opu/odata/sap/\u003cSERVICE>/$metadata"},{"purpose":"List published services","path":"GET /sap/opu/odata/IWFND/CATALOGSERVICE;v=2/ServiceCollection"}],"roles":{"full":"All envs: read & update","ro":"DEV/QAS: read & update\nPRD read-only","dev":"DEV/QAS: read only"}},{"no":18,"id":"sap_call_soap","name":"SOAP call","summary":"Call a SOAP service, passing the envelope through","officialUrl":"https://api.sap.com/products/SAPS4HANACloudPrivateEdition/apis/all","auth":"BasicAuthentication / PrincipalPropagation","callPath":[{"purpose":"Call SOAP service","path":"POST /sap/bc/srt/rfc/sap/\u003cservice>/\u003cclient>/\u003cservice>/\u003cbinding>"},{"purpose":"Fetch WSDL","path":"GET \u003cendpoint>?wsdl (fetch it with sap_call_s4_api)"}],"roles":{"full":"All envs: all operations","ro":"DEV/QAS: all operations\nPRD blocked","dev":"Not available"}},{"no":19,"id":"sap_call_ias_admin","name":"IAS administration","summary":"Manage users, groups and applications through the Admin API (SCIM) — handles personal data","officialUrl":"https://api.sap.com/package/SCPIdentityServices","auth":"OAuth2ClientCredentials","callPath":[{"purpose":"Users","path":"GET/POST/PUT /scim/Users"},{"purpose":"Groups","path":"GET/POST/PUT /scim/Groups"},{"purpose":"Applications","path":"GET /Applications/v1"}],"roles":{"full":"All envs: read & update","ro":"Not available","dev":"Not available"}},{"no":20,"id":"sap_call_ips_job","name":"IPS jobs","summary":"Inspect and run provisioning jobs through the Jobs / JobLogs API — handles personal data","officialUrl":"https://api.sap.com/package/SCPIdentityServices","auth":"OAuth2ClientCredentials","callPath":[{"purpose":"Jobs","path":"GET /service/scim/Jobs"},{"purpose":"Job logs","path":"GET /service/scim/JobLogs"}],"roles":{"full":"All envs: read & update","ro":"Not available","dev":"Not available"}},{"no":21,"id":"sap_call_cf_api","name":"Cloud Foundry API","summary":"Inspect and manage apps, orgs/spaces and services through the v3 API","officialUrl":"https://v3-apidocs.cloudfoundry.org/","auth":"OAuth2Password (with the cf client)","callPath":[{"purpose":"Apps","path":"GET /v3/apps"},{"purpose":"Orgs/Spaces","path":"GET /v3/organizations, /v3/spaces"},{"purpose":"Service instances/keys","path":"GET /v3/service_instances, /v3/service_credential_bindings"}],"roles":{"full":"All envs: read & update","ro":"DEV/QAS: read & update\nPRD read-only","dev":"DEV/QAS: read only"}},{"no":22,"id":"sap_call_bwz_content","name":"Work Zone content","summary":"Read CDM site information and export business content as a zip","officialUrl":"https://api.sap.com/package/SAPBuildWorkZone","auth":"OAuth2ClientCredentials","callPath":[{"purpose":"Sites","path":"GET /semantic/entity/site"},{"purpose":"Tenant configuration","path":"GET /semantic/entity/site?isTenantConf=true"},{"purpose":"Export a site as zip","path":"GET /cdm_export_service/v1/export/site(siteID='{siteId}')"},{"purpose":"Export content items as zip","path":"POST /cdm_export_service/v1/export/Entities"},{"purpose":"Send to cTMS","path":"POST /cdm_export_service/v1/export/site_to_ctms | entities_to_ctms"}],"roles":{"full":"All envs: read & update","ro":"DEV/QAS: read & update\nPRD read-only","dev":"DEV/QAS: read only"}},{"no":23,"id":"sap_call_ctms_api","name":"cTMS transport","summary":"Manage transport nodes, queues and imports through the v2 API","officialUrl":"https://api.sap.com/package/TmsForCloudPub","auth":"OAuth2ClientCredentials","callPath":[{"purpose":"Nodes","path":"GET /v2/nodes"},{"purpose":"Transport requests","path":"GET /v2/nodes/{nodeId}/transportRequests"},{"purpose":"Import","path":"POST /v2/nodes/{nodeId}/transportRequests/import"}],"roles":{"full":"All envs: read & update","ro":"DEV/QAS: read & update\nPRD read-only","dev":"DEV/QAS: read only"}},{"no":24,"id":"sap_call_forms_api","name":"Form generation","summary":"List and generate forms through the REST API","officialUrl":"https://api.sap.com/package/SAPFormsServicebyAdobe","auth":"OAuth2ClientCredentials","callPath":[{"purpose":"API docs","path":"GET /v3/api-docs"},{"purpose":"Forms","path":"GET /v1/forms"},{"purpose":"Generate","path":"POST /v3/forms/{id}/data"}],"roles":{"full":"All envs: read & update","ro":"DEV/QAS: read & update\nPRD read-only","dev":"DEV/QAS: read only"}},{"no":25,"id":"sap_call_cis_api","name":"Account read","summary":"Inspect accounts, subaccounts and entitlements through the CIS Central API","officialUrl":"https://api.sap.com/package/SAPCloudPlatformCoreServices","auth":"OAuth2ClientCredentials (global account Viewer/Admin role)","callPath":[{"purpose":"Global account","path":"GET /accounts/v1/globalAccount"},{"purpose":"Subaccounts","path":"GET /accounts/v1/subaccounts"},{"purpose":"Entitlements","path":"GET /entitlements/v1/assignedQuotas"}],"roles":{"full":"All envs: read & update","ro":"DEV/QAS: read & update\nPRD read-only","dev":"DEV/QAS: read only"}},{"no":26,"id":"sap_call_cpi_api","name":"Integration monitoring","summary":"Inspect message processing logs and integration artifacts through the audit/monitoring API","officialUrl":"https://help.sap.com/docs/cloud-integration","auth":"OAuth2ClientCredentials","callPath":[{"purpose":"Message processing logs","path":"GET /api/v1/MessageProcessingLogs"},{"purpose":"Integration packages","path":"GET /api/v1/IntegrationPackages"},{"purpose":"Runtime artifacts","path":"GET /api/v1/IntegrationRuntimeArtifacts"}],"roles":{"full":"All envs: read & update","ro":"DEV/QAS: read & update\nPRD read-only","dev":"DEV/QAS: read only"}},{"no":27,"id":"sap_call_ans_api","name":"Alert notification","summary":"Manage conditions, actions, subscriptions and events through the REST API","officialUrl":"https://api.sap.com/package/AlertNotification","auth":"OAuth2ClientCredentials","callPath":[{"purpose":"Configuration","path":"GET/POST/PUT/DELETE /cf/configuration/v1/condition|action|subscription"},{"purpose":"Consumer","path":"GET /cf/consumer/v1/matched-events|undelivered-events"},{"purpose":"Producer","path":"POST /cf/producer/v1/resource-events"}],"roles":{"full":"All envs: read & update","ro":"DEV/QAS: read & update\nPRD read-only","dev":"DEV/QAS: read only"}},{"no":28,"id":"sap_call_sbpa_api","name":"Workflow operation","summary":"Inspect and drive workflow definitions and instances through the REST API","officialUrl":"https://api.sap.com/package/SAPProcessAutomation","auth":"OAuth2ClientCredentials","callPath":[{"purpose":"Workflow definitions","path":"GET /workflow/rest/v1/workflow-definitions"},{"purpose":"Task definitions","path":"GET /workflow/rest/v1/task-definitions"},{"purpose":"Instances","path":"GET/POST /workflow/rest/v1/workflow-instances|task-instances"}],"roles":{"full":"All envs: read & update","ro":"DEV/QAS: read & update\nPRD read-only","dev":"DEV/QAS: read only"}},{"no":29,"id":"sap_call_datasphere_api","name":"Datasphere API","summary":"Manage catalog, connections and task chains through the public REST/OData API","officialUrl":"https://api.sap.com/package/sapdatasphere","auth":"OAuth2ClientCredentials (technical user, requires header x-sap-sac-custom-auth: true)","callPath":[{"purpose":"Catalog","path":"GET /api/v1/dwc/catalog/spaces|assets"},{"purpose":"Connections/Certs","path":"GET /api/v1/datasphere/spaces/{space}/connections"},{"purpose":"SCIM","path":"GET /api/v1/scim2/Users|Groups"},{"purpose":"Task chains","path":"POST /api/v1/datasphere/tasks/chains/{space}/run/{objectid}"}],"roles":{"full":"All envs: read & update","ro":"DEV/QAS: read & update\nPRD read-only","dev":"DEV/QAS: read only"}},{"no":30,"id":"sap_call_calm_api","name":"Cloud ALM API","summary":"Manage projects, tasks, alerts and support cases through the REST API","officialUrl":"https://api.sap.com/package/SAPCloudALM","auth":"OAuth2ClientCredentials","callPath":[{"purpose":"Projects","path":"GET /api/calm-projects/v1/projects"},{"purpose":"Tasks","path":"GET /api/calm-tasks/v1/tasks?projectId={uuid}"},{"purpose":"Status events (alerts)","path":"GET /api/bsm-service/v1/events （scope calm-api.bsm.read）"},{"purpose":"Close event situation","path":"PUT /api/calm-event-situations/v1/event-situations/{id} （scope calm-api.event-situations.write）"},{"purpose":"ITSM: list support case ids","path":"GET /api/calm-itsmapi/v1/supportcases/cases/ids?reporter=&customerNumber= （scope calm-api.itsm.read）"},{"purpose":"ITSM: create support case","path":"POST /api/calm-itsmapi/v1/supportcases/cases （scope calm-api.itsm.write）"}],"roles":{"full":"All envs: read & update","ro":"DEV/QAS: read & update\nPRD read-only","dev":"DEV/QAS: read only"}},{"no":31,"id":"sap_call_btp_cli","name":"btp CLI","summary":"Run the btp CLI server-side and return its output (v2.106.1)","officialUrl":"https://help.sap.com/docs/btp/btp-cli-command-reference/btp-cli-command-reference","auth":"BasicAuthentication","callPath":[{"purpose":"Run btp CLI","path":"args: [\"list\",\"accounts/subaccount\"] etc."}],"roles":{"full":"All envs: run","ro":"Not available","dev":"Not available"}},{"no":32,"id":"sap_call_cf_cli","name":"cf CLI","summary":"Run the cf CLI server-side and return its output (v8.18.3)","officialUrl":"https://cli.cloudfoundry.org/en-US/v8/","auth":"OAuth2Password (with the cf client)","callPath":[{"purpose":"Run cf CLI","path":"args: [\"apps\"] etc."}],"roles":{"full":"All envs: run","ro":"Not available","dev":"Not available"}},{"no":33,"id":"sap_call_datasphere_cli","name":"Datasphere CLI","summary":"Run the datasphere CLI server-side and return its output (v2026.13.0)","officialUrl":"https://help.sap.com/docs/SAP_DATASPHERE/d0ecd6f297ac40249072a44df0549c1a/12d2b51987034daf822511ed1a229a6c.html","auth":"OAuth2ClientCredentials (Datasphere CLI)","callPath":[{"purpose":"Run datasphere CLI","path":"args: [\"spaces\",\"read\"] etc."}],"roles":{"full":"All envs: run","ro":"Not available","dev":"Not available"}},{"no":34,"id":"sap_call_ibp_api","name":"IBP data","summary":"Read and write master, planning and stock data through the OData API","officialUrl":"https://api.sap.com/products/SAPIntegratedBusinessPlanningforSupplyChain/apis/all","auth":"BasicAuthentication (communication user, resolved by the destination)","callPath":[{"purpose":"Master data read/write","path":"GET/POST /sap/opu/odata/IBP/MASTER_DATA_API_SRV/..."},{"purpose":"Planning data read/write","path":"GET/POST /sap/opu/odata/IBP/PLANNING_DATA_API_SRV/..."},{"purpose":"Stock/Batch (OData v4)","path":"GET /sap/opu/odata4/ibp/api_stock/srvd_a2x/ibp/api_stock/0001/..."},{"purpose":"Analytics extract","path":"GET /sap/opu/odata/IBP/EXTRACT_ODATA_SRV/..."}],"roles":{"full":"All envs: read & update","ro":"DEV/QAS: read & update\nPRD read-only","dev":"DEV/QAS: read & update"}},{"no":35,"id":"sap_call_sac_api","name":"SAC API","summary":"Manage stories, models and data import/export through the REST and OData APIs","officialUrl":"https://api.sap.com/package/SAPAnalyticsCloud","auth":"OAuth2ClientCredentials (requires header x-sap-sac-custom-auth: true)","callPath":[{"purpose":"Stories: list, copy, rename, delete","path":"GET/POST /api/v1/stories , DELETE/PATCH /api/v1/stories/{id}"},{"purpose":"Users and groups (SCIM 2.0)","path":"GET /api/v1/scim2/Users , GET /api/v1/scim2/Groups"},{"purpose":"Data import: models and jobs","path":"GET /api/v1/dataimport/models , GET/POST /api/v1/dataimport/models/{modelID} , GET /api/v1/dataimport/models/{modelID}/metadata"},{"purpose":"Data export: namespaces and providers","path":"GET /api/v1/dataexport/administration/Namespaces , /api/v1/dataexport/administration/Namespaces(NamespaceID='{id}')/Providers"},{"purpose":"Audit: export user activities (CSV)","path":"GET /api/v1/audit/activities/exportActivities"}],"roles":{"full":"All envs: read & update","ro":"DEV/QAS: read & update\nPRD read-only","dev":"DEV/QAS: read only"}},{"no":36,"id":"app_call_jira_api","name":"Jira issues","summary":"Read, create, transition and search issues through the REST API","officialUrl":"https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/#","auth":"ClientCertificateAuthentication (mTLS) + bearer (resolved by the destination)","callPath":[{"purpose":"Issue read/update","path":"GET/PUT /rest/api/2/issue/{key} , POST /rest/api/2/issue"},{"purpose":"Transition","path":"GET/POST /rest/api/2/issue/{key}/transitions"},{"purpose":"Comment","path":"POST /rest/api/2/issue/{key}/comment"},{"purpose":"Service Desk request","path":"POST/GET /rest/servicedeskapi/request"},{"purpose":"Search (JQL)","path":"GET /rest/api/2/search?jql=..."}],"roles":{"full":"All envs: all operations","ro":"DEV/QAS: all operations\nPRD read-only","dev":"DEV/QAS: all operations\nPRD blocked"}},{"no":37,"id":"app_call_smartdb_api","name":"SmartDB operation","summary":"Manage documents, views and processes through the REST API v3","officialUrl":"https://doc.support-dreamarts.com/SmartDB/Document/RestDocDocumentV3/index.html","auth":"NoAuthentication + static bearer (resolved via the destination URL.headers.Authorization)","callPath":[{"purpose":"Binder detail / views","path":"GET /binders/{binder} , GET /binders/{binder}/views"},{"purpose":"Document list by view","path":"GET /binders/{binder}/views/{view}/documents"},{"purpose":"Document CRUD","path":"GET/PUT/DELETE /binders/{binder}/documents/{document} , POST /binders/{binder}/documents"},{"purpose":"Process / activity","path":"POST /processes/start , GET /activities/worklist , PUT /activities/{activity}"},{"purpose":"CSV import/export","path":"GET /binders/{binder}/views/{view}/documents/csv , POST/PUT /binders/{binder}/documents/csv"}],"roles":{"full":"All envs: all operations","ro":"DEV/QAS: all operations\nPRD read-only","dev":"DEV/QAS: all operations\nPRD blocked"}},{"no":38,"id":"os_call_windows_ssh","name":"Windows command","summary":"Run any OS command on an on-premise Windows server (OS connection, Windows)","officialUrl":"https://learn.microsoft.com/en-us/windows-server/administration/openssh/openssh-server-configuration","auth":"SSH public-key auth (private key held in connection-backend app env) via Connectivity SOCKS5 + Cloud Connector TCP","callPath":[{"purpose":"Execute","path":"backend relay /api/tableread/mcp/call-ssh (os=windows) -> connection-backend /internal/ssh -> sshd 22/tcp -> PowerShell"}],"roles":{"full":"All envs (always treated as write)","ro":"Not allowed","dev":"Not allowed"}},{"no":39,"id":"os_call_linux_ssh","name":"Linux command","summary":"Run any OS command on an on-premise Linux server (OS connection, Linux)","officialUrl":"https://www.openssh.com/manual.html","auth":"SSH public-key auth (private key held in connection-backend app env) via Connectivity SOCKS5 + Cloud Connector TCP","callPath":[{"purpose":"Execute","path":"backend relay /api/tableread/mcp/call-ssh (os=linux) -> connection-backend /internal/ssh -> sshd 22/tcp -> bash -c"}],"roles":{"full":"All envs (always treated as write)","ro":"Not allowed","dev":"Not allowed"}},{"no":40,"id":"os_call_jp1_command","name":"JP1 command","summary":"Run allow-listed JP1/AJS3 - Manager commands (show, operate, define, backup, service control)","officialUrl":"https://itpfdoc.hitachi.co.jp/manuals/3021/30213L4920/AJSO0034.HTM","auth":"SSH public-key auth (same path as os_call_windows_ssh). JP1 ADMACLIMIT is default, so the OS Administrators account can run every operation","callPath":[{"purpose":"Show","path":"command: ajsprint / ajsshow / ajsname / ajsplanout / ajsstatus / ajsschedule / ajscalutil"},{"purpose":"Operate","path":"command: ajsentry / ajsleave / ajsplan / ajschgstat / ajsintrpt / ajskill / ajsrerun / ajssuspend / ajschange"},{"purpose":"Define","path":"command: ajsdefine (definition passed via stdin) / ajschgnet / ajschgjob / ajscopy / ajsdelete / ajsrelease / ajscalendar"},{"purpose":"Backup / restore","path":"command: ajsbackup / ajsrestore / ajsbkudel / ajsrgexport / ajsrgimport"},{"purpose":"Service control","path":"command: ajsstart / ajsstop / ajsalter"}],"roles":{"full":"All envs: all commands","ro":"DEV: all commands\nPRD: show commands only (7)","dev":"DEV: all commands\nPRD blocked"}},{"no":41,"id":"app_call_zabbix_api","name":"Zabbix operation","summary":"Read and manage monitoring configuration, problems and maintenance windows through the Zabbix 7.0 JSON-RPC API","officialUrl":"https://www.zabbix.com/documentation/7.0/en/manual/api","auth":"API token (Authorization: Bearer, no expiry). The token lives in the Destination (URL.headers.Authorization); full and read-only tokens are separate Destinations distinguished by the property zabbix.tokenScope. The Zabbix user-role method allow-list is the effective restriction","callPath":[{"purpose":"Read","path":"method: host.get / item.get / trigger.get / template.get / problem.get / event.get / maintenance.get / hostgroup.get"},{"purpose":"Acknowledge","path":"method: event.acknowledge"},{"purpose":"Maintenance","path":"method: maintenance.create / update / delete"},{"purpose":"Hosts / templates","path":"method: host.create / update / delete / massupdate, template.*, hostgroup.*"}],"roles":{"full":"All methods (full token)","ro":"*.get only (read-only token)","dev":"Unreachable (Zabbix destinations are PRD only)"}},{"no":42,"id":"sap_call_scc_api","name":"Cloud Connector admin","summary":"Inspect and configure Cloud Connector through its admin API","officialUrl":"https://help.sap.com/docs/connectivity/sap-btp-connectivity-cf/rest-apis","auth":"Basic authentication with a dedicated technical user holding the Administrator role. The API is exposed only on the administration port (8443 by default), so it is reached through an OnPremise Destination. Destructive operations are rejected by the backend (HA role switch, authentication settings, backup, bulk delete, subaccount delete, audit level, traffic trace)","callPath":[{"purpose":"Connected subaccounts and tunnel state","path":"GET /api/monitoring/subaccounts"},{"purpose":"Backend connection state","path":"GET /api/monitoring/connections/backends"},{"purpose":"Certificate expiry state","path":"GET /api/monitoring/certificates"},{"purpose":"Access control (system mappings)","path":"GET /api/v1/configuration/subaccounts/\u003cregionHost>/\u003csubaccount>/systemMappings"},{"purpose":"Cloud Connector version","path":"GET /api/v1/connector/version"}],"roles":{"full":"All envs: read & update\nDestructive operations denied","ro":"Not available","dev":"Not available"}},{"no":43,"id":"sap_call_dms_admin","name":"DMS repository admin","summary":"Manage Document Management Service repositories and usage","officialUrl":"https://help.sap.com/docs/document-management-service","auth":"OAuth2ClientCredentials from the DMS instance service key, resolved on the Destination; callers pass only method/path and payload","callPath":[{"purpose":"List / onboard repositories","path":"GET|POST /rest/v2/repositories"},{"purpose":"Get / update / delete a repository","path":"GET|PUT|DELETE /rest/v2/repositories/{id}"},{"purpose":"API call count","path":"GET /rest/v2/usage/api"},{"purpose":"Storage usage","path":"GET /rest/v2/usage/storage"},{"purpose":"List / restore deleted objects","path":"GET|POST /rest/v2/repositories/{repository_id}/deleted/objects"},{"purpose":"Export repository metadata","path":"POST /rest/v3/repositories/export/{id}"}],"roles":{"full":"All envs: read & update","ro":"DEV/QAS: read & update\nPRD read-only","dev":"DEV/QAS: read only"}},{"no":44,"id":"sap_call_dms_cmis","name":"DMS document operation","summary":"Browse and manage DMS folders and documents via CMIS","officialUrl":"https://help.sap.com/docs/document-management-service","auth":"OAuth2ClientCredentials from the DMS instance service key, resolved on the Destination; callers pass only method/path and payload","callPath":[{"purpose":"List repositories (obtain repository_id here)","path":"GET /browser"},{"purpose":"CMIS query (SQL-like search)","path":"GET /browser/{repository_id}"},{"purpose":"All reads (switched by cmisselector)","path":"GET /browser/{repository_id}/root"},{"purpose":"All updates (switched by cmisaction)","path":"POST /browser/{repository_id}/root[/{folder_path}]"}],"roles":{"full":"All envs: read & update","ro":"DEV/QAS: read & update\nPRD read-only","dev":"DEV/QAS: read only"}},{"no":45,"id":"sap_call_dms_file","name":"DMS file transfer","summary":"Upload and download DMS file content (5 MB cap)","officialUrl":"https://help.sap.com/docs/document-management-service","auth":"OAuth2ClientCredentials from the DMS instance service key, resolved on the Destination; callers pass only method/path and payload","callPath":[{"purpose":"Create document / set content (multipart)","path":"POST /browser/{repository_id}/root"},{"purpose":"Download content","path":"GET /browser/{repository_id}/root?cmisselector=content&objectId=..."}],"roles":{"full":"All envs: read & update","ro":"DEV/QAS: read & update\nPRD read-only","dev":"DEV/QAS: read only"}},{"no":46,"id":"sap_call_audit_log","name":"Audit log aggregation","summary":"Read and aggregate BTP audit logs","officialUrl":"https://api.sap.com/api/AuditLogRetrievalAPI/overview","auth":"OAuth2ClientCredentials to the backend (the backend resolves the audit log service key)","callPath":[{"purpose":"List instances","path":"CF API v3 /v3/service_instances (offering auditlog-management)"},{"purpose":"Fetch audit records","path":"/auditlog/v2/auditlogrecords"}],"roles":{"full":"All envs: available","ro":"Not available (403)","dev":"Not available (403)"}}];
 const d = document.getElementById('d');
 const set = (id, text) => { document.getElementById(id).textContent = text; };
 document.querySelectorAll('button.detail').forEach((b) => {
   b.addEventListener('click', () => {
     const t = TOOLS.find((x) => String(x.no) === b.dataset.no);
     if (!t) return;
-    set('d-id', t.id); set('d-sum', t.summary); set('d-auth', t.auth);
+    set('d-name', t.name); set('d-id', t.id); set('d-sum', t.summary); set('d-auth', t.auth);
     set('d-full', t.roles.full); set('d-ro', t.roles.ro); set('d-dev', t.roles.dev);
     const path = document.getElementById('d-path');
     path.textContent = '';
