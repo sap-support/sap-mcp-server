@@ -71,7 +71,7 @@ to the account and machine that ran it rather than being absent from the audit t
 
 ## Capabilities
 
-**46 tools.** Per-tool descriptions, official API references and per-scope permissions are carried in
+**49 tools.** Per-tool descriptions, official API references and per-scope permissions are carried in
 the tool catalog embedded in the binary, which your MCP client shows once the server is connected.
 
 The same catalog is published as the [Tool reference](https://sap-support.github.io/sap-mcp-server/)
@@ -103,6 +103,9 @@ page linked above.
   - Analytics Cloud (SAC REST API)
   - Cloud ALM (REST API)
   - Document Management Service (repository administration, CMIS browser binding, file upload / download)
+  - Audit Log Retrieval (fetch, filter and server-side aggregation of audit logs; `mcp` scope only)
+  - AI Core (AI API — resource groups, scenarios, configurations, deployments, executions and logs)
+  - AI Core inference (orchestration completion; `mcp` scope only — **tokens are billed**)
 - **SAP applications**
   - Integrated Business Planning (IBP) OData API
 - **CLI execution** (`mcp` scope only)
