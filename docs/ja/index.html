@@ -63,6 +63,9 @@ td.mk span {
 td.mk .v-full { background: hsl(150 55% 32% / .16); color: var(--v-full); }
 td.mk .v-ro   { background: hsl(35 90% 45% / .18);  color: var(--v-ro); }
 td.mk .v-no   { background: transparent;            color: var(--muted); font-weight: 400; }
+td.mk .v-rb   { background: hsl(215 70% 45% / .16); color: hsl(215 70% 38%); }
+@media (prefers-color-scheme: dark) { td.mk .v-rb { color: hsl(215 80% 72%); } }
+td.mk.web { border-left: 2px solid var(--line); }
 .envbar { display: flex; align-items: center; gap: .5rem; margin: 0 0 1rem; }
 .envlabel { color: var(--muted); font-size: .85rem; margin-right: .25rem; }
 .envbtn {
@@ -130,7 +133,7 @@ a { color: var(--accent); }
     <table>
       <thead>
         <tr>
-          <th class="" data-i="0" aria-sort="none">No</th><th class="" data-i="1" aria-sort="none">ツール名</th><th class="" data-i="2" aria-sort="none">ツール</th><th class="" data-i="3" aria-sort="none">説明</th><th class="" data-i="4" aria-sort="none">対象システム</th><th class="r-full" data-i="5" aria-sort="none">フル</th><th class="r-ro" data-i="6" aria-sort="none">参照専用</th><th class="r-dev" data-i="7" aria-sort="none">開発専用</th><th></th>
+          <th class="" data-i="0" aria-sort="none">No</th><th class="" data-i="1" aria-sort="none">ツール名</th><th class="" data-i="2" aria-sort="none">ツール</th><th class="" data-i="3" aria-sort="none">説明</th><th class="" data-i="4" aria-sort="none">対象システム</th><th class="r-full" data-i="5" aria-sort="none">フル</th><th class="r-ro" data-i="6" aria-sort="none">参照専用</th><th class="r-dev" data-i="7" aria-sort="none">開発専用</th><th class="r-web" data-i="8" aria-sort="none">Web 版</th><th></th>
         </tr>
       </thead>
       <tbody>
@@ -143,6 +146,7 @@ a { color: var(--accent); }
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="全環境で利用可" aria-label="全環境で利用可"><span></span></td>
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="全環境で利用可" aria-label="全環境で利用可"><span></span></td>
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="全環境で利用可" aria-label="全環境で利用可"><span></span></td>
+          <td class="mk web" data-prd="Full" data-nonprd="Full" data-tip="全員許可" aria-label="全員許可"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="1">詳細</button></td>
         </tr>
         <tr data-id="sap_use_destination">
@@ -154,6 +158,7 @@ a { color: var(--accent); }
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="全環境で利用可" aria-label="全環境で利用可"><span></span></td>
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="全環境で利用可" aria-label="全環境で利用可"><span></span></td>
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="全環境で利用可" aria-label="全環境で利用可"><span></span></td>
+          <td class="mk web" data-prd="Full" data-nonprd="Full" data-tip="全員許可" aria-label="全員許可"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="2">詳細</button></td>
         </tr>
         <tr data-id="sap_current_destination">
@@ -165,6 +170,7 @@ a { color: var(--accent); }
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="全環境で利用可" aria-label="全環境で利用可"><span></span></td>
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="全環境で利用可" aria-label="全環境で利用可"><span></span></td>
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="全環境で利用可" aria-label="全環境で利用可"><span></span></td>
+          <td class="mk web" data-prd="Full" data-nonprd="Full" data-tip="全員許可" aria-label="全員許可"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="3">詳細</button></td>
         </tr>
         <tr data-id="sap_call_fm">
@@ -176,6 +182,7 @@ a { color: var(--accent); }
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="全環境で参照・更新" aria-label="全環境で参照・更新"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="Full" data-tip="開発・品証で参照・更新 / 本番は不可" aria-label="開発・品証で参照・更新 / 本番は不可"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="Full" data-tip="開発・品証で参照・更新" aria-label="開発・品証で参照・更新"><span></span></td>
+          <td class="mk web" data-prd="RoleBased" data-nonprd="RoleBased" data-tip="接続先認可。本人のアカウントでログオンし、接続先が本人の権限で判定する" aria-label="接続先認可。本人のアカウントでログオンし、接続先が本人の権限で判定する"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="4">詳細</button></td>
         </tr>
         <tr data-id="sap_select_table">
@@ -187,6 +194,7 @@ a { color: var(--accent); }
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="全環境で参照" aria-label="全環境で参照"><span></span></td>
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="全環境で参照" aria-label="全環境で参照"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="Full" data-tip="開発・品証で参照" aria-label="開発・品証で参照"><span></span></td>
+          <td class="mk web" data-prd="RoleBased" data-nonprd="RoleBased" data-tip="接続先認可。本人のアカウントでログオンし、接続先が本人の権限で判定する" aria-label="接続先認可。本人のアカウントでログオンし、接続先が本人の権限で判定する"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="5">詳細</button></td>
         </tr>
         <tr data-id="sap_adt_freestyle">
@@ -198,6 +206,7 @@ a { color: var(--accent); }
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="全環境で参照" aria-label="全環境で参照"><span></span></td>
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="全環境で参照" aria-label="全環境で参照"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="Full" data-tip="開発・品証で参照" aria-label="開発・品証で参照"><span></span></td>
+          <td class="mk web" data-prd="RoleBased" data-nonprd="RoleBased" data-tip="接続先認可。本人のアカウントでログオンし、接続先が本人の権限で判定する" aria-label="接続先認可。本人のアカウントでログオンし、接続先が本人の権限で判定する"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="6">詳細</button></td>
         </tr>
         <tr data-id="sap_adt_osql">
@@ -209,6 +218,7 @@ a { color: var(--accent); }
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="全環境で参照" aria-label="全環境で参照"><span></span></td>
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="全環境で参照" aria-label="全環境で参照"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="Full" data-tip="開発・品証で参照" aria-label="開発・品証で参照"><span></span></td>
+          <td class="mk web" data-prd="RoleBased" data-nonprd="RoleBased" data-tip="接続先認可。本人のアカウントでログオンし、接続先が本人の権限で判定する" aria-label="接続先認可。本人のアカウントでログオンし、接続先が本人の権限で判定する"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="7">詳細</button></td>
         </tr>
         <tr data-id="sap_adt_ddic">
@@ -220,6 +230,7 @@ a { color: var(--accent); }
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="全環境で参照" aria-label="全環境で参照"><span></span></td>
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="全環境で参照" aria-label="全環境で参照"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="Full" data-tip="開発・品証で参照" aria-label="開発・品証で参照"><span></span></td>
+          <td class="mk web" data-prd="RoleBased" data-nonprd="RoleBased" data-tip="接続先認可。本人のアカウントでログオンし、接続先が本人の権限で判定する" aria-label="接続先認可。本人のアカウントでログオンし、接続先が本人の権限で判定する"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="8">詳細</button></td>
         </tr>
         <tr data-id="sap_abap_read_source">
@@ -231,6 +242,7 @@ a { color: var(--accent); }
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="全環境で参照" aria-label="全環境で参照"><span></span></td>
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="全環境で参照" aria-label="全環境で参照"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="Full" data-tip="開発・品証で参照" aria-label="開発・品証で参照"><span></span></td>
+          <td class="mk web" data-prd="RoleBased" data-nonprd="RoleBased" data-tip="接続先認可。本人のアカウントでログオンし、接続先が本人の権限で判定する" aria-label="接続先認可。本人のアカウントでログオンし、接続先が本人の権限で判定する"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="9">詳細</button></td>
         </tr>
         <tr data-id="sap_abap_write_source">
@@ -242,6 +254,7 @@ a { color: var(--accent); }
           <td class="mk" data-prd="—" data-nonprd="Full" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="Full" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="Full" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新"><span></span></td>
+          <td class="mk web" data-prd="RoleBased" data-nonprd="RoleBased" data-tip="接続先認可。本人のアカウントでログオンし、接続先が本人の権限で判定する" aria-label="接続先認可。本人のアカウントでログオンし、接続先が本人の権限で判定する"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="10">詳細</button></td>
         </tr>
         <tr data-id="sap_abap_delete_source">
@@ -253,6 +266,7 @@ a { color: var(--accent); }
           <td class="mk" data-prd="—" data-nonprd="Full" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="Full" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="Full" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新"><span></span></td>
+          <td class="mk web" data-prd="RoleBased" data-nonprd="RoleBased" data-tip="接続先認可。本人のアカウントでログオンし、接続先が本人の権限で判定する" aria-label="接続先認可。本人のアカウントでログオンし、接続先が本人の権限で判定する"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="11">詳細</button></td>
         </tr>
         <tr data-id="sap_abap_write_fm">
@@ -264,6 +278,7 @@ a { color: var(--accent); }
           <td class="mk" data-prd="—" data-nonprd="Full" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="Full" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="Full" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新"><span></span></td>
+          <td class="mk web" data-prd="RoleBased" data-nonprd="RoleBased" data-tip="接続先認可。本人のアカウントでログオンし、接続先が本人の権限で判定する" aria-label="接続先認可。本人のアカウントでログオンし、接続先が本人の権限で判定する"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="12">詳細</button></td>
         </tr>
         <tr data-id="sap_create_transport">
@@ -275,6 +290,7 @@ a { color: var(--accent); }
           <td class="mk" data-prd="—" data-nonprd="Full" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="Full" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="Full" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新"><span></span></td>
+          <td class="mk web" data-prd="RoleBased" data-nonprd="RoleBased" data-tip="接続先認可。本人のアカウントでログオンし、接続先が本人の権限で判定する" aria-label="接続先認可。本人のアカウントでログオンし、接続先が本人の権限で判定する"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="13">詳細</button></td>
         </tr>
         <tr data-id="sap_release_transport">
@@ -286,6 +302,7 @@ a { color: var(--accent); }
           <td class="mk" data-prd="—" data-nonprd="Full" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="Full" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="Full" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新"><span></span></td>
+          <td class="mk web" data-prd="RoleBased" data-nonprd="RoleBased" data-tip="接続先認可。本人のアカウントでログオンし、接続先が本人の権限で判定する" aria-label="接続先認可。本人のアカウントでログオンし、接続先が本人の権限で判定する"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="14">詳細</button></td>
         </tr>
         <tr data-id="sap_abap_activate">
@@ -297,6 +314,7 @@ a { color: var(--accent); }
           <td class="mk" data-prd="—" data-nonprd="Full" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="Full" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="Full" data-tip="開発環境で作成・更新" aria-label="開発環境で作成・更新"><span></span></td>
+          <td class="mk web" data-prd="RoleBased" data-nonprd="RoleBased" data-tip="接続先認可。本人のアカウントでログオンし、接続先が本人の権限で判定する" aria-label="接続先認可。本人のアカウントでログオンし、接続先が本人の権限で判定する"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="15">詳細</button></td>
         </tr>
         <tr data-id="sap_list_odata_services">
@@ -308,6 +326,7 @@ a { color: var(--accent); }
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="全環境で参照" aria-label="全環境で参照"><span></span></td>
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="全環境で参照" aria-label="全環境で参照"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="Full" data-tip="開発・品証で参照" aria-label="開発・品証で参照"><span></span></td>
+          <td class="mk web" data-prd="RoleBased" data-nonprd="RoleBased" data-tip="接続先認可。本人のアカウントでログオンし、接続先が本人の権限で判定する" aria-label="接続先認可。本人のアカウントでログオンし、接続先が本人の権限で判定する"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="16">詳細</button></td>
         </tr>
         <tr data-id="sap_call_s4_api">
@@ -319,6 +338,7 @@ a { color: var(--accent); }
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="全環境で参照・更新" aria-label="全環境で参照・更新"><span></span></td>
           <td class="mk" data-prd="Read Only" data-nonprd="Full" data-tip="開発・品証で参照・更新 / 本番は参照のみ" aria-label="開発・品証で参照・更新 / 本番は参照のみ"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="Read Only" data-tip="開発・品証で参照のみ" aria-label="開発・品証で参照のみ"><span></span></td>
+          <td class="mk web" data-prd="RoleBased" data-nonprd="RoleBased" data-tip="接続先認可。本人のアカウントでログオンし、接続先が本人の権限で判定する" aria-label="接続先認可。本人のアカウントでログオンし、接続先が本人の権限で判定する"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="17">詳細</button></td>
         </tr>
         <tr data-id="sap_call_soap">
@@ -330,6 +350,7 @@ a { color: var(--accent); }
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="全環境で実行" aria-label="全環境で実行"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="Full" data-tip="開発・品証で実行 / 本番は不可" aria-label="開発・品証で実行 / 本番は不可"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="—" data-tip="利用不可" aria-label="利用不可"><span></span></td>
+          <td class="mk web" data-prd="RoleBased" data-nonprd="RoleBased" data-tip="接続先認可。本人のアカウントでログオンし、接続先が本人の権限で判定する" aria-label="接続先認可。本人のアカウントでログオンし、接続先が本人の権限で判定する"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="18">詳細</button></td>
         </tr>
         <tr data-id="sap_call_ias_admin">
@@ -341,6 +362,7 @@ a { color: var(--accent); }
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="全環境で参照・更新" aria-label="全環境で参照・更新"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="—" data-tip="利用不可" aria-label="利用不可"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="—" data-tip="利用不可" aria-label="利用不可"><span></span></td>
+          <td class="mk web" data-prd="—" data-nonprd="—" data-tip="全員不可。Web 版では使えない" aria-label="全員不可。Web 版では使えない"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="19">詳細</button></td>
         </tr>
         <tr data-id="sap_call_ips_job">
@@ -352,6 +374,7 @@ a { color: var(--accent); }
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="全環境で参照・更新" aria-label="全環境で参照・更新"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="—" data-tip="利用不可" aria-label="利用不可"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="—" data-tip="利用不可" aria-label="利用不可"><span></span></td>
+          <td class="mk web" data-prd="—" data-nonprd="—" data-tip="全員不可。Web 版では使えない" aria-label="全員不可。Web 版では使えない"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="20">詳細</button></td>
         </tr>
         <tr data-id="sap_call_cf_api">
@@ -363,6 +386,7 @@ a { color: var(--accent); }
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="全環境で参照・更新" aria-label="全環境で参照・更新"><span></span></td>
           <td class="mk" data-prd="Read Only" data-nonprd="Full" data-tip="開発・品証で参照・更新 / 本番は参照のみ" aria-label="開発・品証で参照・更新 / 本番は参照のみ"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="Read Only" data-tip="開発・品証で参照のみ" aria-label="開発・品証で参照のみ"><span></span></td>
+          <td class="mk web" data-prd="—" data-nonprd="—" data-tip="全員不可。Web 版では使えない" aria-label="全員不可。Web 版では使えない"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="21">詳細</button></td>
         </tr>
         <tr data-id="sap_call_bwz_content">
@@ -374,6 +398,7 @@ a { color: var(--accent); }
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="全環境で参照・更新" aria-label="全環境で参照・更新"><span></span></td>
           <td class="mk" data-prd="Read Only" data-nonprd="Full" data-tip="開発・品証で参照・更新 / 本番は参照のみ" aria-label="開発・品証で参照・更新 / 本番は参照のみ"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="Read Only" data-tip="開発・品証で参照のみ" aria-label="開発・品証で参照のみ"><span></span></td>
+          <td class="mk web" data-prd="Read Only" data-nonprd="Full" data-tip="MCP 認可。使える Destination を利用者ごとに許可し、接続先では共用の接続用アカウントの権限になる" aria-label="MCP 認可。使える Destination を利用者ごとに許可し、接続先では共用の接続用アカウントの権限になる"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="22">詳細</button></td>
         </tr>
         <tr data-id="sap_call_ctms_api">
@@ -385,6 +410,7 @@ a { color: var(--accent); }
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="全環境で参照・更新" aria-label="全環境で参照・更新"><span></span></td>
           <td class="mk" data-prd="Read Only" data-nonprd="Full" data-tip="開発・品証で参照・更新 / 本番は参照のみ" aria-label="開発・品証で参照・更新 / 本番は参照のみ"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="Read Only" data-tip="開発・品証で参照のみ" aria-label="開発・品証で参照のみ"><span></span></td>
+          <td class="mk web" data-prd="Read Only" data-nonprd="Full" data-tip="MCP 認可。使える Destination を利用者ごとに許可し、接続先では共用の接続用アカウントの権限になる" aria-label="MCP 認可。使える Destination を利用者ごとに許可し、接続先では共用の接続用アカウントの権限になる"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="23">詳細</button></td>
         </tr>
         <tr data-id="sap_call_forms_api">
@@ -396,6 +422,7 @@ a { color: var(--accent); }
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="全環境で参照・更新" aria-label="全環境で参照・更新"><span></span></td>
           <td class="mk" data-prd="Read Only" data-nonprd="Full" data-tip="開発・品証で参照・更新 / 本番は参照のみ" aria-label="開発・品証で参照・更新 / 本番は参照のみ"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="Read Only" data-tip="開発・品証で参照のみ" aria-label="開発・品証で参照のみ"><span></span></td>
+          <td class="mk web" data-prd="Read Only" data-nonprd="Full" data-tip="MCP 認可。使える Destination を利用者ごとに許可し、接続先では共用の接続用アカウントの権限になる" aria-label="MCP 認可。使える Destination を利用者ごとに許可し、接続先では共用の接続用アカウントの権限になる"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="24">詳細</button></td>
         </tr>
         <tr data-id="sap_call_cis_api">
@@ -407,6 +434,7 @@ a { color: var(--accent); }
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="全環境で参照・更新" aria-label="全環境で参照・更新"><span></span></td>
           <td class="mk" data-prd="Read Only" data-nonprd="Full" data-tip="開発・品証で参照・更新 / 本番は参照のみ" aria-label="開発・品証で参照・更新 / 本番は参照のみ"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="Read Only" data-tip="開発・品証で参照のみ" aria-label="開発・品証で参照のみ"><span></span></td>
+          <td class="mk web" data-prd="Read Only" data-nonprd="Read Only" data-tip="MCP 認可。Web 版では GET 以外を拒否する" aria-label="MCP 認可。Web 版では GET 以外を拒否する"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="25">詳細</button></td>
         </tr>
         <tr data-id="sap_call_cpi_api">
@@ -418,6 +446,7 @@ a { color: var(--accent); }
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="全環境で参照・更新" aria-label="全環境で参照・更新"><span></span></td>
           <td class="mk" data-prd="Read Only" data-nonprd="Full" data-tip="開発・品証で参照・更新 / 本番は参照のみ" aria-label="開発・品証で参照・更新 / 本番は参照のみ"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="Read Only" data-tip="開発・品証で参照のみ" aria-label="開発・品証で参照のみ"><span></span></td>
+          <td class="mk web" data-prd="Read Only" data-nonprd="Full" data-tip="MCP 認可。使える Destination を利用者ごとに許可し、接続先では共用の接続用アカウントの権限になる" aria-label="MCP 認可。使える Destination を利用者ごとに許可し、接続先では共用の接続用アカウントの権限になる"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="26">詳細</button></td>
         </tr>
         <tr data-id="sap_call_ans_api">
@@ -429,6 +458,7 @@ a { color: var(--accent); }
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="全環境で参照・更新" aria-label="全環境で参照・更新"><span></span></td>
           <td class="mk" data-prd="Read Only" data-nonprd="Full" data-tip="開発・品証で参照・更新 / 本番は参照のみ" aria-label="開発・品証で参照・更新 / 本番は参照のみ"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="Read Only" data-tip="開発・品証で参照のみ" aria-label="開発・品証で参照のみ"><span></span></td>
+          <td class="mk web" data-prd="Read Only" data-nonprd="Full" data-tip="MCP 認可。使える Destination を利用者ごとに許可し、接続先では共用の接続用アカウントの権限になる" aria-label="MCP 認可。使える Destination を利用者ごとに許可し、接続先では共用の接続用アカウントの権限になる"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="27">詳細</button></td>
         </tr>
         <tr data-id="sap_call_sbpa_api">
@@ -440,6 +470,7 @@ a { color: var(--accent); }
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="全環境で参照・更新" aria-label="全環境で参照・更新"><span></span></td>
           <td class="mk" data-prd="Read Only" data-nonprd="Full" data-tip="開発・品証で参照・更新 / 本番は参照のみ" aria-label="開発・品証で参照・更新 / 本番は参照のみ"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="Read Only" data-tip="開発・品証で参照のみ" aria-label="開発・品証で参照のみ"><span></span></td>
+          <td class="mk web" data-prd="RoleBased" data-nonprd="RoleBased" data-tip="接続先認可。本人のアカウントでログオンし、接続先が本人の権限で判定する" aria-label="接続先認可。本人のアカウントでログオンし、接続先が本人の権限で判定する"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="28">詳細</button></td>
         </tr>
         <tr data-id="sap_call_datasphere_api">
@@ -451,6 +482,7 @@ a { color: var(--accent); }
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="全環境で参照・更新" aria-label="全環境で参照・更新"><span></span></td>
           <td class="mk" data-prd="Read Only" data-nonprd="Full" data-tip="開発・品証で参照・更新 / 本番は参照のみ" aria-label="開発・品証で参照・更新 / 本番は参照のみ"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="Read Only" data-tip="開発・品証で参照のみ" aria-label="開発・品証で参照のみ"><span></span></td>
+          <td class="mk web" data-prd="Read Only" data-nonprd="Full" data-tip="MCP 認可。使える Destination を利用者ごとに許可し、接続先では共用の接続用アカウントの権限になる" aria-label="MCP 認可。使える Destination を利用者ごとに許可し、接続先では共用の接続用アカウントの権限になる"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="29">詳細</button></td>
         </tr>
         <tr data-id="sap_call_calm_api">
@@ -462,6 +494,7 @@ a { color: var(--accent); }
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="全環境で参照・更新" aria-label="全環境で参照・更新"><span></span></td>
           <td class="mk" data-prd="Read Only" data-nonprd="Full" data-tip="開発・品証で参照・更新 / 本番は参照のみ" aria-label="開発・品証で参照・更新 / 本番は参照のみ"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="Read Only" data-tip="開発・品証で参照のみ" aria-label="開発・品証で参照のみ"><span></span></td>
+          <td class="mk web" data-prd="Read Only" data-nonprd="Full" data-tip="MCP 認可。使える Destination を利用者ごとに許可し、接続先では共用の接続用アカウントの権限になる" aria-label="MCP 認可。使える Destination を利用者ごとに許可し、接続先では共用の接続用アカウントの権限になる"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="30">詳細</button></td>
         </tr>
         <tr data-id="sap_call_btp_cli">
@@ -473,6 +506,7 @@ a { color: var(--accent); }
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="全環境で実行" aria-label="全環境で実行"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="—" data-tip="利用不可" aria-label="利用不可"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="—" data-tip="利用不可" aria-label="利用不可"><span></span></td>
+          <td class="mk web" data-prd="—" data-nonprd="—" data-tip="全員不可。Web 版では使えない" aria-label="全員不可。Web 版では使えない"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="31">詳細</button></td>
         </tr>
         <tr data-id="sap_call_cf_cli">
@@ -484,6 +518,7 @@ a { color: var(--accent); }
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="全環境で実行" aria-label="全環境で実行"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="—" data-tip="利用不可" aria-label="利用不可"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="—" data-tip="利用不可" aria-label="利用不可"><span></span></td>
+          <td class="mk web" data-prd="—" data-nonprd="—" data-tip="全員不可。Web 版では使えない" aria-label="全員不可。Web 版では使えない"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="32">詳細</button></td>
         </tr>
         <tr data-id="sap_call_datasphere_cli">
@@ -495,6 +530,7 @@ a { color: var(--accent); }
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="全環境で実行" aria-label="全環境で実行"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="—" data-tip="利用不可" aria-label="利用不可"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="—" data-tip="利用不可" aria-label="利用不可"><span></span></td>
+          <td class="mk web" data-prd="—" data-nonprd="—" data-tip="全員不可。Web 版では使えない" aria-label="全員不可。Web 版では使えない"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="33">詳細</button></td>
         </tr>
         <tr data-id="sap_call_ibp_api">
@@ -506,6 +542,7 @@ a { color: var(--accent); }
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="全環境で参照・更新" aria-label="全環境で参照・更新"><span></span></td>
           <td class="mk" data-prd="Read Only" data-nonprd="Full" data-tip="開発・品証で参照・更新 / 本番は参照のみ" aria-label="開発・品証で参照・更新 / 本番は参照のみ"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="Full" data-tip="開発・品証で参照・更新" aria-label="開発・品証で参照・更新"><span></span></td>
+          <td class="mk web" data-prd="Read Only" data-nonprd="Full" data-tip="MCP 認可。使える Destination を利用者ごとに許可し、接続先では共用の接続用アカウントの権限になる" aria-label="MCP 認可。使える Destination を利用者ごとに許可し、接続先では共用の接続用アカウントの権限になる"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="34">詳細</button></td>
         </tr>
         <tr data-id="sap_call_sac_api">
@@ -517,6 +554,7 @@ a { color: var(--accent); }
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="全環境で参照・更新" aria-label="全環境で参照・更新"><span></span></td>
           <td class="mk" data-prd="Read Only" data-nonprd="Full" data-tip="開発・品証で参照・更新 / 本番は参照のみ" aria-label="開発・品証で参照・更新 / 本番は参照のみ"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="Read Only" data-tip="開発・品証で参照のみ" aria-label="開発・品証で参照のみ"><span></span></td>
+          <td class="mk web" data-prd="RoleBased" data-nonprd="RoleBased" data-tip="接続先認可。本人のアカウントでログオンし、接続先が本人の権限で判定する" aria-label="接続先認可。本人のアカウントでログオンし、接続先が本人の権限で判定する"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="35">詳細</button></td>
         </tr>
         <tr data-id="app_call_jira_api">
@@ -528,6 +566,7 @@ a { color: var(--accent); }
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="全環境で全操作（起票/遷移/コメント/照会）" aria-label="全環境で全操作（起票/遷移/コメント/照会）"><span></span></td>
           <td class="mk" data-prd="Read Only" data-nonprd="Full" data-tip="開発・品証で全操作 / 本番は参照のみ" aria-label="開発・品証で全操作 / 本番は参照のみ"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="Full" data-tip="開発・品証で全操作可 / 本番は不可" aria-label="開発・品証で全操作可 / 本番は不可"><span></span></td>
+          <td class="mk web" data-prd="Read Only" data-nonprd="Full" data-tip="MCP 認可。使える Destination を利用者ごとに許可し、接続先では共用の接続用アカウントの権限になる" aria-label="MCP 認可。使える Destination を利用者ごとに許可し、接続先では共用の接続用アカウントの権限になる"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="36">詳細</button></td>
         </tr>
         <tr data-id="app_call_jira_file">
@@ -539,6 +578,7 @@ a { color: var(--accent); }
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="全環境で全操作（起票/遷移/コメント/照会）" aria-label="全環境で全操作（起票/遷移/コメント/照会）"><span></span></td>
           <td class="mk" data-prd="Read Only" data-nonprd="Full" data-tip="開発・品証で全操作 / 本番は参照のみ" aria-label="開発・品証で全操作 / 本番は参照のみ"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="Full" data-tip="開発・品証で全操作可 / 本番は不可" aria-label="開発・品証で全操作可 / 本番は不可"><span></span></td>
+          <td class="mk web" data-prd="Read Only" data-nonprd="Full" data-tip="MCP 認可。使える Destination を利用者ごとに許可し、接続先では共用の接続用アカウントの権限になる" aria-label="MCP 認可。使える Destination を利用者ごとに許可し、接続先では共用の接続用アカウントの権限になる"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="37">詳細</button></td>
         </tr>
         <tr data-id="app_call_smartdb_api">
@@ -550,6 +590,7 @@ a { color: var(--accent); }
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="全環境で全操作（文書 CRUD/プロセス実行）" aria-label="全環境で全操作（文書 CRUD/プロセス実行）"><span></span></td>
           <td class="mk" data-prd="Read Only" data-nonprd="Full" data-tip="開発・品証で全操作 / 本番は参照のみ" aria-label="開発・品証で全操作 / 本番は参照のみ"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="Full" data-tip="開発・品証で全操作可 / 本番は不可" aria-label="開発・品証で全操作可 / 本番は不可"><span></span></td>
+          <td class="mk web" data-prd="Read Only" data-nonprd="Full" data-tip="MCP 認可。使える Destination を利用者ごとに許可し、接続先では共用の接続用アカウントの権限になる" aria-label="MCP 認可。使える Destination を利用者ごとに許可し、接続先では共用の接続用アカウントの権限になる"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="38">詳細</button></td>
         </tr>
         <tr data-id="os_call_windows_ssh">
@@ -561,6 +602,7 @@ a { color: var(--accent); }
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="全環境で実行可（常に更新系扱い）" aria-label="全環境で実行可（常に更新系扱い）"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="—" data-tip="不可" aria-label="不可"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="—" data-tip="不可" aria-label="不可"><span></span></td>
+          <td class="mk web" data-prd="—" data-nonprd="—" data-tip="全員不可。Web 版では使えない" aria-label="全員不可。Web 版では使えない"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="39">詳細</button></td>
         </tr>
         <tr data-id="os_call_linux_ssh">
@@ -572,6 +614,7 @@ a { color: var(--accent); }
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="全環境で実行可（常に更新系扱い）" aria-label="全環境で実行可（常に更新系扱い）"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="—" data-tip="不可" aria-label="不可"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="—" data-tip="不可" aria-label="不可"><span></span></td>
+          <td class="mk web" data-prd="—" data-nonprd="—" data-tip="全員不可。Web 版では使えない" aria-label="全員不可。Web 版では使えない"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="40">詳細</button></td>
         </tr>
         <tr data-id="os_call_jp1_command">
@@ -583,6 +626,7 @@ a { color: var(--accent); }
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="全環境で全コマンド" aria-label="全環境で全コマンド"><span></span></td>
           <td class="mk" data-prd="Read Only" data-nonprd="Full" data-tip="開発は全コマンド / 本番は参照系（ajsprint 等 7 本）のみ" aria-label="開発は全コマンド / 本番は参照系（ajsprint 等 7 本）のみ"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="Full" data-tip="開発は全コマンド / 本番は不可" aria-label="開発は全コマンド / 本番は不可"><span></span></td>
+          <td class="mk web" data-prd="—" data-nonprd="—" data-tip="全員不可。Web 版では使えない" aria-label="全員不可。Web 版では使えない"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="41">詳細</button></td>
         </tr>
         <tr data-id="app_call_zabbix_api">
@@ -594,6 +638,7 @@ a { color: var(--accent); }
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="全メソッド（フル用トークン）" aria-label="全メソッド（フル用トークン）"><span></span></td>
           <td class="mk" data-prd="Read Only" data-nonprd="Read Only" data-tip="*.get のみ（参照専用トークン）" aria-label="*.get のみ（参照専用トークン）"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="—" data-tip="到達不可（Zabbix の Destination は本番のみ）" aria-label="到達不可（Zabbix の Destination は本番のみ）"><span></span></td>
+          <td class="mk web" data-prd="Read Only" data-nonprd="Read Only" data-tip="MCP 認可。使える Destination を利用者ごとに許可し、接続先では共用の接続用アカウントの権限になる" aria-label="MCP 認可。使える Destination を利用者ごとに許可し、接続先では共用の接続用アカウントの権限になる"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="42">詳細</button></td>
         </tr>
         <tr data-id="sap_call_scc_api">
@@ -605,6 +650,7 @@ a { color: var(--accent); }
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="全環境で参照・更新 / 破壊的操作は拒否" aria-label="全環境で参照・更新 / 破壊的操作は拒否"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="—" data-tip="利用不可" aria-label="利用不可"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="—" data-tip="利用不可" aria-label="利用不可"><span></span></td>
+          <td class="mk web" data-prd="—" data-nonprd="—" data-tip="全員不可。Web 版では使えない" aria-label="全員不可。Web 版では使えない"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="43">詳細</button></td>
         </tr>
         <tr data-id="sap_call_dms_admin">
@@ -616,6 +662,7 @@ a { color: var(--accent); }
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="全環境で参照・更新" aria-label="全環境で参照・更新"><span></span></td>
           <td class="mk" data-prd="Read Only" data-nonprd="Full" data-tip="開発・品証で参照・更新 / 本番は参照のみ" aria-label="開発・品証で参照・更新 / 本番は参照のみ"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="Read Only" data-tip="開発・品証で参照のみ" aria-label="開発・品証で参照のみ"><span></span></td>
+          <td class="mk web" data-prd="—" data-nonprd="—" data-tip="全員不可。Web 版では使えない" aria-label="全員不可。Web 版では使えない"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="44">詳細</button></td>
         </tr>
         <tr data-id="sap_call_dms_cmis">
@@ -627,6 +674,7 @@ a { color: var(--accent); }
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="全環境で参照・更新" aria-label="全環境で参照・更新"><span></span></td>
           <td class="mk" data-prd="Read Only" data-nonprd="Full" data-tip="開発・品証で参照・更新 / 本番は参照のみ" aria-label="開発・品証で参照・更新 / 本番は参照のみ"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="Read Only" data-tip="開発・品証で参照のみ" aria-label="開発・品証で参照のみ"><span></span></td>
+          <td class="mk web" data-prd="RoleBased" data-nonprd="RoleBased" data-tip="接続先認可。本人のアカウントでログオンし、接続先が本人の権限で判定する" aria-label="接続先認可。本人のアカウントでログオンし、接続先が本人の権限で判定する"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="45">詳細</button></td>
         </tr>
         <tr data-id="sap_call_dms_file">
@@ -638,6 +686,7 @@ a { color: var(--accent); }
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="全環境で参照・更新" aria-label="全環境で参照・更新"><span></span></td>
           <td class="mk" data-prd="Read Only" data-nonprd="Full" data-tip="開発・品証で参照・更新 / 本番は参照のみ" aria-label="開発・品証で参照・更新 / 本番は参照のみ"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="Read Only" data-tip="開発・品証で参照のみ" aria-label="開発・品証で参照のみ"><span></span></td>
+          <td class="mk web" data-prd="RoleBased" data-nonprd="RoleBased" data-tip="接続先認可。本人のアカウントでログオンし、接続先が本人の権限で判定する" aria-label="接続先認可。本人のアカウントでログオンし、接続先が本人の権限で判定する"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="46">詳細</button></td>
         </tr>
         <tr data-id="sap_call_audit_log">
@@ -649,6 +698,7 @@ a { color: var(--accent); }
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="全環境で利用可" aria-label="全環境で利用可"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="—" data-tip="利用不可（403）" aria-label="利用不可（403）"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="—" data-tip="利用不可（403）" aria-label="利用不可（403）"><span></span></td>
+          <td class="mk web" data-prd="—" data-nonprd="—" data-tip="全員不可。Web 版では使えない" aria-label="全員不可。Web 版では使えない"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="47">詳細</button></td>
         </tr>
         <tr data-id="sap_call_aicore_api">
@@ -660,6 +710,7 @@ a { color: var(--accent); }
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="全環境で参照・更新" aria-label="全環境で参照・更新"><span></span></td>
           <td class="mk" data-prd="Read Only" data-nonprd="Full" data-tip="開発・品証で参照・更新 / 本番は参照のみ" aria-label="開発・品証で参照・更新 / 本番は参照のみ"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="Read Only" data-tip="開発・品証で参照のみ" aria-label="開発・品証で参照のみ"><span></span></td>
+          <td class="mk web" data-prd="Read Only" data-nonprd="Full" data-tip="MCP 認可。使える Destination を利用者ごとに許可し、接続先では共用の接続用アカウントの権限になる" aria-label="MCP 認可。使える Destination を利用者ごとに許可し、接続先では共用の接続用アカウントの権限になる"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="48">詳細</button></td>
         </tr>
         <tr data-id="sap_call_aicore_inference">
@@ -671,6 +722,7 @@ a { color: var(--accent); }
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="全環境で利用可" aria-label="全環境で利用可"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="—" data-tip="利用不可（403）" aria-label="利用不可（403）"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="—" data-tip="利用不可（403）" aria-label="利用不可（403）"><span></span></td>
+          <td class="mk web" data-prd="—" data-nonprd="—" data-tip="全員不可。Web 版では使えない" aria-label="全員不可。Web 版では使えない"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="49">詳細</button></td>
         </tr>
         <tr data-id="sap_call_aicore_file">
@@ -682,6 +734,7 @@ a { color: var(--accent); }
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="全環境で import・export" aria-label="全環境で import・export"><span></span></td>
           <td class="mk" data-prd="Read Only" data-nonprd="Full" data-tip="開発・品証で import・export / 本番は export のみ" aria-label="開発・品証で import・export / 本番は export のみ"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="Read Only" data-tip="開発・品証で export のみ" aria-label="開発・品証で export のみ"><span></span></td>
+          <td class="mk web" data-prd="Read Only" data-nonprd="Full" data-tip="MCP 認可。使える Destination を利用者ごとに許可し、接続先では共用の接続用アカウントの権限になる" aria-label="MCP 認可。使える Destination を利用者ごとに許可し、接続先では共用の接続用アカウントの権限になる"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="50">詳細</button></td>
         </tr>
         <tr data-id="app_call_github_api">
@@ -693,6 +746,7 @@ a { color: var(--accent); }
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="登録済みの設計リポを参照のみ" aria-label="登録済みの設計リポを参照のみ"><span></span></td>
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="登録済みの設計リポを参照のみ" aria-label="登録済みの設計リポを参照のみ"><span></span></td>
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="登録済みの設計リポを参照のみ" aria-label="登録済みの設計リポを参照のみ"><span></span></td>
+          <td class="mk web" data-prd="—" data-nonprd="—" data-tip="全員不可。Web 版では使えない" aria-label="全員不可。Web 版では使えない"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="51">詳細</button></td>
         </tr>
         <tr data-id="sap_call_objectstore_api">
@@ -704,6 +758,7 @@ a { color: var(--accent); }
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="全環境で参照・更新" aria-label="全環境で参照・更新"><span></span></td>
           <td class="mk" data-prd="Read Only" data-nonprd="Full" data-tip="開発・品証・本番で参照 / 更新は開発・品証のみ" aria-label="開発・品証・本番で参照 / 更新は開発・品証のみ"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="Read Only" data-tip="開発・品証で参照のみ" aria-label="開発・品証で参照のみ"><span></span></td>
+          <td class="mk web" data-prd="Read Only" data-nonprd="Full" data-tip="MCP 認可。使える Destination を利用者ごとに許可し、接続先では共用の接続用アカウントの権限になる" aria-label="MCP 認可。使える Destination を利用者ごとに許可し、接続先では共用の接続用アカウントの権限になる"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="52">詳細</button></td>
         </tr>
         <tr data-id="sap_call_objectstore_file">
@@ -715,6 +770,7 @@ a { color: var(--accent); }
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="全環境で参照・更新" aria-label="全環境で参照・更新"><span></span></td>
           <td class="mk" data-prd="Read Only" data-nonprd="Full" data-tip="開発・品証・本番でダウンロード / アップロードは開発・品証のみ" aria-label="開発・品証・本番でダウンロード / アップロードは開発・品証のみ"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="Read Only" data-tip="開発・品証でダウンロードのみ" aria-label="開発・品証でダウンロードのみ"><span></span></td>
+          <td class="mk web" data-prd="Read Only" data-nonprd="Full" data-tip="MCP 認可。使える Destination を利用者ごとに許可し、接続先では共用の接続用アカウントの権限になる" aria-label="MCP 認可。使える Destination を利用者ごとに許可し、接続先では共用の接続用アカウントの権限になる"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="53">詳細</button></td>
         </tr>
       </tbody>
@@ -799,7 +855,7 @@ heads.forEach((th) => {
       .forEach((r) => tb.append(r));
   });
 });
-const VCLASS = { 'Full': 'v-full', 'Read Only': 'v-ro', '—': 'v-no' };
+const VCLASS = { 'Full': 'v-full', 'Read Only': 'v-ro', '—': 'v-no', 'RoleBased': 'v-rb' };
 const cells = [...document.querySelectorAll('td.mk')];
 function applyEnv(env) {
   for (const td of cells) {

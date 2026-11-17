@@ -63,6 +63,9 @@ td.mk span {
 td.mk .v-full { background: hsl(150 55% 32% / .16); color: var(--v-full); }
 td.mk .v-ro   { background: hsl(35 90% 45% / .18);  color: var(--v-ro); }
 td.mk .v-no   { background: transparent;            color: var(--muted); font-weight: 400; }
+td.mk .v-rb   { background: hsl(215 70% 45% / .16); color: hsl(215 70% 38%); }
+@media (prefers-color-scheme: dark) { td.mk .v-rb { color: hsl(215 80% 72%); } }
+td.mk.web { border-left: 2px solid var(--line); }
 .envbar { display: flex; align-items: center; gap: .5rem; margin: 0 0 1rem; }
 .envlabel { color: var(--muted); font-size: .85rem; margin-right: .25rem; }
 .envbtn {
@@ -130,7 +133,7 @@ a { color: var(--accent); }
     <table>
       <thead>
         <tr>
-          <th class="" data-i="0" aria-sort="none">No</th><th class="" data-i="1" aria-sort="none">Name</th><th class="" data-i="2" aria-sort="none">Tool</th><th class="" data-i="3" aria-sort="none">Description</th><th class="" data-i="4" aria-sort="none">System</th><th class="r-full" data-i="5" aria-sort="none">Full</th><th class="r-ro" data-i="6" aria-sort="none">Read-only</th><th class="r-dev" data-i="7" aria-sort="none">Developer</th><th></th>
+          <th class="" data-i="0" aria-sort="none">No</th><th class="" data-i="1" aria-sort="none">Name</th><th class="" data-i="2" aria-sort="none">Tool</th><th class="" data-i="3" aria-sort="none">Description</th><th class="" data-i="4" aria-sort="none">System</th><th class="r-full" data-i="5" aria-sort="none">Full</th><th class="r-ro" data-i="6" aria-sort="none">Read-only</th><th class="r-dev" data-i="7" aria-sort="none">Developer</th><th class="r-web" data-i="8" aria-sort="none">Web</th><th></th>
         </tr>
       </thead>
       <tbody>
@@ -143,6 +146,7 @@ a { color: var(--accent); }
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="All envs: available" aria-label="All envs: available"><span></span></td>
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="All envs: available" aria-label="All envs: available"><span></span></td>
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="All envs: available" aria-label="All envs: available"><span></span></td>
+          <td class="mk web" data-prd="Full" data-nonprd="Full" data-tip="Available to every user" aria-label="Available to every user"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="1">Details</button></td>
         </tr>
         <tr data-id="sap_use_destination">
@@ -154,6 +158,7 @@ a { color: var(--accent); }
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="All envs: available" aria-label="All envs: available"><span></span></td>
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="All envs: available" aria-label="All envs: available"><span></span></td>
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="All envs: available" aria-label="All envs: available"><span></span></td>
+          <td class="mk web" data-prd="Full" data-nonprd="Full" data-tip="Available to every user" aria-label="Available to every user"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="2">Details</button></td>
         </tr>
         <tr data-id="sap_current_destination">
@@ -165,6 +170,7 @@ a { color: var(--accent); }
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="All envs: available" aria-label="All envs: available"><span></span></td>
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="All envs: available" aria-label="All envs: available"><span></span></td>
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="All envs: available" aria-label="All envs: available"><span></span></td>
+          <td class="mk web" data-prd="Full" data-nonprd="Full" data-tip="Available to every user" aria-label="Available to every user"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="3">Details</button></td>
         </tr>
         <tr data-id="sap_call_fm">
@@ -176,6 +182,7 @@ a { color: var(--accent); }
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="All envs: read &amp; update" aria-label="All envs: read &amp; update"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="Full" data-tip="DEV/QAS: read &amp; update / PRD blocked" aria-label="DEV/QAS: read &amp; update / PRD blocked"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="Full" data-tip="DEV/QAS: read &amp; update" aria-label="DEV/QAS: read &amp; update"><span></span></td>
+          <td class="mk web" data-prd="RoleBased" data-nonprd="RoleBased" data-tip="Destination authorizes: the user logs on with their own account and the destination checks their own permissions" aria-label="Destination authorizes: the user logs on with their own account and the destination checks their own permissions"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="4">Details</button></td>
         </tr>
         <tr data-id="sap_select_table">
@@ -187,6 +194,7 @@ a { color: var(--accent); }
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="All envs: read" aria-label="All envs: read"><span></span></td>
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="All envs: read" aria-label="All envs: read"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="Full" data-tip="DEV/QAS: read" aria-label="DEV/QAS: read"><span></span></td>
+          <td class="mk web" data-prd="RoleBased" data-nonprd="RoleBased" data-tip="Destination authorizes: the user logs on with their own account and the destination checks their own permissions" aria-label="Destination authorizes: the user logs on with their own account and the destination checks their own permissions"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="5">Details</button></td>
         </tr>
         <tr data-id="sap_adt_freestyle">
@@ -198,6 +206,7 @@ a { color: var(--accent); }
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="All envs: read" aria-label="All envs: read"><span></span></td>
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="All envs: read" aria-label="All envs: read"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="Full" data-tip="DEV/QAS: read" aria-label="DEV/QAS: read"><span></span></td>
+          <td class="mk web" data-prd="RoleBased" data-nonprd="RoleBased" data-tip="Destination authorizes: the user logs on with their own account and the destination checks their own permissions" aria-label="Destination authorizes: the user logs on with their own account and the destination checks their own permissions"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="6">Details</button></td>
         </tr>
         <tr data-id="sap_adt_osql">
@@ -209,6 +218,7 @@ a { color: var(--accent); }
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="All envs: read" aria-label="All envs: read"><span></span></td>
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="All envs: read" aria-label="All envs: read"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="Full" data-tip="DEV/QAS: read" aria-label="DEV/QAS: read"><span></span></td>
+          <td class="mk web" data-prd="RoleBased" data-nonprd="RoleBased" data-tip="Destination authorizes: the user logs on with their own account and the destination checks their own permissions" aria-label="Destination authorizes: the user logs on with their own account and the destination checks their own permissions"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="7">Details</button></td>
         </tr>
         <tr data-id="sap_adt_ddic">
@@ -220,6 +230,7 @@ a { color: var(--accent); }
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="All envs: read" aria-label="All envs: read"><span></span></td>
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="All envs: read" aria-label="All envs: read"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="Full" data-tip="DEV/QAS: read" aria-label="DEV/QAS: read"><span></span></td>
+          <td class="mk web" data-prd="RoleBased" data-nonprd="RoleBased" data-tip="Destination authorizes: the user logs on with their own account and the destination checks their own permissions" aria-label="Destination authorizes: the user logs on with their own account and the destination checks their own permissions"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="8">Details</button></td>
         </tr>
         <tr data-id="sap_abap_read_source">
@@ -231,6 +242,7 @@ a { color: var(--accent); }
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="All envs: read" aria-label="All envs: read"><span></span></td>
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="All envs: read" aria-label="All envs: read"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="Full" data-tip="DEV/QAS: read" aria-label="DEV/QAS: read"><span></span></td>
+          <td class="mk web" data-prd="RoleBased" data-nonprd="RoleBased" data-tip="Destination authorizes: the user logs on with their own account and the destination checks their own permissions" aria-label="Destination authorizes: the user logs on with their own account and the destination checks their own permissions"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="9">Details</button></td>
         </tr>
         <tr data-id="sap_abap_write_source">
@@ -242,6 +254,7 @@ a { color: var(--accent); }
           <td class="mk" data-prd="—" data-nonprd="Full" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="Full" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="Full" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update"><span></span></td>
+          <td class="mk web" data-prd="RoleBased" data-nonprd="RoleBased" data-tip="Destination authorizes: the user logs on with their own account and the destination checks their own permissions" aria-label="Destination authorizes: the user logs on with their own account and the destination checks their own permissions"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="10">Details</button></td>
         </tr>
         <tr data-id="sap_abap_delete_source">
@@ -253,6 +266,7 @@ a { color: var(--accent); }
           <td class="mk" data-prd="—" data-nonprd="Full" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="Full" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="Full" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update"><span></span></td>
+          <td class="mk web" data-prd="RoleBased" data-nonprd="RoleBased" data-tip="Destination authorizes: the user logs on with their own account and the destination checks their own permissions" aria-label="Destination authorizes: the user logs on with their own account and the destination checks their own permissions"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="11">Details</button></td>
         </tr>
         <tr data-id="sap_abap_write_fm">
@@ -264,6 +278,7 @@ a { color: var(--accent); }
           <td class="mk" data-prd="—" data-nonprd="Full" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="Full" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="Full" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update"><span></span></td>
+          <td class="mk web" data-prd="RoleBased" data-nonprd="RoleBased" data-tip="Destination authorizes: the user logs on with their own account and the destination checks their own permissions" aria-label="Destination authorizes: the user logs on with their own account and the destination checks their own permissions"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="12">Details</button></td>
         </tr>
         <tr data-id="sap_create_transport">
@@ -275,6 +290,7 @@ a { color: var(--accent); }
           <td class="mk" data-prd="—" data-nonprd="Full" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="Full" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="Full" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update"><span></span></td>
+          <td class="mk web" data-prd="RoleBased" data-nonprd="RoleBased" data-tip="Destination authorizes: the user logs on with their own account and the destination checks their own permissions" aria-label="Destination authorizes: the user logs on with their own account and the destination checks their own permissions"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="13">Details</button></td>
         </tr>
         <tr data-id="sap_release_transport">
@@ -286,6 +302,7 @@ a { color: var(--accent); }
           <td class="mk" data-prd="—" data-nonprd="Full" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="Full" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="Full" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update"><span></span></td>
+          <td class="mk web" data-prd="RoleBased" data-nonprd="RoleBased" data-tip="Destination authorizes: the user logs on with their own account and the destination checks their own permissions" aria-label="Destination authorizes: the user logs on with their own account and the destination checks their own permissions"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="14">Details</button></td>
         </tr>
         <tr data-id="sap_abap_activate">
@@ -297,6 +314,7 @@ a { color: var(--accent); }
           <td class="mk" data-prd="—" data-nonprd="Full" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="Full" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="Full" data-tip="DEV only: create &amp; update" aria-label="DEV only: create &amp; update"><span></span></td>
+          <td class="mk web" data-prd="RoleBased" data-nonprd="RoleBased" data-tip="Destination authorizes: the user logs on with their own account and the destination checks their own permissions" aria-label="Destination authorizes: the user logs on with their own account and the destination checks their own permissions"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="15">Details</button></td>
         </tr>
         <tr data-id="sap_list_odata_services">
@@ -308,6 +326,7 @@ a { color: var(--accent); }
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="All envs: read" aria-label="All envs: read"><span></span></td>
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="All envs: read" aria-label="All envs: read"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="Full" data-tip="DEV/QAS: read" aria-label="DEV/QAS: read"><span></span></td>
+          <td class="mk web" data-prd="RoleBased" data-nonprd="RoleBased" data-tip="Destination authorizes: the user logs on with their own account and the destination checks their own permissions" aria-label="Destination authorizes: the user logs on with their own account and the destination checks their own permissions"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="16">Details</button></td>
         </tr>
         <tr data-id="sap_call_s4_api">
@@ -319,6 +338,7 @@ a { color: var(--accent); }
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="All envs: read &amp; update" aria-label="All envs: read &amp; update"><span></span></td>
           <td class="mk" data-prd="Read Only" data-nonprd="Full" data-tip="DEV/QAS: read &amp; update / PRD read-only" aria-label="DEV/QAS: read &amp; update / PRD read-only"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="Read Only" data-tip="DEV/QAS: read only" aria-label="DEV/QAS: read only"><span></span></td>
+          <td class="mk web" data-prd="RoleBased" data-nonprd="RoleBased" data-tip="Destination authorizes: the user logs on with their own account and the destination checks their own permissions" aria-label="Destination authorizes: the user logs on with their own account and the destination checks their own permissions"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="17">Details</button></td>
         </tr>
         <tr data-id="sap_call_soap">
@@ -330,6 +350,7 @@ a { color: var(--accent); }
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="All envs: all operations" aria-label="All envs: all operations"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="Full" data-tip="DEV/QAS: all operations / PRD blocked" aria-label="DEV/QAS: all operations / PRD blocked"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="—" data-tip="Not available" aria-label="Not available"><span></span></td>
+          <td class="mk web" data-prd="RoleBased" data-nonprd="RoleBased" data-tip="Destination authorizes: the user logs on with their own account and the destination checks their own permissions" aria-label="Destination authorizes: the user logs on with their own account and the destination checks their own permissions"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="18">Details</button></td>
         </tr>
         <tr data-id="sap_call_ias_admin">
@@ -341,6 +362,7 @@ a { color: var(--accent); }
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="All envs: read &amp; update" aria-label="All envs: read &amp; update"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="—" data-tip="Not available" aria-label="Not available"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="—" data-tip="Not available" aria-label="Not available"><span></span></td>
+          <td class="mk web" data-prd="—" data-nonprd="—" data-tip="Not available on the web edition" aria-label="Not available on the web edition"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="19">Details</button></td>
         </tr>
         <tr data-id="sap_call_ips_job">
@@ -352,6 +374,7 @@ a { color: var(--accent); }
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="All envs: read &amp; update" aria-label="All envs: read &amp; update"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="—" data-tip="Not available" aria-label="Not available"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="—" data-tip="Not available" aria-label="Not available"><span></span></td>
+          <td class="mk web" data-prd="—" data-nonprd="—" data-tip="Not available on the web edition" aria-label="Not available on the web edition"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="20">Details</button></td>
         </tr>
         <tr data-id="sap_call_cf_api">
@@ -363,6 +386,7 @@ a { color: var(--accent); }
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="All envs: read &amp; update" aria-label="All envs: read &amp; update"><span></span></td>
           <td class="mk" data-prd="Read Only" data-nonprd="Full" data-tip="DEV/QAS: read &amp; update / PRD read-only" aria-label="DEV/QAS: read &amp; update / PRD read-only"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="Read Only" data-tip="DEV/QAS: read only" aria-label="DEV/QAS: read only"><span></span></td>
+          <td class="mk web" data-prd="—" data-nonprd="—" data-tip="Not available on the web edition" aria-label="Not available on the web edition"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="21">Details</button></td>
         </tr>
         <tr data-id="sap_call_bwz_content">
@@ -374,6 +398,7 @@ a { color: var(--accent); }
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="All envs: read &amp; update" aria-label="All envs: read &amp; update"><span></span></td>
           <td class="mk" data-prd="Read Only" data-nonprd="Full" data-tip="DEV/QAS: read &amp; update / PRD read-only" aria-label="DEV/QAS: read &amp; update / PRD read-only"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="Read Only" data-tip="DEV/QAS: read only" aria-label="DEV/QAS: read only"><span></span></td>
+          <td class="mk web" data-prd="Read Only" data-nonprd="Full" data-tip="MCP authorizes per user which destinations to use; the destination sees one shared connection account" aria-label="MCP authorizes per user which destinations to use; the destination sees one shared connection account"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="22">Details</button></td>
         </tr>
         <tr data-id="sap_call_ctms_api">
@@ -385,6 +410,7 @@ a { color: var(--accent); }
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="All envs: read &amp; update" aria-label="All envs: read &amp; update"><span></span></td>
           <td class="mk" data-prd="Read Only" data-nonprd="Full" data-tip="DEV/QAS: read &amp; update / PRD read-only" aria-label="DEV/QAS: read &amp; update / PRD read-only"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="Read Only" data-tip="DEV/QAS: read only" aria-label="DEV/QAS: read only"><span></span></td>
+          <td class="mk web" data-prd="Read Only" data-nonprd="Full" data-tip="MCP authorizes per user which destinations to use; the destination sees one shared connection account" aria-label="MCP authorizes per user which destinations to use; the destination sees one shared connection account"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="23">Details</button></td>
         </tr>
         <tr data-id="sap_call_forms_api">
@@ -396,6 +422,7 @@ a { color: var(--accent); }
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="All envs: read &amp; update" aria-label="All envs: read &amp; update"><span></span></td>
           <td class="mk" data-prd="Read Only" data-nonprd="Full" data-tip="DEV/QAS: read &amp; update / PRD read-only" aria-label="DEV/QAS: read &amp; update / PRD read-only"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="Read Only" data-tip="DEV/QAS: read only" aria-label="DEV/QAS: read only"><span></span></td>
+          <td class="mk web" data-prd="Read Only" data-nonprd="Full" data-tip="MCP authorizes per user which destinations to use; the destination sees one shared connection account" aria-label="MCP authorizes per user which destinations to use; the destination sees one shared connection account"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="24">Details</button></td>
         </tr>
         <tr data-id="sap_call_cis_api">
@@ -407,6 +434,7 @@ a { color: var(--accent); }
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="All envs: read &amp; update" aria-label="All envs: read &amp; update"><span></span></td>
           <td class="mk" data-prd="Read Only" data-nonprd="Full" data-tip="DEV/QAS: read &amp; update / PRD read-only" aria-label="DEV/QAS: read &amp; update / PRD read-only"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="Read Only" data-tip="DEV/QAS: read only" aria-label="DEV/QAS: read only"><span></span></td>
+          <td class="mk web" data-prd="Read Only" data-nonprd="Read Only" data-tip="Read only: anything but GET is denied on the web edition" aria-label="Read only: anything but GET is denied on the web edition"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="25">Details</button></td>
         </tr>
         <tr data-id="sap_call_cpi_api">
@@ -418,6 +446,7 @@ a { color: var(--accent); }
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="All envs: read &amp; update" aria-label="All envs: read &amp; update"><span></span></td>
           <td class="mk" data-prd="Read Only" data-nonprd="Full" data-tip="DEV/QAS: read &amp; update / PRD read-only" aria-label="DEV/QAS: read &amp; update / PRD read-only"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="Read Only" data-tip="DEV/QAS: read only" aria-label="DEV/QAS: read only"><span></span></td>
+          <td class="mk web" data-prd="Read Only" data-nonprd="Full" data-tip="MCP authorizes per user which destinations to use; the destination sees one shared connection account" aria-label="MCP authorizes per user which destinations to use; the destination sees one shared connection account"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="26">Details</button></td>
         </tr>
         <tr data-id="sap_call_ans_api">
@@ -429,6 +458,7 @@ a { color: var(--accent); }
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="All envs: read &amp; update" aria-label="All envs: read &amp; update"><span></span></td>
           <td class="mk" data-prd="Read Only" data-nonprd="Full" data-tip="DEV/QAS: read &amp; update / PRD read-only" aria-label="DEV/QAS: read &amp; update / PRD read-only"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="Read Only" data-tip="DEV/QAS: read only" aria-label="DEV/QAS: read only"><span></span></td>
+          <td class="mk web" data-prd="Read Only" data-nonprd="Full" data-tip="MCP authorizes per user which destinations to use; the destination sees one shared connection account" aria-label="MCP authorizes per user which destinations to use; the destination sees one shared connection account"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="27">Details</button></td>
         </tr>
         <tr data-id="sap_call_sbpa_api">
@@ -440,6 +470,7 @@ a { color: var(--accent); }
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="All envs: read &amp; update" aria-label="All envs: read &amp; update"><span></span></td>
           <td class="mk" data-prd="Read Only" data-nonprd="Full" data-tip="DEV/QAS: read &amp; update / PRD read-only" aria-label="DEV/QAS: read &amp; update / PRD read-only"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="Read Only" data-tip="DEV/QAS: read only" aria-label="DEV/QAS: read only"><span></span></td>
+          <td class="mk web" data-prd="RoleBased" data-nonprd="RoleBased" data-tip="Destination authorizes: the user logs on with their own account and the destination checks their own permissions" aria-label="Destination authorizes: the user logs on with their own account and the destination checks their own permissions"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="28">Details</button></td>
         </tr>
         <tr data-id="sap_call_datasphere_api">
@@ -451,6 +482,7 @@ a { color: var(--accent); }
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="All envs: read &amp; update" aria-label="All envs: read &amp; update"><span></span></td>
           <td class="mk" data-prd="Read Only" data-nonprd="Full" data-tip="DEV/QAS: read &amp; update / PRD read-only" aria-label="DEV/QAS: read &amp; update / PRD read-only"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="Read Only" data-tip="DEV/QAS: read only" aria-label="DEV/QAS: read only"><span></span></td>
+          <td class="mk web" data-prd="Read Only" data-nonprd="Full" data-tip="MCP authorizes per user which destinations to use; the destination sees one shared connection account" aria-label="MCP authorizes per user which destinations to use; the destination sees one shared connection account"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="29">Details</button></td>
         </tr>
         <tr data-id="sap_call_calm_api">
@@ -462,6 +494,7 @@ a { color: var(--accent); }
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="All envs: read &amp; update" aria-label="All envs: read &amp; update"><span></span></td>
           <td class="mk" data-prd="Read Only" data-nonprd="Full" data-tip="DEV/QAS: read &amp; update / PRD read-only" aria-label="DEV/QAS: read &amp; update / PRD read-only"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="Read Only" data-tip="DEV/QAS: read only" aria-label="DEV/QAS: read only"><span></span></td>
+          <td class="mk web" data-prd="Read Only" data-nonprd="Full" data-tip="MCP authorizes per user which destinations to use; the destination sees one shared connection account" aria-label="MCP authorizes per user which destinations to use; the destination sees one shared connection account"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="30">Details</button></td>
         </tr>
         <tr data-id="sap_call_btp_cli">
@@ -473,6 +506,7 @@ a { color: var(--accent); }
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="All envs: run" aria-label="All envs: run"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="—" data-tip="Not available" aria-label="Not available"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="—" data-tip="Not available" aria-label="Not available"><span></span></td>
+          <td class="mk web" data-prd="—" data-nonprd="—" data-tip="Not available on the web edition" aria-label="Not available on the web edition"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="31">Details</button></td>
         </tr>
         <tr data-id="sap_call_cf_cli">
@@ -484,6 +518,7 @@ a { color: var(--accent); }
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="All envs: run" aria-label="All envs: run"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="—" data-tip="Not available" aria-label="Not available"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="—" data-tip="Not available" aria-label="Not available"><span></span></td>
+          <td class="mk web" data-prd="—" data-nonprd="—" data-tip="Not available on the web edition" aria-label="Not available on the web edition"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="32">Details</button></td>
         </tr>
         <tr data-id="sap_call_datasphere_cli">
@@ -495,6 +530,7 @@ a { color: var(--accent); }
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="All envs: run" aria-label="All envs: run"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="—" data-tip="Not available" aria-label="Not available"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="—" data-tip="Not available" aria-label="Not available"><span></span></td>
+          <td class="mk web" data-prd="—" data-nonprd="—" data-tip="Not available on the web edition" aria-label="Not available on the web edition"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="33">Details</button></td>
         </tr>
         <tr data-id="sap_call_ibp_api">
@@ -506,6 +542,7 @@ a { color: var(--accent); }
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="All envs: read &amp; update" aria-label="All envs: read &amp; update"><span></span></td>
           <td class="mk" data-prd="Read Only" data-nonprd="Full" data-tip="DEV/QAS: read &amp; update / PRD read-only" aria-label="DEV/QAS: read &amp; update / PRD read-only"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="Full" data-tip="DEV/QAS: read &amp; update" aria-label="DEV/QAS: read &amp; update"><span></span></td>
+          <td class="mk web" data-prd="Read Only" data-nonprd="Full" data-tip="MCP authorizes per user which destinations to use; the destination sees one shared connection account" aria-label="MCP authorizes per user which destinations to use; the destination sees one shared connection account"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="34">Details</button></td>
         </tr>
         <tr data-id="sap_call_sac_api">
@@ -517,6 +554,7 @@ a { color: var(--accent); }
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="All envs: read &amp; update" aria-label="All envs: read &amp; update"><span></span></td>
           <td class="mk" data-prd="Read Only" data-nonprd="Full" data-tip="DEV/QAS: read &amp; update / PRD read-only" aria-label="DEV/QAS: read &amp; update / PRD read-only"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="Read Only" data-tip="DEV/QAS: read only" aria-label="DEV/QAS: read only"><span></span></td>
+          <td class="mk web" data-prd="RoleBased" data-nonprd="RoleBased" data-tip="Destination authorizes: the user logs on with their own account and the destination checks their own permissions" aria-label="Destination authorizes: the user logs on with their own account and the destination checks their own permissions"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="35">Details</button></td>
         </tr>
         <tr data-id="app_call_jira_api">
@@ -528,6 +566,7 @@ a { color: var(--accent); }
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="All envs: all operations" aria-label="All envs: all operations"><span></span></td>
           <td class="mk" data-prd="Read Only" data-nonprd="Full" data-tip="DEV/QAS: all operations / PRD read-only" aria-label="DEV/QAS: all operations / PRD read-only"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="Full" data-tip="DEV/QAS: all operations / PRD blocked" aria-label="DEV/QAS: all operations / PRD blocked"><span></span></td>
+          <td class="mk web" data-prd="Read Only" data-nonprd="Full" data-tip="MCP authorizes per user which destinations to use; the destination sees one shared connection account" aria-label="MCP authorizes per user which destinations to use; the destination sees one shared connection account"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="36">Details</button></td>
         </tr>
         <tr data-id="app_call_jira_file">
@@ -539,6 +578,7 @@ a { color: var(--accent); }
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="All envs: all operations" aria-label="All envs: all operations"><span></span></td>
           <td class="mk" data-prd="Read Only" data-nonprd="Full" data-tip="DEV/QAS: all operations / PRD read-only" aria-label="DEV/QAS: all operations / PRD read-only"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="Full" data-tip="DEV/QAS: all operations / PRD blocked" aria-label="DEV/QAS: all operations / PRD blocked"><span></span></td>
+          <td class="mk web" data-prd="Read Only" data-nonprd="Full" data-tip="MCP authorizes per user which destinations to use; the destination sees one shared connection account" aria-label="MCP authorizes per user which destinations to use; the destination sees one shared connection account"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="37">Details</button></td>
         </tr>
         <tr data-id="app_call_smartdb_api">
@@ -550,6 +590,7 @@ a { color: var(--accent); }
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="All envs: all operations" aria-label="All envs: all operations"><span></span></td>
           <td class="mk" data-prd="Read Only" data-nonprd="Full" data-tip="DEV/QAS: all operations / PRD read-only" aria-label="DEV/QAS: all operations / PRD read-only"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="Full" data-tip="DEV/QAS: all operations / PRD blocked" aria-label="DEV/QAS: all operations / PRD blocked"><span></span></td>
+          <td class="mk web" data-prd="Read Only" data-nonprd="Full" data-tip="MCP authorizes per user which destinations to use; the destination sees one shared connection account" aria-label="MCP authorizes per user which destinations to use; the destination sees one shared connection account"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="38">Details</button></td>
         </tr>
         <tr data-id="os_call_windows_ssh">
@@ -561,6 +602,7 @@ a { color: var(--accent); }
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="All envs (always treated as write)" aria-label="All envs (always treated as write)"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="—" data-tip="Not allowed" aria-label="Not allowed"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="—" data-tip="Not allowed" aria-label="Not allowed"><span></span></td>
+          <td class="mk web" data-prd="—" data-nonprd="—" data-tip="Not available on the web edition" aria-label="Not available on the web edition"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="39">Details</button></td>
         </tr>
         <tr data-id="os_call_linux_ssh">
@@ -572,6 +614,7 @@ a { color: var(--accent); }
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="All envs (always treated as write)" aria-label="All envs (always treated as write)"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="—" data-tip="Not allowed" aria-label="Not allowed"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="—" data-tip="Not allowed" aria-label="Not allowed"><span></span></td>
+          <td class="mk web" data-prd="—" data-nonprd="—" data-tip="Not available on the web edition" aria-label="Not available on the web edition"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="40">Details</button></td>
         </tr>
         <tr data-id="os_call_jp1_command">
@@ -583,6 +626,7 @@ a { color: var(--accent); }
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="All envs: all commands" aria-label="All envs: all commands"><span></span></td>
           <td class="mk" data-prd="Read Only" data-nonprd="Full" data-tip="DEV: all commands / PRD: show commands only (7)" aria-label="DEV: all commands / PRD: show commands only (7)"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="Full" data-tip="DEV: all commands / PRD blocked" aria-label="DEV: all commands / PRD blocked"><span></span></td>
+          <td class="mk web" data-prd="—" data-nonprd="—" data-tip="Not available on the web edition" aria-label="Not available on the web edition"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="41">Details</button></td>
         </tr>
         <tr data-id="app_call_zabbix_api">
@@ -594,6 +638,7 @@ a { color: var(--accent); }
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="All methods (full token)" aria-label="All methods (full token)"><span></span></td>
           <td class="mk" data-prd="Read Only" data-nonprd="Read Only" data-tip="*.get only (read-only token)" aria-label="*.get only (read-only token)"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="—" data-tip="Unreachable (Zabbix destinations are PRD only)" aria-label="Unreachable (Zabbix destinations are PRD only)"><span></span></td>
+          <td class="mk web" data-prd="Read Only" data-nonprd="Read Only" data-tip="MCP authorizes per user which destinations to use; the destination sees one shared connection account" aria-label="MCP authorizes per user which destinations to use; the destination sees one shared connection account"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="42">Details</button></td>
         </tr>
         <tr data-id="sap_call_scc_api">
@@ -605,6 +650,7 @@ a { color: var(--accent); }
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="All envs: read &amp; update / Destructive operations denied" aria-label="All envs: read &amp; update / Destructive operations denied"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="—" data-tip="Not available" aria-label="Not available"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="—" data-tip="Not available" aria-label="Not available"><span></span></td>
+          <td class="mk web" data-prd="—" data-nonprd="—" data-tip="Not available on the web edition" aria-label="Not available on the web edition"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="43">Details</button></td>
         </tr>
         <tr data-id="sap_call_dms_admin">
@@ -616,6 +662,7 @@ a { color: var(--accent); }
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="All envs: read &amp; update" aria-label="All envs: read &amp; update"><span></span></td>
           <td class="mk" data-prd="Read Only" data-nonprd="Full" data-tip="DEV/QAS: read &amp; update / PRD read-only" aria-label="DEV/QAS: read &amp; update / PRD read-only"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="Read Only" data-tip="DEV/QAS: read only" aria-label="DEV/QAS: read only"><span></span></td>
+          <td class="mk web" data-prd="—" data-nonprd="—" data-tip="Not available on the web edition" aria-label="Not available on the web edition"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="44">Details</button></td>
         </tr>
         <tr data-id="sap_call_dms_cmis">
@@ -627,6 +674,7 @@ a { color: var(--accent); }
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="All envs: read &amp; update" aria-label="All envs: read &amp; update"><span></span></td>
           <td class="mk" data-prd="Read Only" data-nonprd="Full" data-tip="DEV/QAS: read &amp; update / PRD read-only" aria-label="DEV/QAS: read &amp; update / PRD read-only"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="Read Only" data-tip="DEV/QAS: read only" aria-label="DEV/QAS: read only"><span></span></td>
+          <td class="mk web" data-prd="RoleBased" data-nonprd="RoleBased" data-tip="Destination authorizes: the user logs on with their own account and the destination checks their own permissions" aria-label="Destination authorizes: the user logs on with their own account and the destination checks their own permissions"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="45">Details</button></td>
         </tr>
         <tr data-id="sap_call_dms_file">
@@ -638,6 +686,7 @@ a { color: var(--accent); }
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="All envs: read &amp; update" aria-label="All envs: read &amp; update"><span></span></td>
           <td class="mk" data-prd="Read Only" data-nonprd="Full" data-tip="DEV/QAS: read &amp; update / PRD read-only" aria-label="DEV/QAS: read &amp; update / PRD read-only"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="Read Only" data-tip="DEV/QAS: read only" aria-label="DEV/QAS: read only"><span></span></td>
+          <td class="mk web" data-prd="RoleBased" data-nonprd="RoleBased" data-tip="Destination authorizes: the user logs on with their own account and the destination checks their own permissions" aria-label="Destination authorizes: the user logs on with their own account and the destination checks their own permissions"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="46">Details</button></td>
         </tr>
         <tr data-id="sap_call_audit_log">
@@ -649,6 +698,7 @@ a { color: var(--accent); }
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="All envs: available" aria-label="All envs: available"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="—" data-tip="Not available (403)" aria-label="Not available (403)"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="—" data-tip="Not available (403)" aria-label="Not available (403)"><span></span></td>
+          <td class="mk web" data-prd="—" data-nonprd="—" data-tip="Not available on the web edition" aria-label="Not available on the web edition"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="47">Details</button></td>
         </tr>
         <tr data-id="sap_call_aicore_api">
@@ -660,6 +710,7 @@ a { color: var(--accent); }
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="All envs: read &amp; update" aria-label="All envs: read &amp; update"><span></span></td>
           <td class="mk" data-prd="Read Only" data-nonprd="Full" data-tip="DEV/QAS: read &amp; update / PRD read-only" aria-label="DEV/QAS: read &amp; update / PRD read-only"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="Read Only" data-tip="DEV/QAS: read only" aria-label="DEV/QAS: read only"><span></span></td>
+          <td class="mk web" data-prd="Read Only" data-nonprd="Full" data-tip="MCP authorizes per user which destinations to use; the destination sees one shared connection account" aria-label="MCP authorizes per user which destinations to use; the destination sees one shared connection account"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="48">Details</button></td>
         </tr>
         <tr data-id="sap_call_aicore_inference">
@@ -671,6 +722,7 @@ a { color: var(--accent); }
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="All envs: available" aria-label="All envs: available"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="—" data-tip="Not available (403)" aria-label="Not available (403)"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="—" data-tip="Not available (403)" aria-label="Not available (403)"><span></span></td>
+          <td class="mk web" data-prd="—" data-nonprd="—" data-tip="Not available on the web edition" aria-label="Not available on the web edition"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="49">Details</button></td>
         </tr>
         <tr data-id="sap_call_aicore_file">
@@ -682,6 +734,7 @@ a { color: var(--accent); }
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="All envs: import &amp; export" aria-label="All envs: import &amp; export"><span></span></td>
           <td class="mk" data-prd="Read Only" data-nonprd="Full" data-tip="DEV/QAS: import &amp; export / PRD export only" aria-label="DEV/QAS: import &amp; export / PRD export only"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="Read Only" data-tip="DEV/QAS: export only" aria-label="DEV/QAS: export only"><span></span></td>
+          <td class="mk web" data-prd="Read Only" data-nonprd="Full" data-tip="MCP authorizes per user which destinations to use; the destination sees one shared connection account" aria-label="MCP authorizes per user which destinations to use; the destination sees one shared connection account"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="50">Details</button></td>
         </tr>
         <tr data-id="app_call_github_api">
@@ -693,6 +746,7 @@ a { color: var(--accent); }
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="Registered design repos: read only" aria-label="Registered design repos: read only"><span></span></td>
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="Registered design repos: read only" aria-label="Registered design repos: read only"><span></span></td>
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="Registered design repos: read only" aria-label="Registered design repos: read only"><span></span></td>
+          <td class="mk web" data-prd="—" data-nonprd="—" data-tip="Not available on the web edition" aria-label="Not available on the web edition"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="51">Details</button></td>
         </tr>
         <tr data-id="sap_call_objectstore_api">
@@ -704,6 +758,7 @@ a { color: var(--accent); }
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="All envs: read &amp; update" aria-label="All envs: read &amp; update"><span></span></td>
           <td class="mk" data-prd="Read Only" data-nonprd="Full" data-tip="DEV/QAS/PRD: read / update on DEV/QAS only" aria-label="DEV/QAS/PRD: read / update on DEV/QAS only"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="Read Only" data-tip="DEV/QAS: read only" aria-label="DEV/QAS: read only"><span></span></td>
+          <td class="mk web" data-prd="Read Only" data-nonprd="Full" data-tip="MCP authorizes per user which destinations to use; the destination sees one shared connection account" aria-label="MCP authorizes per user which destinations to use; the destination sees one shared connection account"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="52">Details</button></td>
         </tr>
         <tr data-id="sap_call_objectstore_file">
@@ -715,6 +770,7 @@ a { color: var(--accent); }
           <td class="mk" data-prd="Full" data-nonprd="Full" data-tip="All envs: read &amp; update" aria-label="All envs: read &amp; update"><span></span></td>
           <td class="mk" data-prd="Read Only" data-nonprd="Full" data-tip="DEV/QAS/PRD: download / upload on DEV/QAS only" aria-label="DEV/QAS/PRD: download / upload on DEV/QAS only"><span></span></td>
           <td class="mk" data-prd="—" data-nonprd="Read Only" data-tip="DEV/QAS: download only" aria-label="DEV/QAS: download only"><span></span></td>
+          <td class="mk web" data-prd="Read Only" data-nonprd="Full" data-tip="MCP authorizes per user which destinations to use; the destination sees one shared connection account" aria-label="MCP authorizes per user which destinations to use; the destination sees one shared connection account"><span></span></td>
           <td class="act"><button type="button" class="detail" data-no="53">Details</button></td>
         </tr>
       </tbody>
@@ -799,7 +855,7 @@ heads.forEach((th) => {
       .forEach((r) => tb.append(r));
   });
 });
-const VCLASS = { 'Full': 'v-full', 'Read Only': 'v-ro', '—': 'v-no' };
+const VCLASS = { 'Full': 'v-full', 'Read Only': 'v-ro', '—': 'v-no', 'RoleBased': 'v-rb' };
 const cells = [...document.querySelectorAll('td.mk')];
 function applyEnv(env) {
   for (const td of cells) {
